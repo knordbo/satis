@@ -5,12 +5,19 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/rootCoordinator"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"/>
+
+    </android.support.design.widget.CoordinatorLayout>
 
     <EditText
         android:id="@+id/color"

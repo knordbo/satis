@@ -46,6 +46,9 @@ dependencies {
     // Tiny Dancer
     implementation deps.tinydancer
 
+    // Conductor
+    implementation deps.conductor
+
     // Architecture Components
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions

@@ -1,11 +1,11 @@
 package com.satis.app
 
-import com.satis.app.feature.colors.ui.ColorViewModelFactory
+import com.satis.app.feature.colors.persistence.ColorDao
 import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [AppModule::class])
 interface AppComponent {
-    fun colorViewModelFactory(): ColorViewModelFactory
+    fun colorDao(): ColorDao
 }

@@ -1,15 +1,8 @@
 package com.satis.app.feature.colors.ui
 
-import android.graphics.Color
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
-import android.view.View
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.MATCH_PARENT
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.widget.TextView
-import androidx.view.setPadding
-import com.satis.app.R
 import com.satis.app.feature.colors.persistence.ColorEntity
 import com.satis.app.utils.adapter.SimpleDiffCallback
 
@@ -31,27 +24,14 @@ class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ColorViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            ColorViewHolder(TextView(parent.context).apply {
-                layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-                setPadding(context.resources.getDimension(R.dimen.key_line).toInt())
-            })
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ColorViewHolder(ColorItemView(parent.context))
 
     override fun getItemCount() = items.size
 
     override fun onBindViewHolder(holder: ColorViewHolder, position: Int) {
-        (holder.itemView as? TextView)?.apply {
-            with(items.get(position)) {
-                text = color
-                try {
-                    setBackgroundColor(Color.parseColor(color))
-                } catch (t: Throwable) {
-                    setBackgroundColor(0)
-                }
-            }
-        }
+        holder.colorItemView.bind(items[position])
     }
 
-    class ColorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class ColorViewHolder(val colorItemView: ColorItemView) : RecyclerView.ViewHolder(colorItemView)
 
 }
