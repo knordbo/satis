@@ -7,15 +7,15 @@ import io.reactivex.Scheduler
 
 class ColorDispatcher(
         private val colorMiddleware: ColorMiddleware,
-        simpleStore: Store<ColorState>,
+        colorStore: Store<ColorState, ColorActions>,
         scheduler: Scheduler)
-    : ReduxDipatcher<ColorState, ColorViewState>(
-        simpleStore,
+    : ReduxDipatcher<ColorState, ColorActions, ColorViewState>(
+        colorStore,
         scheduler,
         ::colorStateToColorViewState) {
 
     init {
-        simpleStore.dispatch(colorMiddleware.getColors())
+        store.dispatch(colorMiddleware.getColors())
     }
 
     fun deleteColor(colorEntity: ColorEntity) {
@@ -28,6 +28,10 @@ class ColorDispatcher(
 
     fun addColorReset() {
         store.dispatch(ColorActions.ColorAddReset)
+    }
+
+    fun deleteColorReset() {
+        store.dispatch(ColorActions.ColorDeleteReset)
     }
 
 }

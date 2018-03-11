@@ -5,14 +5,15 @@ import io.reactivex.Scheduler
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-abstract class ReduxDipatcher<S : State, out VS : ViewState>(protected val store: Store<S>,
-                                                             private val mainScheduler: Scheduler,
-                                                             private val viewStateMapper: (S) -> VS) {
+abstract class ReduxDipatcher<State, in Action, out ViewState>(
+        protected val store: Store<State, Action>,
+        private val mainScheduler: Scheduler,
+        private val viewStateMapper: (State) -> ViewState) {
 
-    protected open val state: Flowable<S> = store.asObservable()
+    private val state: Flowable<State> = store.asFlowable()
     private val disposables = CompositeDisposable()
 
-    fun subscribe(onNext: (viewState: VS) -> Unit): Disposable = state
+    fun subscribe(onNext: (viewState: ViewState) -> Unit): Disposable = state
             .map(viewStateMapper)
             .observeOn(mainScheduler)
             .subscribe(onNext)

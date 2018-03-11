@@ -1,14 +1,17 @@
 package com.satis.app.redux
 
 import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.Lifecycle.Event.ON_START
+import android.arch.lifecycle.Lifecycle.Event.ON_STOP
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.OnLifecycleEvent
+import com.satis.app.utils.rx.safeDispose
 import io.reactivex.disposables.Disposable
 
-class DispatcherBinder<S : State, VS : ViewState>(
+class DispatcherBinder<State, Action, ViewState>(
         lifecycle: Lifecycle,
-        private val reduxDipatcher: ReduxDipatcher<S, VS>,
-        private val onNext: (VS) -> Unit) : LifecycleObserver {
+        private val dispatcher: ReduxDipatcher<State, Action, ViewState>,
+        private val onNext: (ViewState) -> Unit) : LifecycleObserver {
 
     private var disposable: Disposable? = null
 
@@ -16,17 +19,13 @@ class DispatcherBinder<S : State, VS : ViewState>(
         lifecycle.addObserver(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    @OnLifecycleEvent(ON_START)
     fun onStart() {
-        disposable = reduxDipatcher.subscribe(onNext)
+        disposable = dispatcher.subscribe(onNext)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    @OnLifecycleEvent(ON_STOP)
     fun onStop() {
-        disposable?.let {
-            if (!it.isDisposed) {
-                it.dispose()
-            }
-        }
+        disposable?.safeDispose()
     }
 }

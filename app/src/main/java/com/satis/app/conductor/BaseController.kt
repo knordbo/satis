@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-
 abstract class BaseController : ViewModelController() {
 
     abstract fun inflateView(inflater: LayoutInflater, container: ViewGroup): View

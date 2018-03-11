@@ -8,41 +8,31 @@ import android.view.ViewGroup
 import androidx.view.postDelayed
 import com.satis.app.R
 import com.satis.app.conductor.BaseController
-import com.satis.app.feature.colors.redux.ColorDispatcher
 import com.satis.app.feature.colors.redux.ColorDispatcherViewHolder
+import com.satis.app.feature.colors.redux.ColorViewState
 import com.satis.app.redux.DispatcherBinder
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.feature_color.view.*
 
 class ColorController : BaseController(), RecyclerView.OnChildAttachStateChangeListener {
 
-    private val colorDispatcher: ColorDispatcher by lazy { viewModelProvider().get(ColorDispatcherViewHolder::class.java).dispatcher }
+    private val colorDispatcher by lazy { viewModelProvider().get(ColorDispatcherViewHolder::class.java).dispatcher }
+    private val colorDispatcherBinder by lazy { DispatcherBinder(lifecycle, colorDispatcher, this::render) }
     private val disposable = CompositeDisposable()
-    private val colorAdapter by lazy { ColorAdapter() }
+    private val colorAdapter = ColorAdapter()
 
     override fun inflateView(inflater: LayoutInflater, container: ViewGroup): View =
             inflater.inflate(R.layout.feature_color, container, false)
 
     override fun onViewInflated(view: View) {
         super.onViewInflated(view)
+        colorDispatcherBinder // invoke to ensure initialised
         with(view) {
             (rv.layoutManager as? LinearLayoutManager)?.stackFromEnd = true
             rv.adapter = colorAdapter
             rv.addOnChildAttachStateChangeListener(this@ColorController)
             addColor.setOnClickListener {
                 colorDispatcher.addColor(this@ColorController.view!!.color.text.toString())
-            }
-        }
-        DispatcherBinder(lifecycle, colorDispatcher) { colorViewState ->
-            with(this.view!!) {
-                colorAdapter.bind(colorViewState.colors)
-                if (colorViewState.successfullyAddedColor != null) {
-                    color.setText("")
-                    postDelayed(100) {
-                        rv.smoothScrollToPosition(colorAdapter.itemCount - 1)
-                    }
-                    colorDispatcher.addColorReset()
-                }
             }
         }
     }
@@ -61,6 +51,22 @@ class ColorController : BaseController(), RecyclerView.OnChildAttachStateChangeL
     override fun onChildViewAttachedToWindow(view: View) {
         if (view is ColorItemView) {
             view.clickListener = colorDispatcher::deleteColor
+        }
+    }
+
+    private fun render(colorViewState: ColorViewState) {
+        with(view!!) {
+            colorAdapter.bind(colorViewState.colors)
+            if (colorViewState.successfullyAddedColor != null) {
+                color.setText("")
+                postDelayed(100) {
+                    rv.smoothScrollToPosition(colorAdapter.itemCount - 1)
+                }
+                colorDispatcher.addColorReset()
+            }
+            if (colorViewState.successfullyDeletedColor != null) {
+                colorDispatcher.deleteColorReset()
+            }
         }
     }
 

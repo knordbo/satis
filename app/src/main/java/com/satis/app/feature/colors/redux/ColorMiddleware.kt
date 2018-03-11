@@ -8,17 +8,20 @@ import io.reactivex.schedulers.Schedulers
 
 class ColorMiddleware(private val colorDao: ColorDao) {
     fun getColors(): Flowable<ColorActions> = colorDao.getColors()
-            .map { ColorActions.ColorResultSuccess(it) as ColorActions }
+            .map { ColorActions.ColorResultSuccess(it) }
+            .cast(ColorActions::class.java)
             .subscribeOn(Schedulers.io())
             .onErrorReturn { ColorActions.ColorResultError(it) }
             .startWith(ColorActions.ColorProgress)
 
-    fun addColor(color: String) = addColorCompletable(color)
+    fun addColor(color: String): Flowable<ColorActions> = addColorCompletable(color)
             .andThen(Flowable.just(ColorActions.ColorAddSuccess(color)))
+            .cast(ColorActions::class.java)
             .subscribeOn(Schedulers.io())
 
     fun deleteColor(colorEntity: ColorEntity): Flowable<ColorActions> = deleteColorCompletable(colorEntity)
-            .andThen(Flowable.just(ColorActions.ColorDeleteSuccess(colorEntity) as ColorActions))
+            .andThen(Flowable.just(ColorActions.ColorDeleteSuccess(colorEntity)))
+            .cast(ColorActions::class.java)
             .subscribeOn(Schedulers.io())
 
     private fun addColorCompletable(color: String) = Completable.fromCallable {

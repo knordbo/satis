@@ -7,27 +7,21 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.PublishSubject
 
-interface Action // TODO get rid off and change S to State generic and Action generic etc
-
-interface State // TODO get rid off and change S to State generic and Action generic etc
-
-interface Reducer<S : State> {
-    fun reduce(oldState: S, action: Action): S
+interface Reducer<State, in Action> {
+    fun reduce(oldState: State, action: Action): State
 }
 
-interface Store<S : State> {
+interface Store<State, in Action> {
     fun dispatch(action: Action)
     fun dispatch(actions: Flowable<out Action>)
-    fun asObservable(): Flowable<S>
-    fun currentState(): S
+    fun asFlowable(): Flowable<State>
     fun tearDown()
 }
 
-class SimpleStore<S : State>(private val initialValue: S, reducer: Reducer<S>) : Store<S> {
+class DefaultStore<State, in Action>(initialValue: State, reducer: Reducer<State, Action>) : Store<State, Action> {
 
     private val actionsSubject = PublishSubject.create<Action>()
-    private val statesSubject = BehaviorSubject.create<S>()
-
+    private val statesSubject = BehaviorSubject.create<State>()
     private val disposables = CompositeDisposable()
 
     init {
@@ -45,9 +39,7 @@ class SimpleStore<S : State>(private val initialValue: S, reducer: Reducer<S>) :
         disposables += actions.subscribe { dispatch(it) }
     }
 
-    override fun asObservable(): Flowable<S> = statesSubject.toFlowable(BackpressureStrategy.LATEST)
-
-    override fun currentState(): S = if (statesSubject.hasValue()) statesSubject.value else initialValue
+    override fun asFlowable(): Flowable<State> = statesSubject.toFlowable(BackpressureStrategy.LATEST)
 
     override fun tearDown() {
         disposables.clear()

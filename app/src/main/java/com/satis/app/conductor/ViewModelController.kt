@@ -8,7 +8,6 @@ import android.arch.lifecycle.ViewModelStore
 import android.os.Bundle
 import com.bluelinelabs.conductor.Controller
 
-
 abstract class ViewModelController(bundle: Bundle? = null) : Controller(bundle), LifecycleOwner {
 
     private val viewModelStore = ViewModelStore()
