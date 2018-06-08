@@ -4,4 +4,9 @@
     <string name="color_add">Add color</string>
     <string name="color_add_failure">Failed to add color: %s</string>
     <string name="color_delete_failure">Failed to delete color: %s</string>
+
+    <string name="card_add_header">Add a card</string>
+    <string name="card_add">Add</string>
+    <string name="card_title_hint">Title…</string>
+    <string name="card_message_hint">Message…</string>
 </resources>

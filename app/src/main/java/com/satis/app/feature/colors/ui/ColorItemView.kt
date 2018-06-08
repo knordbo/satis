@@ -8,7 +8,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import androidx.view.setPadding
+import androidx.view.updatePaddingRelative
 import com.satis.app.R
 import com.satis.app.feature.colors.persistence.ColorEntity
 
@@ -19,7 +19,12 @@ class ColorItemView @JvmOverloads constructor(context: Context, attrs: Attribute
 
     init {
         layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-        setPadding(context.resources.getDimension(R.dimen.key_line).toInt())
+        val padding = context.resources.getDimension(R.dimen.key_line).toInt()
+        updatePaddingRelative(
+                start = padding,
+                top = padding,
+                end = padding
+        )
         gravity = Gravity.CENTER
     }
 

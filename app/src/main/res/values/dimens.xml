@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="key_line_small">4dp</dimen>
+    <dimen name="key_line_med">8dp</dimen>
     <dimen name="key_line">16dp</dimen>
 </resources>

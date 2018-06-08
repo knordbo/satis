@@ -10,7 +10,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        configureVariant()
+//        configureVariant()
 
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(this))
