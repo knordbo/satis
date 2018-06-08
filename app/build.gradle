@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.github.triplet.play'
 
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(file("../../signing/keystore.properties")))
@@ -15,8 +16,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 3
-        versionName "3.0"
+        versionCode 5
+        versionName "5.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -34,6 +35,11 @@ android {
             signingConfig signingConfigs.release
         }
     }
+}
+
+play {
+    jsonFile = file("../../signing/service-account.json")
+    track = 'internal'
 }
 
 dependencies {

@@ -18,6 +18,7 @@ versions.conductor = "2.1.4"
 versions.google_services = "4.0.0"
 versions.firebase_core = "16.0.0"
 versions.firebase_firestore = "17.0.1"
+versions.play_publish = "1.2.2"
 def deps = [:]
 
 def support = [:]
@@ -84,6 +85,7 @@ deps.conductor = "com.bluelinelabs:conductor:$versions.conductor"
 deps.google_services = "com.google.gms:google-services:$versions.google_services"
 deps.firebase_core = "com.google.firebase:firebase-core:$versions.firebase_core"
 deps.firebase_firestore = "com.google.firebase:firebase-firestore:$versions.firebase_firestore"
+deps.play_publish = "com.github.triplet.gradle:play-publisher:$versions.play_publish"
 ext.deps = deps
 
 def build_versions = [:]
