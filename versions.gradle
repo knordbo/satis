@@ -7,11 +7,11 @@ versions.dagger = "2.14.1"
 versions.junit = "4.12"
 versions.espresso = "3.0.1"
 versions.constraint_layout = "1.0.2"
-versions.android_gradle_plugin = "3.2.0-alpha15"
+versions.android_gradle_plugin = "3.2.0-alpha18"
 versions.rxjava2 = "2.1.10"
 versions.rx_android = "2.0.2"
 versions.atsl_runner = "1.0.1"
-versions.kotlin = "1.2.21"
+versions.kotlin = "1.2.50"
 versions.android_ktx = "0.1"
 versions.tinydancer = "0.1.2"
 versions.conductor = "2.1.4"
@@ -70,7 +70,7 @@ atsl.rules = "com.android.support.test:rules:$versions.atsl_runner"
 deps.atsl = atsl
 
 def kotlin = [:]
-kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jre7:$versions.kotlin"
+kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
 
