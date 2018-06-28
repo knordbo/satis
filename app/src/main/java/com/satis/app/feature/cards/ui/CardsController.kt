@@ -70,7 +70,7 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
     }
 
     private fun render(cardViewState: CardViewState) {
-        cardsAdapter.bind(cardViewState.cards)
+        cardsAdapter.submitList(cardViewState.cards)
     }
 
 }

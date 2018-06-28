@@ -6,7 +6,9 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.github.triplet.play'
 
 def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(file("../../signing/keystore.properties")))
+try {
+    keystoreProperties.load(new FileInputStream(file("../../signing/keystore.properties")))
+} catch (Exception ignore) {}
 
 android {
     compileSdkVersion build_versions.target_sdk
@@ -24,7 +26,7 @@ android {
         release {
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
+            storeFile file(keystoreProperties['storeFile'] ?: "dummy")
             storePassword keystoreProperties['storePassword']
         }
     }

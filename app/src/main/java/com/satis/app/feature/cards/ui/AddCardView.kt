@@ -5,11 +5,12 @@ import android.support.constraint.ConstraintLayout
 import android.support.v7.app.AlertDialog
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import android.view.inputmethod.InputMethodManager
 import androidx.view.setPadding
 import com.satis.app.R
 import com.satis.app.feature.cards.data.Card
+import com.satis.app.utils.view.hideKeyboard
 import com.satis.app.utils.view.layoutInflater
+import com.satis.app.utils.view.showKeyboard
 import kotlinx.android.synthetic.main.add_card.view.*
 
 class AddCardView(context: Context) : ConstraintLayout(context) {
@@ -23,7 +24,7 @@ class AddCardView(context: Context) : ConstraintLayout(context) {
         submit.setOnClickListener {
             addListener?.invoke(Card(title = title.text.toString(), message = message.text.toString()))
         }
-        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        context.showKeyboard()
     }
 
     companion object {
@@ -32,7 +33,7 @@ class AddCardView(context: Context) : ConstraintLayout(context) {
             val dialog = AlertDialog.Builder(context)
                     .setView(view)
                     .setOnDismissListener {
-                        (context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).hideSoftInputFromWindow(view.windowToken, 0)
+                        context.hideKeyboard(view)
                     }
                     .create()
             val extendedListener: ((Card) -> Unit) = {

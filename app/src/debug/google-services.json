@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1",
+    "firebase_url": "https://replaceme.firebaseio.com",
+    "project_id": "replaceme",
+    "storage_bucket": "replaceme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:23423423:android:345345345345",
+        "android_client_info": {
+          "package_name": "com.satis.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3465345345345-gdfshsdfa8fsd7a9sdf7asdf6sdfs.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "3465345345345-gdfshsdfa8fsd7a9sdf7asdf6sdfs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "SKJDHFsdf687(asdknjabA768asdhkbAHSDJGdd"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
