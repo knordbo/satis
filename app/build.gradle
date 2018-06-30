@@ -18,8 +18,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 18
-        versionName "18.0"
+        versionCode 19
+        versionName "19.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -40,6 +40,7 @@ android {
 }
 
 play {
+    defaultToAppBundles = true
     serviceAccountCredentials = file("../../signing/service-account.json")
     track = 'internal'
 }

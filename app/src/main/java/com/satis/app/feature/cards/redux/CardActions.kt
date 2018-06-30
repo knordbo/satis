@@ -7,4 +7,5 @@ sealed class CardActions {
     object CardLiked : CardActions()
     object CardDisliked : CardActions()
     object CardAdded : CardActions()
+    object CardRemoved : CardActions()
 }

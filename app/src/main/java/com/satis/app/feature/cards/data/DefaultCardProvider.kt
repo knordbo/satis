@@ -30,6 +30,10 @@ class DefaultCardProvider(private val userId: String, firebaseFirestore: Firebas
         cardsCollection.add(card.toDb())
     }
 
+    override fun removeCard(id: String) {
+        cardsCollection.document(id).delete()
+    }
+
     override fun like(id: String, like: Boolean) {
         setDiff(id, mapOf(LIKES to mapOf(userId to like)))
     }

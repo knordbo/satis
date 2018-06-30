@@ -19,6 +19,11 @@ class CardMiddleware(private val cardProvider: CardProvider) {
             .cast(CardActions::class.java)
             .subscribeOn(Schedulers.io())
 
+    fun removeCard(id: String): Flowable<CardActions> = Completable.fromCallable { cardProvider.removeCard(id) }
+            .andThen(Flowable.just(CardActions.CardRemoved))
+            .cast(CardActions::class.java)
+            .subscribeOn(Schedulers.io())
+
     fun like(id: String, like: Boolean): Flowable<CardActions> = Completable.fromCallable { cardProvider.like(id, like) }
             .andThen(Flowable.just(CardActions.CardLiked))
             .cast(CardActions::class.java)

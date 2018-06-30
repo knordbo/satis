@@ -1,7 +1,12 @@
 package com.satis.app.feature.cards.ui
 
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.RecyclerView.NO_POSITION
+import android.support.v7.widget.RecyclerView.ViewHolder
 import android.support.v7.widget.SimpleItemAnimator
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.support.v7.widget.helper.ItemTouchHelper.END
+import android.support.v7.widget.helper.ItemTouchHelper.START
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -37,6 +42,17 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
             cardsRv.adapter = cardsAdapter
             cardsRv.addOnChildAttachStateChangeListener(this@CardsController)
             (cardsRv.itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
+            ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, START or END) {
+                override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                    viewHolder.adapterPosition.let {
+                        if (it != NO_POSITION) {
+                            cardDispatcher.removeCard(cardsAdapter.getCard(it).id)
+                        }
+                    }
+                }
+
+                override fun onMove(recyclerView: RecyclerView?, viewHolder: ViewHolder?, target: ViewHolder?): Boolean = false
+            }).attachToRecyclerView(cardsRv)
         }
     }
 

@@ -22,6 +22,10 @@ class CardDispatcher(
         store.dispatch(cardMiddleware.addCard(card))
     }
 
+    fun removeCard(id: String) {
+        store.dispatch(cardMiddleware.removeCard(id))
+    }
+
     fun like(id: String, like: Boolean) {
         store.dispatch(cardMiddleware.like(id, like))
     }

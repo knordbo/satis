@@ -8,5 +8,6 @@ object CardReducer : Reducer<CardState, CardActions> {
         CardActions.CardLiked -> oldState
         CardActions.CardDisliked -> oldState
         CardActions.CardAdded -> oldState
+        CardActions.CardRemoved -> oldState
     }
 }

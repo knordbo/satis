@@ -17,6 +17,8 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(object : DiffU
         holder.cardItemView.bind(getItem(position))
     }
 
+    fun getCard(pos: Int) = getItem(pos)
+
     class CardViewHolder(val cardItemView: CardItemView) : RecyclerView.ViewHolder(cardItemView)
 
 }
