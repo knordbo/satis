@@ -17,4 +17,4 @@ cache:
     - $HOME/.android/build-cache
 
 script:
-  - ./gradlew clean assembleDebug --stacktrace
+  - ./gradlew cleanBuildCache clean assembleDebug --stacktrace

@@ -8,6 +8,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.satis.app.BuildConfig
 import com.satis.app.R
 import com.satis.app.conductor.BaseController
 import com.satis.app.feature.cards.redux.CardDispatcherViewHolder
@@ -61,12 +63,16 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
         inflater.inflate(R.menu.cards_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.cardAdd) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
+        R.id.cardAdd -> {
             AddCardView.createDialog(view!!.context, cardDispatcher::addCard).show()
-            return true
+            true
         }
-        return super.onOptionsItemSelected(item)
+        R.id.version -> {
+            Toast.makeText(view!!.context, BuildConfig.VERSION_CODE.toString(), Toast.LENGTH_SHORT).show()
+            true
+        }
+        else -> super.onOptionsItemSelected(item)
     }
 
     private fun render(cardViewState: CardViewState) {

@@ -7,7 +7,7 @@ versions.dagger = "2.14.1"
 versions.junit = "4.12"
 versions.espresso = "3.0.1"
 versions.constraint_layout = "1.0.2"
-versions.android_gradle_plugin = "3.2.0-beta01"
+versions.android_gradle_plugin = "3.2.0-beta02"
 versions.rxjava2 = "2.1.10"
 versions.rx_android = "2.0.2"
 versions.atsl_runner = "1.0.1"
@@ -18,7 +18,7 @@ versions.conductor = "2.1.4"
 versions.google_services = "4.0.0"
 versions.firebase_core = "16.0.0"
 versions.firebase_firestore = "17.0.1"
-versions.play_publish = "1.2.2"
+versions.play_publish = "2.0.0"
 def deps = [:]
 
 def support = [:]
@@ -85,7 +85,8 @@ deps.conductor = "com.bluelinelabs:conductor:$versions.conductor"
 deps.google_services = "com.google.gms:google-services:$versions.google_services"
 deps.firebase_core = "com.google.firebase:firebase-core:$versions.firebase_core"
 deps.firebase_firestore = "com.google.firebase:firebase-firestore:$versions.firebase_firestore"
-deps.play_publish = "com.github.triplet.gradle:play-publisher:$versions.play_publish"
+deps.play_publish = "com.github.knordbo:gradle-play-publisher:e00c3d6" // TODO swap back to using triplet repo
+//deps.play_publish = "com.github.Triple-T:gradle-play-publisher:42ffe9922c"
 ext.deps = deps
 
 def build_versions = [:]
