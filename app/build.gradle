@@ -18,8 +18,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 19
-        versionName "19.0"
+        versionCode 46
+        versionName "46.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

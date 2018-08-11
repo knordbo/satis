@@ -7,7 +7,11 @@ import android.content.Context
 import com.satis.app.feature.colors.persistence.ColorDao
 import com.satis.app.feature.colors.persistence.ColorEntity
 
-@Database(entities = [(ColorEntity::class)], version = 1)
+@Database(
+        entities = [(ColorEntity::class)],
+        version = 1,
+        exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun colorDao(): ColorDao

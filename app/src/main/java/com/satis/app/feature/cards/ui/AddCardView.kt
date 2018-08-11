@@ -37,12 +37,10 @@ class AddCardView(context: Context) : ConstraintLayout(context) {
             val view = AddCardView(context)
             val dialog = AlertDialog.Builder(context)
                     .setView(view)
-                    .setOnDismissListener {
-                        context.hideKeyboard(view)
-                    }
                     .create()
             val extendedListener: ((Card) -> Unit) = {
                 addListener.invoke(it)
+                context.hideKeyboard(view)
                 dialog.dismiss()
             }
             view.addListener = extendedListener
