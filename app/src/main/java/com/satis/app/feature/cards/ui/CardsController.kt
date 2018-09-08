@@ -1,5 +1,6 @@
 package com.satis.app.feature.cards.ui
 
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.RecyclerView.NO_POSITION
 import android.support.v7.widget.RecyclerView.ViewHolder
@@ -16,6 +17,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.satis.app.BuildConfig
 import com.satis.app.R
+import com.satis.app.appComponent
 import com.satis.app.conductor.BaseController
 import com.satis.app.feature.cards.redux.CardDispatcherViewHolder
 import com.satis.app.feature.cards.redux.CardViewState
@@ -42,7 +44,7 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
             cardsRv.adapter = cardsAdapter
             cardsRv.addOnChildAttachStateChangeListener(this@CardsController)
             (cardsRv.itemAnimator as? SimpleItemAnimator)?.supportsChangeAnimations = false
-            ItemTouchHelper(object: ItemTouchHelper.SimpleCallback(0, START or END) {
+            ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     viewHolder.adapterPosition.let {
                         if (it != NO_POSITION) {
@@ -82,6 +84,12 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.cardAdd -> {
             AddCardView.createDialog(view!!.context, cardDispatcher::addCard).show()
+            true
+        }
+        R.id.log -> {
+            AlertDialog.Builder(view!!.context)
+                    .setMessage(applicationContext!!.appComponent().prefs().getLog())
+                    .show()
             true
         }
         R.id.version -> {

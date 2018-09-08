@@ -10,6 +10,11 @@
         app:showAsAction="always"/>
 
     <item
+        android:id="@+id/log"
+        android:title="@string/log"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/version"
         android:title="@string/version"
         app:showAsAction="never"/>

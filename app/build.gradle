@@ -12,14 +12,13 @@ try {
 
 android {
     compileSdkVersion build_versions.target_sdk
-    buildToolsVersion build_versions.build_tools
 
     defaultConfig {
         applicationId "com.satis.app"
         minSdkVersion build_versions.min_sdk
         targetSdkVersion build_versions.target_sdk
-        versionCode 46
-        versionName "46.0"
+        versionCode 48
+        versionName "48.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -82,6 +81,7 @@ dependencies {
     implementation deps.room.runtime
     kapt deps.room.compiler
     implementation deps.room.rxjava2
+    implementation deps.work_manager.runtime
 
     // Support libraries
     implementation deps.support.app_compat
