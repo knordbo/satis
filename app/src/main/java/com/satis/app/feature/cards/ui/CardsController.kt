@@ -53,7 +53,7 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
                     }
                 }
 
-                override fun onMove(recyclerView: RecyclerView?, viewHolder: ViewHolder?, target: ViewHolder?): Boolean = false
+                override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
             }).attachToRecyclerView(cardsRv)
         }
     }
