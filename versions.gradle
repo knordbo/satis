@@ -2,7 +2,7 @@ ext.deps = [:]
 def versions = [:]
 versions.arch = "1.1.0"
 versions.room = "1.1.0"
-versions.support = "28.0.0-rc02"
+versions.support = "28.0.0"
 versions.dagger = "2.14.1"
 versions.junit = "4.12"
 versions.espresso = "3.0.1"
@@ -20,6 +20,7 @@ versions.firebase_core = "16.0.0"
 versions.firebase_firestore = "17.0.1"
 versions.play_publish = "2.0.0"
 versions.work_manager = "1.0.0-alpha08"
+versions.gradle_versions_plugin = "0.20.0"
 def deps = [:]
 
 def support = [:]
@@ -92,6 +93,7 @@ deps.firebase_core = "com.google.firebase:firebase-core:$versions.firebase_core"
 deps.firebase_firestore = "com.google.firebase:firebase-firestore:$versions.firebase_firestore"
 //deps.play_publish = "com.github.triplet.gradle:play-publisher:$versions.play_publish"
 deps.play_publish = "com.github.knordbo:gradle-play-publisher:$versions.play_publish" // TODO swap back to using triplet repo
+deps.gradle_versions_plugin = "com.github.ben-manes:gradle-versions-plugin:$versions.gradle_versions_plugin"
 ext.deps = deps
 
 def build_versions = [:]

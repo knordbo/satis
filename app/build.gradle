@@ -4,11 +4,13 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.github.triplet.play'
+apply plugin: "com.github.ben-manes.versions"
 
 def keystoreProperties = new Properties()
 try {
     keystoreProperties.load(new FileInputStream(file("../../signing/keystore.properties")))
-} catch (Exception ignore) {}
+} catch (Exception ignore) {
+}
 
 android {
     compileSdkVersion build_versions.target_sdk
