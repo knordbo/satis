@@ -17,12 +17,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.satis.app.BuildConfig
 import com.satis.app.R
-import com.satis.app.appComponent
+import com.satis.app.common.Prefs
 import com.satis.app.conductor.BaseController
 import com.satis.app.feature.cards.redux.CardDispatcherViewHolder
 import com.satis.app.feature.cards.redux.CardViewState
 import com.satis.app.redux.DispatcherBinder
 import kotlinx.android.synthetic.main.feature_cards.view.*
+import org.koin.android.ext.android.get
 
 class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeListener {
 
@@ -88,7 +89,7 @@ class CardsController : BaseController(), RecyclerView.OnChildAttachStateChangeL
         }
         R.id.log -> {
             AlertDialog.Builder(view!!.context)
-                    .setMessage(applicationContext!!.appComponent().prefs().getLog())
+                    .setMessage(activity!!.get<Prefs>().getLog())
                     .show()
             true
         }

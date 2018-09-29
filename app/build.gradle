@@ -15,6 +15,11 @@ try {
 android {
     compileSdkVersion build_versions.target_sdk
 
+    // TODO remove after work manager alpha 09
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
     defaultConfig {
         applicationId "com.satis.app"
         minSdkVersion build_versions.min_sdk
@@ -57,13 +62,6 @@ dependencies {
     implementation deps.rx_android
     implementation deps.rxjava2
 
-    // Dagger
-    implementation deps.dagger.runtime
-    implementation deps.dagger.android
-    implementation deps.dagger.android_support
-    kapt deps.dagger.compiler
-    kapt deps.dagger.android_support_compiler
-
     // Kotlin
     implementation deps.kotlin.stdlib
 
@@ -76,6 +74,10 @@ dependencies {
     // Conductor
     implementation deps.conductor
 
+    // Koin
+    implementation deps.koin.android
+    implementation deps.koin.android_viewmodel
+
     // Architecture Components
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.extensions
@@ -83,7 +85,10 @@ dependencies {
     implementation deps.room.runtime
     kapt deps.room.compiler
     implementation deps.room.rxjava2
-    implementation deps.work_manager.runtime
+    implementation (deps.work_manager.runtime) {
+        // TODO remove after work manager alpha 09
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
 
     // Support libraries
     implementation deps.support.app_compat

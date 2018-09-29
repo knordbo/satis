@@ -3,7 +3,6 @@ def versions = [:]
 versions.arch = "1.1.0"
 versions.room = "1.1.0"
 versions.support = "28.0.0"
-versions.dagger = "2.14.1"
 versions.junit = "4.12"
 versions.espresso = "3.0.1"
 versions.constraint_layout = "1.0.2"
@@ -19,8 +18,9 @@ versions.google_services = "4.0.0"
 versions.firebase_core = "16.0.0"
 versions.firebase_firestore = "17.0.1"
 versions.play_publish = "2.0.0"
-versions.work_manager = "1.0.0-alpha08"
+versions.work_manager = "1.0.0-alpha09"
 versions.gradle_versions_plugin = "0.20.0"
+versions.koin = "1.0.1"
 def deps = [:]
 
 def support = [:]
@@ -56,14 +56,6 @@ def work_manager = [:]
 work_manager.runtime = "android.arch.work:work-runtime-ktx:$versions.work_manager"
 deps.work_manager = work_manager
 
-def dagger = [:]
-dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
-dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
-dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
-dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
-dagger.android_support_compiler = "com.google.dagger:dagger-android-processor:$versions.dagger"
-deps.dagger = dagger
-
 def espresso = [:]
 espresso.core = "com.android.support.test.espresso:espresso-core:$versions.espresso"
 espresso.contrib = "com.android.support.test.espresso:espresso-contrib:$versions.espresso"
@@ -79,8 +71,13 @@ def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
 kotlin.test = "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin"
 kotlin.plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
-
 deps.kotlin = kotlin
+
+def koin = [:]
+koin.android = "org.koin:koin-android:$versions.koin"
+koin.android_viewmodel = "org.koin:koin-android-viewmodel:$versions.koin"
+deps.koin = koin
+
 deps.junit = "junit:junit:$versions.junit"
 deps.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
 deps.rx_android = "io.reactivex.rxjava2:rxandroid:$versions.rx_android"

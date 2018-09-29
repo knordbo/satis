@@ -1,28 +1,31 @@
 package com.satis.app
 
 import android.app.Application
-import android.content.Context
+import androidx.work.WorkManager
+import com.satis.app.feature.cards.cardModule
+import com.satis.app.feature.colors.colorModule
 import com.satis.app.work.WorkScheduler
+import com.satis.app.work.workerModule
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.startKoin
 
 class App : Application() {
-
-    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
 
 //        configureVariant()
 
-        appComponent = DaggerAppComponent.builder()
-                .appModule(AppModule(this))
-                .build()
+        startKoin(this, listOf(
+                appModule,
+                cardModule,
+                colorModule,
+                workerModule
+        ))
 
-        appComponent.prefs().log("App", "App startup")
-        WorkScheduler().schedule(appComponent.prefs())
+        WorkManager.initialize(this, get())
+
+        get<WorkScheduler>().schedule()
     }
 
-    fun appComponent() = appComponent
-
 }
-
-fun Context.appComponent(): AppComponent = (applicationContext as App).appComponent()

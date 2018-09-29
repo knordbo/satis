@@ -1,13 +1,18 @@
 package com.satis.app.work
 
+import android.content.Context
 import androidx.work.Worker
 import androidx.work.Worker.Result.FAILURE
 import androidx.work.Worker.Result.SUCCESS
-import com.satis.app.appComponent
+import androidx.work.WorkerParameters
+import com.satis.app.common.Prefs
 
-class ChargingNetworkWorker : Worker() {
+class ChargingNetworkWorker(
+        context: Context,
+        workerParameters: WorkerParameters,
+        private val prefs: Prefs
+) : Worker(context, workerParameters) {
     override fun doWork(): Result {
-        val prefs = applicationContext.appComponent().prefs()
         prefs.log(LOG_TAG, "Starting")
         return try {
             Thread.sleep(5000)

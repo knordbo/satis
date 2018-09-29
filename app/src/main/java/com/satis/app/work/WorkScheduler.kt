@@ -8,11 +8,11 @@ import androidx.work.WorkManager
 import com.satis.app.common.Prefs
 import java.util.concurrent.TimeUnit
 
-class WorkScheduler {
+class WorkScheduler(private val prefs: Prefs) {
 
     private val workManager by lazy { WorkManager.getInstance() }
 
-    fun schedule(prefs: Prefs) {
+    fun schedule() {
         prefs.log(LOG_TAG, "Scheduling work")
         recurringNetworkJob()
         recurringChargingNetworkJob()
