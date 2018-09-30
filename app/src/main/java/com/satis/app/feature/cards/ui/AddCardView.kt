@@ -29,6 +29,7 @@ class AddCardView(context: Context) : ConstraintLayout(context) {
                 addListener?.invoke(Card(title = title.text.toString(), message = message.text.toString()))
             }
         }
+        title.requestFocus()
         context.showKeyboard()
     }
 

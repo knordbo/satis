@@ -24,8 +24,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 51
-        versionName "51.0"
+        versionCode 52
+        versionName "52.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -71,12 +71,12 @@ dependencies {
     // Tiny Dancer
     implementation deps.tinydancer
 
-    // Conductor
-    implementation deps.conductor
-
     // Koin
     implementation deps.koin.android
     implementation deps.koin.androidViewmodel
+
+    // MvRx
+    implementation deps.mvrx
 
     // Architecture Components
     implementation deps.lifecycle.runtime

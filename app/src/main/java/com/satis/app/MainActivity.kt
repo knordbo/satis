@@ -1,23 +1,18 @@
 package com.satis.app
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.bluelinelabs.conductor.Conductor
-import com.bluelinelabs.conductor.RouterTransaction
-import com.satis.app.feature.cards.ui.CardsController
-import kotlinx.android.synthetic.main.activity_main.*
+import com.airbnb.mvrx.BaseMvRxActivity
+import com.satis.app.feature.cards.CardFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseMvRxActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val router = Conductor.attachRouter(this, controllerContainer, savedInstanceState)
-
-        if (!router.hasRootController()) {
-            router.setRoot(RouterTransaction.with(CardsController()))
-        }
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainer, CardFragment())
+                .commit()
     }
 
 }

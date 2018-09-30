@@ -10,4 +10,8 @@ val cardModule = module {
     single<CardProvider> {
         DefaultCardProvider(get<Prefs>().getUniqueId(), FirebaseFirestore.getInstance())
     }
+
+    factory<CardViewModel> { (initialState: CardState) ->
+        CardViewModel(initialState, get())
+    }
 }
