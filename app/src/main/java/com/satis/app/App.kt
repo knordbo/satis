@@ -3,7 +3,6 @@ package com.satis.app
 import android.app.Application
 import androidx.work.WorkManager
 import com.satis.app.feature.cards.cardModule
-import com.satis.app.feature.colors.colorModule
 import com.satis.app.work.WorkScheduler
 import com.satis.app.work.workerModule
 import org.koin.android.ext.android.get
@@ -19,7 +18,6 @@ class App : Application() {
         startKoin(this, listOf(
                 appModule,
                 cardModule,
-                colorModule,
                 workerModule
         ))
 

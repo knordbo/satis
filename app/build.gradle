@@ -13,7 +13,7 @@ try {
 }
 
 android {
-    compileSdkVersion build_versions.target_sdk
+    compileSdkVersion buildVersions.targetSdk
 
     // TODO remove after work manager alpha 09
     packagingOptions {
@@ -22,10 +22,10 @@ android {
 
     defaultConfig {
         applicationId "com.satis.app"
-        minSdkVersion build_versions.min_sdk
-        targetSdkVersion build_versions.target_sdk
-        versionCode 48
-        versionName "48.0"
+        minSdkVersion buildVersions.minSdk
+        targetSdkVersion buildVersions.targetSdk
+        versionCode 51
+        versionName "51.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -55,18 +55,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // Firebase
-    implementation deps.firebase_core
-    implementation deps.firebase_firestore
+    implementation deps.firebase.core
+    implementation deps.firebase.firestore
 
     // RxJava
-    implementation deps.rx_android
-    implementation deps.rxjava2
+    implementation deps.rxAndroid
+    implementation deps.rxJava2
 
     // Kotlin
     implementation deps.kotlin.stdlib
 
     // Android Ktx
-    implementation deps.android_ktx
+    implementation deps.androidKtx
 
     // Tiny Dancer
     implementation deps.tinydancer
@@ -76,7 +76,7 @@ dependencies {
 
     // Koin
     implementation deps.koin.android
-    implementation deps.koin.android_viewmodel
+    implementation deps.koin.androidViewmodel
 
     // Architecture Components
     implementation deps.lifecycle.runtime
@@ -85,16 +85,16 @@ dependencies {
     implementation deps.room.runtime
     kapt deps.room.compiler
     implementation deps.room.rxjava2
-    implementation (deps.work_manager.runtime) {
+    implementation (deps.workManager.runtime) {
         // TODO remove after work manager alpha 09
         exclude group: 'com.google.guava', module: 'listenablefuture'
     }
 
     // Support libraries
-    implementation deps.support.app_compat
+    implementation deps.support.appCompat
     implementation deps.support.v4
     implementation deps.support.design
-    implementation deps.support.constraint_layout
+    implementation deps.support.constraintLayout
     implementation deps.support.recyclerview
     implementation deps.support.cardview
 
@@ -105,7 +105,7 @@ dependencies {
     androidTestImplementation deps.atsl.runner
     androidTestImplementation deps.atsl.rules
     androidTestImplementation deps.room.testing
-    androidTestImplementation deps.arch_core.testing
+    androidTestImplementation deps.archCore.testing
     androidTestImplementation deps.espresso.core
     androidTestImplementation deps.espresso.contrib
     androidTestImplementation deps.espresso.intents
