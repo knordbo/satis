@@ -1,6 +1,7 @@
 package com.satis.app.feature.cards
 
 import com.google.firebase.firestore.FirebaseFirestore
+import com.satis.app.IO
 import com.satis.app.common.Prefs
 import com.satis.app.feature.cards.data.CardProvider
 import com.satis.app.feature.cards.data.DefaultCardProvider
@@ -12,6 +13,6 @@ val cardModule = module {
     }
 
     factory<CardViewModel> { (initialState: CardState) ->
-        CardViewModel(initialState, get())
+        CardViewModel(initialState, get(), get(IO))
     }
 }
