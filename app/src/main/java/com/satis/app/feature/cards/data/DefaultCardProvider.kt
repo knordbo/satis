@@ -10,7 +10,7 @@ class DefaultCardProvider(private val userId: String, firebaseFirestore: Firebas
     private val cardsCollection = firebaseFirestore.collection(CARDS_COLLECTION)
 
     override fun getCards(): Flowable<List<Card>> = Flowable.create({ emitter ->
-        val listener = cardsCollection.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+        val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
             if (!emitter.isCancelled && querySnapshot != null) {
                 val cards = querySnapshot.documents
                         .mapNotNull {

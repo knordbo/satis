@@ -1,6 +1,6 @@
 package com.satis.app.feature.cards
 
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig

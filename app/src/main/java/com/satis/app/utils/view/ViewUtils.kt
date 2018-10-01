@@ -1,11 +1,11 @@
 package com.satis.app.utils.view
 
-import android.support.annotation.LayoutRes
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.SimpleItemAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 
 val View.layoutInflater: LayoutInflater
     get() = LayoutInflater.from(context)

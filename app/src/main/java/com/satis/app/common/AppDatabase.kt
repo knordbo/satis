@@ -1,11 +1,11 @@
 package com.satis.app.common
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
 @Database(
         entities = [DummyEntity::class],

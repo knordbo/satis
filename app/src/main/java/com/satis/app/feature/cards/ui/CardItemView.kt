@@ -3,14 +3,14 @@ package com.satis.app.feature.cards.ui
 import android.content.Context
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
-import android.support.v4.content.ContextCompat
-import android.support.v4.graphics.drawable.DrawableCompat
 import android.util.AttributeSet
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
-import androidx.view.setPadding
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.setPadding
 import com.satis.app.R
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.utils.view.layoutInflater

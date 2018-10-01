@@ -24,9 +24,9 @@ android {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 52
-        versionName "52.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode 53
+        versionName "53.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
         release {
@@ -54,59 +54,58 @@ play {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // AndroidX
+    implementation deps.androidx.appCompat
+    implementation deps.androidx.cardView
+    implementation deps.androidx.constraintLayout
+    implementation deps.androidx.coreKtx
+    implementation deps.androidx.lifecycle.extensions
+    implementation deps.androidx.lifecycle.runtime
+    implementation deps.androidx.recyclerView
+    implementation deps.androidx.room.runtime
+    implementation deps.androidx.room.rxJava2
+    kapt deps.androidx.lifecycle.compiler
+    kapt deps.androidx.room.compiler
+
     // Firebase
     implementation deps.firebase.core
     implementation deps.firebase.firestore
-
-    // RxJava
-    implementation deps.rxAndroid
-    implementation deps.rxJava2
-
-    // Kotlin
-    implementation deps.kotlin.stdlib
-
-    // Android Ktx
-    implementation deps.androidKtx
-
-    // Tiny Dancer
-    implementation deps.tinydancer
 
     // Koin
     implementation deps.koin.android
     implementation deps.koin.androidViewmodel
 
+    // Kotlin
+    implementation deps.kotlin.stdlib
+
+    // Material Design
+    implementation deps.material
+
     // MvRx
     implementation deps.mvrx
 
-    // Architecture Components
-    implementation deps.lifecycle.runtime
-    implementation deps.lifecycle.extensions
-    kapt deps.lifecycle.compiler
-    implementation deps.room.runtime
-    kapt deps.room.compiler
-    implementation deps.room.rxjava2
-    implementation (deps.workManager.runtime) {
-        // TODO remove after work manager alpha 09
+    // RxJava
+    implementation deps.rxAndroid
+    implementation deps.rxJava2
+
+    // Tiny Dancer
+    implementation deps.tinydancer
+
+    // Work Manager
+    implementation(deps.workManager.runtime) {
+        // TODO remove after work manager alpha
         exclude group: 'com.google.guava', module: 'listenablefuture'
     }
-
-    // Support libraries
-    implementation deps.support.appCompat
-    implementation deps.support.v4
-    implementation deps.support.design
-    implementation deps.support.constraintLayout
-    implementation deps.support.recyclerview
-    implementation deps.support.cardview
 
     // Unit Testing
     testImplementation deps.junit
 
     // Android Testing
-    androidTestImplementation deps.atsl.runner
-    androidTestImplementation deps.atsl.rules
-    androidTestImplementation deps.room.testing
-    androidTestImplementation deps.archCore.testing
-    androidTestImplementation deps.espresso.core
-    androidTestImplementation deps.espresso.contrib
-    androidTestImplementation deps.espresso.intents
+    androidTestImplementation deps.androidx.test.runner
+    androidTestImplementation deps.androidx.test.rules
+    androidTestImplementation deps.androidx.room.testing
+    androidTestImplementation deps.androidx.coreTesting
+    androidTestImplementation deps.androidx.espresso.core
+    androidTestImplementation deps.androidx.espresso.contrib
+    androidTestImplementation deps.androidx.espresso.intents
 }

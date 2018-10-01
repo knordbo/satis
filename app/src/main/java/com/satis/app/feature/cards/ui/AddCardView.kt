@@ -1,12 +1,12 @@
 package com.satis.app.feature.cards.ui
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
-import android.support.v7.app.AlertDialog
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.Toast
-import androidx.view.setPadding
+import androidx.appcompat.app.AlertDialog
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.setPadding
 import com.satis.app.R
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.utils.view.hideKeyboard

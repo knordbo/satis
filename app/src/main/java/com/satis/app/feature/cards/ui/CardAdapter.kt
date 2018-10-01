@@ -1,12 +1,13 @@
 package com.satis.app.feature.cards.ui
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil.ItemCallback
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.satis.app.feature.cards.data.Card
+import com.satis.app.feature.cards.ui.CardAdapter.CardViewHolder
 
-class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(object : DiffUtil.ItemCallback<Card>() {
+class CardAdapter : ListAdapter<Card, CardViewHolder>(object : ItemCallback<Card>() {
     override fun areContentsTheSame(oldItem: Card, newItem: Card) = oldItem == newItem
     override fun areItemsTheSame(oldItem: Card, newItem: Card) = oldItem.id == newItem.id
 }) {
@@ -19,6 +20,6 @@ class CardAdapter : ListAdapter<Card, CardAdapter.CardViewHolder>(object : DiffU
 
     fun getCard(pos: Int) = getItem(pos)
 
-    class CardViewHolder(val cardItemView: CardItemView) : RecyclerView.ViewHolder(cardItemView)
+    class CardViewHolder(val cardItemView: CardItemView) : ViewHolder(cardItemView)
 
 }

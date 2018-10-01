@@ -1,14 +1,6 @@
 package com.satis.app.feature.cards
 
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.RecyclerView.NO_POSITION
-import android.support.v7.widget.RecyclerView.OnChildAttachStateChangeListener
-import android.support.v7.widget.RecyclerView.ViewHolder
-import android.support.v7.widget.helper.ItemTouchHelper
-import android.support.v7.widget.helper.ItemTouchHelper.END
-import android.support.v7.widget.helper.ItemTouchHelper.START
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -16,6 +8,14 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.ItemTouchHelper.END
+import androidx.recyclerview.widget.ItemTouchHelper.START
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.NO_POSITION
+import androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
@@ -94,7 +94,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
         cardsRv.disableChangeAnimations()
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 viewHolder.adapterPosition.let {
                     if (it != NO_POSITION) {
                         viewModel.removeCard(cardsAdapter.getCard(it).id)
