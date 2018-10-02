@@ -24,8 +24,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 53
-        versionName "53.0"
+        versionCode 54
+        versionName "54.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -49,6 +49,10 @@ play {
     defaultToAppBundles = true
     serviceAccountCredentials = file("../../signing/service-account.json")
     track = 'internal'
+}
+
+androidExtensions {
+    experimental = true
 }
 
 dependencies {
