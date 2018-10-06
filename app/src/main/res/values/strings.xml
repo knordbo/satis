@@ -8,5 +8,7 @@
     <string name="card_message_no_title">Please enter a title</string>
 
     <string name="version">Version</string>
+    <string name="version_info">Version: %1$s</string>
+    <string name="build_time_info">Build time: %1$s</string>
     <string name="log">Log</string>
 </resources>

@@ -28,6 +28,9 @@ import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.view.*
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
 
@@ -64,7 +67,14 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
             true
         }
         R.id.version -> {
-            Toast.makeText(view!!.context, BuildConfig.VERSION_CODE.toString(), Toast.LENGTH_SHORT).show()
+            val versionInfo = resources.getString(R.string.version_info, BuildConfig.VERSION_CODE.toString())
+            val message = if (BuildConfig.DEBUG) {
+                versionInfo
+            } else {
+                val buildTime = SimpleDateFormat("dd.MM.YY HH:mm", Locale.US).format(Date(BuildConfig.BUILD_TIME))
+                versionInfo + "\n" + resources.getString(R.string.build_time_info, buildTime)
+            }
+            Toast.makeText(view!!.context, message, Toast.LENGTH_SHORT).show()
             true
         }
         else -> super.onOptionsItemSelected(item)

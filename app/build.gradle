@@ -24,8 +24,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 55
-        versionName "55.0"
+        versionCode 1
+        versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
@@ -37,7 +37,11 @@ android {
         }
     }
     buildTypes {
+        debug {
+            buildConfigField "Long", "BUILD_TIME", "0L"
+        }
         release {
+            buildConfigField "Long", "BUILD_TIME", System.currentTimeMillis().toString() + "L"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -49,6 +53,7 @@ play {
     defaultToAppBundles = true
     serviceAccountCredentials = file("../../signing/service-account.json")
     track = 'internal'
+    resolutionStrategy = 'auto'
 }
 
 androidExtensions {

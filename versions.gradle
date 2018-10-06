@@ -21,7 +21,7 @@ def versions = [
         "kotlin"              : "1.2.71",
         "material"            : "1.0.0",
         "mvrx"                : "0.5.0",
-        "playPublish"         : "-SNAPSHOT", // TODO swap for com.github.triplet.gradle:play-publisher:2.0.0 when published
+        "playPublish"         : "2.0.0-SNAPSHOT", // TODO swap for 2.0.0 when released
         "rxAndroid"           : "2.1.0",
         "rxJava2"             : "2.2.2",
         "tinydancer"          : "0.1.2",
@@ -76,7 +76,7 @@ ext.deps = [
         ],
         "material"            : "com.google.android.material:material:$versions.material",
         "mvrx"                : "com.airbnb.android:mvrx:$versions.mvrx",
-        "playPublish"         : "com.github.triple-t:gradle-play-publisher:$versions.playPublish",
+        "playPublish"         : "com.github.triplet.gradle:play-publisher:$versions.playPublish",
         "rxAndroid"           : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
         "rxJava2"             : "io.reactivex.rxjava2:rxjava:$versions.rxJava2",
         "tinydancer"          : "com.github.brianPlummer:tinydancer:$versions.tinydancer",
