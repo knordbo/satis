@@ -74,7 +74,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
                 val buildTime = SimpleDateFormat("dd.MM.YY HH:mm", Locale.US).format(Date(BuildConfig.BUILD_TIME))
                 versionInfo + "\n" + resources.getString(R.string.build_time_info, buildTime)
             }
-            Toast.makeText(view!!.context, message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(view!!.context, message, Toast.LENGTH_LONG).show()
             true
         }
         else -> super.onOptionsItemSelected(item)
