@@ -8,7 +8,7 @@ apply plugin: "com.github.ben-manes.versions"
 
 def keystoreProperties = new Properties()
 try {
-    keystoreProperties.load(new FileInputStream(file("../../signing/keystore.properties")))
+    keystoreProperties.load(new FileInputStream(file("../keystore.properties")))
 } catch (Exception ignore) {
 }
 
@@ -51,7 +51,7 @@ android {
 
 play {
     defaultToAppBundles = true
-    serviceAccountCredentials = file("../../signing/service-account.json")
+    serviceAccountCredentials = file("../service-account.json")
     track = 'internal'
     resolutionStrategy = 'auto'
 }
