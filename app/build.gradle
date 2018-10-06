@@ -24,8 +24,8 @@ android {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
         targetSdkVersion buildVersions.targetSdk
-        versionCode 54
-        versionName "54.0"
+        versionCode 55
+        versionName "55.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
