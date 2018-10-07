@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.2.0",
+        "androidGradlePlugin" : "3.3.0-alpha13",
         "androidx"            : [
                 "appCompat"       : "1.0.0",
                 "cardView"        : "1.0.0",
