@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="toolbarStyle">@style/Toolbar</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
