@@ -63,6 +63,7 @@ dependencies {
     implementation deps.androidx.cardView
     implementation deps.androidx.constraintLayout
     implementation deps.androidx.coreKtx
+    implementation deps.androidx.futures
     implementation deps.androidx.lifecycle.extensions
     implementation deps.androidx.lifecycle.runtime
     implementation deps.androidx.recyclerView
