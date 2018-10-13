@@ -2,9 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.github.triplet.play'
-apply plugin: "com.github.ben-manes.versions"
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'io.fabric'
 
 def keystoreProperties = new Properties()
 try {
@@ -71,6 +71,9 @@ dependencies {
     kapt deps.androidx.lifecycle.compiler
     kapt deps.androidx.room.compiler
 
+    // Crashlytics
+    implementation deps.crashlytics
+
     // Firebase
     implementation deps.firebase.core
     implementation deps.firebase.firestore
@@ -107,9 +110,10 @@ dependencies {
     // Android Testing
     androidTestImplementation deps.androidx.test.runner
     androidTestImplementation deps.androidx.test.rules
-    androidTestImplementation deps.androidx.room.testing
     androidTestImplementation deps.androidx.coreTesting
     androidTestImplementation deps.androidx.espresso.core
     androidTestImplementation deps.androidx.espresso.contrib
     androidTestImplementation deps.androidx.espresso.intents
 }
+
+apply plugin: 'com.google.gms.google-services'
