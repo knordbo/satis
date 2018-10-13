@@ -25,7 +25,7 @@ def versions = [
         "rxAndroid"           : "2.1.0",
         "rxJava2"             : "2.2.2",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "1.0.0-alpha09",
+        "workManager"         : "1.0.0-alpha10",
 ]
 
 ext.deps = [

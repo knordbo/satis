@@ -15,11 +15,6 @@ try {
 android {
     compileSdkVersion buildVersions.targetSdk
 
-    // TODO remove after work manager alpha 09
-    packagingOptions {
-        exclude 'META-INF/proguard/androidx-annotations.pro'
-    }
-
     defaultConfig {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk

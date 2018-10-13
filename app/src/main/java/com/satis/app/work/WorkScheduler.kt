@@ -3,7 +3,7 @@ package com.satis.app.work
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy.KEEP
 import androidx.work.NetworkType.CONNECTED
-import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import com.satis.app.common.Prefs
 import java.util.concurrent.TimeUnit
@@ -26,7 +26,7 @@ class WorkScheduler(private val prefs: Prefs) {
                 .setRequiredNetworkType(CONNECTED)
                 .build()
 
-        val work = PeriodicWorkRequestBuilder<NetworkWorker>(5, TimeUnit.HOURS)
+        val work = PeriodicWorkRequest.Builder(NetworkWorker::class.java, 5, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build()
 
@@ -41,7 +41,7 @@ class WorkScheduler(private val prefs: Prefs) {
                 .setRequiresCharging(true)
                 .build()
 
-        val work = PeriodicWorkRequestBuilder<ChargingNetworkWorker>(24, TimeUnit.HOURS)
+        val work = PeriodicWorkRequest.Builder(ChargingNetworkWorker::class.java, 24, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build()
 
