@@ -21,6 +21,7 @@ def versions = [
         "junit"               : "4.12",
         "koin"                : "1.0.1",
         "kotlin"              : "1.3.0-rc-146",
+        "kotlinCoroutines"    : "0.30.2-eap13",
         "material"            : "1.0.0",
         "mvrx"                : "0.5.0",
         "playPublish"         : "2.0.0-beta1",
@@ -74,9 +75,13 @@ ext.deps = [
                 "androidViewmodel": "org.koin:koin-android-viewmodel:$versions.koin",
         ],
         "kotlin"              : [
-                "stdlib": "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
-                "test"  : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin",
-                "plugin": "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+                "stdlib"    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
+                "test"      : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin",
+                "plugin"    : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
+                "coroutines": [
+                        "common" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${versions.kotlinCoroutines}",
+                        "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinCoroutines}"
+                ],
         ],
         "material"            : "com.google.android.material:material:$versions.material",
         "mvrx"                : "com.airbnb.android:mvrx:$versions.mvrx",

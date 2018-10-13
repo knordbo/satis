@@ -29,10 +29,10 @@ val workerModule = module {
     }
 
     factory<ListenableWorker>(NetworkWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->
-        NetworkWorker(context, workerParameters, get(), get(IO))
+        NetworkWorker(context, workerParameters, get(IO), get())
     }
 
     factory<ListenableWorker>(ChargingNetworkWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->
-        ChargingNetworkWorker(context, workerParameters, get(), get(IO))
+        ChargingNetworkWorker(context, workerParameters, get(IO), get())
     }
 }

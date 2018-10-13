@@ -5,7 +5,9 @@ import com.satis.app.common.Prefs
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
+import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module.module
+import kotlin.coroutines.CoroutineContext
 
 val appModule = module {
     single<AppDatabase> {
@@ -22,6 +24,14 @@ val appModule = module {
 
     single<Scheduler>(MAIN) {
         mainThread()
+    }
+
+    single<CoroutineContext>(IO) {
+        Dispatchers.IO
+    }
+
+    single<CoroutineContext>(MAIN) {
+        Dispatchers.Main
     }
 }
 
