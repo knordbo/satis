@@ -63,7 +63,9 @@ dependencies {
     implementation deps.androidx.cardView
     implementation deps.androidx.constraintLayout
     implementation deps.androidx.coreKtx
-    implementation deps.androidx.futures
+    implementation(deps.androidx.futures) {
+        exclude group: 'com.google.guava', module: 'listenablefuture'
+    }
     implementation deps.androidx.lifecycle.extensions
     implementation deps.androidx.lifecycle.runtime
     implementation deps.androidx.recyclerView
