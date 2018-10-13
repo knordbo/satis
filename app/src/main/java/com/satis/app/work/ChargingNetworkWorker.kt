@@ -16,8 +16,8 @@ class ChargingNetworkWorker(
 ) : RxWorker(context, workerParameters) {
 
     override fun work(): Single<Payload> = Single.fromCallable {
-        prefs.log(LOG_TAG, "Starting")
-        return@fromCallable Payload(try {
+        Payload(try {
+            prefs.log(LOG_TAG, "Starting")
             Thread.sleep(5000)
             prefs.log(LOG_TAG, "Success")
             SUCCESS
