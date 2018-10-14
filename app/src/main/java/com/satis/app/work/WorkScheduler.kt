@@ -8,9 +8,7 @@ import androidx.work.WorkManager
 import com.satis.app.common.Prefs
 import java.util.concurrent.TimeUnit
 
-class WorkScheduler(private val prefs: Prefs) {
-
-    private val workManager by lazy { WorkManager.getInstance() }
+class WorkScheduler(private val prefs: Prefs, private val workManager: WorkManager) {
 
     fun schedule() {
         prefs.log(LOG_TAG, "Scheduling work")

@@ -3,6 +3,7 @@ package com.satis.app.work
 import android.content.Context
 import androidx.work.Configuration
 import androidx.work.ListenableWorker
+import androidx.work.WorkManager
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
 import com.satis.app.IO
@@ -10,6 +11,10 @@ import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module.module
 
 val workerModule = module {
+    single<WorkManager> {
+        WorkManager.getInstance()
+    }
+
     single<WorkerFactory> {
         object : WorkerFactory() {
             override fun createWorker(
@@ -25,7 +30,7 @@ val workerModule = module {
     }
 
     single<WorkScheduler> {
-        WorkScheduler(get())
+        WorkScheduler(get(), get())
     }
 
     factory<ListenableWorker>(NetworkWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->

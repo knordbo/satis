@@ -7,4 +7,6 @@ import com.satis.app.feature.cards.data.Card
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CardState(@PersistState val cards: List<Card> = emptyList()) : MvRxState, Parcelable
+data class CardState(
+        @PersistState val cards: List<Card> = emptyList()
+) : MvRxState, Parcelable

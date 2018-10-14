@@ -1,11 +1,17 @@
 package com.satis.app
 
 import android.os.Bundle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
-import com.satis.app.feature.cards.CardFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMvRxActivity() {
+
+    private val navigationController: NavController
+        get() = findNavController(R.id.navigationHostFragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -13,9 +19,12 @@ class MainActivity : BaseMvRxActivity() {
 
         setSupportActionBar(toolbar)
 
-        supportFragmentManager.beginTransaction()
-                .replace(R.id.fragmentContainer, CardFragment())
-                .commit()
+        bottomNav.setupWithNavController(navigationController)
+        setupActionBarWithNavController(navigationController)
+
+        navigationController.addOnNavigatedListener { _, _ ->
+            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        }
     }
 
 }

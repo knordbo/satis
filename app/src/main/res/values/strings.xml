@@ -7,8 +7,11 @@
     <string name="card_message_hint">Message…</string>
     <string name="card_message_no_title">Please enter a title</string>
 
-    <string name="version">Version</string>
-    <string name="version_info">Version: %1$s</string>
+    <string name="version_info">Version: %1$d</string>
     <string name="build_time_info">Build time: %1$s</string>
     <string name="log">Log</string>
+
+    <string name="home">Home</string>
+    <string name="notifications">Notifications</string>
+    <string name="account">Account</string>
 </resources>

@@ -2,13 +2,11 @@
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="AlwaysShowAction"
 >
 
     <item
-        android:id="@+id/cardAdd"
-        android:title="@string/card_add_header"
+        android:id="@+id/log"
+        android:title="@string/log"
         app:showAsAction="always"
     />
 

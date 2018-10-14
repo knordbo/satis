@@ -12,7 +12,7 @@
     </style>
 
     <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:background">@color/white</item>
     </style>
 
 </resources>

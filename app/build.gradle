@@ -68,6 +68,8 @@ dependencies {
     }
     implementation deps.androidx.lifecycle.extensions
     implementation deps.androidx.lifecycle.runtime
+    implementation deps.androidx.navigation.fragmentKtx
+    implementation deps.androidx.navigation.uiKtx
     implementation deps.androidx.recyclerView
     implementation deps.androidx.room.runtime
     implementation deps.androidx.room.rxJava2

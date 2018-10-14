@@ -9,6 +9,7 @@ def versions = [
                 "espresso"        : "3.1.0-beta02",
                 "futures"         : "1.0.0-alpha02",
                 "lifecycle"       : "2.0.0",
+                "navigation"      : "1.0.0-alpha06",
                 "recyclerView"    : "1.0.0",
                 "room"            : "2.1.0-alpha01",
                 "test"            : "1.1.0-beta02",
@@ -50,6 +51,10 @@ ext.deps = [
                         "runtime"   : "androidx.lifecycle:lifecycle-runtime:$versions.androidx.lifecycle",
                         "extensions": "androidx.lifecycle:lifecycle-extensions:$versions.androidx.lifecycle",
                         "compiler"  : "androidx.lifecycle:lifecycle-compiler:$versions.androidx.lifecycle",
+                ],
+                "navigation"      : [
+                        "fragmentKtx": "android.arch.navigation:navigation-fragment-ktx:$versions.androidx.navigation",
+                        "uiKtx": "android.arch.navigation:navigation-ui-ktx:$versions.androidx.navigation",
                 ],
                 "recyclerView"    : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerView",
                 "room"            : [

@@ -3,4 +3,5 @@
     <dimen name="key_line_small">4dp</dimen>
     <dimen name="key_line_med">8dp</dimen>
     <dimen name="key_line">16dp</dimen>
+    <dimen name="bottom_nav_height">56dp</dimen>
 </resources>

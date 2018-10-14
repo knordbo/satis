@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    android:id="@+id/navigation_graph"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/home"
+>
+
+    <fragment
+        android:id="@+id/home"
+        android:name="com.satis.app.feature.cards.CardFragment"
+        android:label="@string/home"
+    />
+
+    <fragment
+        android:id="@+id/notifications"
+        android:name="com.satis.app.utils.view.EmptyFragment"
+        android:label="@string/notifications"
+    />
+
+    <fragment
+        android:id="@+id/account"
+        android:name="com.satis.app.feature.account.AccountFragment"
+        android:label="@string/account"
+    />
+
+</navigation>
