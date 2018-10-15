@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Satis</string>
 
-    <string name="card_add_header">Add a card</string>
+    <string name="card_add_header">Add card</string>
     <string name="card_add">Add</string>
     <string name="card_title_hint">Title…</string>
     <string name="card_message_hint">Message…</string>
