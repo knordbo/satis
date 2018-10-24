@@ -6,6 +6,7 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardProvider
+import com.satis.app.utils.coroutines.BaseViewModel
 import io.reactivex.Scheduler
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
@@ -14,7 +15,7 @@ class CardViewModel(
         initialSate: CardState,
         private val cardProvider: CardProvider,
         private val ioScheduler: Scheduler
-) : BaseMvRxViewModel<CardState>(
+) : BaseViewModel<CardState>(
         initialState = initialSate,
         debugMode = BuildConfig.DEBUG
 ) {

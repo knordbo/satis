@@ -10,9 +10,9 @@
     />
 
     <item
-        android:id="@+id/notifications"
-        android:icon="@drawable/ic_notifications"
-        android:title="@string/notifications"
+        android:id="@+id/images"
+        android:icon="@drawable/ic_image"
+        android:title="@string/images"
     />
 
     <item

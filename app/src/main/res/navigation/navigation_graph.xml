@@ -13,9 +13,9 @@
     />
 
     <fragment
-        android:id="@+id/notifications"
-        android:name="com.satis.app.utils.view.EmptyFragment"
-        android:label="@string/notifications"
+        android:id="@+id/images"
+        android:name="com.satis.app.feature.images.ImagesFragment"
+        android:label="@string/images"
     />
 
     <fragment

@@ -18,17 +18,27 @@ def versions = [
         "fabric"              : "1.25.4",
         "firebaseCore"        : "16.0.4",
         "firebaseFirestore"   : "17.1.1",
+        "glide"               : "4.8.0",
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
         "junit"               : "4.12",
         "koin"                : "1.0.1",
-        "kotlin"              : "1.3.0-rc-190",
-        "kotlinCoroutines"    : "1.0.0-RC1",
+        "kotlin"              : [
+                "kotlin"       : "1.3.0-rc-190",
+                "coroutines"   : "1.0.0-RC1",
+                "serialization": "0.8.3-rc13",
+        ],
         "material"            : "1.0.0",
         "mvrx"                : "0.5.0",
+        "okhttp"              : "3.11.0",
         "playPublish"         : "2.0.0-beta1",
+        "retrofit"            : [
+                "kotlinCoroutinesAdapter": "0.9.2",
+                "kotlinSerialization"    : "0.1.0",
+                "retrofit"               : "2.4.0",
+        ],
         "rxAndroid"           : "2.1.0",
-        "rxJava2"             : "2.2.2",
+        "rxJava2"             : "2.2.3",
         "tinydancer"          : "0.1.2",
         "workManager"         : "1.0.0-alpha10",
 ]
@@ -54,7 +64,7 @@ ext.deps = [
                 ],
                 "navigation"      : [
                         "fragmentKtx": "android.arch.navigation:navigation-fragment-ktx:$versions.androidx.navigation",
-                        "uiKtx": "android.arch.navigation:navigation-ui-ktx:$versions.androidx.navigation",
+                        "uiKtx"      : "android.arch.navigation:navigation-ui-ktx:$versions.androidx.navigation",
                 ],
                 "recyclerView"    : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerView",
                 "room"            : [
@@ -74,6 +84,10 @@ ext.deps = [
                 "core"     : "com.google.firebase:firebase-core:$versions.firebaseCore",
                 "firestore": "com.google.firebase:firebase-firestore:$versions.firebaseFirestore",
         ],
+        "glide"               : [
+                "glide"   : "com.github.bumptech.glide:glide:$versions.glide",
+                "compiler": "com.github.bumptech.glide:compiler:$versions.glide",
+        ],
         "googleServices"      : "com.google.gms:google-services:$versions.googleServices",
         "gradleVersionsPlugin": "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersionsPlugin",
         "junit"               : "junit:junit:$versions.junit",
@@ -82,17 +96,31 @@ ext.deps = [
                 "androidViewmodel": "org.koin:koin-android-viewmodel:$versions.koin",
         ],
         "kotlin"              : [
-                "stdlib"    : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin",
-                "test"      : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin",
-                "plugin"    : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin",
-                "coroutines": [
-                        "common" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${versions.kotlinCoroutines}",
-                        "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.kotlinCoroutines}"
+                "stdlib"       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin.kotlin",
+                "test"         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin.kotlin",
+                "plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin.kotlin",
+                "coroutines"   : [
+                        "common" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.kotlin.coroutines",
+                        "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin.coroutines"
+                ],
+                "serialization": [
+                        "runtime"      : "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlin.serialization",
+                        "runtimeCommon": "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$versions.kotlin.serialization",
+                        "serialization": "org.jetbrains.kotlin:kotlin-serialization:$versions.kotlin.kotlin",
                 ],
         ],
         "material"            : "com.google.android.material:material:$versions.material",
         "mvrx"                : "com.airbnb.android:mvrx:$versions.mvrx",
+        "okhttp"              : [
+                "okhttp"            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+                "loggingInterceptor": "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
+        ],
         "playPublish"         : "com.github.triplet.gradle:play-publisher:$versions.playPublish",
+        "retrofit"            : [
+                "kotlinCoroutinesAdapter": "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit.kotlinCoroutinesAdapter",
+                "kotlinSerialization"    : "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$versions.retrofit.kotlinSerialization",
+                "retrofit"               : "com.squareup.retrofit2:retrofit:$versions.retrofit.retrofit",
+        ],
         "rxAndroid"           : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
         "rxJava2"             : "io.reactivex.rxjava2:rxjava:$versions.rxJava2",
         "tinydancer"          : "com.github.brianPlummer:tinydancer:$versions.tinydancer",

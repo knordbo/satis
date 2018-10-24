@@ -5,13 +5,14 @@ import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
 import com.satis.app.common.Prefs
+import com.satis.app.utils.coroutines.BaseViewModel
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
 
 class AccountViewModel(
         initialState: AccountState,
         private val prefs: Prefs
-) : BaseMvRxViewModel<AccountState>(
+) : BaseViewModel<AccountState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
 ) {

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlinx-serialization'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'com.github.ben-manes.versions'
 apply plugin: 'io.fabric'
@@ -83,11 +84,17 @@ dependencies {
     implementation deps.firebase.core
     implementation deps.firebase.firestore
 
+    // Glide
+    implementation deps.glide.glide
+    kapt deps.glide.compiler
+
     // Koin
     implementation deps.koin.android
     implementation deps.koin.androidViewmodel
 
     // Kotlin
+    implementation deps.kotlin.serialization.runtime
+    implementation deps.kotlin.serialization.runtimeCommon
     implementation deps.kotlin.stdlib
 
     // Kotlin Coroutines
@@ -99,6 +106,14 @@ dependencies {
 
     // MvRx
     implementation deps.mvrx
+
+    // OkHttp
+    implementation deps.okhttp.okhttp
+
+    // Retrofit
+    implementation deps.retrofit.retrofit
+    implementation deps.retrofit.kotlinCoroutinesAdapter
+    implementation deps.retrofit.kotlinSerialization
 
     // RxJava
     implementation deps.rxAndroid
