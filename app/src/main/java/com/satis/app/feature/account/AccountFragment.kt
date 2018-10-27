@@ -8,17 +8,14 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
-import com.satis.app.common.fragment.ReselectableFragment
-import com.satis.app.common.logging.Logger
 import com.satis.app.feature.account.ui.LogAdapter
 import kotlinx.android.synthetic.main.feature_account.*
 import kotlinx.android.synthetic.main.feature_account.view.*
-import org.koin.android.ext.android.get
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-class AccountFragment : BaseMvRxFragment(), ReselectableFragment {
+class AccountFragment : BaseMvRxFragment() {
 
     private val viewModel: AccountViewModel by activityViewModel()
     private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
@@ -40,10 +37,6 @@ class AccountFragment : BaseMvRxFragment(), ReselectableFragment {
             }
         }
         previousState = it
-    }
-
-    override fun onFragmentReselected() {
-        get<Logger>().log("TESTING", Math.random().toString())
     }
 
     private fun View.initView() {
