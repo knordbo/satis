@@ -3,7 +3,11 @@ package com.satis.app
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.stringBased
 import com.satis.app.common.AppDatabase
-import com.satis.app.common.Prefs
+import com.satis.app.common.logging.LogDao
+import com.satis.app.common.logging.Logger
+import com.satis.app.common.logging.PersistedLogger
+import com.satis.app.common.prefs.DefaultPrefs
+import com.satis.app.common.prefs.Prefs
 import com.satis.app.utils.retrofit.jsonMediaType
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
@@ -14,7 +18,6 @@ import kotlinx.serialization.json.JSON
 import okhttp3.OkHttpClient
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
-import kotlin.coroutines.CoroutineContext
 
 val appModule = module {
     single<JSON> { JSON.nonstrict }
@@ -29,7 +32,9 @@ val appModule = module {
     }
 
     single<AppDatabase> { AppDatabase.createDatabase(get()) }
-    single<Prefs> { Prefs(get()) }
+    single<LogDao> { get<AppDatabase>().logDao() }
+    single<Logger> { PersistedLogger(get(), get(IO)) }
+    single<Prefs> { DefaultPrefs(get()) }
 
     single<Scheduler>(MAIN) { mainThread() }
     single<Scheduler>(IO) { io() }

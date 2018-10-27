@@ -1,4 +1,4 @@
-package com.satis.app.common
+package com.satis.app.common.prefs
 
 import android.content.Context
 import androidx.core.content.edit
@@ -7,11 +7,11 @@ import java.util.Date
 import java.util.Locale
 import java.util.UUID
 
-class Prefs(context: Context) {
+class DefaultPrefs(context: Context) : Prefs {
 
     private val sharedPreferences = context.getSharedPreferences(SHARED_PREFS, 0)
 
-    fun getUniqueId(): String = UNIQUE_USER_ID.let { key ->
+    override fun getUniqueId(): String = UNIQUE_USER_ID.let { key ->
         if (sharedPreferences.contains(key)) {
             sharedPreferences.getString(key, "")
         } else {
@@ -32,7 +32,6 @@ class Prefs(context: Context) {
         }
     }
 
-    fun getLog(): String = sharedPreferences.getString(LOG, "")
 }
 
 private const val SHARED_PREFS = "satis.shared.prefs"

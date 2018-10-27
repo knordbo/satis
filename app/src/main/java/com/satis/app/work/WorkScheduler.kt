@@ -5,16 +5,16 @@ import androidx.work.ExistingPeriodicWorkPolicy.KEEP
 import androidx.work.NetworkType.CONNECTED
 import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
-import com.satis.app.common.Prefs
+import com.satis.app.common.logging.Logger
 import java.util.concurrent.TimeUnit
 
-class WorkScheduler(private val prefs: Prefs, private val workManager: WorkManager) {
+class WorkScheduler(private val logger: Logger, private val workManager: WorkManager) {
 
     fun schedule() {
-        prefs.log(LOG_TAG, "Scheduling work")
+        logger.log(LOG_TAG, "Scheduling work")
         recurringNetworkJob()
         recurringChargingNetworkJob()
-        prefs.log(LOG_TAG, "Done scheduling work")
+        logger.log(LOG_TAG, "Done scheduling work")
     }
 
     private fun recurringNetworkJob() {

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
-import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
 import com.satis.app.common.fragment.ReselectableFragment
@@ -28,7 +28,7 @@ import kotlinx.android.synthetic.main.feature_cards.view.*
 
 class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, ReselectableFragment {
 
-    private val viewModel: CardViewModel by fragmentViewModel()
+    private val viewModel: CardViewModel by activityViewModel()
     private val cardsAdapter = CardAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
