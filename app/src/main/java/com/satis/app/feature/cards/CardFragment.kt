@@ -18,13 +18,15 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
+import com.satis.app.common.fragment.ReselectableFragment
 import com.satis.app.feature.cards.ui.AddCardView
 import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
+import kotlinx.android.synthetic.main.feature_cards.*
 import kotlinx.android.synthetic.main.feature_cards.view.*
 
-class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
+class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, ReselectableFragment {
 
     private val viewModel: CardViewModel by fragmentViewModel()
     private val cardsAdapter = CardAdapter()
@@ -39,6 +41,10 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
 
     override fun invalidate() = withState(viewModel) { state ->
         cardsAdapter.submitList(state.cards)
+    }
+
+    override fun onFragmentReselected() {
+        cards.smoothScrollToPosition(0)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -73,9 +79,9 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
     }
 
     private fun View.initView() {
-        cardsRv.adapter = cardsAdapter
-        cardsRv.addOnChildAttachStateChangeListener(this@CardFragment)
-        cardsRv.disableChangeAnimations()
+        cards.adapter = cardsAdapter
+        cards.addOnChildAttachStateChangeListener(this@CardFragment)
+        cards.disableChangeAnimations()
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
@@ -87,7 +93,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
             }
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
-        }).attachToRecyclerView(cardsRv)
+        }).attachToRecyclerView(cards)
     }
 
 }

@@ -26,6 +26,10 @@ class ImagesViewModel(
         fetchImages()
     }
 
+    fun onReselected() {
+        fetchImages()
+    }
+
     private fun fetchImages() {
         launch {
             val photos = withContext(io) {

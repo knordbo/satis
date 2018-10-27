@@ -9,10 +9,12 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
+import com.satis.app.common.fragment.ReselectableFragment
 import com.satis.app.feature.images.ui.ImagesAdapter
+import kotlinx.android.synthetic.main.feature_images.*
 import kotlinx.android.synthetic.main.feature_images.view.*
 
-class ImagesFragment : BaseMvRxFragment() {
+class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
 
     private val viewModel: ImagesViewModel by activityViewModel()
     private val adapter = ImagesAdapter()
@@ -26,9 +28,14 @@ class ImagesFragment : BaseMvRxFragment() {
         }
     }
 
+    override fun onFragmentReselected() {
+        images.smoothScrollToPosition(0)
+        viewModel.onReselected()
+    }
+
     private fun View.initView() {
-        rv.adapter = adapter
-        rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        images.adapter = adapter
+        images.layoutManager = GridLayoutManager(requireContext(), 2)
     }
 
 }
