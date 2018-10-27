@@ -1,5 +1,6 @@
 package com.satis.app.feature.images
 
+import android.net.Uri
 import android.os.Parcelable
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.PersistState
@@ -11,4 +12,4 @@ data class ImagesState(
 ) : MvRxState, Parcelable
 
 @Parcelize
-data class PhotoState(val id: String, val url: String) : Parcelable
+data class PhotoState(val id: String, val url: Uri) : Parcelable

@@ -1,6 +1,5 @@
 package com.satis.app.feature.images.ui
 
-import android.net.Uri
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DiffUtil
@@ -22,9 +21,15 @@ class ImagesAdapter : ListAdapter<PhotoState, ImageViewHolder>(object : DiffUtil
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         Glide.with(holder.imageView)
-                .load(Uri.parse(getItem(position).url))
+                .load(getItem(position).url)
                 .apply(RequestOptions.centerCropTransform())
                 .into(holder.imageView)
+    }
+
+    override fun onViewRecycled(holder: ImageViewHolder) {
+        super.onViewRecycled(holder)
+        Glide.with(holder.imageView)
+                .clear(holder.imageView)
     }
 
     class ImageViewHolder(val imageView: AppCompatImageView) : ViewHolder(imageView)
