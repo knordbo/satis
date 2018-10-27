@@ -23,19 +23,21 @@ class AccountViewModel(
 
     fun showLog(show: Boolean) {
         setState {
-            copy(showLog = show)
+            copy(data = getAccountData(), showLog = show)
         }
     }
 
     private fun getAccountState() {
         setState {
-            copy(data = AccountData(
-                    versionNum = BuildConfig.VERSION_CODE,
-                    buildTime = BuildConfig.BUILD_TIME,
-                    log = prefs.getLog()
-            ))
+            copy(data = getAccountData())
         }
     }
+
+    private fun getAccountData() = AccountData(
+            versionNum = BuildConfig.VERSION_CODE,
+            buildTime = BuildConfig.BUILD_TIME,
+            log = prefs.getLog()
+    )
 
     companion object : MvRxViewModelFactory<AccountState> {
         @JvmStatic
