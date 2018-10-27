@@ -8,6 +8,7 @@ import com.satis.app.utils.retrofit.jsonMediaType
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
 import io.reactivex.schedulers.Schedulers.io
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.JSON
 import okhttp3.OkHttpClient
@@ -33,8 +34,8 @@ val appModule = module {
     single<Scheduler>(MAIN) { mainThread() }
     single<Scheduler>(IO) { io() }
 
-    single<CoroutineContext>(MAIN) { Dispatchers.Main }
-    single<CoroutineContext>(IO) { Dispatchers.IO }
+    single<CoroutineDispatcher>(MAIN) { Dispatchers.Main }
+    single<CoroutineDispatcher>(IO) { Dispatchers.IO }
 }
 
 const val IO = "io"

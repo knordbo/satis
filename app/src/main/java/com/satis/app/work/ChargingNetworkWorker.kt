@@ -5,14 +5,14 @@ import androidx.work.ListenableWorker.Result.FAILURE
 import androidx.work.ListenableWorker.Result.SUCCESS
 import androidx.work.WorkerParameters
 import com.satis.app.common.Prefs
-import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.CoroutineDispatcher
 
 class ChargingNetworkWorker(
         context: Context,
         workerParameters: WorkerParameters,
-        coroutineContext: CoroutineContext,
+        coroutineDispatcher: CoroutineDispatcher,
         private val prefs: Prefs
-) : CoroutineWorker(context, workerParameters, coroutineContext) {
+) : CoroutineWorker(context, workerParameters, coroutineDispatcher) {
 
     override suspend fun work(): Payload = Payload(try {
         prefs.log(LOG_TAG, "Starting")
