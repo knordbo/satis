@@ -26,7 +26,7 @@ val appModule = module {
         Retrofit.Builder()
                 .baseUrl("https://dummy.com/")
                 .client(get())
-                .addConverterFactory(serializationConverterFactory(jsonMediaType(), JSON))
+                .addConverterFactory(serializationConverterFactory(jsonMediaType(), get<JSON>()))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
     }
