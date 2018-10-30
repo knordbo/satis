@@ -1,7 +1,7 @@
 package com.satis.app
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.stringBased
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.serializationConverterFactory
 import com.satis.app.common.AppDatabase
 import com.satis.app.common.logging.LogDao
 import com.satis.app.common.logging.Logger
@@ -26,7 +26,7 @@ val appModule = module {
         Retrofit.Builder()
                 .baseUrl("https://dummy.com/")
                 .client(get())
-                .addConverterFactory(stringBased(jsonMediaType(), get<JSON>()::parse, get<JSON>()::stringify))
+                .addConverterFactory(serializationConverterFactory(jsonMediaType(), JSON))
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
     }
