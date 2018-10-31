@@ -1,9 +1,9 @@
 package com.satis.app.common.logging
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import io.reactivex.Flowable
 
 @Dao
 interface LogDao {
@@ -11,5 +11,5 @@ interface LogDao {
     fun insertLog(logEntity: LogEntity)
 
     @Query("SELECT * FROM log")
-    fun getLogStream(): LiveData<List<LogEntity>>
+    fun getLogStream(): Flowable<List<LogEntity>>
 }

@@ -4,43 +4,48 @@ import androidx.fragment.app.FragmentActivity
 import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
-import com.satis.app.feature.images.data.FlickerProvider
+import com.satis.app.feature.images.data.FlickrProvider
 import com.satis.app.utils.coroutines.BaseViewModel
+import io.reactivex.Scheduler
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
-import kotlin.coroutines.CoroutineContext
 
 class ImagesViewModel(
         initialState: ImagesState,
-        private val flickerProvider: FlickerProvider,
-        private val io: CoroutineDispatcher
+        private val flickrProvider: FlickrProvider,
+        private val io: CoroutineDispatcher,
+        private val ioScheduler: Scheduler
 ) : BaseViewModel<ImagesState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
 ) {
+
     init {
         logStateChanges()
         fetchImages()
+        streamPopularImages()
     }
 
     fun onReselected() {
         fetchImages()
     }
 
-    private fun fetchImages() {
-        launch {
-            val photos = withContext(io) {
-                try {
-                    flickerProvider.getRecentImages()
-                } catch (t: Throwable) {
-                    emptyList<PhotoState>()
+    private fun streamPopularImages() {
+        flickrProvider.streamPopularImages()
+                .subscribeOn(ioScheduler)
+                .toObservable().execute {
+                    copy(flickrPhotoUrls = it() ?: flickrPhotoUrls)
                 }
-            }
-            setState {
-                copy(flickerPhotoUrls = photos)
+    }
+
+    private fun fetchImages() {
+        launch(io) {
+            try {
+                flickrProvider.fetchPopularImages()
+            } catch (t: Throwable) {
+                // ignored
             }
         }
     }

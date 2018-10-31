@@ -3,6 +3,9 @@ package com.satis.app
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.serializationConverterFactory
 import com.satis.app.common.AppDatabase
+import com.satis.app.common.keyvalue.DefaultKeyValueProvider
+import com.satis.app.common.keyvalue.KeyValueDao
+import com.satis.app.common.keyvalue.KeyValueProvider
 import com.satis.app.common.logging.LogDao
 import com.satis.app.common.logging.Logger
 import com.satis.app.common.logging.PersistedLogger
@@ -32,6 +35,8 @@ val appModule = module {
     }
 
     single<AppDatabase> { AppDatabase.createDatabase(get()) }
+    single<KeyValueDao> { get<AppDatabase>().keyValueDao() }
+    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get()) }
     single<LogDao> { get<AppDatabase>().logDao() }
     single<Logger> { PersistedLogger(get(), get(IO)) }
     single<Prefs> { DefaultPrefs(get()) }

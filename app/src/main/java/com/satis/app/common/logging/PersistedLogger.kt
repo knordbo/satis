@@ -1,8 +1,7 @@
 package com.satis.app.common.logging
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import io.reactivex.Flowable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -28,7 +27,7 @@ class PersistedLogger(
         }
     }
 
-    override fun getLogs(): LiveData<List<LogEntry>> = Transformations.map(logDao.getLogStream()) { logs ->
+    override fun streamLogs(): Flowable<List<LogEntry>> = logDao.getLogStream().map { logs ->
         logs.map {
             LogEntry(it.id, it.timestamp, it.tag, it.message)
         }

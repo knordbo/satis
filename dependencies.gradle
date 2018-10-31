@@ -85,8 +85,9 @@ ext.deps = [
                 "firestore": "com.google.firebase:firebase-firestore:$versions.firebaseFirestore",
         ],
         "glide"               : [
-                "glide"   : "com.github.bumptech.glide:glide:$versions.glide",
                 "compiler": "com.github.bumptech.glide:compiler:$versions.glide",
+                "glide"   : "com.github.bumptech.glide:glide:$versions.glide",
+                "recyclerview": "com.github.bumptech.glide:recyclerview-integration:$versions.glide",
         ],
         "googleServices"      : "com.google.gms:google-services:$versions.googleServices",
         "gradleVersionsPlugin": "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersionsPlugin",

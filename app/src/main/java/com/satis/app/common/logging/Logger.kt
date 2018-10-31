@@ -1,8 +1,8 @@
 package com.satis.app.common.logging
 
-import androidx.lifecycle.LiveData
+import io.reactivex.Flowable
 
 interface Logger {
     fun log(tag: String, message: String)
-    fun getLogs(): LiveData<List<LogEntry>>
+    fun streamLogs(): Flowable<List<LogEntry>>
 }

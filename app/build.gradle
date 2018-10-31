@@ -86,6 +86,7 @@ dependencies {
 
     // Glide
     implementation deps.glide.glide
+    implementation deps.glide.recyclerview
     kapt deps.glide.compiler
 
     // Koin

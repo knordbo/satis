@@ -3,7 +3,7 @@ package com.satis.app.feature.images.data
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Flicker(val photos: Photos)
+data class Flickr(val photos: Photos)
 
 @Serializable
 data class Photos(val photo: List<Photo>)
