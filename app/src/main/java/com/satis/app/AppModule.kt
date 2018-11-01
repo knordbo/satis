@@ -36,7 +36,7 @@ val appModule = module {
 
     single<AppDatabase> { AppDatabase.createDatabase(get()) }
     single<KeyValueDao> { get<AppDatabase>().keyValueDao() }
-    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get()) }
+    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get(), get(IO)) }
     single<LogDao> { get<AppDatabase>().logDao() }
     single<Logger> { PersistedLogger(get(), get(IO)) }
     single<Prefs> { DefaultPrefs(get()) }

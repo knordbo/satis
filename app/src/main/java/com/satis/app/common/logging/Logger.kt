@@ -1,8 +1,8 @@
 package com.satis.app.common.logging
 
-import io.reactivex.Flowable
+import kotlinx.coroutines.channels.ReceiveChannel
 
 interface Logger {
     fun log(tag: String, message: String)
-    fun streamLogs(): Flowable<List<LogEntry>>
+    fun streamLogs(): ReceiveChannel<List<LogEntry>>
 }

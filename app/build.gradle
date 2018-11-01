@@ -99,8 +99,9 @@ dependencies {
     implementation deps.kotlin.stdlib
 
     // Kotlin Coroutines
-    implementation deps.kotlin.coroutines.common
     implementation deps.kotlin.coroutines.android
+    implementation deps.kotlin.coroutines.common
+    implementation deps.kotlin.coroutines.rx2
 
     // Material Design
     implementation deps.material

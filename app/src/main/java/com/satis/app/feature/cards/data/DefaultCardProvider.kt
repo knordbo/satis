@@ -4,27 +4,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.reactive.openSubscription
 
 class DefaultCardProvider(private val userId: String, firebaseFirestore: FirebaseFirestore) : CardProvider {
 
     private val cardsCollection = firebaseFirestore.collection(CARDS_COLLECTION)
 
-    override fun getCards(): Flowable<List<Card>> = Flowable.create({ emitter ->
-        val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
-            if (!emitter.isCancelled && querySnapshot != null) {
-                val cards = querySnapshot.documents
-                        .mapNotNull {
-                            it.toObject(DbCard::class.java)?.toModel(it.id, userId)
-                        }
-                emitter.onNext(cards)
-            }
-        }
-        if (!emitter.isCancelled) {
-            emitter.setCancellable {
-                listener.remove()
-            }
-        }
-    }, BackpressureStrategy.LATEST)
+    override fun getCards(): ReceiveChannel<List<Card>> = getCardsFlowable().openSubscription()
 
     override fun addCard(card: Card) {
         cardsCollection.add(card.toDb())
@@ -45,6 +32,23 @@ class DefaultCardProvider(private val userId: String, firebaseFirestore: Firebas
     private fun setDiff(id: String, diff: Any) {
         cardsCollection.document(id).set(diff, SetOptions.merge())
     }
+
+    private fun getCardsFlowable(): Flowable<List<Card>> = Flowable.create({ emitter ->
+        val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
+            if (!emitter.isCancelled && querySnapshot != null) {
+                val cards = querySnapshot.documents
+                        .mapNotNull {
+                            it.toObject(DbCard::class.java)?.toModel(it.id, userId)
+                        }
+                emitter.onNext(cards)
+            }
+        }
+        if (!emitter.isCancelled) {
+            emitter.setCancellable {
+                listener.remove()
+            }
+        }
+    }, BackpressureStrategy.LATEST)
 
 }
 

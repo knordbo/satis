@@ -6,14 +6,13 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
 import com.satis.app.common.logging.Logger
 import com.satis.app.utils.coroutines.BaseViewModel
-import io.reactivex.Scheduler
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
 
 class AccountViewModel(
         initialState: AccountState,
-        private val logger: Logger,
-        private val ioScheduler: Scheduler
+        private val logger: Logger
 ) : BaseViewModel<AccountState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
@@ -26,11 +25,13 @@ class AccountViewModel(
     }
 
     private fun streamLogs() {
-        logger.streamLogs()
-                .subscribeOn(ioScheduler)
-                .toObservable().execute {
-                    copy(logs = it() ?: logs)
+        launch {
+            for (logs in logger.streamLogs()) {
+                setState {
+                    copy(logs = logs)
                 }
+            }
+        }
     }
 
     private fun getAccountState() {

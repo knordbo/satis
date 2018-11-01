@@ -85,8 +85,8 @@ ext.deps = [
                 "firestore": "com.google.firebase:firebase-firestore:$versions.firebaseFirestore",
         ],
         "glide"               : [
-                "compiler": "com.github.bumptech.glide:compiler:$versions.glide",
-                "glide"   : "com.github.bumptech.glide:glide:$versions.glide",
+                "compiler"    : "com.github.bumptech.glide:compiler:$versions.glide",
+                "glide"       : "com.github.bumptech.glide:glide:$versions.glide",
                 "recyclerview": "com.github.bumptech.glide:recyclerview-integration:$versions.glide",
         ],
         "googleServices"      : "com.google.gms:google-services:$versions.googleServices",
@@ -101,8 +101,9 @@ ext.deps = [
                 "test"         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin.kotlin",
                 "plugin"       : "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin.kotlin",
                 "coroutines"   : [
+                        "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin.coroutines",
                         "common" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.kotlin.coroutines",
-                        "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin.coroutines"
+                        "rx2"    : "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$versions.kotlin.coroutines",
                 ],
                 "serialization": [
                         "runtime"      : "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlin.serialization",

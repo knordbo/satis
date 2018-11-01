@@ -5,8 +5,9 @@ import com.satis.app.common.keyvalue.Key
 import com.satis.app.common.keyvalue.KeyValueProvider
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.data.ImageSize.SIZE_100
-import com.satis.app.feature.images.data.ImageSize.SIZE_320
-import io.reactivex.Flowable
+import com.satis.app.feature.images.data.ImageSize.SIZE_640
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.map
 
 class DefaultFlickrProvider(
         private val flickrApi: FlickrApi,
@@ -20,7 +21,7 @@ class DefaultFlickrProvider(
         return popularImages.photos.photo.toState()
     }
 
-    override fun streamPopularImages(): Flowable<List<PhotoState>> =
+    override fun streamPopularImages(): ReceiveChannel<List<PhotoState>> =
             keyValueProvider.getStream(popularImagesKey).map { flickr ->
                 flickr.photos.photo.toState()
             }
@@ -29,7 +30,7 @@ class DefaultFlickrProvider(
         PhotoState(
                 id = it.id,
                 thumbnailUrl = it.toUri(SIZE_100),
-                photoUrl = it.toUri(SIZE_320)
+                photoUrl = it.toUri(SIZE_640)
         )
     }
 

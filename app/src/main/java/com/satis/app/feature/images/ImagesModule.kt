@@ -23,7 +23,7 @@ val imagesModule = module {
     }
 
     factory<ImagesViewModel> { (initialState: ImagesState) ->
-        ImagesViewModel(initialState, get(), get(IO), get(IO))
+        ImagesViewModel(initialState, get(), get(IO))
     }
 
     factory<ListenableWorker>(ImageWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->

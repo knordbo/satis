@@ -1,11 +1,11 @@
 package com.satis.app.common.keyvalue
 
-import io.reactivex.Flowable
+import kotlinx.coroutines.channels.ReceiveChannel
 
 interface KeyValueProvider {
-    fun <T : Any> get(key: Key<T>): T?
-    fun <T : Any> getStream(key: Key<T>): Flowable<T>
-    fun <T : Any> insert(key: Key<T>, value: T)
+    suspend fun <T : Any> get(key: Key<T>): T?
+    fun <T : Any> getStream(key: Key<T>): ReceiveChannel<T>
+    suspend fun <T : Any> insert(key: Key<T>, value: T)
 }
 
 data class Key<T : Any>(val id: String, val type: Class<T>) {
