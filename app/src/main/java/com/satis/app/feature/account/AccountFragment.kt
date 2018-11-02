@@ -31,7 +31,7 @@ class AccountFragment : BaseMvRxFragment() {
         if (it.buildData != null) {
             versionNumber.text = resources.getString(R.string.version_info, it.buildData.versionNum)
             buildTime.text = resources.getString(R.string.build_time_info, simpleDateFormat.format(Date(it.buildData.buildTime)))
-            logAdapter.submitList(it.logs.reversed())
+            logAdapter.submitList(it.logs)
             if (it.logs != previousState?.logs) {
                 logs.smoothScrollToPosition(0)
             }

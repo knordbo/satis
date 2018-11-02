@@ -10,6 +10,6 @@ interface LogDao {
     @Insert
     fun insertLog(logEntity: LogEntity)
 
-    @Query("SELECT * FROM log")
+    @Query("SELECT * FROM log ORDER BY timestamp DESC LIMIT 1000")
     fun getLogStream(): Flowable<List<LogEntity>>
 }

@@ -14,9 +14,10 @@ class PersistedLogger(
 
     override fun log(tag: String, message: String) {
         Log.d(tag, message)
+        val timestamp = System.currentTimeMillis()
         GlobalScope.launch(io) {
             logDao.insertLog(LogEntity(
-                    timestamp = System.currentTimeMillis(),
+                    timestamp = timestamp,
                     tag = tag,
                     message = message
             ))
