@@ -5,6 +5,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
@@ -24,14 +25,13 @@ class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSe
         setSupportActionBar(toolbar)
 
         bottomNav.setupWithNavController(navigationController)
-        setupActionBarWithNavController(navigationController)
+        setupActionBarWithNavController(
+                navController = navigationController,
+                configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
+        )
 
         bottomNav.setOnNavigationItemSelectedListener(this)
         bottomNav.setOnNavigationItemReselectedListener(this)
-
-        navigationController.addOnNavigatedListener { _, _ ->
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        }
     }
 
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
