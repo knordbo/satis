@@ -7,7 +7,7 @@ import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.satis.app.common.logging.Logger
-import com.satis.app.feature.images.data.FlickrProvider
+import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.work.CoroutineWorker
 import kotlinx.coroutines.CoroutineDispatcher
 import java.util.concurrent.TimeUnit
@@ -17,13 +17,13 @@ class ImageWorker(
         workerParameters: WorkerParameters,
         coroutineDispatcher: CoroutineDispatcher,
         private val logger: Logger,
-        private val flickrProvider: FlickrProvider
+        private val unsplashProvider: UnsplashProvider
 ) : CoroutineWorker(context, workerParameters, coroutineDispatcher) {
     override suspend fun work(): Payload {
         return Payload(try {
             logger.log(LOG_TAG, "Starting")
 
-            val popularImages = flickrProvider.fetchPopularImages()
+            val popularImages = unsplashProvider.fetchCuratedPhotos()
             val requestManager = Glide.with(context)
             popularImages.forEachIndexed { index, photo ->
                 if (index < FETCH_IMAGE_COUNT) {
@@ -46,5 +46,5 @@ class ImageWorker(
     }
 }
 
-private const val FETCH_IMAGE_COUNT = 20
+private const val FETCH_IMAGE_COUNT = 10
 private const val LOG_TAG = "ImageWorker"

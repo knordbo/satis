@@ -27,7 +27,7 @@ class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
 
     override fun invalidate() {
         withState(viewModel) {
-            adapter.submitList(it.flickrPhotoUrls)
+            adapter.submitList(it.photoState)
         }
     }
 

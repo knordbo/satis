@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ImagesState(
-        @PersistState val flickrPhotoUrls: List<PhotoState> = emptyList()
+        @PersistState val photoState: List<PhotoState> = emptyList()
 ) : MvRxState, Parcelable
 
 @Parcelize

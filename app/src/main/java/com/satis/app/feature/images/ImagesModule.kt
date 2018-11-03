@@ -5,8 +5,11 @@ import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.satis.app.IO
 import com.satis.app.feature.images.data.DefaultFlickrProvider
+import com.satis.app.feature.images.data.DefaultUnsplashProvider
 import com.satis.app.feature.images.data.FlickrApi
 import com.satis.app.feature.images.data.FlickrProvider
+import com.satis.app.feature.images.data.UnsplashApi
+import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.utils.retrofit.create
 import org.koin.dsl.module.module
@@ -20,6 +23,14 @@ val imagesModule = module {
 
     single<FlickrProvider> {
         DefaultFlickrProvider(get(), get())
+    }
+
+    single<UnsplashApi> {
+        get<Retrofit>().create()
+    }
+
+    single<UnsplashProvider> {
+        DefaultUnsplashProvider(get(), get())
     }
 
     factory<ImagesViewModel> { (initialState: ImagesState) ->
