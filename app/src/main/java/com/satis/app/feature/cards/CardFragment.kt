@@ -24,7 +24,6 @@ import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.*
-import kotlinx.android.synthetic.main.feature_cards.view.*
 
 class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, ReselectableFragment {
 
@@ -37,7 +36,26 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_cards, container, false).apply { initView() }
+            inflater.inflate(R.layout.feature_cards, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        cards.adapter = cardsAdapter
+        cards.addOnChildAttachStateChangeListener(this@CardFragment)
+        cards.disableChangeAnimations()
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
+            override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                viewHolder.adapterPosition.let {
+                    if (it != NO_POSITION) {
+                        viewModel.removeCard(cardsAdapter.getCard(it).id)
+                    }
+                }
+            }
+
+            override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
+        }).attachToRecyclerView(cards)
+    }
 
     override fun invalidate() = withState(viewModel) { state ->
         cardsAdapter.submitList(state.cards)
@@ -76,24 +94,6 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
                 viewModel.dislike(it.id, !it.hasDisliked)
             }
         }
-    }
-
-    private fun View.initView() {
-        cards.adapter = cardsAdapter
-        cards.addOnChildAttachStateChangeListener(this@CardFragment)
-        cards.disableChangeAnimations()
-
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
-            override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-                viewHolder.adapterPosition.let {
-                    if (it != NO_POSITION) {
-                        viewModel.removeCard(cardsAdapter.getCard(it).id)
-                    }
-                }
-            }
-
-            override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
-        }).attachToRecyclerView(cards)
     }
 
 }

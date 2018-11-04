@@ -12,6 +12,9 @@ interface UnsplashApi {
             "Accept-Version: v1",
             "Authorization: Client-ID $UNSPLASH_CLIENT_ID"
     )
-    @GET("https://api.unsplash.com/photos/curated")
-    fun getCuratedPhotos(@Query("per_page") perPage: Int = 30): Deferred<List<UnsplashPhoto>>
+    @GET("https://api.unsplash.com/search/photos")
+    fun searchPhotos(
+            @Query("per_page") perPage: Int = 30,
+            @Query("query") query: String
+    ): Deferred<Unsplash>
 }

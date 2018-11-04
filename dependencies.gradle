@@ -16,7 +16,7 @@ def versions = [
         ],
         "crashlytics"         : "2.9.5",
         "fabric"              : "1.25.4",
-        "firebaseCore"        : "16.0.4",
+        "firebaseCore"        : "16.0.5",
         "firebaseFirestore"   : "17.1.2",
         "glide"               : "4.8.0",
         "googleServices"      : "4.0.0",
@@ -31,6 +31,7 @@ def versions = [
         "material"            : "1.1.0-alpha01",
         "mvrx"                : "0.6.0",
         "okhttp"              : "3.11.0",
+        "peekAndPop"          : "1.1.0",
         "playPublish"         : "2.0.0-beta1",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "0.9.2",
@@ -117,6 +118,7 @@ ext.deps = [
                 "okhttp"            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
                 "loggingInterceptor": "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         ],
+        "peekAndPop"          : "com.github.shalskar:PeekAndPop:$versions.peekAndPop",
         "playPublish"         : "com.github.triplet.gradle:play-publisher:$versions.playPublish",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit.kotlinCoroutinesAdapter",

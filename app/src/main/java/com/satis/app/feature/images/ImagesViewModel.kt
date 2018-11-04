@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity
 import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
+import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.utils.coroutines.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -22,17 +23,17 @@ class ImagesViewModel(
 
     init {
         logStateChanges()
-        fetchImages()
-        streamPopularImages()
+        fetchPhotos()
+        streamPhotos()
     }
 
     fun onReselected() {
-        fetchImages()
+        fetchPhotos()
     }
 
-    private fun streamPopularImages() {
+    private fun streamPhotos() {
         launch {
-            for (photos in unsplashProvider.streamCuratedPhotos()) {
+            for (photos in unsplashProvider.streamPhotos(NATURE)) {
                 setState {
                     copy(photoState = photos)
                 }
@@ -40,10 +41,10 @@ class ImagesViewModel(
         }
     }
 
-    private fun fetchImages() {
+    private fun fetchPhotos() {
         launch(io) {
             try {
-                unsplashProvider.fetchCuratedPhotos()
+                unsplashProvider.fetchPhotos(NATURE)
             } catch (t: Throwable) {
                 // ignored
             }

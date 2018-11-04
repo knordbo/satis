@@ -113,6 +113,9 @@ dependencies {
     // OkHttp
     implementation deps.okhttp.okhttp
 
+    // PeekAndPop
+    implementation deps.peekAndPop
+
     // Retrofit
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.kotlinCoroutinesAdapter

@@ -12,4 +12,15 @@ data class ImagesState(
 ) : MvRxState, Parcelable
 
 @Parcelize
-data class PhotoState(val id: String, val thumbnailUrl: Uri, val photoUrl: Uri) : Parcelable
+data class PhotoState(
+        val id: String,
+        val thumbnailUrl: Uri,
+        val photoUrl: Uri,
+        val user: User
+) : Parcelable
+
+@Parcelize
+data class User(
+        val username: String,
+        val userAvatar: Uri
+) : Parcelable

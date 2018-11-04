@@ -10,7 +10,6 @@ import com.airbnb.mvrx.withState
 import com.satis.app.R
 import com.satis.app.feature.account.ui.LogAdapter
 import kotlinx.android.synthetic.main.feature_account.*
-import kotlinx.android.synthetic.main.feature_account.view.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -23,9 +22,12 @@ class AccountFragment : BaseMvRxFragment() {
     private var previousState: AccountState? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_account, container, false).apply {
-                initView()
-            }
+            inflater.inflate(R.layout.feature_account, container, false)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        logs.adapter = logAdapter
+    }
 
     override fun invalidate() = withState(viewModel) {
         if (it.buildData != null) {
@@ -37,10 +39,6 @@ class AccountFragment : BaseMvRxFragment() {
             }
         }
         previousState = it
-    }
-
-    private fun View.initView() {
-        logs.adapter = logAdapter
     }
 
 }

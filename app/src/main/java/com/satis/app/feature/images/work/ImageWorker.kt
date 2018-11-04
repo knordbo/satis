@@ -7,6 +7,7 @@ import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.satis.app.common.logging.Logger
+import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.work.CoroutineWorker
 import kotlinx.coroutines.CoroutineDispatcher
@@ -23,7 +24,7 @@ class ImageWorker(
         return Payload(try {
             logger.log(LOG_TAG, "Starting")
 
-            val popularImages = unsplashProvider.fetchCuratedPhotos()
+            val popularImages = unsplashProvider.fetchPhotos(NATURE)
             val requestManager = Glide.with(context)
             popularImages.forEachIndexed { index, photo ->
                 if (index < FETCH_IMAGE_COUNT) {

@@ -4,6 +4,7 @@ import android.net.Uri
 import com.satis.app.common.keyvalue.Key
 import com.satis.app.common.keyvalue.KeyValueProvider
 import com.satis.app.feature.images.PhotoState
+import com.satis.app.feature.images.User
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.channels.map
 
@@ -11,23 +12,28 @@ class DefaultUnsplashProvider(
         private val unsplashApi: UnsplashApi,
         private val keyValueProvider: KeyValueProvider
 ) : UnsplashProvider {
-    private val curatedPhotosKey: Key<Unsplash> = Key.of("unsplash_curated_photos")
 
-    override suspend fun fetchCuratedPhotos(): List<PhotoState> {
-        val curatedPhotos = Unsplash(unsplashApi.getCuratedPhotos().await())
-        keyValueProvider.insert(curatedPhotosKey, curatedPhotos)
-        return curatedPhotos.toState()
+    override suspend fun fetchPhotos(query: String): List<PhotoState> {
+        val photos = unsplashApi.searchPhotos(query = query).await()
+        keyValueProvider.insert(photosKey(query), photos)
+        return photos.toState()
     }
 
-    override fun streamCuratedPhotos(): ReceiveChannel<List<PhotoState>> = keyValueProvider.getStream(curatedPhotosKey).map { unsplash ->
+    override fun streamPhotos(query: String): ReceiveChannel<List<PhotoState>> = keyValueProvider.getStream(photosKey(query)).map { unsplash ->
         unsplash.toState()
     }
 
-    private fun Unsplash.toState() = photos.map {
+    private fun photosKey(query: String): Key<Unsplash> = Key.of("unsplash_photos_$query")
+
+    private fun Unsplash.toState() = results.map {
         PhotoState(
                 id = it.id,
                 thumbnailUrl = Uri.parse(it.urls.thumb),
-                photoUrl = Uri.parse(it.urls.regular)
+                photoUrl = Uri.parse(it.urls.regular),
+                user = User(
+                        username = it.user.username,
+                        userAvatar = Uri.parse(it.user.profileImage.medium)
+                )
         )
     }
 }
