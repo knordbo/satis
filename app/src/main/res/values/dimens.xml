@@ -5,4 +5,6 @@
     <dimen name="key_line">16dp</dimen>
     <dimen name="bottom_nav_height">56dp</dimen>
     <dimen name="image_height">200dp</dimen>
+    <dimen name="peek_margin_horizontal">0dp</dimen>
+    <dimen name="peek_margin_vertical">36dp</dimen>
 </resources>
