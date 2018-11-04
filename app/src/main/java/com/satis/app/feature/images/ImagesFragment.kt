@@ -41,8 +41,11 @@ class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
                 IMAGE_PRELOAD_SIZE)
 
         images.adapter = adapter
-        images.layoutManager = GridLayoutManager(requireContext(), 2)
+        images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
         images.addOnScrollListener(preloader)
+
+        val dividerDrawable = requireContext().getDrawable(R.drawable.divider)
+        images.addItemDecoration(GridDividerItemDecoration(dividerDrawable, dividerDrawable, COLUMNS))
     }
 
     override fun invalidate() {
@@ -59,3 +62,4 @@ class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
 }
 
 private const val IMAGE_PRELOAD_SIZE = 20
+private const val COLUMNS = 3
