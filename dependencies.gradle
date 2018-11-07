@@ -14,7 +14,7 @@ def versions = [
                 "room"            : "2.1.0-alpha02",
                 "test"            : "1.1.0",
         ],
-        "crashlytics"         : "2.9.5",
+        "crashlytics"         : "2.9.6",
         "fabric"              : "1.25.4",
         "firebaseCore"        : "16.0.5",
         "firebaseFirestore"   : "17.1.2",
