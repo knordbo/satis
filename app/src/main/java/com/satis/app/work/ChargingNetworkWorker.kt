@@ -1,6 +1,7 @@
 package com.satis.app.work
 
 import android.content.Context
+import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker.Result.FAILURE
 import androidx.work.ListenableWorker.Result.SUCCESS
 import androidx.work.WorkerParameters
@@ -10,11 +11,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 class ChargingNetworkWorker(
         context: Context,
         workerParameters: WorkerParameters,
-        coroutineDispatcher: CoroutineDispatcher,
+        override val coroutineContext: CoroutineDispatcher,
         private val logger: Logger
-) : CoroutineWorker(context, workerParameters, coroutineDispatcher) {
+) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun work(): Payload = Payload(try {
+    override suspend fun doWork(): Payload = Payload(try {
         logger.log(LOG_TAG, "Starting")
         Thread.sleep(5000)
         logger.log(LOG_TAG, "Success")

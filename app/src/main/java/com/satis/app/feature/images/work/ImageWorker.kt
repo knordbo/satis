@@ -1,6 +1,7 @@
 package com.satis.app.feature.images.work
 
 import android.content.Context
+import androidx.work.CoroutineWorker
 import androidx.work.ListenableWorker.Result.FAILURE
 import androidx.work.ListenableWorker.Result.SUCCESS
 import androidx.work.WorkerParameters
@@ -9,18 +10,18 @@ import com.bumptech.glide.request.RequestOptions
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
-import com.satis.app.work.CoroutineWorker
 import kotlinx.coroutines.CoroutineDispatcher
 import java.util.concurrent.TimeUnit
 
 class ImageWorker(
         private val context: Context,
         workerParameters: WorkerParameters,
-        coroutineDispatcher: CoroutineDispatcher,
+        override val coroutineContext: CoroutineDispatcher,
         private val logger: Logger,
         private val unsplashProvider: UnsplashProvider
-) : CoroutineWorker(context, workerParameters, coroutineDispatcher) {
-    override suspend fun work(): Payload {
+) : CoroutineWorker(context, workerParameters) {
+
+    override suspend fun doWork(): Payload {
         return Payload(try {
             logger.log(LOG_TAG, "Starting")
 
@@ -45,6 +46,7 @@ class ImageWorker(
             FAILURE
         })
     }
+
 }
 
 private const val FETCH_IMAGE_COUNT = 10
