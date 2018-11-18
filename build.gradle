@@ -16,7 +16,6 @@ buildscript {
         classpath deps.kotlin.plugin
         classpath deps.kotlin.serialization.serialization
         classpath deps.googleServices
-        classpath deps.playPublish
         classpath deps.gradleVersionsPlugin
         classpath deps.fabric
 

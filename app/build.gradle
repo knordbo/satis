@@ -1,11 +1,13 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlinx-serialization'
-apply plugin: 'com.github.triplet.play'
-apply plugin: 'com.github.ben-manes.versions'
-apply plugin: 'io.fabric'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'kotlinx-serialization'
+    id 'com.github.triplet.play' version '2.0.0-rc2'
+    id 'com.github.ben-manes.versions'
+    id 'io.fabric'
+}
 
 def keystoreProperties = new Properties()
 try {
