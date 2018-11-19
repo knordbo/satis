@@ -35,7 +35,7 @@ def versions = [
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "0.9.2",
                 "kotlinSerialization"    : "0.2.0",
-                "retrofit"               : "2.4.0",
+                "retrofit"               : "2.5.0",
         ],
         "rxAndroid"           : "2.1.0",
         "rxJava2"             : "2.2.3",
