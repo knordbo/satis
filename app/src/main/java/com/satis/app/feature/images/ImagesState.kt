@@ -16,7 +16,8 @@ data class PhotoState(
         val id: String,
         val thumbnailUrl: Uri,
         val photoUrl: Uri,
-        val user: User
+        val user: User,
+        val description: String?
 ) : Parcelable
 
 @Parcelize

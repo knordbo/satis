@@ -34,6 +34,8 @@ class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSe
         bottomNav.setOnNavigationItemReselectedListener(this)
     }
 
+    override fun onSupportNavigateUp() = navigationController.navigateUp()
+
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         // Overriding default behaviour of NavigationUI which adds a way too long fade animation
         navigationController.navigate(menuItem.itemId)

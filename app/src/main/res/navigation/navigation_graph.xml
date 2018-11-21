@@ -16,7 +16,28 @@
         android:id="@+id/images"
         android:name="com.satis.app.feature.images.ImagesFragment"
         android:label="@string/images"
-    />
+    >
+        <action
+            android:id="@+id/action_images_to_image"
+            app:destination="@id/image"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+        />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/image"
+        android:name="com.satis.app.feature.images.ImageFragment"
+    >
+        <argument
+            android:name="photo"
+            app:argType="com.satis.app.feature.images.PhotoState"
+        />
+
+    </fragment>
 
     <fragment
         android:id="@+id/account"

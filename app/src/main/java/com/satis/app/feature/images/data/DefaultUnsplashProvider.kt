@@ -33,7 +33,8 @@ class DefaultUnsplashProvider(
                 user = User(
                         username = it.user.username,
                         userAvatar = Uri.parse(it.user.profileImage.medium)
-                )
+                ),
+                description = it.description
         )
     }
 }

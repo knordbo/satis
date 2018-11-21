@@ -23,7 +23,8 @@ import kotlinx.android.synthetic.main.peek_image.view.*
 
 class ImagesAdapter(
         private val requestManager: RequestManager,
-        private val peekAndPop: PeekAndPop
+        private val peekAndPop: PeekAndPop,
+        private val imageClicked: (PhotoState) -> Unit
 ) : ListAdapter<PhotoState, ImageViewHolder>(object : DiffUtil.ItemCallback<PhotoState>() {
     override fun areItemsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem.id == newItem.id
     override fun areContentsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem == newItem
@@ -51,8 +52,13 @@ class ImagesAdapter(
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = getItem(position)
-        holder.imageView.load(item)
-        peekAndPop.addLongClickView(holder.imageView, position)
+        with(holder.imageView) {
+            load(item)
+            peekAndPop.addLongClickView(this, position)
+            setOnClickListener {
+                imageClicked(item)
+            }
+        }
     }
 
     override fun getPreloadItems(position: Int): List<PhotoState> = listOf(getItem(position))

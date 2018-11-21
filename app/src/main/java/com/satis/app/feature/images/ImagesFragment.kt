@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
@@ -22,10 +23,16 @@ class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
 
     private val viewModel: ImagesViewModel by activityViewModel()
     private val adapter by lazy {
-        ImagesAdapter(Glide.with(this), PeekAndPop.Builder(requireActivity())
-                .peekLayout(R.layout.peek_image)
-                .parentViewGroupToDisallowTouchEvents(view!!.images)
-                .build())
+        ImagesAdapter(
+                requestManager = Glide.with(this),
+                peekAndPop = PeekAndPop.Builder(requireActivity())
+                        .peekLayout(R.layout.peek_image)
+                        .parentViewGroupToDisallowTouchEvents(view!!.images)
+                        .build(),
+                imageClicked = { photostate ->
+                    findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photostate))
+                }
+        )
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

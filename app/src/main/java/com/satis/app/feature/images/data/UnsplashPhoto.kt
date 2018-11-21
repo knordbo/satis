@@ -10,7 +10,8 @@ data class Unsplash(val results: List<UnsplashPhoto>)
 data class UnsplashPhoto(
         val id: String,
         val urls: Urls,
-        val user: User
+        val user: User,
+        val description: String?
 )
 
 @Serializable
