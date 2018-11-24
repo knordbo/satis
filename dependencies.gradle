@@ -38,7 +38,7 @@ def versions = [
                 "retrofit"               : "2.5.0",
         ],
         "rxAndroid"           : "2.1.0",
-        "rxJava2"             : "2.2.3",
+        "rxJava2"             : "2.2.4",
         "tinydancer"          : "0.1.2",
         "workManager"         : "1.0.0-alpha11",
 ]
