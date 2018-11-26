@@ -17,17 +17,20 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.withState
+import com.satis.app.NavigationViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.ReselectableFragment
+import com.satis.app.Tab
+import com.satis.app.Tab.HOME
 import com.satis.app.feature.cards.ui.AddCardView
 import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.*
 
-class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, ReselectableFragment {
+class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
 
-    private val viewModel: CardViewModel by activityViewModel()
+    private val cardViewModel: CardViewModel by activityViewModel()
+    private val navigationViewModel: NavigationViewModel by activityViewModel()
     private val cardsAdapter = CardAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,7 +51,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 viewHolder.adapterPosition.let {
                     if (it != NO_POSITION) {
-                        viewModel.removeCard(cardsAdapter.getCard(it).id)
+                        cardViewModel.removeCard(cardsAdapter.getCard(it).id)
                     }
                 }
             }
@@ -57,12 +60,12 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
         }).attachToRecyclerView(cards)
     }
 
-    override fun invalidate() = withState(viewModel) { state ->
-        cardsAdapter.submitList(state.cards)
-    }
-
-    override fun onFragmentReselected() {
-        cards.smoothScrollToPosition(0)
+    override fun invalidate() = withState(cardViewModel, navigationViewModel) { cardState, navigationState ->
+        cardsAdapter.submitList(cardState.cards)
+        if (navigationState.reselectedTab == HOME) {
+            navigationViewModel.tabReselectedHandled()
+            cards.smoothScrollToPosition(0)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,7 +75,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.cardAdd -> {
-            AddCardView.createDialog(requireContext(), viewModel::addCard).show()
+            AddCardView.createDialog(requireContext(), cardViewModel::addCard).show()
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -88,10 +91,10 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener, Resel
     override fun onChildViewAttachedToWindow(view: View) {
         if (view is CardItemView) {
             view.likesClickedListener = {
-                viewModel.like(it.id, !it.hasLiked)
+                cardViewModel.like(it.id, !it.hasLiked)
             }
             view.dislikesClickedListener = {
-                viewModel.dislike(it.id, !it.hasDisliked)
+                cardViewModel.dislike(it.id, !it.hasDisliked)
             }
         }
     }

@@ -2,21 +2,24 @@ package com.satis.app
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.FragmentNavigator
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
+import com.airbnb.mvrx.viewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
-import com.satis.app.common.fragment.ReselectableFragment
+import com.satis.app.Tab.ACCOUNT
+import com.satis.app.Tab.HOME
+import com.satis.app.Tab.IMAGES
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.RuntimeException
 
 class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
 
     private val navigationController by lazy { findNavController(R.id.navigationHostFragment) }
+    private val navigationViewModel: NavigationViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,19 +42,19 @@ class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSe
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         // Overriding default behaviour of NavigationUI which adds a way too long fade animation
         navigationController.navigate(menuItem.itemId)
+        navigationViewModel.tabSelected(menuItem.asTab())
         return true
     }
 
     override fun onNavigationItemReselected(menuItem: MenuItem) {
-        // Invoke the current fragment if it is reselectable
-        (currentFragment() as? ReselectableFragment)?.onFragmentReselected()
+        navigationViewModel.tabReselected(menuItem.asTab())
     }
 
-    private fun currentFragment(): Fragment? = supportFragmentManager.findFragmentById(R.id.navigationHostFragment)
-            ?.childFragmentManager
-            ?.fragments
-            ?.firstOrNull {
-                it.javaClass == (navigationController.currentDestination as? FragmentNavigator.Destination)?.fragmentClass
-            }
+}
 
+private fun MenuItem.asTab() = when (itemId) {
+    R.id.home -> HOME
+    R.id.images -> IMAGES
+    R.id.account -> ACCOUNT
+    else -> throw RuntimeException("Unsupported tab")
 }

@@ -13,15 +13,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.peekandpop.shalskar.peekandpop.PeekAndPop
+import com.satis.app.NavigationViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.ReselectableFragment
+import com.satis.app.Tab.IMAGES
 import com.satis.app.feature.images.ui.ImagesAdapter
 import kotlinx.android.synthetic.main.feature_images.*
 import kotlinx.android.synthetic.main.feature_images.view.*
 
-class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
+class ImagesFragment : BaseMvRxFragment() {
 
-    private val viewModel: ImagesViewModel by activityViewModel()
+    private val navigationViewModel: NavigationViewModel by activityViewModel()
+    private val imagesViewModel: ImagesViewModel by activityViewModel()
     private val adapter by lazy {
         ImagesAdapter(
                 requestManager = Glide.with(this),
@@ -56,14 +58,14 @@ class ImagesFragment : BaseMvRxFragment(), ReselectableFragment {
     }
 
     override fun invalidate() {
-        withState(viewModel) {
-            adapter.submitList(it.photoState)
+        withState(imagesViewModel, navigationViewModel) { imageState, navigationState ->
+            adapter.submitList(imageState.photoState)
+            if (navigationState.reselectedTab == IMAGES) {
+                navigationViewModel.tabReselectedHandled()
+                images.smoothScrollToPosition(0)
+                imagesViewModel.onReselected()
+            }
         }
-    }
-
-    override fun onFragmentReselected() {
-        images.smoothScrollToPosition(0)
-        viewModel.onReselected()
     }
 
 }
