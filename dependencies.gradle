@@ -7,6 +7,7 @@ def versions = [
                 "coreKtx"         : "1.0.1",
                 "coreTesting"     : "2.0.0",
                 "espresso"        : "3.1.1-alpha01",
+                "fragment"        : "1.1.0-alpha01",
                 "futures"         : "1.0.0-alpha02",
                 "lifecycle"       : "2.0.0",
                 "navigation"      : "1.0.0-alpha07",
@@ -56,6 +57,7 @@ ext.deps = [
                         "contrib": "androidx.test.espresso:espresso-contrib:$versions.androidx.espresso",
                         "intents": "androidx.test.espresso:espresso-intents:$versions.androidx.espresso",
                 ],
+                "fragment"        : "androidx.fragment:fragment:$versions.androidx.fragment",
                 "futures"         : "androidx.concurrent:concurrent-futures:$versions.androidx.futures",
                 "lifecycle"       : [
                         "runtime"   : "androidx.lifecycle:lifecycle-runtime:$versions.androidx.lifecycle",
