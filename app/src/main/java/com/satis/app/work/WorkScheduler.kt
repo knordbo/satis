@@ -4,7 +4,7 @@ import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy.KEEP
 import androidx.work.NetworkType.CONNECTED
 import androidx.work.NetworkType.UNMETERED
-import androidx.work.PeriodicWorkRequest
+import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.work.ImageWorker
@@ -27,7 +27,7 @@ class WorkScheduler(private val logger: Logger, private val workManager: WorkMan
                 .setRequiredNetworkType(CONNECTED)
                 .build()
 
-        val work = PeriodicWorkRequest.Builder(NetworkWorker::class.java, 5, TimeUnit.HOURS)
+        val work = PeriodicWorkRequestBuilder<NetworkWorker>(5, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build()
 
@@ -42,7 +42,7 @@ class WorkScheduler(private val logger: Logger, private val workManager: WorkMan
                 .setRequiresCharging(true)
                 .build()
 
-        val work = PeriodicWorkRequest.Builder(ChargingNetworkWorker::class.java, 24, TimeUnit.HOURS)
+        val work = PeriodicWorkRequestBuilder<ChargingNetworkWorker>(24, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build()
 
@@ -56,7 +56,7 @@ class WorkScheduler(private val logger: Logger, private val workManager: WorkMan
                 .setRequiredNetworkType(UNMETERED)
                 .build()
 
-        val work = PeriodicWorkRequest.Builder(ImageWorker::class.java, 4, TimeUnit.HOURS)
+        val work = PeriodicWorkRequestBuilder<ImageWorker>(4, TimeUnit.HOURS)
                 .setConstraints(constraints)
                 .build()
 

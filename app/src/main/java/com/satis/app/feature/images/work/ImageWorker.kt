@@ -2,8 +2,7 @@ package com.satis.app.feature.images.work
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.ListenableWorker.Result.FAILURE
-import androidx.work.ListenableWorker.Result.SUCCESS
+import androidx.work.Result
 import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -21,8 +20,8 @@ class ImageWorker(
         private val unsplashProvider: UnsplashProvider
 ) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun doWork(): Payload {
-        return Payload(try {
+    override suspend fun doWork(): Result {
+        return try {
             logger.log(LOG_TAG, "Starting")
 
             val popularImages = unsplashProvider.fetchPhotos(NATURE)
@@ -40,11 +39,11 @@ class ImageWorker(
             }
 
             logger.log(LOG_TAG, "Success")
-            SUCCESS
+            Result.success()
         } catch (t: Throwable) {
             logger.log(LOG_TAG, "Failure")
-            FAILURE
-        })
+            Result.failure()
+        }
     }
 
 }

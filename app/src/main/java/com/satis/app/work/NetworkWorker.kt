@@ -2,8 +2,7 @@ package com.satis.app.work
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.ListenableWorker.Result.FAILURE
-import androidx.work.ListenableWorker.Result.SUCCESS
+import androidx.work.Result
 import androidx.work.WorkerParameters
 import com.satis.app.common.logging.Logger
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,15 +14,15 @@ class NetworkWorker(
         private val logger: Logger
 ) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun doWork(): Payload = Payload(try {
+    override suspend fun doWork(): Result = try {
         logger.log(LOG_TAG, "Starting")
         Thread.sleep(5000)
         logger.log(LOG_TAG, "Success")
-        SUCCESS
+        Result.success()
     } catch (t: Throwable) {
         logger.log(LOG_TAG, "Failure")
-        FAILURE
-    })
+        Result.failure()
+    }
 
 }
 
