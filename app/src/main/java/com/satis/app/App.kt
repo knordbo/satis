@@ -8,6 +8,7 @@ import com.satis.app.feature.images.imagesModule
 import com.satis.app.feature.playground.playgroundModule
 import com.satis.app.work.WorkScheduler
 import com.satis.app.work.workerModule
+import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.startKoin
 
@@ -17,6 +18,10 @@ class App : Application() {
         super.onCreate()
 
 //        configureVariant()
+
+        RxJavaPlugins.setErrorHandler {
+            // ignore
+        }
 
         startKoin(this, listOf(
                 appModule,
