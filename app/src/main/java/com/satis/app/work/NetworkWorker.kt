@@ -2,7 +2,6 @@ package com.satis.app.work
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.Result
 import androidx.work.WorkerParameters
 import com.satis.app.common.logging.Logger
 import kotlinx.coroutines.CoroutineDispatcher

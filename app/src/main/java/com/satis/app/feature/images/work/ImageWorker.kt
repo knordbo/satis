@@ -2,7 +2,6 @@ package com.satis.app.feature.images.work
 
 import android.content.Context
 import androidx.work.CoroutineWorker
-import androidx.work.Result
 import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
