@@ -7,7 +7,9 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.satis.app.BuildConfig
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.satis.app.utils.rx.plusAssign
 import io.reactivex.Scheduler
+import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.parcel.Parcelize
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
@@ -20,6 +22,8 @@ class PlaygroundViewModel(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
 ) {
+    private val disposables = CompositeDisposable()
+
     private val memoryCacheThenCall = MemoryCacheThenCall<String, List<String>> { query ->
         playgroundProvider.getItems(query)
     }
@@ -29,7 +33,8 @@ class PlaygroundViewModel(
     }
 
     fun fetch(query: String) {
-        memoryCacheThenCall.call(query)
+        disposables.clear()
+        disposables += memoryCacheThenCall.call(query)
                 .subscribeOn(io)
                 .subscribe({ items ->
                     setState {
@@ -38,7 +43,11 @@ class PlaygroundViewModel(
                 }, {
                     // ignore
                 })
-                .disposeOnClear()
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposables.clear()
     }
 
     companion object : MvRxViewModelFactory<PlaygroundState> {
