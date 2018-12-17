@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.viewModel
@@ -32,6 +33,9 @@ class AccountFragment : BaseMvRxFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logs.adapter = logAdapter
+        playgroundButton.setOnClickListener {
+            findNavController().navigate(R.id.playground)
+        }
     }
 
     override fun invalidate() = withState(accountViewModel, navigationViewModel) { accountState, navigationState ->

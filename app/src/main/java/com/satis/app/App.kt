@@ -5,6 +5,7 @@ import androidx.work.WorkManager
 import com.satis.app.feature.account.accountModule
 import com.satis.app.feature.cards.cardModule
 import com.satis.app.feature.images.imagesModule
+import com.satis.app.feature.playground.playgroundModule
 import com.satis.app.work.WorkScheduler
 import com.satis.app.work.workerModule
 import org.koin.android.ext.android.get
@@ -23,7 +24,8 @@ class App : Application() {
                 // features
                 cardModule,
                 accountModule,
-                imagesModule
+                imagesModule,
+                playgroundModule
         ))
 
         WorkManager.initialize(this, get())

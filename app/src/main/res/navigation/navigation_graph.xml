@@ -40,6 +40,11 @@
     </fragment>
 
     <fragment
+        android:id="@+id/playground"
+        android:name="com.satis.app.feature.playground.PlaygroundFragment"
+    />
+
+    <fragment
         android:id="@+id/account"
         android:name="com.satis.app.feature.account.AccountFragment"
         android:label="@string/account"
