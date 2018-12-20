@@ -18,7 +18,7 @@ class ImageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val photoState = ImageFragmentArgs.fromBundle(arguments).photo
+        val photoState = ImageFragmentArgs.fromBundle(arguments!!).photo
 
         (activity as? AppCompatActivity)?.supportActionBar?.title = photoState.description
 
