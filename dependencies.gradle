@@ -1,9 +1,9 @@
 def versions = [
-        "androidGradlePlugin" : "3.4.0-alpha09",
+        "androidGradlePlugin" : "3.4.0-alpha10",
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha01",
                 "cardView"        : "1.0.0",
-                "constraintLayout": "2.0.0-alpha2",
+                "constraintLayout": "2.0.0-alpha3",
                 "coreKtx"         : "1.1.0-alpha03",
                 "coreTesting"     : "2.0.0",
                 "espresso"        : "3.1.1",
@@ -15,7 +15,7 @@ def versions = [
                 "room"            : "2.1.0-alpha03",
                 "test"            : "1.1.1",
         ],
-        "crashlytics"         : "2.9.7",
+        "crashlytics"         : "2.9.8",
         "fabric"              : "1.25.4",
         "firebaseCore"        : "16.0.6",
         "firebaseFirestore"   : "17.1.5",
@@ -26,12 +26,12 @@ def versions = [
         "koin"                : "1.0.2",
         "kotlin"              : [
                 "kotlin"       : "1.3.11",
-                "coroutines"   : "1.0.1",
+                "coroutines"   : "1.1.0",
                 "serialization": "0.9.1",
         ],
         "material"            : "1.1.0-alpha02",
         "mvrx"                : "0.6.0",
-        "okhttp"              : "3.12.0",
+        "okhttp"              : "3.12.1",
         "peekAndPop"          : "1.1.0",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "0.9.2",
@@ -39,7 +39,7 @@ def versions = [
                 "retrofit"               : "2.5.0",
         ],
         "rxAndroid"           : "2.1.0",
-        "rxJava2"             : "2.2.4",
+        "rxJava2"             : "2.2.5",
         "tinydancer"          : "0.1.2",
         "workManager"         : "1.0.0-beta01",
 ]
