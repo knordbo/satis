@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.4.0-alpha10",
+        "androidGradlePlugin" : "3.4.0-beta01",
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha01",
                 "cardView"        : "1.0.0",
@@ -30,7 +30,7 @@ def versions = [
                 "serialization": "0.9.1",
         ],
         "material"            : "1.1.0-alpha02",
-        "mvrx"                : "0.6.0",
+        "mvrx"                : "0.7.2",
         "okhttp"              : "3.12.1",
         "peekAndPop"          : "1.1.0",
         "retrofit"            : [
@@ -41,7 +41,7 @@ def versions = [
         "rxAndroid"           : "2.1.0",
         "rxJava2"             : "2.2.5",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "1.0.0-beta01",
+        "workManager"         : "1.0.0-beta02",
 ]
 
 ext.deps = [
@@ -121,7 +121,6 @@ ext.deps = [
                 "loggingInterceptor": "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         ],
         "peekAndPop"          : "com.github.shalskar:PeekAndPop:$versions.peekAndPop",
-        "playPublish"         : "com.github.triplet.gradle:play-publisher:$versions.playPublish",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit.kotlinCoroutinesAdapter",
                 "kotlinSerialization"    : "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$versions.retrofit.kotlinSerialization",

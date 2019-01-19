@@ -3,11 +3,11 @@ package com.satis.app.feature.playground
 import io.reactivex.Observable
 import io.reactivex.Single
 
-class SimpleLruCache<K: Any, V: Any>(private val capacity: Int = 100): LinkedHashMap<K, V>() {
+class SimpleLruCache<K : Any, V : Any>(private val capacity: Int = 100) : LinkedHashMap<K, V>() {
     override fun removeEldestEntry(eldest: MutableMap.MutableEntry<K, V>?): Boolean = size > capacity
 }
 
-class MemoryCacheThenCall<K: Any, V: Any>(private val source: (K) -> Single<V>) {
+class MemoryCacheThenCall<K : Any, V : Any>(private val source: (K) -> Single<V>) {
 
     private val cache = SimpleLruCache<K, V>()
 

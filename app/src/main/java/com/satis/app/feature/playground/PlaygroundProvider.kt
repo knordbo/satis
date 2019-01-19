@@ -14,7 +14,7 @@ class DefaultPlaygroundProvider: PlaygroundProvider {
     private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
 
     override fun getItems(query: String): Single<List<String>> = Single.fromCallable {
-        Thread.sleep(2000)
+        Thread.sleep(500)
 
         val time = simpleDateFormat.format(Date())
         (0..100).map {

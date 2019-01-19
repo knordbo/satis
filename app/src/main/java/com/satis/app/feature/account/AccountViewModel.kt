@@ -1,8 +1,7 @@
 package com.satis.app.feature.account
 
-import androidx.fragment.app.FragmentActivity
-import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.common.logging.Logger
 import com.satis.app.utils.coroutines.BaseViewModel
@@ -43,9 +42,8 @@ class AccountViewModel(
         }
     }
 
-    companion object : MvRxViewModelFactory<AccountState> {
-        @JvmStatic
-        override fun create(activity: FragmentActivity, state: AccountState): BaseMvRxViewModel<AccountState> =
-                activity.get<AccountViewModel> { parametersOf(state) }
+    companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
+        override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? =
+                viewModelContext.activity.get { parametersOf(state) }
     }
 }

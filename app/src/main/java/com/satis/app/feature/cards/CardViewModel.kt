@@ -1,8 +1,7 @@
 package com.satis.app.feature.cards
 
-import androidx.fragment.app.FragmentActivity
-import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardProvider
@@ -49,9 +48,8 @@ class CardViewModel(
         }
     }
 
-    companion object : MvRxViewModelFactory<CardState> {
-        @JvmStatic
-        override fun create(activity: FragmentActivity, state: CardState): BaseMvRxViewModel<CardState> =
-                activity.get<CardViewModel> { parametersOf(state) }
+    companion object : MvRxViewModelFactory<CardViewModel, CardState> {
+        override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel? =
+                viewModelContext.activity.get { parametersOf(state) }
     }
 }

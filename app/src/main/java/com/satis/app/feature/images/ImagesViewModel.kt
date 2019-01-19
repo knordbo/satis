@@ -1,8 +1,7 @@
 package com.satis.app.feature.images
 
-import androidx.fragment.app.FragmentActivity
-import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
@@ -51,9 +50,8 @@ class ImagesViewModel(
         }
     }
 
-    companion object : MvRxViewModelFactory<ImagesState> {
-        @JvmStatic
-        override fun create(activity: FragmentActivity, state: ImagesState): BaseMvRxViewModel<ImagesState> =
-                activity.get<ImagesViewModel> { parametersOf(state) }
+    companion object : MvRxViewModelFactory<ImagesViewModel, ImagesState> {
+        override fun create(viewModelContext: ViewModelContext, state: ImagesState): ImagesViewModel? =
+                viewModelContext.activity.get { parametersOf(state) }
     }
 }

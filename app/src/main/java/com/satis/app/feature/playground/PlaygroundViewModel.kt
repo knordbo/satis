@@ -1,10 +1,9 @@
 package com.satis.app.feature.playground
 
 import android.os.Parcelable
-import androidx.fragment.app.FragmentActivity
-import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.rx.plusAssign
@@ -50,10 +49,9 @@ class PlaygroundViewModel(
         disposables.clear()
     }
 
-    companion object : MvRxViewModelFactory<PlaygroundState> {
-        @JvmStatic
-        override fun create(activity: FragmentActivity, state: PlaygroundState): BaseMvRxViewModel<PlaygroundState> =
-                activity.get<PlaygroundViewModel> { parametersOf(state) }
+    companion object : MvRxViewModelFactory<PlaygroundViewModel, PlaygroundState> {
+        override fun create(viewModelContext: ViewModelContext, state: PlaygroundState): PlaygroundViewModel? =
+                viewModelContext.activity.get { parametersOf(state) }
     }
 
 }
