@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.5.0-alpha03",
+        "androidGradlePlugin" : "3.5.0-alpha04",
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha02",
                 "cardView"        : "1.0.0",
@@ -10,7 +10,7 @@ def versions = [
                 "fragment"        : "1.1.0-alpha04",
                 "futures"         : "1.0.0-alpha03",
                 "lifecycle"       : "2.1.0-alpha02",
-                "navigation"      : "1.0.0-beta01",
+                "navigation"      : "1.0.0-beta02",
                 "recyclerView"    : "1.1.0-alpha02",
                 "room"            : "2.1.0-alpha04",
                 "test"            : "1.1.2-alpha01",
@@ -19,7 +19,7 @@ def versions = [
         "fabric"              : "1.25.4",
         "firebaseCore"        : "16.0.7",
         "firebaseFirestore"   : "18.0.1",
-        "glide"               : "4.8.0",
+        "glide"               : "4.9.0",
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
         "junit"               : "4.13-beta-2",
@@ -38,10 +38,10 @@ def versions = [
                 "kotlinSerialization"    : "0.2.0",
                 "retrofit"               : "2.5.0",
         ],
-        "rxAndroid"           : "2.1.0",
+        "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.6",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "1.0.0-beta05",
+        "workManager"         : "1.0.0-rc01",
 ]
 
 ext.deps = [
