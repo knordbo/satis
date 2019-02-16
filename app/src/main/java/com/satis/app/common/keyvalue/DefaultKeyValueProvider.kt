@@ -4,12 +4,12 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.channels.ReceiveChannel
 import kotlinx.coroutines.reactive.openSubscription
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializerByTypeToken
 
 class DefaultKeyValueProvider(
         private val keyValueDao: KeyValueDao,
-        private val json: JSON,
+        private val json: Json,
         private val io: CoroutineDispatcher
 ) : KeyValueProvider {
 

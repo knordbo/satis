@@ -11,6 +11,10 @@ val cardModule = module {
         DefaultCardProvider(get<Prefs>().getUniqueId(), FirebaseFirestore.getInstance())
     }
 
+    factory<CardFragment> {
+        CardFragment()
+    }
+
     factory<CardViewModel> { (initialState: CardState) ->
         CardViewModel(initialState, get())
     }

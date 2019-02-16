@@ -7,8 +7,10 @@ import androidx.work.WorkManager
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
 import com.satis.app.IO
+import com.satis.app.utils.system.forNameAsSubclass
 import org.koin.core.parameter.parametersOf
 import org.koin.dsl.module.module
+import org.koin.experimental.builder.getForClass
 
 val workerModule = module {
     single<WorkManager> {
@@ -21,7 +23,7 @@ val workerModule = module {
                     appContext: Context,
                     workerClassName: String,
                     workerParameters: WorkerParameters
-            ): ListenableWorker? = get(workerClassName) { parametersOf(appContext, workerParameters) }
+            ): ListenableWorker? = getForClass(clazz = forNameAsSubclass(workerClassName)) { parametersOf(appContext, workerParameters) }
         }
     }
 
@@ -33,11 +35,11 @@ val workerModule = module {
         WorkScheduler(get(), get())
     }
 
-    factory<ListenableWorker>(NetworkWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->
+    factory<NetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
         NetworkWorker(context, workerParameters, get(IO), get())
     }
 
-    factory<ListenableWorker>(ChargingNetworkWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->
+    factory<ChargingNetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
         ChargingNetworkWorker(context, workerParameters, get(IO), get())
     }
 }

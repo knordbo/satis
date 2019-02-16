@@ -6,4 +6,8 @@ val accountModule = module {
     factory<AccountViewModel> { (initialState: AccountState) ->
         AccountViewModel(initialState, get())
     }
+
+    factory<AccountFragment> {
+        AccountFragment()
+    }
 }

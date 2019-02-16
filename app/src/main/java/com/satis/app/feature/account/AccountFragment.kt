@@ -7,11 +7,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
-import com.airbnb.mvrx.viewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.NavigationViewModel
 import com.satis.app.R
-import com.satis.app.Tab
 import com.satis.app.Tab.ACCOUNT
 import com.satis.app.feature.account.ui.LogAdapter
 import kotlinx.android.synthetic.main.feature_account.*

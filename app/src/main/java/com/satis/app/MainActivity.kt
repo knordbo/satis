@@ -14,6 +14,7 @@ import com.satis.app.Tab.ACCOUNT
 import com.satis.app.Tab.HOME
 import com.satis.app.Tab.IMAGES
 import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.ext.android.get
 import java.lang.RuntimeException
 
 class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
@@ -22,6 +23,7 @@ class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSe
     private val navigationViewModel: NavigationViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportFragmentManager.fragmentFactory = get()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

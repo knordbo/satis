@@ -1,7 +1,6 @@
 package com.satis.app.feature.images
 
 import android.content.Context
-import androidx.work.ListenableWorker
 import androidx.work.WorkerParameters
 import com.satis.app.IO
 import com.satis.app.feature.images.data.DefaultUnsplashProvider
@@ -26,7 +25,15 @@ val imagesModule = module {
         ImagesViewModel(initialState, get(), get(IO))
     }
 
-    factory<ListenableWorker>(ImageWorker::class.java.name) { (context: Context, workerParameters: WorkerParameters) ->
+    factory<ImagesFragment> {
+        ImagesFragment()
+    }
+
+    factory<ImageFragment> {
+        ImageFragment()
+    }
+
+    factory<ImageWorker> { (context: Context, workerParameters: WorkerParameters) ->
         ImageWorker(context, workerParameters, get(IO), get(), get())
     }
 }
