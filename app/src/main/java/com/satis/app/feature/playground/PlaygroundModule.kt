@@ -11,4 +11,8 @@ val playgroundModule = module {
         PlaygroundViewModel(initialState, get(), get(IO))
     }
 
+    factory<PlaygroundFragment> {
+        PlaygroundFragment()
+    }
+
 }

@@ -23,7 +23,7 @@ val workerModule = module {
                     appContext: Context,
                     workerClassName: String,
                     workerParameters: WorkerParameters
-            ): ListenableWorker? = getForClass(clazz = forNameAsSubclass(workerClassName)) { parametersOf(appContext, workerParameters) }
+            ): ListenableWorker? = getForClass(clazz = forNameAsSubclass<ListenableWorker>(workerClassName)) { parametersOf(appContext, workerParameters) }
         }
     }
 
