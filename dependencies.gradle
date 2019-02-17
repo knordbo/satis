@@ -71,10 +71,11 @@ ext.deps = [
                 ],
                 "recyclerView"    : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerView",
                 "room"            : [
-                        "runtime" : "androidx.room:room-runtime:$versions.androidx.room",
-                        "compiler": "androidx.room:room-compiler:$versions.androidx.room",
-                        "rxJava2" : "androidx.room:room-rxjava2:$versions.androidx.room",
-                        "testing" : "androidx.room:room-testing:$versions.androidx.room",
+                        "runtime"   : "androidx.room:room-runtime:$versions.androidx.room",
+                        "compiler"  : "androidx.room:room-compiler:$versions.androidx.room",
+                        "coroutines": "androidx.room:room-coroutines:$versions.androidx.room",
+                        "rxJava2"   : "androidx.room:room-rxjava2:$versions.androidx.room",
+                        "testing"   : "androidx.room:room-testing:$versions.androidx.room",
                 ],
                 "test"            : [
                         "runner": "androidx.test:runner:$versions.androidx.test",

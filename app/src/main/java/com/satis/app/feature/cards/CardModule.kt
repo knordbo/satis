@@ -8,7 +8,7 @@ import org.koin.dsl.module.module
 
 val cardModule = module {
     single<CardProvider> {
-        DefaultCardProvider(get<Prefs>().getUniqueId(), FirebaseFirestore.getInstance())
+        DefaultCardProvider(get<Prefs>().uniqueId, FirebaseFirestore.getInstance())
     }
 
     factory<CardFragment> {

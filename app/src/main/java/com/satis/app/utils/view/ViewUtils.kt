@@ -15,5 +15,5 @@ fun ViewGroup.inflate(@LayoutRes resource: Int, attach: Boolean = true) {
 }
 
 fun RecyclerView.disableChangeAnimations() {
-    (this.itemAnimator as? SimpleItemAnimator)!!.supportsChangeAnimations = false
+    (this.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 }

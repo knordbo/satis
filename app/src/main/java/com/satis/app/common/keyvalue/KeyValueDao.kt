@@ -10,14 +10,15 @@ import io.reactivex.Flowable
 
 @Dao
 interface KeyValueDao {
-    @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
-    fun get(key: String): KeyValueEntity?
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(keyValue: KeyValueEntity)
 
+    @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
+    suspend fun get(key: String): KeyValueEntity?
+
+    // TODO use channel when supported
     @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
     fun getStream(key: String): Flowable<KeyValueEntity>
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(keyValue: KeyValueEntity)
 }
 
 @Entity(tableName = "keyValue")

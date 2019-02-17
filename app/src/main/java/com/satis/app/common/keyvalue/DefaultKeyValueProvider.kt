@@ -13,6 +13,12 @@ class DefaultKeyValueProvider(
         private val io: CoroutineDispatcher
 ) : KeyValueProvider {
 
+    override suspend fun <T : Any> insert(key: Key<T>, value: T) {
+        withContext(io) {
+            keyValueDao.insert(KeyValueEntity(key.id, stringify(key, value)))
+        }
+    }
+
     override suspend fun <T : Any> get(key: Key<T>): T? = withContext(io) {
         keyValueDao.get(key.id)?.let { keyValue ->
             parse(key, keyValue)
@@ -22,12 +28,6 @@ class DefaultKeyValueProvider(
     override fun <T : Any> getStream(key: Key<T>): ReceiveChannel<T> = keyValueDao.getStream(key.id).map { keyValue ->
         parse(key, keyValue)
     }.openSubscription()
-
-    override suspend fun <T : Any> insert(key: Key<T>, value: T) {
-        withContext(io) {
-            keyValueDao.insert(KeyValueEntity(key.id, stringify(key, value)))
-        }
-    }
 
     private fun <T : Any> stringify(key: Key<T>, value: T): String = json.stringify(serializerByTypeToken(key.type), value)
 

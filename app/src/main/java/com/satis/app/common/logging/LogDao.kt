@@ -8,8 +8,9 @@ import io.reactivex.Flowable
 @Dao
 interface LogDao {
     @Insert
-    fun insertLog(logEntity: LogEntity)
+    suspend fun insertLog(logEntity: LogEntity)
 
+    // TODO use channel when supported
     @Query("SELECT * FROM log ORDER BY timestamp DESC LIMIT 1000")
     fun getLogStream(): Flowable<List<LogEntity>>
 }
