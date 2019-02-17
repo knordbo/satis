@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
+import com.satis.app.utils.lifecycle.isAppForegroundString
 import kotlinx.coroutines.CoroutineDispatcher
 import java.util.concurrent.TimeUnit
 
@@ -21,7 +21,7 @@ class ImageWorker(
 
     override suspend fun doWork(): Result {
         return try {
-            logger.log(LOG_TAG, "Starting")
+            logger.log(LOG_TAG, "Starting in $isAppForegroundString")
 
             val popularImages = unsplashProvider.fetchPhotos(NATURE)
             val requestManager = Glide.with(context)
@@ -30,8 +30,8 @@ class ImageWorker(
                     requestManager
                             .load(photo.photoUrl)
                             .thumbnail(requestManager.load(photo.thumbnailUrl)
-                                    .apply(RequestOptions.centerCropTransform()))
-                            .apply(RequestOptions.centerCropTransform())
+                                    .centerCrop())
+                            .centerCrop()
                             .submit()
                             .get(5, TimeUnit.SECONDS)
                 }

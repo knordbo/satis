@@ -25,8 +25,16 @@ class PersistedLogger(
     }
 
     override fun streamLogs(): ReceiveChannel<List<LogEntry>> = logDao.getLogStream().map { logs ->
-        logs.map {
-            LogEntry(it.id, it.timestamp, it.tag, it.message)
-        }
+        logs.map { it.toModel() }
     }.openSubscription()
+
+    override suspend fun searchLogs(query: String): List<LogEntry> =
+            logDao.searchLogs(query).map { it.toModel() }
+
+    private fun LogEntity.toModel() = LogEntry(
+            id = id,
+            timestamp = timestamp,
+            tag = tag,
+            message = message
+    )
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.satis.app.common.logging.Logger
+import com.satis.app.utils.lifecycle.isAppForegroundString
 import kotlinx.coroutines.CoroutineDispatcher
 
 class ChargingNetworkWorker(
@@ -14,8 +15,10 @@ class ChargingNetworkWorker(
 ) : CoroutineWorker(context, workerParameters) {
 
     override suspend fun doWork(): Result = try {
-        logger.log(LOG_TAG, "Starting")
-        Thread.sleep(5000)
+        logger.log(LOG_TAG, "Starting in $isAppForegroundString")
+
+        Thread.sleep(60_000) // simulate long work
+
         logger.log(LOG_TAG, "Success")
         Result.success()
     } catch (t: Throwable) {

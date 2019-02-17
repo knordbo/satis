@@ -5,48 +5,35 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
+import com.satis.app.common.logging.LogEntry
+import com.satis.app.common.logging.Logger
+import com.satis.app.feature.account.ui.formatted
 import com.satis.app.utils.coroutines.BaseViewModel
-import com.satis.app.utils.rx.plusAssign
-import io.reactivex.Scheduler
-import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.parcel.Parcelize
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
 
 class PlaygroundViewModel(
         initialState: PlaygroundState,
-        private val playgroundProvider: PlaygroundProvider,
-        private val io: Scheduler
+        private val logger: Logger,
+        private val io: CoroutineDispatcher
 ) : BaseViewModel<PlaygroundState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
 ) {
-    private val disposables = CompositeDisposable()
-
-    private val memoryCacheThenCall = MemoryCacheThenCall<String, List<String>> { query ->
-        playgroundProvider.getItems(query)
-    }
-
     init {
         fetch("")
     }
 
     fun fetch(query: String) {
-        disposables.clear()
-        disposables += memoryCacheThenCall.call(query)
-                .subscribeOn(io)
-                .subscribe({ items ->
-                    setState {
-                        copy(items = items)
-                    }
-                }, {
-                    // ignore
-                })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposables.clear()
+        launch(io) {
+            val searchResults = logger.searchLogs(query).map(LogEntry::formatted)
+            setState {
+                copy(items = searchResults)
+            }
+        }
     }
 
     companion object : MvRxViewModelFactory<PlaygroundViewModel, PlaygroundState> {

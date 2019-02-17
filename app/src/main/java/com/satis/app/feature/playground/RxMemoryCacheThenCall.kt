@@ -7,7 +7,7 @@ class SimpleLruCache<K : Any, V : Any>(private val capacity: Int = 100) : Linked
     override fun removeEldestEntry(eldest: MutableMap.MutableEntry<K, V>?): Boolean = size > capacity
 }
 
-class MemoryCacheThenCall<K : Any, V : Any>(private val source: (K) -> Single<V>) {
+class RxMemoryCacheThenCall<K : Any, V : Any>(private val source: (K) -> Single<V>) {
 
     private val cache = SimpleLruCache<K, V>()
 

@@ -11,8 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.RequestOptions.centerCropTransform
 import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
@@ -66,8 +64,8 @@ class ImagesAdapter(
     override fun getPreloadRequestBuilder(item: PhotoState): RequestBuilder<*>? =
             requestManager.load(item.photoUrl)
                     .thumbnail(requestManager.load(item.thumbnailUrl)
-                            .apply(RequestOptions.centerCropTransform()))
-                    .apply(RequestOptions.centerCropTransform())
+                            .centerCrop())
+                    .centerCrop()
 
     override fun onViewRecycled(holder: ImageViewHolder) {
         super.onViewRecycled(holder)
@@ -80,8 +78,8 @@ class ImagesAdapter(
                 .load(photoState.photoUrl)
                 .thumbnail(Glide.with(this)
                         .load(photoState.thumbnailUrl)
-                        .apply(centerCropTransform()))
-                .apply(centerCropTransform())
+                        .centerCrop())
+                .centerCrop()
                 .into(this)
     }
 

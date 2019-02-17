@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.satis.app.R
 import kotlinx.android.synthetic.main.feature_image.*
 
@@ -26,8 +25,8 @@ class ImageFragment : Fragment() {
                 .load(photoState.photoUrl)
                 .thumbnail(Glide.with(this)
                         .load(photoState.thumbnailUrl)
-                        .apply(RequestOptions.centerCropTransform()))
-                .apply(RequestOptions.centerCropTransform())
+                        .centerCrop())
+                .centerCrop()
                 .into(image)
     }
 

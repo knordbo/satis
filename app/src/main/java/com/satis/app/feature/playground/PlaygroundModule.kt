@@ -5,8 +5,6 @@ import org.koin.dsl.module.module
 
 val playgroundModule = module {
 
-    single<PlaygroundProvider> { DefaultPlaygroundProvider() }
-
     factory<PlaygroundViewModel> { (initialState: PlaygroundState) ->
         PlaygroundViewModel(initialState, get(), get(IO))
     }
