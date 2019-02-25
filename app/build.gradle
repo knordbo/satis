@@ -158,9 +158,9 @@ dependencies {
 class RenameBundleFile implements TaskExecutionListener {
     @Override
     void afterExecute(Task task, TaskState taskState) {
-        if (t.name == "bundleRelease") {
-            File newBundleFile = new File(t.project.getRootDir(), "app/build/outputs/bundle/release/app-release.aab")
-            File oldBundleFile = new File(t.project.getRootDir(), "app/build/outputs/bundle/release/app.aab")
+        if (task.name == "bundleRelease") {
+            File newBundleFile = new File(task.project.getRootDir(), "app/build/outputs/bundle/release/app-release.aab")
+            File oldBundleFile = new File(task.project.getRootDir(), "app/build/outputs/bundle/release/app.aab")
             newBundleFile.renameTo(oldBundleFile)
         }
     }
