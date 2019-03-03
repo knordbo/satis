@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.5.0-alpha05",
+        "androidGradlePlugin" : "3.5.0-alpha06",
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha02",
                 "cardView"        : "1.0.0",
@@ -18,7 +18,7 @@ def versions = [
         "crashlytics"         : "2.9.9",
         "fabric"              : "1.25.4",
         "firebaseCore"        : "16.0.7",
-        "firebaseFirestore"   : "18.0.1",
+        "firebaseFirestore"   : "18.1.0",
         "glide"               : "4.9.0",
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
@@ -29,7 +29,7 @@ def versions = [
                 "coroutines"   : "1.1.1",
                 "serialization": "0.10.0",
         ],
-        "material"            : "1.1.0-alpha03",
+        "material"            : "1.1.0-alpha04",
         "mvrx"                : "0.7.2",
         "okhttp"              : "3.13.1",
         "peekAndPop"          : "1.1.0",
