@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'kotlin-android-extensions'
     id 'kotlinx-serialization'
-    id 'com.github.triplet.play' version '2.1.0' // TODO remove RenameBundleFile when bumping
+    id 'com.github.triplet.play' version '2.1.1'
     id 'com.github.ben-manes.versions'
     id 'io.fabric'
 }
@@ -153,21 +153,5 @@ dependencies {
     androidTestImplementation deps.androidx.espresso.contrib
     androidTestImplementation deps.androidx.espresso.intents
 }
-
-// TODO remove when bumping to com.github.triplet.play 2.2.0
-class RenameBundleFile implements TaskExecutionListener {
-    @Override
-    void afterExecute(Task task, TaskState taskState) {
-        if (task.name == "bundleRelease") {
-            File newBundleFile = new File(task.project.getRootDir(), "app/build/outputs/bundle/release/app-release.aab")
-            File oldBundleFile = new File(task.project.getRootDir(), "app/build/outputs/bundle/release/app.aab")
-            newBundleFile.renameTo(oldBundleFile)
-        }
-    }
-    @Override
-    void beforeExecute(Task task) {}
-}
-
-project.gradle.addListener(new RenameBundleFile())
 
 apply plugin: 'com.google.gms.google-services'
