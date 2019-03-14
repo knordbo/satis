@@ -85,7 +85,7 @@ dependencies {
     implementation deps.androidx.recyclerView
     implementation deps.androidx.room.runtime
     implementation deps.androidx.room.rxJava2
-    implementation deps.androidx.room.coroutines
+    implementation deps.androidx.room.ktx
     kapt deps.androidx.lifecycle.compiler
     kapt deps.androidx.room.compiler
 
