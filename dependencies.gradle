@@ -10,7 +10,7 @@ def versions = [
                 "fragment"        : "1.1.0-alpha05",
                 "futures"         : "1.0.0-alpha03",
                 "lifecycle"       : "2.1.0-alpha03",
-                "navigation"      : "1.0.0",
+                "navigation"      : "2.1.0-alpha01",
                 "recyclerView"    : "1.1.0-alpha03",
                 "room"            : "2.1.0-alpha05",
                 "test"            : "1.1.2-alpha02",
@@ -41,7 +41,7 @@ def versions = [
         "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.7",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "1.0.0",
+        "workManager"         : "2.0.0",
 ]
 
 ext.deps = [
@@ -65,9 +65,9 @@ ext.deps = [
                         "compiler"  : "androidx.lifecycle:lifecycle-compiler:$versions.androidx.lifecycle",
                 ],
                 "navigation"      : [
-                        "fragmentKtx": "android.arch.navigation:navigation-fragment-ktx:$versions.androidx.navigation",
-                        "safeArgs"   : "android.arch.navigation:navigation-safe-args-gradle-plugin:$versions.androidx.navigation",
-                        "uiKtx"      : "android.arch.navigation:navigation-ui-ktx:$versions.androidx.navigation",
+                        "fragmentKtx": "androidx.navigation:navigation-fragment-ktx:$versions.androidx.navigation",
+                        "safeArgs"   : "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.androidx.navigation",
+                        "uiKtx"      : "androidx.navigation:navigation-ui-ktx:$versions.androidx.navigation",
                 ],
                 "recyclerView"    : "androidx.recyclerview:recyclerview:$versions.androidx.recyclerView",
                 "room"            : [
@@ -131,7 +131,7 @@ ext.deps = [
         "rxJava2"             : "io.reactivex.rxjava2:rxjava:$versions.rxJava2",
         "tinydancer"          : "com.github.brianPlummer:tinydancer:$versions.tinydancer",
         "workManager"         : [
-                "runtime": "android.arch.work:work-runtime-ktx:$versions.workManager",
+                "runtime": "androidx.work:work-runtime-ktx:$versions.workManager",
         ],
 ]
 
