@@ -9,23 +9,44 @@ import com.satis.app.feature.playground.playgroundModule
 import com.satis.app.work.WorkScheduler
 import com.satis.app.work.workerModule
 import io.reactivex.plugins.RxJavaPlugins
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.startKoin
-import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.coroutines.CoroutineContext
 
-class App : Application(), Configuration.Provider {
+class App : Application(), Configuration.Provider, CoroutineScope {
 
-    private val offloadedExecutor: ExecutorService = Executors.newSingleThreadExecutor()
+    override val coroutineContext: CoroutineContext = Dispatchers.Main.immediate
+
+    private val offloadedDispatcher: CoroutineDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     override fun onCreate() {
         super.onCreate()
 
+        launch {
+            blockingCalls()
+
+            withContext(offloadedDispatcher) {
+                offloadedCalls()
+            }
+        }
+    }
+
+    /**
+     * Blocking calls that we need to do in the startup call stack
+     */
+    private fun blockingCalls() {
         RxJavaPlugins.setErrorHandler {
             // ignore
         }
 
-        startKoin(this, listOf(
+        startKoin(this@App, listOf(
                 appModule,
                 workerModule,
                 // features
@@ -34,11 +55,13 @@ class App : Application(), Configuration.Provider {
                 imagesModule,
                 playgroundModule
         ))
+    }
 
-        // Things we want executed but are not needed in the startup call stack
-        offloadedExecutor.execute {
-            get<WorkScheduler>().schedule()
-        }
+    /**
+     * Things we want executed but are not needed in the startup call stack
+     */
+    private fun offloadedCalls() {
+        get<WorkScheduler>().schedule()
     }
 
     override fun getWorkManagerConfiguration(): Configuration = get()
