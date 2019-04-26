@@ -1,7 +1,7 @@
 package com.satis.app
 
 import android.app.Application
-import androidx.work.WorkManager
+import androidx.work.Configuration
 import com.satis.app.feature.account.accountModule
 import com.satis.app.feature.cards.cardModule
 import com.satis.app.feature.images.imagesModule
@@ -11,13 +11,15 @@ import com.satis.app.work.workerModule
 import io.reactivex.plugins.RxJavaPlugins
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.startKoin
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
 
-class App : Application() {
+class App : Application(), Configuration.Provider {
+
+    private val offloadedExecutor: ExecutorService = Executors.newSingleThreadExecutor()
 
     override fun onCreate() {
         super.onCreate()
-
-//        configureVariant()
 
         RxJavaPlugins.setErrorHandler {
             // ignore
@@ -33,9 +35,11 @@ class App : Application() {
                 playgroundModule
         ))
 
-        WorkManager.initialize(this, get())
-
-        get<WorkScheduler>().schedule()
+        // Things we want executed but are not needed in the startup call stack
+        offloadedExecutor.execute {
+            get<WorkScheduler>().schedule()
+        }
     }
 
+    override fun getWorkManagerConfiguration(): Configuration = get()
 }

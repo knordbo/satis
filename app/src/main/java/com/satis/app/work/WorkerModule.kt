@@ -14,7 +14,7 @@ import org.koin.experimental.builder.getForClass
 
 val workerModule = module {
     single<WorkManager> {
-        WorkManager.getInstance()
+        WorkManager.getInstance(get())
     }
 
     single<WorkerFactory> {
