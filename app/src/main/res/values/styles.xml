@@ -1,18 +1,13 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="toolbarStyle">@style/Toolbar</item>
-        <item name="android:windowLightStatusBar">true</item>
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorAccent">@color/color_accent</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="android:windowLightStatusBar">@bool/is_light</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme"/>
-
-    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
-        <item name="android:background">@color/white</item>
-    </style>
 
 </resources>

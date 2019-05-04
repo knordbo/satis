@@ -1,6 +1,8 @@
 package com.satis.app
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
 import androidx.work.Configuration
 import com.satis.app.feature.account.accountModule
 import com.satis.app.feature.cards.cardModule
@@ -42,6 +44,8 @@ class App : Application(), Configuration.Provider, CoroutineScope {
      * Blocking calls that we need to do in the startup call stack
      */
     private fun blockingCalls() {
+        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_AUTO_BATTERY)
+
         RxJavaPlugins.setErrorHandler {
             // ignore
         }

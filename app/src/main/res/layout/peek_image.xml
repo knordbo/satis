@@ -46,7 +46,6 @@
                 android:gravity="center_vertical"
                 android:maxLines="1"
                 android:paddingStart="8dp"
-                android:textColor="@color/textColorPrimary"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/avatar"
                 app:layout_constraintEnd_toEndOf="parent"
