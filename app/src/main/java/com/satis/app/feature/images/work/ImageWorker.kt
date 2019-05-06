@@ -9,18 +9,19 @@ import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 class ImageWorker(
         private val context: Context,
         workerParameters: WorkerParameters,
-        override val coroutineContext: CoroutineDispatcher,
+        private val io: CoroutineDispatcher,
         private val logger: Logger,
         private val unsplashProvider: UnsplashProvider
 ) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun doWork(): Result {
-        return try {
+    override suspend fun doWork(): Result = withContext(io) {
+        try {
             logger.log(LOG_TAG, "Starting in $isAppForegroundString")
 
             val popularImages = unsplashProvider.fetchPhotos(NATURE)

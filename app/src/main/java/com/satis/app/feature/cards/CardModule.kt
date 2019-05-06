@@ -4,7 +4,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.feature.cards.data.CardProvider
 import com.satis.app.feature.cards.data.DefaultCardProvider
-import org.koin.dsl.module.module
+import org.koin.dsl.module
 
 val cardModule = module {
     single<CardProvider> {

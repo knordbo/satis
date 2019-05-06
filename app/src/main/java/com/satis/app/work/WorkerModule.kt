@@ -6,11 +6,11 @@ import androidx.work.ListenableWorker
 import androidx.work.WorkManager
 import androidx.work.WorkerFactory
 import androidx.work.WorkerParameters
-import com.satis.app.IO
+import com.satis.app.Io
 import com.satis.app.utils.system.forNameAsSubclass
 import org.koin.core.parameter.parametersOf
-import org.koin.dsl.module.module
-import org.koin.experimental.builder.getForClass
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 
 val workerModule = module {
     single<WorkManager> {
@@ -23,7 +23,14 @@ val workerModule = module {
                     appContext: Context,
                     workerClassName: String,
                     workerParameters: WorkerParameters
-            ): ListenableWorker? = getForClass(clazz = forNameAsSubclass<ListenableWorker>(workerClassName)) { parametersOf(appContext, workerParameters) }
+            ): ListenableWorker? {
+                val kClass = forNameAsSubclass<ListenableWorker>(workerClassName)?.kotlin
+                return if (kClass != null) {
+                    get(clazz = kClass, qualifier = null) { parametersOf(appContext, workerParameters) }
+                } else {
+                    null
+                }
+            }
         }
     }
 
@@ -36,10 +43,10 @@ val workerModule = module {
     }
 
     factory<NetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        NetworkWorker(context, workerParameters, get(IO), get())
+        NetworkWorker(context, workerParameters, get(named<Io>()), get())
     }
 
     factory<ChargingNetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        ChargingNetworkWorker(context, workerParameters, get(IO), get())
+        ChargingNetworkWorker(context, workerParameters, get(named<Io>()), get())
     }
 }

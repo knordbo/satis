@@ -5,8 +5,8 @@ import com.satis.app.common.keyvalue.Key
 import com.satis.app.common.keyvalue.KeyValueProvider
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.User
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.map
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class DefaultUnsplashProvider(
         private val unsplashApi: UnsplashApi,
@@ -19,7 +19,7 @@ class DefaultUnsplashProvider(
         return photos.toState()
     }
 
-    override fun streamPhotos(query: String): ReceiveChannel<List<PhotoState>> = keyValueProvider.getStream(photosKey(query)).map { unsplash ->
+    override fun streamPhotos(query: String): Flow<List<PhotoState>> = keyValueProvider.getStream(photosKey(query)).map { unsplash ->
         unsplash.toState()
     }
 

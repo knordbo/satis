@@ -1,9 +1,9 @@
 package com.satis.app.common.logging
 
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 
 interface Logger {
     fun log(tag: String, message: String)
-    fun streamLogs(): ReceiveChannel<List<LogEntry>>
+    fun streamLogs(): Flow<List<LogEntry>>
     suspend fun searchLogs(query: String): List<LogEntry>
 }

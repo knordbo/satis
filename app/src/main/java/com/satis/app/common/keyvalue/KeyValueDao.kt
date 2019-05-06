@@ -16,7 +16,7 @@ interface KeyValueDao {
     @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
     suspend fun get(key: String): KeyValueEntity?
 
-    // TODO use channel when supported
+    // TODO use flow when supported
     @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
     fun getStream(key: String): Flowable<KeyValueEntity>
 }

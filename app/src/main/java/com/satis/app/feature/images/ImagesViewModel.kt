@@ -7,6 +7,7 @@ import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.utils.coroutines.BaseViewModel
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
@@ -32,7 +33,7 @@ class ImagesViewModel(
 
     private fun streamPhotos() {
         launch {
-            for (photos in unsplashProvider.streamPhotos(NATURE)) {
+            unsplashProvider.streamPhotos(NATURE).collect { photos ->
                 setState {
                     copy(photoState = photos)
                 }

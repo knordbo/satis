@@ -6,6 +6,7 @@ import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardProvider
 import com.satis.app.utils.coroutines.BaseViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
@@ -40,7 +41,7 @@ class CardViewModel(
 
     private fun getCards() {
         launch {
-            for (cards in cardProvider.getCards()) {
+            cardProvider.getCards().collect { cards ->
                 setState {
                     copy(cards = cards.sortedByDescending { it.likes })
                 }

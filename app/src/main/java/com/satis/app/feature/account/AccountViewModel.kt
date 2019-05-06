@@ -5,6 +5,7 @@ import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.common.logging.Logger
 import com.satis.app.utils.coroutines.BaseViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.get
 import org.koin.core.parameter.parametersOf
@@ -25,7 +26,7 @@ class AccountViewModel(
 
     private fun streamLogs() {
         launch {
-            for (logs in logger.streamLogs()) {
+            logger.streamLogs().collect { logs ->
                 setState {
                     copy(logs = logs)
                 }

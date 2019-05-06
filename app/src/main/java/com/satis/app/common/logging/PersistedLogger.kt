@@ -3,9 +3,9 @@ package com.satis.app.common.logging
 import android.util.Log
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.reactive.openSubscription
+import kotlinx.coroutines.reactive.flow.asFlow
 
 class PersistedLogger(
         private val logDao: LogDao,
@@ -24,9 +24,9 @@ class PersistedLogger(
         }
     }
 
-    override fun streamLogs(): ReceiveChannel<List<LogEntry>> = logDao.getLogStream().map { logs ->
+    override fun streamLogs(): Flow<List<LogEntry>> = logDao.getLogStream().map { logs ->
         logs.map { it.toModel() }
-    }.openSubscription()
+    }.asFlow()
 
     override suspend fun searchLogs(query: String): List<LogEntry> =
             logDao.searchLogs(query).map { it.toModel() }

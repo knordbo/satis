@@ -8,7 +8,6 @@ import com.satis.app.feature.images.imagesModule
 import com.satis.app.feature.playground.playgroundModule
 import com.satis.app.work.WorkScheduler
 import com.satis.app.work.workerModule
-import io.reactivex.plugins.RxJavaPlugins
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +15,9 @@ import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.get
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
@@ -42,19 +43,22 @@ class App : Application(), Configuration.Provider, CoroutineScope {
      * Blocking calls that we need to do in the startup call stack
      */
     private fun blockingCalls() {
-        RxJavaPlugins.setErrorHandler {
-            // ignore
-        }
+        startKoin {
+            if (BuildConfig.DEBUG) {
+                androidLogger()
+            }
+            androidContext(this@App)
 
-        startKoin(this@App, listOf(
-                appModule,
-                workerModule,
-                // features
-                cardModule,
-                accountModule,
-                imagesModule,
-                playgroundModule
-        ))
+            modules(
+                    appModule,
+                    workerModule,
+                    // features
+                    cardModule,
+                    accountModule,
+                    imagesModule,
+                    playgroundModule
+            )
+        }
     }
 
     /**

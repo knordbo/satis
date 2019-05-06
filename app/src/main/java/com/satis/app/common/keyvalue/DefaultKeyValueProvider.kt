@@ -1,8 +1,8 @@
 package com.satis.app.common.keyvalue
 
 import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.reactive.openSubscription
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.reactive.flow.asFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializerByTypeToken
@@ -25,9 +25,9 @@ class DefaultKeyValueProvider(
         }
     }
 
-    override fun <T : Any> getStream(key: Key<T>): ReceiveChannel<T> = keyValueDao.getStream(key.id).map { keyValue ->
+    override fun <T : Any> getStream(key: Key<T>): Flow<T> = keyValueDao.getStream(key.id).map { keyValue ->
         parse(key, keyValue)
-    }.openSubscription()
+    }.asFlow()
 
     private fun <T : Any> stringify(key: Key<T>, value: T): String = json.stringify(serializerByTypeToken(key.type), value)
 

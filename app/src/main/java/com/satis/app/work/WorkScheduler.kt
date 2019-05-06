@@ -54,6 +54,7 @@ class WorkScheduler(private val logger: Logger, private val workManager: WorkMan
 
         val constraints = Constraints.Builder()
                 .setRequiredNetworkType(UNMETERED)
+                .setRequiresCharging(true)
                 .build()
 
         val work = PeriodicWorkRequestBuilder<ImageWorker>(4, TimeUnit.HOURS)

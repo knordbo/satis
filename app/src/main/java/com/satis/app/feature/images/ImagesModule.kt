@@ -2,13 +2,14 @@ package com.satis.app.feature.images
 
 import android.content.Context
 import androidx.work.WorkerParameters
-import com.satis.app.IO
+import com.satis.app.Io
 import com.satis.app.feature.images.data.DefaultUnsplashProvider
 import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.utils.retrofit.create
-import org.koin.dsl.module.module
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val imagesModule = module {
@@ -22,7 +23,7 @@ val imagesModule = module {
     }
 
     factory<ImagesViewModel> { (initialState: ImagesState) ->
-        ImagesViewModel(initialState, get(), get(IO))
+        ImagesViewModel(initialState, get(), get(named<Io>()))
     }
 
     factory<ImagesFragment> {
@@ -34,6 +35,6 @@ val imagesModule = module {
     }
 
     factory<ImageWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        ImageWorker(context, workerParameters, get(IO), get(), get())
+        ImageWorker(context, workerParameters, get(named<Io>()), get(), get())
     }
 }

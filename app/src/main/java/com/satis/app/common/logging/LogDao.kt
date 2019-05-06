@@ -13,7 +13,7 @@ interface LogDao {
     @Query("SELECT * FROM log WHERE tag like '%' || :query || '%' OR message like '%' || :query || '%' ORDER BY timestamp LIMIT 1000")
     suspend fun searchLogs(query: String): List<LogEntity>
 
-    // TODO use channel when supported
+    // TODO use flow when supported
     @Query("SELECT * FROM log ORDER BY timestamp DESC LIMIT 1000")
     fun getLogStream(): Flowable<List<LogEntity>>
 }

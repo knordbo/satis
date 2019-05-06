@@ -4,14 +4,14 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.reactive.openSubscription
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.reactive.flow.asFlow
 
 class DefaultCardProvider(private val userId: String, firebaseFirestore: FirebaseFirestore) : CardProvider {
 
     private val cardsCollection = firebaseFirestore.collection(CARDS_COLLECTION)
 
-    override fun getCards(): ReceiveChannel<List<Card>> = getCardsFlowable().openSubscription()
+    override fun getCards(): Flow<List<Card>> = getCardsFlowable().asFlow()
 
     override fun addCard(card: Card) {
         cardsCollection.add(card.toDb())

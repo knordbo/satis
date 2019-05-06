@@ -1,11 +1,9 @@
 package com.satis.app
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.jakewharton.retrofit2.converter.kotlinx.serialization.serializationConverterFactory
 import com.satis.app.common.AppDatabase
 import com.satis.app.common.keyvalue.DefaultKeyValueProvider
 import com.satis.app.common.keyvalue.KeyValueDao
@@ -16,15 +14,12 @@ import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.DefaultPrefs
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.utils.retrofit.jsonMediaType
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers.mainThread
-import io.reactivex.schedulers.Schedulers.io
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
-import org.koin.dsl.module.module
-import org.koin.experimental.builder.getForClass
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import retrofit2.Retrofit
 
 val appModule = module {
@@ -41,11 +36,11 @@ val appModule = module {
 
     single<FragmentFactory> {
         object : FragmentFactory() {
-            override fun instantiate(classLoader: ClassLoader, className: String, args: Bundle?): Fragment {
+            override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
                 return try {
-                    getForClass(clazz = loadFragmentClass(classLoader, className))
+                    get(clazz = loadFragmentClass(classLoader, className).kotlin, qualifier = null, parameters = null)
                 } catch (t: Throwable) {
-                    super.instantiate(classLoader, className, args)
+                    super.instantiate(classLoader, className)
                 }
             }
         }
@@ -53,17 +48,14 @@ val appModule = module {
 
     single<AppDatabase> { AppDatabase.createDatabase(get()) }
     single<KeyValueDao> { get<AppDatabase>().keyValueDao() }
-    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get(), get(IO)) }
+    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get(), get(named<Io>())) }
     single<LogDao> { get<AppDatabase>().logDao() }
-    single<Logger> { PersistedLogger(get(), get(IO)) }
+    single<Logger> { PersistedLogger(get(), get(named<Io>())) }
     single<Prefs> { DefaultPrefs(get()) }
 
-    single<Scheduler>(MAIN) { mainThread() }
-    single<Scheduler>(IO) { io() }
-
-    single<CoroutineDispatcher>(MAIN) { Dispatchers.Main }
-    single<CoroutineDispatcher>(IO) { Dispatchers.IO }
+    single<CoroutineDispatcher>(named<Main>()) { Dispatchers.Main }
+    single<CoroutineDispatcher>(named<Io>()) { Dispatchers.IO }
 }
 
-const val IO = "io"
-const val MAIN = "main"
+annotation class Io
+annotation class Main
