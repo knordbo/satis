@@ -23,7 +23,18 @@ class DefaultPrefs(context: Context) : Prefs {
             }
         }
 
+    override var theme: Theme
+        get() = Theme.values()
+                .firstOrNull {
+                    sharedPreferences.getString(THEME, null) == it.themeName
+                } ?: Theme.SYSTEM
+        set(value) {
+            sharedPreferences.edit {
+                putString(THEME, value.themeName)
+            }
+        }
 }
 
 private const val SHARED_PREFS = "satis.shared.prefs"
 private const val UNIQUE_USER_ID = "UNIQUE_USER_ID"
+private const val THEME = "THEME"

@@ -7,6 +7,10 @@
     <string name="card_message_hint">Message…</string>
     <string name="card_message_no_title">Please enter a title</string>
 
+    <string name="theme_system">System theme</string>
+    <string name="theme_light">Light theme</string>
+    <string name="theme_dark">Dark theme</string>
+
     <string name="version_info">Version: %1$d</string>
     <string name="build_time_info">Build time: %1$s</string>
     <string name="log">Log</string>

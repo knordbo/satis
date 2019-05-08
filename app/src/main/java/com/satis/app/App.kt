@@ -2,6 +2,8 @@ package com.satis.app
 
 import android.app.Application
 import androidx.work.Configuration
+import com.satis.app.common.prefs.Prefs
+import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.accountModule
 import com.satis.app.feature.cards.cardModule
 import com.satis.app.feature.images.imagesModule
@@ -59,6 +61,9 @@ class App : Application(), Configuration.Provider, CoroutineScope {
                     playgroundModule
             )
         }
+
+        // Apply the current theme
+        get<Prefs>().theme.apply()
     }
 
     /**

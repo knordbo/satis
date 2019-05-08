@@ -4,7 +4,7 @@ import org.koin.dsl.module
 
 val accountModule = module {
     factory<AccountViewModel> { (initialState: AccountState) ->
-        AccountViewModel(initialState, get())
+        AccountViewModel(initialState, get(), get())
     }
 
     factory<AccountFragment> {
