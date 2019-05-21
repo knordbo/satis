@@ -130,6 +130,9 @@ dependencies {
     // OkHttp
     implementation deps.okhttp.okhttp
 
+    // Google Play Core
+    implementation deps.playCore
+
     // PeekAndPop
     implementation deps.peekAndPop
 

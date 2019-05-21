@@ -32,6 +32,7 @@ def versions = [
         "material"            : "1.1.0-alpha06",
         "mvrx"                : "1.0.1",
         "okhttp"              : "3.14.1",
+        "playCore"            : "1.5.0",
         "peekAndPop"          : "1.1.0",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "0.9.2",
@@ -121,6 +122,7 @@ ext.deps = [
                 "okhttp"            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
                 "loggingInterceptor": "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         ],
+        "playCore"            : "com.google.android.play:core:$versions.playCore",
         "peekAndPop"          : "com.github.shalskar:PeekAndPop:$versions.peekAndPop",
         "retrofit"            : [
                 "kotlinCoroutinesAdapter": "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$versions.retrofit.kotlinCoroutinesAdapter",

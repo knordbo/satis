@@ -1,5 +1,6 @@
 package com.satis.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -14,11 +15,14 @@ import com.satis.app.Tab.HOME
 import com.satis.app.Tab.IMAGES
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
+import org.koin.core.parameter.parametersOf
 
 class MainActivity : BaseMvRxActivity() {
 
     private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
     private val navigationViewModel: NavigationViewModel by viewModel()
+    private val immediateAppUpdater: ImmediateAppUpdater by inject { parametersOf(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory = get()
@@ -39,6 +43,16 @@ class MainActivity : BaseMvRxActivity() {
         bottomNav.setOnNavigationItemReselectedListener {
             navigationViewModel.tabReselected(navigationController.currentDestination!!.asTab())
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        immediateAppUpdater.onResume()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        immediateAppUpdater.onActivityResult(requestCode, resultCode)
     }
 
     override fun onSupportNavigateUp() = navigationController.navigateUp()
