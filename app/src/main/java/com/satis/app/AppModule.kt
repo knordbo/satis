@@ -60,7 +60,7 @@ val appModule = module {
     single<CoroutineDispatcher>(named<Io>()) { Dispatchers.IO }
 
     single<AppUpdateManager> { AppUpdateManagerFactory.create(get()) }
-    factory<ImmediateAppUpdater> { (activity: Activity) -> ImmediateAppUpdater(activity, get()) }
+    factory<ImmediateAppUpdater> { (activity: Activity) -> ImmediateAppUpdater(activity, get(), get()) }
 }
 
 annotation class Io

@@ -1,6 +1,5 @@
 package com.satis.app
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -28,7 +27,7 @@ class MainActivity : BaseMvRxActivity() {
         supportFragmentManager.fragmentFactory = get()
 
         super.onCreate(savedInstanceState)
-        
+
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
@@ -49,12 +48,7 @@ class MainActivity : BaseMvRxActivity() {
 
     override fun onResume() {
         super.onResume()
-        immediateAppUpdater.onResume()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        immediateAppUpdater.onActivityResult(requestCode, resultCode)
+        immediateAppUpdater.startAppUpdateIfNeeded()
     }
 
     override fun onSupportNavigateUp() = navigationController.navigateUp()
