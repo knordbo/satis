@@ -26,7 +26,9 @@ class MainActivity : BaseMvRxActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory = get()
+
         super.onCreate(savedInstanceState)
+        
         setContentView(R.layout.activity_main)
 
         setSupportActionBar(toolbar)
