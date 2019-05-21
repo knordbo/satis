@@ -23,10 +23,13 @@ class MainActivity : BaseMvRxActivity() {
     private val navigationViewModel: NavigationViewModel by viewModel()
     private val immediateAppUpdater: ImmediateAppUpdater by inject { parametersOf(this) }
 
+    private var appUpdateCalled = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         supportFragmentManager.fragmentFactory = get()
 
         super.onCreate(savedInstanceState)
+        appUpdateCalled = savedInstanceState?.getBoolean(APP_UPDATE_CALLED, false) ?: false
 
         setContentView(R.layout.activity_main)
 
@@ -48,12 +51,20 @@ class MainActivity : BaseMvRxActivity() {
 
     override fun onResume() {
         super.onResume()
-        immediateAppUpdater.startAppUpdateIfNeeded()
+        immediateAppUpdater.startAppUpdateIfNeeded(initialCall = !appUpdateCalled)
+        appUpdateCalled = true
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(APP_UPDATE_CALLED, appUpdateCalled)
     }
 
     override fun onSupportNavigateUp() = navigationController.navigateUp()
 
 }
+
+private const val APP_UPDATE_CALLED = "app_update_called"
 
 private fun NavDestination.asTab() = when (id) {
     R.id.home -> HOME

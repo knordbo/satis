@@ -3,8 +3,9 @@ package com.satis.app
 import android.app.Activity
 import android.content.IntentSender
 import com.google.android.play.core.appupdate.AppUpdateManager
-import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
+import com.google.android.play.core.install.model.UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.satis.app.common.logging.Logger
 
 class ImmediateAppUpdater(
@@ -13,15 +14,16 @@ class ImmediateAppUpdater(
         private val logger: Logger
 ) {
 
-    fun startAppUpdateIfNeeded() {
+    fun startAppUpdateIfNeeded(initialCall: Boolean) {
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() in listOf(UpdateAvailability.UPDATE_AVAILABLE, UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS)
-                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+            val shouldStartUpdate = initialCall && appUpdateInfo.updateAvailability() == UPDATE_AVAILABLE
+            val shouldContinueUpdate = appUpdateInfo.updateAvailability() == DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+            if ((shouldStartUpdate || shouldContinueUpdate) && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
                 try {
                     logger.log(LOG_TAG, "Starting app update")
                     appUpdateManager.startUpdateFlowForResult(
                             appUpdateInfo,
-                            AppUpdateType.IMMEDIATE,
+                            IMMEDIATE,
                             activity,
                             IMMEDIATE_IN_APP_UPDATE
                     )
