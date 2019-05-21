@@ -1,16 +1,16 @@
 def versions = [
-        "androidGradlePlugin" : "3.5.0-beta01",
+        "androidGradlePlugin" : "3.5.0-beta02",
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha05",
                 "cardView"        : "1.0.0",
-                "constraintLayout": "2.0.0-alpha5",
-                "coreKtx"         : "1.1.0-beta01",
+                "constraintLayout": "2.0.0-beta1",
+                "coreKtx"         : "1.2.0-alpha01",
                 "coreTesting"     : "2.1.0-beta01",
                 "espresso"        : "3.2.0-beta01",
-                "fragment"        : "1.1.0-alpha08",
+                "fragment"        : "1.1.0-alpha09",
                 "futures"         : "1.0.0-beta01",
                 "lifecycle"       : "2.2.0-alpha01",
-                "navigation"      : "2.1.0-alpha03",
+                "navigation"      : "2.1.0-alpha04",
                 "recyclerView"    : "1.1.0-alpha05",
                 "room"            : "2.1.0-beta01",
                 "test"            : "1.2.0-beta01",
@@ -41,7 +41,7 @@ def versions = [
         "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.8",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "2.1.0-alpha01",
+        "workManager"         : "2.1.0-alpha02",
 ]
 
 ext.deps = [

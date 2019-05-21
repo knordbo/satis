@@ -1,25 +1,23 @@
 package com.satis.app
 
 import android.os.Bundle
-import android.view.MenuItem
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
 import com.airbnb.mvrx.viewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemReselectedListener
 import com.satis.app.Tab.ACCOUNT
 import com.satis.app.Tab.HOME
 import com.satis.app.Tab.IMAGES
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
-import java.lang.RuntimeException
 
-class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSelectedListener, OnNavigationItemReselectedListener {
+class MainActivity : BaseMvRxActivity() {
 
-    private val navigationController by lazy { findNavController(R.id.navigationHostFragment) }
+    private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
     private val navigationViewModel: NavigationViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,26 +33,19 @@ class MainActivity : BaseMvRxActivity(), BottomNavigationView.OnNavigationItemSe
                 configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
         )
 
-        bottomNav.setOnNavigationItemSelectedListener(this)
-        bottomNav.setOnNavigationItemReselectedListener(this)
+        navigationController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
+            navigationViewModel.tabSelected(destination.asTab())
+        }
+        bottomNav.setOnNavigationItemReselectedListener {
+            navigationViewModel.tabReselected(navigationController.currentDestination!!.asTab())
+        }
     }
 
     override fun onSupportNavigateUp() = navigationController.navigateUp()
 
-    override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        // Overriding default behaviour of NavigationUI which adds a way too long fade animation
-        navigationController.navigate(menuItem.itemId)
-        navigationViewModel.tabSelected(menuItem.asTab())
-        return true
-    }
-
-    override fun onNavigationItemReselected(menuItem: MenuItem) {
-        navigationViewModel.tabReselected(menuItem.asTab())
-    }
-
 }
 
-private fun MenuItem.asTab() = when (itemId) {
+private fun NavDestination.asTab() = when (id) {
     R.id.home -> HOME
     R.id.images -> IMAGES
     R.id.account -> ACCOUNT
