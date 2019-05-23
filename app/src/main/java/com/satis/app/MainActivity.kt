@@ -42,10 +42,14 @@ class MainActivity : BaseMvRxActivity() {
         )
 
         navigationController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
-            navigationViewModel.tabSelected(destination.asTab())
+            destination.runIfTab { tab ->
+                navigationViewModel.tabSelected(tab)
+            }
         }
         bottomNav.setOnNavigationItemReselectedListener {
-            navigationViewModel.tabReselected(navigationController.currentDestination!!.asTab())
+            navigationController.currentDestination?.runIfTab { tab ->
+                navigationViewModel.tabReselected(tab)
+            }
         }
     }
 
@@ -66,9 +70,14 @@ class MainActivity : BaseMvRxActivity() {
 
 private const val APP_UPDATE_CALLED = "app_update_called"
 
-private fun NavDestination.asTab() = when (id) {
-    R.id.home -> HOME
-    R.id.images -> IMAGES
-    R.id.account -> ACCOUNT
-    else -> throw RuntimeException("Unsupported tab")
+private fun NavDestination.runIfTab(block: (Tab) -> Unit) {
+    val tab = when (id) {
+        R.id.home -> HOME
+        R.id.images -> IMAGES
+        R.id.account -> ACCOUNT
+        else -> null
+    }
+    if (tab != null) {
+        block(tab)
+    }
 }
