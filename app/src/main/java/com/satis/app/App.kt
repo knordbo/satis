@@ -1,7 +1,9 @@
 package com.satis.app
 
 import android.app.Application
+import android.os.Build
 import androidx.work.Configuration
+import com.satis.app.common.logging.Logger
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.accountModule
@@ -64,6 +66,7 @@ class App : Application(), Configuration.Provider, CoroutineScope {
 
         // Apply the current theme
         get<Prefs>().theme.apply()
+        get<Logger>().log("App", "SDK INT: ${Build.VERSION.SDK_INT} PREVIEW SDK INT: ${Build.VERSION.PREVIEW_SDK_INT}")
     }
 
     /**
