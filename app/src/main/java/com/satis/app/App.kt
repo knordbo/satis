@@ -52,13 +52,15 @@ class App : Application(), Configuration.Provider, CoroutineScope {
             androidContext(this@App)
 
             modules(
-                    appModule,
-                    workerModule,
-                    // features
-                    cardModule,
-                    accountModule,
-                    imagesModule,
-                    playgroundModule
+                    listOf(
+                            appModule,
+                            workerModule,
+                            // features
+                            cardModule,
+                            accountModule,
+                            imagesModule,
+                            playgroundModule
+                    )
             )
         }
 
