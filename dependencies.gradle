@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.6.0-alpha02",
+        "androidGradlePlugin" : "3.6.0-alpha01", // A bump com.github.triplet.play is required before bumping AGP
         "androidx"            : [
                 "appCompat"       : "1.1.0-alpha05",
                 "cardView"        : "1.0.0",
