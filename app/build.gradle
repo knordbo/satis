@@ -138,7 +138,6 @@ dependencies {
 
     // Retrofit
     implementation deps.retrofit.retrofit
-    implementation deps.retrofit.kotlinCoroutinesAdapter
     implementation deps.retrofit.kotlinSerialization
 
     // RxJava

@@ -14,7 +14,7 @@ class DefaultUnsplashProvider(
 ) : UnsplashProvider {
 
     override suspend fun fetchPhotos(query: String): List<PhotoState> {
-        val photos = unsplashApi.searchPhotos(query = query).await()
+        val photos = unsplashApi.searchPhotos(query = query)
         keyValueProvider.insert(photosKey(query), photos)
         return photos.toState()
     }

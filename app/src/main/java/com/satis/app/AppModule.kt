@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.satis.app.common.AppDatabase
 import com.satis.app.common.keyvalue.DefaultKeyValueProvider
@@ -33,7 +32,6 @@ val appModule = module {
                 .baseUrl("https://dummy.com/")
                 .client(get())
                 .addConverterFactory(get<Json>().asConverterFactory(jsonMediaType()))
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
     }
 
