@@ -1,5 +1,5 @@
 def versions = [
-        "androidGradlePlugin" : "3.6.0-alpha01", // A bump com.github.triplet.play is required before bumping AGP
+        "androidGradlePlugin" : "3.6.0-alpha02",
         "androidx"            : [
                 "appCompat"       : "1.1.0-beta01",
                 "cardView"        : "1.0.0",
@@ -20,6 +20,7 @@ def versions = [
         "firebaseCore"        : "16.0.9",
         "firebaseFirestore"   : "19.0.2",
         "glide"               : "4.9.0",
+        "googlePlayPublisher" : "2.3.0-SNAPSHOT", // TODO move away from snapshot
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
         "junit"               : "4.13-beta-3",
@@ -93,6 +94,7 @@ ext.deps = [
                 "glide"       : "com.github.bumptech.glide:glide:$versions.glide",
                 "recyclerview": "com.github.bumptech.glide:recyclerview-integration:$versions.glide",
         ],
+        "googlePlayPublisher" : "com.github.triplet.gradle:play-publisher:$versions.googlePlayPublisher",
         "googleServices"      : "com.google.gms:google-services:$versions.googleServices",
         "gradleVersionsPlugin": "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersionsPlugin",
         "junit"               : "junit:junit:$versions.junit",
