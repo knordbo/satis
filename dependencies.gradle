@@ -4,7 +4,7 @@ def versions = [
                 "appCompat"       : "1.1.0-beta01",
                 "cardView"        : "1.0.0",
                 "constraintLayout": "2.0.0-beta1",
-                "coreKtx"         : "1.2.0-alpha01",
+                "coreKtx"         : "1.2.0-alpha02",
                 "coreTesting"     : "2.1.0-beta01",
                 "espresso"        : "3.2.0",
                 "fragment"        : "1.1.0-beta01",
@@ -12,7 +12,7 @@ def versions = [
                 "lifecycle"       : "2.2.0-alpha01",
                 "navigation"      : "2.1.0-alpha05",
                 "recyclerView"    : "1.1.0-alpha06",
-                "room"            : "2.1.0-rc01",
+                "room"            : "2.1.0",
                 "test"            : "1.2.0",
         ],
         "crashlytics"         : "2.10.1",
@@ -42,7 +42,7 @@ def versions = [
         "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.9",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "2.1.0-alpha03",
+        "workManager"         : "2.1.0-beta01",
 ]
 
 ext.deps = [
