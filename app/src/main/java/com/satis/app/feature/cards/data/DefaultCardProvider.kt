@@ -2,8 +2,9 @@ package com.satis.app.feature.cards.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowViaChannel
+import kotlinx.coroutines.flow.channelFlow
 
 class DefaultCardProvider(private val userId: String, firebaseFirestore: FirebaseFirestore) : CardProvider {
 
@@ -11,17 +12,17 @@ class DefaultCardProvider(private val userId: String, firebaseFirestore: Firebas
         firebaseFirestore.collection(CARDS_COLLECTION)
     }
 
-    override fun getCards(): Flow<List<Card>> = flowViaChannel { channel ->
+    override fun getCards(): Flow<List<Card>> = channelFlow {
         val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
-            if (querySnapshot != null && !channel.isClosedForSend) {
+            if (querySnapshot != null && !isClosedForSend) {
                 val cards = querySnapshot.documents
                         .mapNotNull {
                             it.toObject(DbCard::class.java)?.toModel(it.id, userId)
                         }
-                channel.offer(cards)
+                offer(cards)
             }
         }
-        channel.invokeOnClose {
+        awaitClose {
             listener.remove()
         }
     }
