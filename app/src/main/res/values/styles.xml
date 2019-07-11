@@ -5,7 +5,7 @@
         <item name="colorAccent">@color/color_accent</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="android:windowLightStatusBar">@bool/is_light</item>
-        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
+        <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
     </style>
 
     <style name="AppTheme" parent="BaseAppTheme"/>
