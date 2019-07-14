@@ -17,7 +17,7 @@ def versions = [
         ],
         "crashlytics"         : "2.10.1",
         "fabric"              : "1.29.0",
-        "firebaseCore"        : "17.0.0",
+        "firebaseCore"        : "17.0.1",
         "firebaseFirestore"   : "20.1.0",
         "glide"               : "4.9.0",
         "googlePlayPublisher" : "2.3.0-SNAPSHOT", // TODO move away from snapshot
@@ -42,7 +42,7 @@ def versions = [
         "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.10",
         "tinydancer"          : "0.1.2",
-        "workManager"         : "2.1.0-rc01",
+        "workManager"         : "2.1.0",
 ]
 
 ext.deps = [
