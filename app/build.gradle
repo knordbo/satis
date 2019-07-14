@@ -25,6 +25,10 @@ android {
         targetCompatibility 1.8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     defaultConfig {
         applicationId "com.satis.app"
         minSdkVersion buildVersions.minSdk
