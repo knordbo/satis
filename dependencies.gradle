@@ -20,7 +20,7 @@ def versions = [
         "firebaseCore"        : "17.0.1",
         "firebaseFirestore"   : "20.1.0",
         "glide"               : "4.9.0",
-        "googlePlayPublisher" : "2.3.0-SNAPSHOT", // TODO move away from snapshot
+        "googlePlayPublisher" : "2.3.0",
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
         "junit"               : "4.13-beta-3",
