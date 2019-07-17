@@ -151,6 +151,9 @@ dependencies {
     // Tiny Dancer
     implementation deps.tinydancer
 
+    // Stetho
+    debugImplementation deps.stetho
+
     // Work Manager
     implementation(deps.workManager.runtime)
 

@@ -66,6 +66,8 @@ class App : Application(), Configuration.Provider, CoroutineScope {
 
         // Apply the current theme
         get<Prefs>().theme.apply()
+
+        configureBuildVariantFunctionality(this)
     }
 
     /**
