@@ -10,8 +10,8 @@ interface LogDao {
     @Insert
     suspend fun insertLog(logEntity: LogEntity)
 
-    @Query("SELECT * FROM log WHERE tag like '%' || :query || '%' OR message like '%' || :query || '%' ORDER BY timestamp LIMIT 1000")
-    suspend fun searchLogs(query: String): List<LogEntity>
+    @Query("SELECT * FROM log WHERE tag like '%' || :tagQuery || '%' OR message like '%' || :messageQuery|| '%' ORDER BY timestamp LIMIT 1000")
+    suspend fun searchLogs(tagQuery: String, messageQuery: String): List<LogEntity>
 
     // TODO use flow when supported
     @Query("SELECT * FROM log ORDER BY timestamp DESC LIMIT 1000")

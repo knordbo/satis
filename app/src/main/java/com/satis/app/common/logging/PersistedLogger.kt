@@ -29,7 +29,7 @@ class PersistedLogger(
     }.asFlow()
 
     override suspend fun searchLogs(query: String): List<LogEntry> =
-            logDao.searchLogs(query).map { it.toModel() }
+            logDao.searchLogs(query, query).map { it.toModel() }
 
     private fun LogEntity.toModel() = LogEntry(
             id = id,
