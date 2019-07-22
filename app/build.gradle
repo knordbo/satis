@@ -6,7 +6,7 @@ plugins {
     id("kotlinx-serialization")
     id("com.github.ben-manes.versions")
     id("io.fabric")
-    id("com.github.triplet.play") version "2.3.0"
+    id("com.github.triplet.play")
 }
 
 apply plugin: 'androidx.navigation.safeargs'

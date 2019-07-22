@@ -17,6 +17,7 @@ buildscript {
         classpath deps.gradleVersionsPlugin
         classpath deps.fabric
         classpath deps.androidx.navigation.safeArgs
+        classpath deps.googlePlayPublisher
     }
 }
 
