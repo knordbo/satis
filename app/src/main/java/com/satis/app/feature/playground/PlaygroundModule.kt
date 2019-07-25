@@ -1,17 +1,17 @@
 package com.satis.app.feature.playground
 
-import com.satis.app.Io
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import androidx.fragment.app.Fragment
+import com.satis.app.common.fragment.FragmentKey
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
 
-val playgroundModule = module {
+@Module
+abstract class PlaygroundModule {
 
-    factory<PlaygroundViewModel> { (initialState: PlaygroundState) ->
-        PlaygroundViewModel(initialState, get(), get(named<Io>()))
-    }
-
-    factory<PlaygroundFragment> {
-        PlaygroundFragment()
-    }
+    @Binds
+    @IntoMap
+    @FragmentKey(PlaygroundFragment::class)
+    abstract fun providePlaygroundFragment(bind: PlaygroundFragment): Fragment
 
 }

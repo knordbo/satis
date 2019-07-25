@@ -1,18 +1,19 @@
 package com.satis.app.feature.cards
 
+import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardProvider
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
-import org.koin.core.parameter.parametersOf
 
-class CardViewModel(
-        initialSate: CardState,
+class CardViewModel @AssistedInject constructor(
+        @Assisted initialSate: CardState,
         private val cardProvider: CardProvider
 ) : BaseViewModel<CardState>(
         initialState = initialSate,
@@ -49,8 +50,15 @@ class CardViewModel(
         }
     }
 
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(initialSate: CardState): CardViewModel
+    }
+
     companion object : MvRxViewModelFactory<CardViewModel, CardState> {
-        override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel? =
-                viewModelContext.activity.get { parametersOf(state) }
+        override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel? {
+            val fragment: CardFragment = (viewModelContext as FragmentViewModelContext).fragment()
+            return fragment.createViewModel(state)
+        }
     }
 }

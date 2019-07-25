@@ -3,15 +3,18 @@ package com.satis.app.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.satis.app.Io
 import com.satis.app.common.logging.Logger
 import com.satis.app.utils.lifecycle.isAppForegroundString
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class NetworkWorker(
-        context: Context,
-        workerParameters: WorkerParameters,
-        private val io: CoroutineDispatcher,
+class NetworkWorker @AssistedInject constructor(
+        @Assisted context: Context,
+        @Assisted workerParameters: WorkerParameters,
+        @Io private val io: CoroutineDispatcher,
         private val logger: Logger
 ) : CoroutineWorker(context, workerParameters) {
 
@@ -25,6 +28,9 @@ class NetworkWorker(
             Result.failure()
         }
     }
+
+    @AssistedInject.Factory
+    interface Factory : ChildWorkerFactory
 
 }
 

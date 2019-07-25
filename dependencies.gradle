@@ -16,6 +16,10 @@ def versions = [
                 "test"            : "1.3.0-alpha02",
         ],
         "crashlytics"         : "2.10.1",
+        "dagger"              : [
+                "assistedInject": "0.4.0",
+                "dagger"        : "2.23.2"
+        ],
         "fabric"              : "1.29.0",
         "firebaseCore"        : "17.0.1",
         "firebaseFirestore"   : "20.1.0",
@@ -24,7 +28,6 @@ def versions = [
         "googleServices"      : "4.0.0",
         "gradleVersionsPlugin": "0.20.0",
         "junit"               : "4.13-beta-3",
-        "koin"                : "2.0.1",
         "kotlin"              : [
                 "kotlin"       : "1.3.41",
                 "coroutines"   : "1.3.0-RC",
@@ -36,8 +39,8 @@ def versions = [
         "playCore"            : "1.6.1",
         "peekAndPop"          : "1.1.0",
         "retrofit"            : [
-                "kotlinSerialization"    : "0.4.0",
-                "retrofit"               : "2.6.0",
+                "kotlinSerialization": "0.4.0",
+                "retrofit"           : "2.6.0",
         ],
         "rxAndroid"           : "2.1.1",
         "rxJava2"             : "2.2.10",
@@ -85,6 +88,14 @@ ext.deps = [
                 ],
         ],
         "crashlytics"         : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
+        "dagger"              : [
+                "assistedInjectAnnotations": "com.squareup.inject:assisted-inject-annotations-dagger2:$versions.dagger.assistedInject",
+                "assistedInjectProcessor"  : "com.squareup.inject:assisted-inject-processor-dagger2:$versions.dagger.assistedInject",
+                "android"                  : "com.google.dagger:dagger-android:$versions.dagger.dagger",
+                "androidProcessor"         : "com.google.dagger:dagger-android-processor:$versions.dagger.dagger",
+                "compiler"                 : "com.google.dagger:dagger-compiler:$versions.dagger.dagger",
+                "dagger"                   : "com.google.dagger:dagger:$versions.dagger.dagger",
+        ],
         "fabric"              : "io.fabric.tools:gradle:$versions.fabric",
         "firebase"            : [
                 "core"     : "com.google.firebase:firebase-core:$versions.firebaseCore",
@@ -99,10 +110,6 @@ ext.deps = [
         "googleServices"      : "com.google.gms:google-services:$versions.googleServices",
         "gradleVersionsPlugin": "com.github.ben-manes:gradle-versions-plugin:$versions.gradleVersionsPlugin",
         "junit"               : "junit:junit:$versions.junit",
-        "koin"                : [
-                "android"         : "org.koin:koin-android:$versions.koin",
-                "androidViewmodel": "org.koin:koin-android-viewmodel:$versions.koin",
-        ],
         "kotlin"              : [
                 "stdlib"       : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin.kotlin",
                 "test"         : "org.jetbrains.kotlin:kotlin-test-junit:$versions.kotlin.kotlin",
@@ -127,8 +134,8 @@ ext.deps = [
         "playCore"            : "com.google.android.play:core:$versions.playCore",
         "peekAndPop"          : "com.github.shalskar:PeekAndPop:$versions.peekAndPop",
         "retrofit"            : [
-                "kotlinSerialization"    : "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$versions.retrofit.kotlinSerialization",
-                "retrofit"               : "com.squareup.retrofit2:retrofit:$versions.retrofit.retrofit",
+                "kotlinSerialization": "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$versions.retrofit.kotlinSerialization",
+                "retrofit"           : "com.squareup.retrofit2:retrofit:$versions.retrofit.retrofit",
         ],
         "rxAndroid"           : "io.reactivex.rxjava2:rxandroid:$versions.rxAndroid",
         "rxJava2"             : "io.reactivex.rxjava2:rxjava:$versions.rxJava2",

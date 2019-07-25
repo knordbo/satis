@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListene
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
+import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.NavigationViewModel
 import com.satis.app.R
@@ -25,10 +26,13 @@ import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.*
+import javax.inject.Inject
 
-class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
+class CardFragment @Inject constructor(
+        private val viewModelFactory: CardViewModel.Factory
+): BaseMvRxFragment(), OnChildAttachStateChangeListener {
 
-    private val cardViewModel: CardViewModel by activityViewModel()
+    private val cardViewModel: CardViewModel by fragmentViewModel()
     private val navigationViewModel: NavigationViewModel by activityViewModel()
     private val cardsAdapter = CardAdapter()
 
@@ -97,5 +101,7 @@ class CardFragment : BaseMvRxFragment(), OnChildAttachStateChangeListener {
             }
         }
     }
+
+    fun createViewModel(state: CardState): CardViewModel = viewModelFactory.create(state)
 
 }

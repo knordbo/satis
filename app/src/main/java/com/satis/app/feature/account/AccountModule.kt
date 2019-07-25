@@ -1,13 +1,17 @@
 package com.satis.app.feature.account
 
-import org.koin.dsl.module
+import androidx.fragment.app.Fragment
+import com.satis.app.common.fragment.FragmentKey
+import dagger.Binds
+import dagger.Module
+import dagger.multibindings.IntoMap
 
-val accountModule = module {
-    factory<AccountViewModel> { (initialState: AccountState) ->
-        AccountViewModel(initialState, get(), get())
-    }
+@Module
+abstract class AccountModule {
 
-    factory<AccountFragment> {
-        AccountFragment()
-    }
+    @Binds
+    @IntoMap
+    @FragmentKey(AccountFragment::class)
+    abstract fun provideAccountFragment(bind: AccountFragment): Fragment
+
 }

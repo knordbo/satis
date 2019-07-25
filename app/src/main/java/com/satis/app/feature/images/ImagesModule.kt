@@ -1,40 +1,46 @@
 package com.satis.app.feature.images
 
-import android.content.Context
-import androidx.work.WorkerParameters
-import com.satis.app.Io
+import androidx.fragment.app.Fragment
+import com.satis.app.common.fragment.FragmentKey
 import com.satis.app.feature.images.data.DefaultUnsplashProvider
 import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashProvider
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.utils.retrofit.create
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import com.satis.app.work.ChildWorkerFactory
+import com.satis.app.work.WorkerKey
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.multibindings.IntoMap
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
-val imagesModule = module {
+@Module(includes = [ImagesBindingModule::class])
+class ImagesModule {
 
-    single<UnsplashApi> {
-        get<Retrofit>().create()
-    }
+    @Provides
+    @Singleton
+    fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()
 
-    single<UnsplashProvider> {
-        DefaultUnsplashProvider(get(), get())
-    }
+}
 
-    factory<ImagesViewModel> { (initialState: ImagesState) ->
-        ImagesViewModel(initialState, get(), get(named<Io>()))
-    }
+@Module
+abstract class ImagesBindingModule {
 
-    factory<ImagesFragment> {
-        ImagesFragment()
-    }
+    @Binds
+    @IntoMap
+    @FragmentKey(ImagesFragment::class)
+    abstract fun provideImagesFragment(bind: ImagesFragment): Fragment
 
-    factory<ImageFragment> {
-        ImageFragment()
-    }
+    @Binds
+    @Singleton
+    abstract fun provideUnsplashProvider(bind: DefaultUnsplashProvider): UnsplashProvider
 
-    factory<ImageWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        ImageWorker(context, workerParameters, get(named<Io>()), get(), get())
-    }
+    @Binds
+    @IntoMap
+    @WorkerKey(ImageWorker::class)
+    abstract fun provideImageWorker(bind: ImageWorker.Factory): ChildWorkerFactory
+
+
 }

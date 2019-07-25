@@ -1,6 +1,7 @@
 package com.satis.app
 
 import android.os.Bundle
+import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
@@ -12,21 +13,27 @@ import com.airbnb.mvrx.viewModel
 import com.satis.app.Tab.ACCOUNT
 import com.satis.app.Tab.HOME
 import com.satis.app.Tab.IMAGES
+import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
-import org.koin.core.parameter.parametersOf
+import javax.inject.Inject
 
 class MainActivity : BaseMvRxActivity() {
 
     private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
     private val navigationViewModel: NavigationViewModel by viewModel()
-    private val immediateAppUpdater: ImmediateAppUpdater by inject { parametersOf(this) }
 
     private var appUpdateCalled = false
 
+    @Inject lateinit var fragmentFactory: FragmentFactory
+    @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
+
+    private val immediateAppUpdater: ImmediateAppUpdater by lazy {
+        immediateAppUpdaterFactory.create(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        supportFragmentManager.fragmentFactory = get()
+        AndroidInjection.inject(this)
+        supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)
         appUpdateCalled = savedInstanceState?.getBoolean(APP_UPDATE_CALLED, false) ?: false

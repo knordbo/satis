@@ -1,6 +1,7 @@
 package com.satis.app.feature.playground
 
 import android.os.Parcelable
+import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
@@ -9,14 +10,14 @@ import com.satis.app.common.logging.LogEntry
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.account.ui.formatted
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
-import org.koin.core.parameter.parametersOf
 
-class PlaygroundViewModel(
-        initialState: PlaygroundState,
+class PlaygroundViewModel @AssistedInject constructor(
+        @Assisted initialState: PlaygroundState,
         private val logger: Logger,
         private val io: CoroutineDispatcher
 ) : BaseViewModel<PlaygroundState>(
@@ -36,9 +37,16 @@ class PlaygroundViewModel(
         }
     }
 
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(initialState: PlaygroundState): PlaygroundViewModel
+    }
+
     companion object : MvRxViewModelFactory<PlaygroundViewModel, PlaygroundState> {
-        override fun create(viewModelContext: ViewModelContext, state: PlaygroundState): PlaygroundViewModel? =
-                viewModelContext.activity.get { parametersOf(state) }
+        override fun create(viewModelContext: ViewModelContext, state: PlaygroundState): PlaygroundViewModel {
+            val fragment: PlaygroundFragment = (viewModelContext as FragmentViewModelContext).fragment()
+            return fragment.createViewModel(state)
+        }
     }
 
 }

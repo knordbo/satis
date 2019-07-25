@@ -2,51 +2,49 @@ package com.satis.app.work
 
 import android.content.Context
 import androidx.work.Configuration
-import androidx.work.ListenableWorker
 import androidx.work.WorkManager
 import androidx.work.WorkerFactory
-import androidx.work.WorkerParameters
-import com.satis.app.Io
-import com.satis.app.utils.system.forNameAsSubclass
-import org.koin.core.parameter.parametersOf
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
+import dagger.multibindings.IntoMap
+import javax.inject.Singleton
 
-val workerModule = module {
-    single<WorkManager> {
-        WorkManager.getInstance(get())
-    }
+@Module(includes = [WorkerBindingModule::class])
+class WorkerModule {
 
-    single<WorkerFactory> {
-        object : WorkerFactory() {
-            override fun createWorker(
-                    appContext: Context,
-                    workerClassName: String,
-                    workerParameters: WorkerParameters
-            ): ListenableWorker? {
-                val kClass = forNameAsSubclass<ListenableWorker>(workerClassName)?.kotlin
-                return if (kClass != null) {
-                    get(clazz = kClass, qualifier = null) { parametersOf(appContext, workerParameters) }
-                } else {
-                    null
-                }
-            }
-        }
-    }
+    @Provides
+    @Singleton
+    fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
 
-    single<Configuration> {
-        Configuration.Builder().setWorkerFactory(get()).build()
-    }
+    @Provides
+    @Singleton
+    fun provideConfiguration(workerFactory: WorkerFactory): Configuration =
+            Configuration
+                    .Builder()
+                    .setWorkerFactory(workerFactory)
+                    .build()
 
-    single<WorkScheduler> {
-        WorkScheduler(get(), get())
-    }
+}
 
-    factory<NetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        NetworkWorker(context, workerParameters, get(named<Io>()), get())
-    }
+@Module
+abstract class WorkerBindingModule {
 
-    factory<ChargingNetworkWorker> { (context: Context, workerParameters: WorkerParameters) ->
-        ChargingNetworkWorker(context, workerParameters, get(named<Io>()), get())
-    }
+    @Binds
+    abstract fun provideWorkerFactory(bind: InjectingWorkerFactory): WorkerFactory
+
+    @Binds
+    @Singleton
+    abstract fun provideWorkScheduler(bind: DefaultWorkScheduler): WorkScheduler
+
+    @Binds
+    @IntoMap
+    @WorkerKey(NetworkWorker::class)
+    abstract fun provideNetworkWorker(bind: NetworkWorker.Factory): ChildWorkerFactory
+
+    @Binds
+    @IntoMap
+    @WorkerKey(ChargingNetworkWorker::class)
+    abstract fun provideChargingNetworkWorker(bind: ChargingNetworkWorker.Factory): ChildWorkerFactory
+
 }

@@ -1,5 +1,6 @@
 package com.satis.app.feature.account
 
+import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
@@ -8,13 +9,13 @@ import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.squareup.inject.assisted.Assisted
+import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.get
-import org.koin.core.parameter.parametersOf
 
-class AccountViewModel(
-        initialState: AccountState,
+class AccountViewModel @AssistedInject constructor(
+        @Assisted initialState: AccountState,
         private val logger: Logger,
         private val prefs: Prefs
 ) : BaseViewModel<AccountState>(
@@ -52,8 +53,15 @@ class AccountViewModel(
         }
     }
 
+    @AssistedInject.Factory
+    interface Factory {
+        fun create(initialState: AccountState): AccountViewModel
+    }
+
     companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
-        override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? =
-                viewModelContext.activity.get { parametersOf(state) }
+        override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? {
+            val fragment: AccountFragment = (viewModelContext as FragmentViewModelContext).fragment()
+            return fragment.createViewModel(state)
+        }
     }
 }

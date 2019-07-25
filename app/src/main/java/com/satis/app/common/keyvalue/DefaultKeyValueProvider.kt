@@ -1,16 +1,18 @@
 package com.satis.app.common.keyvalue
 
+import com.satis.app.Io
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.flow.asFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializerByTypeToken
+import javax.inject.Inject
 
-class DefaultKeyValueProvider(
+class DefaultKeyValueProvider @Inject constructor(
         private val keyValueDao: KeyValueDao,
         private val json: Json,
-        private val io: CoroutineDispatcher
+        @Io private val io: CoroutineDispatcher
 ) : KeyValueProvider {
 
     override suspend fun <T : Any> insert(key: Key<T>, value: T) {

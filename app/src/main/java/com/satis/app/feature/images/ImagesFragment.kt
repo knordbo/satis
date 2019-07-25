@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
+import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
@@ -19,11 +20,14 @@ import com.satis.app.Tab.IMAGES
 import com.satis.app.feature.images.ui.ImagesAdapter
 import kotlinx.android.synthetic.main.feature_images.*
 import kotlinx.android.synthetic.main.feature_images.view.*
+import javax.inject.Inject
 
-class ImagesFragment : BaseMvRxFragment() {
+class ImagesFragment @Inject constructor(
+        private val viewModelFactory: ImagesViewModel.Factory
+) : BaseMvRxFragment() {
 
     private val navigationViewModel: NavigationViewModel by activityViewModel()
-    private val imagesViewModel: ImagesViewModel by activityViewModel()
+    private val imagesViewModel: ImagesViewModel by fragmentViewModel()
     private val adapter by lazy {
         ImagesAdapter(
                 requestManager = Glide.with(this),
@@ -67,6 +71,8 @@ class ImagesFragment : BaseMvRxFragment() {
             }
         }
     }
+
+    fun createViewModel(state: ImagesState) = viewModelFactory.create(state)
 
 }
 

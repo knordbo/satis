@@ -1,15 +1,17 @@
 package com.satis.app.common.logging
 
 import android.util.Log
+import com.satis.app.Io
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactive.flow.asFlow
+import javax.inject.Inject
 
-class PersistedLogger(
+class PersistedLogger @Inject constructor(
         private val logDao: LogDao,
-        private val io: CoroutineDispatcher
+        @Io private val io: CoroutineDispatcher
 ) : Logger {
 
     override fun log(tag: String, message: String) {

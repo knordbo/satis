@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
+import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.NavigationViewModel
 import com.satis.app.R
@@ -20,11 +21,14 @@ import kotlinx.android.synthetic.main.feature_account.*
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import javax.inject.Inject
 
-class AccountFragment : BaseMvRxFragment() {
+class AccountFragment @Inject constructor(
+        private val viewModelFactory: AccountViewModel.Factory
+): BaseMvRxFragment() {
 
     private val navigationViewModel: NavigationViewModel by activityViewModel()
-    private val accountViewModel: AccountViewModel by activityViewModel()
+    private val accountViewModel: AccountViewModel by fragmentViewModel()
     private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
     private val logAdapter by lazy { LogAdapter() }
     private var previousState: AccountState? = null
@@ -81,5 +85,7 @@ class AccountFragment : BaseMvRxFragment() {
         }
         else -> super.onOptionsItemSelected(item)
     }
+
+    fun createViewModel(state: AccountState): AccountViewModel = viewModelFactory.create(state)
 
 }

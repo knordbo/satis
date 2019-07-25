@@ -102,6 +102,14 @@ dependencies {
     // Crashlytics
     implementation deps.crashlytics
 
+    // Dagger
+    implementation deps.dagger.dagger
+    implementation deps.dagger.android
+    implementation deps.dagger.assistedInjectAnnotations
+    kapt deps.dagger.compiler
+    kapt deps.dagger.androidProcessor
+    kapt deps.dagger.assistedInjectProcessor
+
     // Firebase
     implementation deps.firebase.core
     implementation deps.firebase.firestore
@@ -110,10 +118,6 @@ dependencies {
     implementation deps.glide.glide
     implementation deps.glide.recyclerview
     kapt deps.glide.compiler
-
-    // Koin
-    implementation deps.koin.android
-    implementation deps.koin.androidViewmodel
 
     // Kotlin
     implementation deps.kotlin.serialization.runtime

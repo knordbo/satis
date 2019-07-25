@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doAfterTextChanged
 import com.airbnb.mvrx.BaseMvRxFragment
-import com.airbnb.mvrx.activityViewModel
+import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
 import kotlinx.android.synthetic.main.feature_playground.*
+import javax.inject.Inject
 
-class PlaygroundFragment : BaseMvRxFragment() {
+class PlaygroundFragment @Inject constructor(
+        private val viewModelFactory: PlaygroundViewModel.Factory
+): BaseMvRxFragment() {
 
-    private val playgroundViewModel: PlaygroundViewModel by activityViewModel()
+    private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.feature_playground, container, false)
@@ -30,5 +33,7 @@ class PlaygroundFragment : BaseMvRxFragment() {
             items.text = state.items.joinToString(separator = "\n") { it }
         }
     }
+
+    fun createViewModel(state: PlaygroundState) = viewModelFactory.create(state)
 
 }

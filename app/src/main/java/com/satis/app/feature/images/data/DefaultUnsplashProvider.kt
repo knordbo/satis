@@ -7,8 +7,9 @@ import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.User
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class DefaultUnsplashProvider(
+class DefaultUnsplashProvider @Inject constructor(
         private val unsplashApi: UnsplashApi,
         private val keyValueProvider: KeyValueProvider
 ) : UnsplashProvider {

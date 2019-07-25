@@ -1,12 +1,11 @@
 package com.satis.app
 
-import android.app.Activity
-import androidx.fragment.app.Fragment
+import android.content.Context
 import androidx.fragment.app.FragmentFactory
-import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.satis.app.common.AppDatabase
+import com.satis.app.common.fragment.InjectingFragmentFactory
 import com.satis.app.common.keyvalue.DefaultKeyValueProvider
 import com.satis.app.common.keyvalue.KeyValueDao
 import com.satis.app.common.keyvalue.KeyValueProvider
@@ -16,50 +15,80 @@ import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.DefaultPrefs
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.utils.retrofit.jsonMediaType
-import kotlinx.coroutines.CoroutineDispatcher
+import dagger.Binds
+import dagger.Module
+import dagger.Provides
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
-val appModule = module {
-    single<Json> { Json.nonstrict }
-    single<OkHttpClient> { OkHttpClient() }
-    single<Retrofit> {
-        Retrofit.Builder()
-                .baseUrl("https://dummy.com/")
-                .client(get())
-                .addConverterFactory(get<Json>().asConverterFactory(jsonMediaType()))
-                .build()
-    }
+@Module(includes = [AppBindingModule::class])
+class AppModule {
+    @Provides
+    fun provideContext(application: App): Context = application.applicationContext
 
-    single<FragmentFactory> {
-        object : FragmentFactory() {
-            override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-                return try {
-                    get(clazz = loadFragmentClass(classLoader, className).kotlin, qualifier = null, parameters = null)
-                } catch (t: Throwable) {
-                    super.instantiate(classLoader, className)
-                }
-            }
-        }
-    }
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json.nonstrict
 
-    single<AppDatabase> { AppDatabase.createDatabase(get()) }
-    single<KeyValueDao> { get<AppDatabase>().keyValueDao() }
-    single<KeyValueProvider> { DefaultKeyValueProvider(get(), get(), get(named<Io>())) }
-    single<LogDao> { get<AppDatabase>().logDao() }
-    single<Logger> { PersistedLogger(get(), get(named<Io>())) }
-    single<Prefs> { DefaultPrefs(get()) }
+    @Provides
+    @Singleton
+    fun provideOkHttp(): OkHttpClient = OkHttpClient()
 
-    single<CoroutineDispatcher>(named<Main>()) { Dispatchers.Main }
-    single<CoroutineDispatcher>(named<Io>()) { Dispatchers.IO }
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
+            .baseUrl("https://dummy.com/")
+            .client(okHttpClient)
+            .addConverterFactory(json.asConverterFactory(jsonMediaType()))
+            .build()
 
-    single<AppUpdateManager> { AppUpdateManagerFactory.create(get()) }
-    factory<ImmediateAppUpdater> { (activity: Activity) -> ImmediateAppUpdater(activity, get(), get()) }
+    @Provides
+    @Singleton
+    fun provideAppDatabase(context: Context): AppDatabase = AppDatabase.createDatabase(context)
+
+    @Provides
+    @Singleton
+    fun provideKeyValueDao(appDatabase: AppDatabase): KeyValueDao = appDatabase.keyValueDao()
+
+    @Provides
+    @Singleton
+    fun provideLogDao(appDatabase: AppDatabase): LogDao = appDatabase.logDao()
+
+    @Provides
+    @Singleton
+    @Main
+    fun provideMainCoroutineDispatcher() = Dispatchers.Main
+
+    @Provides
+    @Singleton
+    @Io
+    fun provideIoCoroutineDispatcher() = Dispatchers.IO
+
+    @Provides
+    @Singleton
+    fun provideAppUpdateManager(context: Context) = AppUpdateManagerFactory.create(context)
+
 }
 
-annotation class Io
-annotation class Main
+@Module
+abstract class AppBindingModule {
+
+    @Binds
+    @Singleton
+    abstract fun provideKeyValueProvider(bind: DefaultKeyValueProvider): KeyValueProvider
+
+    @Binds
+    @Singleton
+    abstract fun provideLogger(bind: PersistedLogger): Logger
+
+    @Binds
+    @Singleton
+    abstract fun providePrefs(bind: DefaultPrefs): Prefs
+
+    @Binds
+    abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory
+
+}
