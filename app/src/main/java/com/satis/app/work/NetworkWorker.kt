@@ -3,7 +3,7 @@ package com.satis.app.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.satis.app.Io
+import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.Logger
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import com.squareup.inject.assisted.Assisted

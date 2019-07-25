@@ -1,5 +1,6 @@
-package com.satis.app
+package com.satis.app.common.navigation
 
+import com.satis.app.BuildConfig
 import com.satis.app.utils.coroutines.BaseViewModel
 
 class NavigationViewModel(

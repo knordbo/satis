@@ -5,7 +5,7 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
-import com.satis.app.feature.cards.data.CardProvider
+import com.satis.app.feature.cards.data.CardRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 
 class CardViewModel @AssistedInject constructor(
         @Assisted initialSate: CardState,
-        private val cardProvider: CardProvider
+        private val cardRepository: CardRepository
 ) : BaseViewModel<CardState>(
         initialState = initialSate,
         debugMode = BuildConfig.DEBUG
@@ -25,24 +25,24 @@ class CardViewModel @AssistedInject constructor(
     }
 
     fun addCard(card: Card) {
-        cardProvider.addCard(card)
+        cardRepository.addCard(card)
     }
 
     fun like(id: String, like: Boolean) {
-        cardProvider.like(id, like)
+        cardRepository.like(id, like)
     }
 
     fun dislike(id: String, dislike: Boolean) {
-        cardProvider.dislike(id, dislike)
+        cardRepository.dislike(id, dislike)
     }
 
     fun removeCard(id: String) {
-        cardProvider.removeCard(id)
+        cardRepository.removeCard(id)
     }
 
     private fun getCards() {
         launch {
-            cardProvider.getCards().collect { cards ->
+            cardRepository.getCards().collect { cards ->
                 setState {
                     copy(cards = cards.sortedByDescending { it.likes })
                 }

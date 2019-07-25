@@ -1,5 +1,6 @@
-package com.satis.app
+package com.satis.app.di
 
+import com.satis.app.App
 import com.satis.app.feature.account.AccountModule
 import com.satis.app.feature.cards.CardModule
 import com.satis.app.feature.images.ImagesModule

@@ -1,7 +1,7 @@
 package com.satis.app.common.logging
 
 import android.util.Log
-import com.satis.app.Io
+import com.satis.app.common.annotations.Io
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow

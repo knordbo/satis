@@ -12,9 +12,9 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import com.satis.app.NavigationViewModel
+import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.R
-import com.satis.app.Tab.ACCOUNT
+import com.satis.app.common.navigation.Tab.ACCOUNT
 import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.ui.LogAdapter
 import kotlinx.android.synthetic.main.feature_account.*

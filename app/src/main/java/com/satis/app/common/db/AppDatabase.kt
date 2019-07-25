@@ -1,4 +1,4 @@
-package com.satis.app.common
+package com.satis.app.common.db
 
 import android.content.Context
 import androidx.room.Database

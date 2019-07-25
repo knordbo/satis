@@ -1,5 +1,6 @@
-package com.satis.app
+package com.satis.app.di
 
+import com.satis.app.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

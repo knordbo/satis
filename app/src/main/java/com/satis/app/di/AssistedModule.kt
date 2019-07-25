@@ -1,4 +1,4 @@
-package com.satis.app
+package com.satis.app.di
 
 import com.squareup.inject.assisted.dagger2.AssistedModule
 import dagger.Module

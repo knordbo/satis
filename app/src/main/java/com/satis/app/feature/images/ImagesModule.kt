@@ -2,9 +2,9 @@ package com.satis.app.feature.images
 
 import androidx.fragment.app.Fragment
 import com.satis.app.common.fragment.FragmentKey
-import com.satis.app.feature.images.data.DefaultUnsplashProvider
 import com.satis.app.feature.images.data.UnsplashApi
-import com.satis.app.feature.images.data.UnsplashProvider
+import com.satis.app.feature.images.data.UnsplashRepository
+import com.satis.app.feature.images.data.UnsplashRepositoryImpl
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.utils.retrofit.create
 import com.satis.app.work.ChildWorkerFactory
@@ -35,7 +35,7 @@ abstract class ImagesBindingModule {
 
     @Binds
     @Singleton
-    abstract fun provideUnsplashProvider(bind: DefaultUnsplashProvider): UnsplashProvider
+    abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
 
     @Binds
     @IntoMap

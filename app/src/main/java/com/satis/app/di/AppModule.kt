@@ -1,18 +1,22 @@
-package com.satis.app
+package com.satis.app.di
 
 import android.content.Context
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.satis.app.common.AppDatabase
+import com.satis.app.App
+import com.satis.app.common.annotations.Io
+import com.satis.app.common.annotations.Main
+import com.satis.app.common.annotations.UniqueId
+import com.satis.app.common.db.AppDatabase
 import com.satis.app.common.fragment.InjectingFragmentFactory
-import com.satis.app.common.keyvalue.DefaultKeyValueProvider
+import com.satis.app.common.keyvalue.KeyValueRepositoryImpl
 import com.satis.app.common.keyvalue.KeyValueDao
-import com.satis.app.common.keyvalue.KeyValueProvider
+import com.satis.app.common.keyvalue.KeyValueRepository
 import com.satis.app.common.logging.LogDao
 import com.satis.app.common.logging.Logger
 import com.satis.app.common.logging.PersistedLogger
-import com.satis.app.common.prefs.DefaultPrefs
+import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.utils.retrofit.jsonMediaType
 import dagger.Binds
@@ -71,6 +75,11 @@ class AppModule {
     @Singleton
     fun provideAppUpdateManager(context: Context) = AppUpdateManagerFactory.create(context)
 
+    @Provides
+    @Singleton
+    @UniqueId
+    fun provideUniqueId(prefs: Prefs) = prefs.uniqueId
+
 }
 
 @Module
@@ -78,7 +87,7 @@ abstract class AppBindingModule {
 
     @Binds
     @Singleton
-    abstract fun provideKeyValueProvider(bind: DefaultKeyValueProvider): KeyValueProvider
+    abstract fun provideKeyValueRepository(bind: KeyValueRepositoryImpl): KeyValueRepository
 
     @Binds
     @Singleton
@@ -86,7 +95,7 @@ abstract class AppBindingModule {
 
     @Binds
     @Singleton
-    abstract fun providePrefs(bind: DefaultPrefs): Prefs
+    abstract fun providePrefs(bind: PrefsImpl): Prefs
 
     @Binds
     abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory

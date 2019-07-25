@@ -11,7 +11,7 @@ import com.satis.app.feature.images.work.ImageWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class DefaultWorkScheduler @Inject constructor(
+class WorkSchedulerImpl @Inject constructor(
         private val logger: Logger,
         private val workManager: WorkManager
 ) : WorkScheduler {
@@ -70,4 +70,4 @@ class DefaultWorkScheduler @Inject constructor(
 
 }
 
-private const val LOG_TAG = "DefaultWorkScheduler"
+private const val LOG_TAG = "WorkSchedulerImpl"

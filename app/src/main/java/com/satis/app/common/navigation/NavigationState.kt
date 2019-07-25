@@ -1,9 +1,9 @@
-package com.satis.app
+package com.satis.app.common.navigation
 
 import android.os.Parcelable
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.PersistState
-import com.satis.app.Tab.HOME
+import com.satis.app.common.navigation.Tab.HOME
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

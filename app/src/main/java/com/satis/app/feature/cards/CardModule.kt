@@ -3,9 +3,8 @@ package com.satis.app.feature.cards
 import androidx.fragment.app.Fragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.satis.app.common.fragment.FragmentKey
-import com.satis.app.common.prefs.Prefs
-import com.satis.app.feature.cards.data.CardProvider
-import com.satis.app.feature.cards.data.DefaultCardProvider
+import com.satis.app.feature.cards.data.CardRepository
+import com.satis.app.feature.cards.data.CardRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -17,9 +16,7 @@ class CardModule {
 
     @Singleton
     @Provides
-    fun provideCardProvider(prefs: Prefs): CardProvider {
-        return DefaultCardProvider(prefs.uniqueId, FirebaseFirestore.getInstance())
-    }
+    fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
 
 }
 
@@ -30,5 +27,9 @@ abstract class CardBindingModule {
     @IntoMap
     @FragmentKey(CardFragment::class)
     abstract fun provideCardFragment(bind: CardFragment): Fragment
+
+    @Binds
+    @Singleton
+    abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
 
 }

@@ -2,7 +2,7 @@ package com.satis.app.feature.cards.data
 
 import kotlinx.coroutines.flow.Flow
 
-interface CardProvider {
+interface CardRepository {
     fun getCards(): Flow<List<Card>>
     fun addCard(card: Card)
     fun removeCard(id: String)

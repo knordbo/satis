@@ -2,11 +2,16 @@ package com.satis.app.feature.cards.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import com.satis.app.common.annotations.UniqueId
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
+import javax.inject.Inject
 
-class DefaultCardProvider(private val userId: String, firebaseFirestore: FirebaseFirestore) : CardProvider {
+class CardRepositoryImpl @Inject constructor(
+        @UniqueId private val userId: String,
+        firebaseFirestore: FirebaseFirestore
+) : CardRepository {
 
     private val cardsCollection by lazy {
         firebaseFirestore.collection(CARDS_COLLECTION)

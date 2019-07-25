@@ -10,9 +10,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
 import com.airbnb.mvrx.viewModel
-import com.satis.app.Tab.ACCOUNT
-import com.satis.app.Tab.HOME
-import com.satis.app.Tab.IMAGES
+import com.satis.app.common.navigation.NavigationViewModel
+import com.satis.app.common.navigation.Tab
+import com.satis.app.common.navigation.Tab.ACCOUNT
+import com.satis.app.common.navigation.Tab.HOME
+import com.satis.app.common.navigation.Tab.IMAGES
+import com.satis.app.common.updater.ImmediateAppUpdater
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject

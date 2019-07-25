@@ -1,4 +1,4 @@
-package com.satis.app
+package com.satis.app.common.updater
 
 import android.app.Activity
 import android.content.IntentSender

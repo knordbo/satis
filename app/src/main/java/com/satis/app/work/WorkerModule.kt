@@ -35,7 +35,7 @@ abstract class WorkerBindingModule {
 
     @Binds
     @Singleton
-    abstract fun provideWorkScheduler(bind: DefaultWorkScheduler): WorkScheduler
+    abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler
 
     @Binds
     @IntoMap

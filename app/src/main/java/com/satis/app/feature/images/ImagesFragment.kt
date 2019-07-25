@@ -14,9 +14,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.peekandpop.shalskar.peekandpop.PeekAndPop
-import com.satis.app.NavigationViewModel
+import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.R
-import com.satis.app.Tab.IMAGES
+import com.satis.app.common.navigation.Tab.IMAGES
 import com.satis.app.feature.images.ui.ImagesAdapter
 import kotlinx.android.synthetic.main.feature_images.*
 import kotlinx.android.synthetic.main.feature_images.view.*

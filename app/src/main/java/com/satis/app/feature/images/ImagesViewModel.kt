@@ -5,7 +5,7 @@ import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.BuildConfig
 import com.satis.app.feature.images.data.NATURE
-import com.satis.app.feature.images.data.UnsplashProvider
+import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 
 class ImagesViewModel @AssistedInject constructor(
         @Assisted initialState: ImagesState,
-        private val unsplashProvider: UnsplashProvider,
+        private val unsplashRepository: UnsplashRepository,
         private val io: CoroutineDispatcher
 ) : BaseViewModel<ImagesState>(
         initialState = initialState,
@@ -34,7 +34,7 @@ class ImagesViewModel @AssistedInject constructor(
 
     private fun streamPhotos() {
         launch {
-            unsplashProvider.streamPhotos(NATURE).collect { photos ->
+            unsplashRepository.streamPhotos(NATURE).collect { photos ->
                 setState {
                     copy(photoState = photos)
                 }
@@ -45,7 +45,7 @@ class ImagesViewModel @AssistedInject constructor(
     private fun fetchPhotos() {
         launch(io) {
             try {
-                unsplashProvider.fetchPhotos(NATURE)
+                unsplashRepository.fetchPhotos(NATURE)
             } catch (t: Throwable) {
                 // ignored
             }

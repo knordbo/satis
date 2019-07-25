@@ -3,6 +3,7 @@ package com.satis.app
 import androidx.work.Configuration
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.apply
+import com.satis.app.di.DaggerAppComponent
 import com.satis.app.work.WorkScheduler
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
