@@ -18,7 +18,7 @@ def versions = [
         "crashlytics"         : "2.10.1",
         "dagger"              : [
                 "assistedInject": "0.4.0",
-                "dagger"        : "2.23.2"
+                "dagger"        : "2.24"
         ],
         "fabric"              : "1.29.0",
         "firebaseCore"        : "17.0.1",
