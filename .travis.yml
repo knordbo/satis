@@ -1,5 +1,5 @@
 language: android
-jdk: oraclejdk8
+dist: trusty
 before_install:
   - yes | sdkmanager "build-tools;28.0.3"
 before_cache:
