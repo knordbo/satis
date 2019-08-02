@@ -40,10 +40,10 @@ def versions = [
         "peekAndPop"          : "1.1.0",
         "retrofit"            : [
                 "kotlinSerialization": "0.4.0",
-                "retrofit"           : "2.6.0",
+                "retrofit"           : "2.6.1",
         ],
         "rxAndroid"           : "2.1.1",
-        "rxJava2"             : "2.2.10",
+        "rxJava2"             : "2.2.11",
         "tinydancer"          : "0.1.2",
         "stetho"              : "1.5.1",
         "workManager"         : "2.2.0-rc01",
