@@ -28,6 +28,7 @@ class ImagesFragment @Inject constructor(
 
     private val navigationViewModel: NavigationViewModel by activityViewModel()
     private val imagesViewModel: ImagesViewModel by fragmentViewModel()
+    private val imageViewPreloadSizeProvider = ViewPreloadSizeProvider<PhotoState>()
     private val adapter by lazy {
         ImagesAdapter(
                 requestManager = Glide.with(this),
@@ -35,8 +36,9 @@ class ImagesFragment @Inject constructor(
                         .peekLayout(R.layout.peek_image)
                         .parentViewGroupToDisallowTouchEvents(view!!.images)
                         .build(),
-                imageClicked = { photostate ->
-                    findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photostate))
+                imageViewPreloadSizeProvider = imageViewPreloadSizeProvider,
+                imageClicked = { photo ->
+                    findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo))
                 }
         )
     }
@@ -46,12 +48,12 @@ class ImagesFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val preloadSizeProvider = ViewPreloadSizeProvider<PhotoState>()
-        val preloader = RecyclerViewPreloader<PhotoState>(
+        val preloader = RecyclerViewPreloader(
                 Glide.with(this@ImagesFragment),
                 adapter,
-                preloadSizeProvider,
-                IMAGE_PRELOAD_SIZE)
+                imageViewPreloadSizeProvider,
+                IMAGE_PRELOAD_SIZE
+        )
 
         images.adapter = adapter
         images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)

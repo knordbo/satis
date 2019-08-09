@@ -85,7 +85,7 @@ dependencies {
     implementation deps.androidx.constraintLayout
     implementation deps.androidx.coreKtx
     implementation deps.androidx.fragment
-    implementation(deps.androidx.futures) {
+    implementation(deps.androidx.concurrent) {
         exclude group: 'com.google.guava', module: 'listenablefuture'
     }
     implementation deps.androidx.lifecycle.extensions

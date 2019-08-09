@@ -12,6 +12,7 @@ import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.request.RequestOptions.circleCropTransform
+import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
 import com.satis.app.feature.images.PhotoState
@@ -22,6 +23,7 @@ import kotlinx.android.synthetic.main.peek_image.view.*
 class ImagesAdapter(
         private val requestManager: RequestManager,
         private val peekAndPop: PeekAndPop,
+        private val imageViewPreloadSizeProvider: ViewPreloadSizeProvider<PhotoState>,
         private val imageClicked: (PhotoState) -> Unit
 ) : ListAdapter<PhotoState, ImageViewHolder>(object : DiffUtil.ItemCallback<PhotoState>() {
     override fun areItemsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem.id == newItem.id
@@ -45,8 +47,11 @@ class ImagesAdapter(
         })
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder =
-            ImageViewHolder(parent.layoutInflater.inflate(R.layout.image_item, parent, false) as AppCompatImageView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
+        val view = parent.layoutInflater.inflate(R.layout.image_item, parent, false)
+        imageViewPreloadSizeProvider.setView(view)
+        return ImageViewHolder(view as AppCompatImageView)
+    }
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
         val item = getItem(position)

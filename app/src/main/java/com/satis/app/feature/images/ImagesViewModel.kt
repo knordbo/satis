@@ -15,8 +15,7 @@ import kotlinx.coroutines.launch
 
 class ImagesViewModel @AssistedInject constructor(
         @Assisted initialState: ImagesState,
-        private val unsplashRepository: UnsplashRepository,
-        private val io: CoroutineDispatcher
+        private val unsplashRepository: UnsplashRepository
 ) : BaseViewModel<ImagesState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
@@ -43,7 +42,7 @@ class ImagesViewModel @AssistedInject constructor(
     }
 
     private fun fetchPhotos() {
-        launch(io) {
+        launch {
             try {
                 unsplashRepository.fetchPhotos(NATURE)
             } catch (t: Throwable) {

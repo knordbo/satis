@@ -7,6 +7,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.reactive.flow.asFlow
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PersistedLogger @Inject constructor(
@@ -30,8 +31,11 @@ class PersistedLogger @Inject constructor(
         logs.map { it.toModel() }
     }.asFlow()
 
-    override suspend fun searchLogs(query: String): List<LogEntry> =
+    override suspend fun searchLogs(query: String): List<LogEntry> {
+        return withContext(io) {
             logDao.searchLogs(query, query).map { it.toModel() }
+        }
+    }
 
     private fun LogEntity.toModel() = LogEntry(
             id = id,

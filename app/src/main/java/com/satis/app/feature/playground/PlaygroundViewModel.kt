@@ -13,13 +13,11 @@ import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.android.parcel.Parcelize
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 
 class PlaygroundViewModel @AssistedInject constructor(
         @Assisted initialState: PlaygroundState,
-        private val logger: Logger,
-        private val io: CoroutineDispatcher
+        private val logger: Logger
 ) : BaseViewModel<PlaygroundState>(
         initialState = initialState,
         debugMode = BuildConfig.DEBUG
@@ -29,7 +27,7 @@ class PlaygroundViewModel @AssistedInject constructor(
     }
 
     fun fetch(query: String) {
-        launch(io) {
+        launch {
             val searchResults = logger.searchLogs(query).map(LogEntry::formatted)
             setState {
                 copy(items = searchResults)
