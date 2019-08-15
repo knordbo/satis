@@ -4,8 +4,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_height="wrap_content"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="@dimen/key_line_med"
+    android:paddingTop="@dimen/key_line_med"
+    android:paddingEnd="@dimen/key_line_med"
+    android:paddingBottom="@dimen/key_line_med"
 >
 
     <com.google.android.material.card.MaterialCardView
