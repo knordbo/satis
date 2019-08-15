@@ -9,6 +9,7 @@ import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
+import com.satis.app.utils.view.asyncText
 import kotlinx.android.synthetic.main.feature_playground.*
 import javax.inject.Inject
 
@@ -30,7 +31,7 @@ class PlaygroundFragment @Inject constructor(
 
     override fun invalidate() {
         withState(playgroundViewModel) { state ->
-            items.text = state.items.joinToString(separator = "\n") { it }
+            items.asyncText = state.items.joinToString(separator = "\n") { it }
         }
     }
 

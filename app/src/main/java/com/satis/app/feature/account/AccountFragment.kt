@@ -17,6 +17,8 @@ import com.satis.app.R
 import com.satis.app.common.navigation.Tab.ACCOUNT
 import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.ui.LogAdapter
+import com.satis.app.utils.view.asyncText
+import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_account.*
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -44,6 +46,7 @@ class AccountFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         logs.adapter = logAdapter
+        logs.disableChangeAnimations()
         playgroundButton.setOnClickListener {
             findNavController().navigate(R.id.playground)
         }
@@ -51,8 +54,8 @@ class AccountFragment @Inject constructor(
 
     override fun invalidate() = withState(accountViewModel, navigationViewModel) { accountState, navigationState ->
         if (accountState.buildData != null) {
-            versionNumber.text = resources.getString(R.string.version_info, accountState.buildData.versionNum)
-            buildTime.text = resources.getString(R.string.build_time_info, simpleDateFormat.format(Date(accountState.buildData.buildTime)))
+            versionNumber.asyncText = resources.getString(R.string.version_info, accountState.buildData.versionNum)
+            buildTime.asyncText = resources.getString(R.string.build_time_info, simpleDateFormat.format(Date(accountState.buildData.buildTime)))
             logAdapter.submitList(accountState.logs)
             if (accountState.logs != previousState?.logs) {
                 logs.smoothScrollToPosition(0)

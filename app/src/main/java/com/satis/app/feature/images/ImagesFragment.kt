@@ -18,6 +18,7 @@ import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.R
 import com.satis.app.common.navigation.Tab.IMAGES
 import com.satis.app.feature.images.ui.ImagesAdapter
+import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_images.*
 import kotlinx.android.synthetic.main.feature_images.view.*
 import javax.inject.Inject
@@ -58,6 +59,7 @@ class ImagesFragment @Inject constructor(
         images.adapter = adapter
         images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
         images.addOnScrollListener(preloader)
+        images.disableChangeAnimations()
 
         val dividerDrawable = requireContext().getDrawable(R.drawable.divider)
         images.addItemDecoration(GridDividerItemDecoration(dividerDrawable, dividerDrawable, COLUMNS))

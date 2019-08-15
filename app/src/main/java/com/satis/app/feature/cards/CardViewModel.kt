@@ -28,23 +28,23 @@ class CardViewModel @AssistedInject constructor(
         cardRepository.addCard(card)
     }
 
-    fun like(id: String, like: Boolean) {
-        cardRepository.like(id, like)
+    fun like(card: Card) {
+        cardRepository.like(card.id, !card.hasLiked)
     }
 
-    fun dislike(id: String, dislike: Boolean) {
-        cardRepository.dislike(id, dislike)
+    fun dislike(card: Card) {
+        cardRepository.dislike(card.id, !card.hasDisliked)
     }
 
-    fun removeCard(id: String) {
-        cardRepository.removeCard(id)
+    fun removeCard(card: Card) {
+        cardRepository.removeCard(card.id)
     }
 
     private fun getCards() {
         launch {
             cardRepository.getCards().collect { cards ->
                 setState {
-                    copy(cards = cards.sortedByDescending { it.likes })
+                    copy(cards = cards.sortedByDescending { card -> card.likes })
                 }
             }
         }

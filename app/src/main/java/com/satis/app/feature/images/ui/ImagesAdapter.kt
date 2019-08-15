@@ -17,6 +17,7 @@ import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.ui.ImagesAdapter.ImageViewHolder
+import com.satis.app.utils.view.asyncText
 import com.satis.app.utils.view.layoutInflater
 import kotlinx.android.synthetic.main.peek_image.view.*
 
@@ -25,10 +26,7 @@ class ImagesAdapter(
         private val peekAndPop: PeekAndPop,
         private val imageViewPreloadSizeProvider: ViewPreloadSizeProvider<PhotoState>,
         private val imageClicked: (PhotoState) -> Unit
-) : ListAdapter<PhotoState, ImageViewHolder>(object : DiffUtil.ItemCallback<PhotoState>() {
-    override fun areItemsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem == newItem
-}), ListPreloader.PreloadModelProvider<PhotoState> {
+) : ListAdapter<PhotoState, ImageViewHolder>(Differ), ListPreloader.PreloadModelProvider<PhotoState> {
 
     init {
         peekAndPop.setOnGeneralActionListener(object : PeekAndPop.OnGeneralActionListener {
@@ -36,7 +34,7 @@ class ImagesAdapter(
             override fun onPeek(view: View, position: Int) {
                 val item = getItem(position)
                 with(peekAndPop.peekView) {
-                    username.text = item.user.username
+                    username.asyncText = item.user.username
                     Glide.with(peekAndPop.peekView)
                             .load(item.user.userAvatar)
                             .apply(circleCropTransform())
@@ -89,5 +87,10 @@ class ImagesAdapter(
     }
 
     class ImageViewHolder(val imageView: AppCompatImageView) : ViewHolder(imageView)
+
+    private object Differ : DiffUtil.ItemCallback<PhotoState>() {
+        override fun areItemsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: PhotoState, newItem: PhotoState): Boolean = oldItem == newItem
+    }
 
 }

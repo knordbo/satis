@@ -1,40 +1,45 @@
 package com.satis.app.feature.cards
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.END
 import androidx.recyclerview.widget.ItemTouchHelper.START
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
-import androidx.recyclerview.widget.RecyclerView.OnChildAttachStateChangeListener
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.R
+import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.common.navigation.Tab.HOME
 import com.satis.app.feature.cards.ui.AddCardView
 import com.satis.app.feature.cards.ui.CardAdapter
-import com.satis.app.feature.cards.ui.CardItemView
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.*
 import javax.inject.Inject
 
 class CardFragment @Inject constructor(
         private val viewModelFactory: CardViewModel.Factory
-): BaseMvRxFragment(), OnChildAttachStateChangeListener {
+) : BaseMvRxFragment() {
 
     private val cardViewModel: CardViewModel by fragmentViewModel()
     private val navigationViewModel: NavigationViewModel by activityViewModel()
-    private val cardsAdapter = CardAdapter()
+    private val cardsAdapter by lazy {
+        CardAdapter(
+                onLikeClicked = { card ->
+                    cardViewModel.like(card)
+                },
+                onDislikeClicked = { card ->
+                    cardViewModel.dislike(card)
+                },
+                onSwiped = { card ->
+                    cardViewModel.removeCard(card)
+                }
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,15 +52,12 @@ class CardFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cards.adapter = cardsAdapter
-        cards.addOnChildAttachStateChangeListener(this@CardFragment)
         cards.disableChangeAnimations()
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-                viewHolder.adapterPosition.let {
-                    if (it != NO_POSITION) {
-                        cardViewModel.removeCard(cardsAdapter.getCard(it).id)
-                    }
+                if (viewHolder.adapterPosition != NO_POSITION) {
+                    cardsAdapter.onSwiped(viewHolder.adapterPosition)
                 }
             }
 
@@ -82,24 +84,6 @@ class CardFragment @Inject constructor(
             true
         }
         else -> super.onOptionsItemSelected(item)
-    }
-
-    override fun onChildViewDetachedFromWindow(view: View) {
-        if (view is CardItemView) {
-            view.likesClickedListener = null
-            view.dislikesClickedListener = null
-        }
-    }
-
-    override fun onChildViewAttachedToWindow(view: View) {
-        if (view is CardItemView) {
-            view.likesClickedListener = {
-                cardViewModel.like(it.id, !it.hasLiked)
-            }
-            view.dislikesClickedListener = {
-                cardViewModel.dislike(it.id, !it.hasDisliked)
-            }
-        }
     }
 
     fun createViewModel(state: CardState): CardViewModel = viewModelFactory.create(state)
