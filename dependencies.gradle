@@ -21,8 +21,8 @@ def versions = [
                 "dagger"        : "2.24"
         ],
         "fabric"              : "1.29.0",
-        "firebaseCore"        : "17.0.1",
-        "firebaseFirestore"   : "20.2.0",
+        "firebaseCore"        : "17.1.0",
+        "firebaseFirestore"   : "21.0.0",
         "glide"               : "4.9.0",
         "googlePlayPublisher" : "2.4.0-SNAPSHOT",
         "googleServices"      : "4.0.0",
