@@ -94,7 +94,6 @@ dependencies {
     implementation deps.androidx.navigation.uiKtx
     implementation deps.androidx.recyclerView
     implementation deps.androidx.room.runtime
-    implementation deps.androidx.room.rxJava2
     implementation deps.androidx.room.ktx
     kapt deps.androidx.lifecycle.compiler
     kapt deps.androidx.room.compiler
@@ -147,10 +146,6 @@ dependencies {
     // Retrofit
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.kotlinSerialization
-
-    // RxJava
-    implementation deps.rxAndroid
-    implementation deps.rxJava2
 
     // Tiny Dancer
     implementation deps.tinydancer

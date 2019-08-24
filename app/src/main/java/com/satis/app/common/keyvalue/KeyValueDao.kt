@@ -6,7 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.PrimaryKey
 import androidx.room.Query
-import io.reactivex.Flowable
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface KeyValueDao {
@@ -16,9 +16,8 @@ interface KeyValueDao {
     @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
     suspend fun get(key: String): KeyValueEntity?
 
-    // TODO use flow when supported
     @Query("SELECT * FROM keyValue WHERE primaryKey=:key")
-    fun getStream(key: String): Flowable<KeyValueEntity>
+    fun getStream(key: String): Flow<KeyValueEntity>
 }
 
 @Entity(tableName = "keyValue")

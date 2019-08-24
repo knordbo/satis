@@ -5,8 +5,10 @@ import com.satis.app.common.annotations.Io
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
@@ -27,9 +29,12 @@ class PersistedLogger @Inject constructor(
         }
     }
 
-    override fun streamLogs(): Flow<List<LogEntry>> = logDao.getLogStream().map { logs ->
-        logs.map { it.toModel() }
-    }.asFlow()
+    override fun streamLogs(): Flow<List<LogEntry>> = logDao.getLogStream()
+            .filterNotNull()
+            .map { logs ->
+                logs.map { it.toModel() }
+            }
+            .flowOn(io)
 
     override suspend fun searchLogs(query: String): List<LogEntry> {
         return withContext(io) {
