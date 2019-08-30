@@ -12,14 +12,14 @@ import com.satis.app.utils.lifecycle.isAppForegroundString
 import com.satis.app.work.ChildWorkerFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.CoroutineContext
 
 class ImageWorker @AssistedInject constructor(
         @Assisted private val context: Context,
         @Assisted workerParameters: WorkerParameters,
-        @Io private val io: CoroutineDispatcher,
+        @Io private val io: CoroutineContext,
         private val logger: Logger,
         private val unsplashRepository: UnsplashRepository
 ) : CoroutineWorker(context, workerParameters) {
@@ -30,17 +30,17 @@ class ImageWorker @AssistedInject constructor(
 
             val popularImages = unsplashRepository.fetchPhotos(NATURE)
             val requestManager = Glide.with(context)
-            popularImages.forEachIndexed { index, photo ->
-                if (index < FETCH_IMAGE_COUNT) {
-                    requestManager
-                            .load(photo.photoUrl)
-                            .thumbnail(requestManager.load(photo.thumbnailUrl)
-                                    .centerCrop())
-                            .centerCrop()
-                            .submit()
-                            .get(5, TimeUnit.SECONDS)
-                }
-            }
+            popularImages
+                    .take(FETCH_IMAGE_COUNT)
+                    .forEach { photo ->
+                        requestManager
+                                .load(photo.photoUrl)
+                                .thumbnail(requestManager.load(photo.thumbnailUrl)
+                                        .centerCrop())
+                                .centerCrop()
+                                .submit()
+                                .get(5, TimeUnit.SECONDS)
+                    }
 
             logger.log(LOG_TAG, "Success")
             Result.success()

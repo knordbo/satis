@@ -27,6 +27,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import javax.inject.Singleton
+import kotlin.coroutines.CoroutineContext
 
 @Module(includes = [AppBindingModule::class])
 class AppModule {
@@ -64,12 +65,12 @@ class AppModule {
     @Provides
     @Singleton
     @Main
-    fun provideMainCoroutineDispatcher() = Dispatchers.Main
+    fun provideMainCoroutineDispatcher(): CoroutineContext = Dispatchers.Main
 
     @Provides
     @Singleton
     @Io
-    fun provideIoCoroutineDispatcher() = Dispatchers.IO
+    fun provideIoCoroutineDispatcher(): CoroutineContext = Dispatchers.IO
 
     @Provides
     @Singleton

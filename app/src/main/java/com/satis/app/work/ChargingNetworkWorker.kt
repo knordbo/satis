@@ -8,13 +8,13 @@ import com.satis.app.common.logging.Logger
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
+import kotlin.coroutines.CoroutineContext
 
 class ChargingNetworkWorker @AssistedInject constructor(
         @Assisted context: Context,
         @Assisted workerParameters: WorkerParameters,
-        @Io private val io: CoroutineDispatcher,
+        @Io private val io: CoroutineContext,
         private val logger: Logger
 ) : CoroutineWorker(context, workerParameters) {
 

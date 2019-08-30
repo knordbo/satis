@@ -2,7 +2,6 @@ package com.satis.app.common.logging
 
 import android.util.Log
 import com.satis.app.common.annotations.Io
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
@@ -11,10 +10,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class PersistedLogger @Inject constructor(
         private val logDao: LogDao,
-        @Io private val io: CoroutineDispatcher
+        @Io private val io: CoroutineContext
 ) : Logger {
 
     override fun log(tag: String, message: String) {

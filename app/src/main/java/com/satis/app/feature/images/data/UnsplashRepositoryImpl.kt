@@ -6,14 +6,14 @@ import com.satis.app.common.keyvalue.Key
 import com.satis.app.common.keyvalue.KeyValueRepository
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.User
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 class UnsplashRepositoryImpl @Inject constructor(
-        @Io private val io: CoroutineDispatcher,
+        @Io private val io: CoroutineContext,
         private val unsplashApi: UnsplashApi,
         private val keyValueRepository: KeyValueRepository
 ) : UnsplashRepository {
