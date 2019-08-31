@@ -3,13 +3,11 @@ package com.satis.app.feature.images
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.satis.app.BuildConfig
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -17,12 +15,10 @@ class ImagesViewModel @AssistedInject constructor(
         @Assisted initialState: ImagesState,
         private val unsplashRepository: UnsplashRepository
 ) : BaseViewModel<ImagesState>(
-        initialState = initialState,
-        debugMode = BuildConfig.DEBUG
+        initialState = initialState
 ) {
 
     init {
-        logStateChanges()
         fetchPhotos()
         streamPhotos()
     }

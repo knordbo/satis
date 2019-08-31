@@ -5,7 +5,6 @@ import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.satis.app.BuildConfig
 import com.satis.app.common.logging.LogEntry
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.account.ui.formatted
@@ -19,8 +18,7 @@ class PlaygroundViewModel @AssistedInject constructor(
         @Assisted initialState: PlaygroundState,
         private val logger: Logger
 ) : BaseViewModel<PlaygroundState>(
-        initialState = initialState,
-        debugMode = BuildConfig.DEBUG
+        initialState = initialState
 ) {
     init {
         fetch("")

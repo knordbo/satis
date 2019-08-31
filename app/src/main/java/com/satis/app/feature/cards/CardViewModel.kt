@@ -3,7 +3,6 @@ package com.satis.app.feature.cards
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.satis.app.BuildConfig
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardRepository
 import com.satis.app.utils.coroutines.BaseViewModel
@@ -16,11 +15,9 @@ class CardViewModel @AssistedInject constructor(
         @Assisted initialSate: CardState,
         private val cardRepository: CardRepository
 ) : BaseViewModel<CardState>(
-        initialState = initialSate,
-        debugMode = BuildConfig.DEBUG
+        initialState = initialSate
 ) {
     init {
-        logStateChanges()
         getCards()
     }
 

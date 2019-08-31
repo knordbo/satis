@@ -8,6 +8,7 @@ import com.satis.app.common.logging.Logger
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
+import com.satis.app.di.AppModule
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
@@ -19,12 +20,10 @@ class AccountViewModel @AssistedInject constructor(
         private val logger: Logger,
         private val prefs: Prefs
 ) : BaseViewModel<AccountState>(
-        initialState = initialState,
-        debugMode = BuildConfig.DEBUG
+        initialState = initialState
 ) {
 
     init {
-        logStateChanges()
         getAccountState()
         streamLogs()
     }

@@ -1,13 +1,11 @@
 package com.satis.app.common.navigation
 
-import com.satis.app.BuildConfig
 import com.satis.app.utils.coroutines.BaseViewModel
 
 class NavigationViewModel(
         initialState: NavigationState
 ) : BaseViewModel<NavigationState>(
-        initialState = initialState,
-        debugMode = BuildConfig.DEBUG
+        initialState = initialState
 ) {
     fun tabSelected(tab: Tab) {
         setState {

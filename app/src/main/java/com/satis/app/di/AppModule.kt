@@ -65,12 +65,12 @@ class AppModule {
     @Provides
     @Singleton
     @Main
-    fun provideMainCoroutineDispatcher(): CoroutineContext = Dispatchers.Main
+    fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main
 
     @Provides
     @Singleton
     @Io
-    fun provideIoCoroutineDispatcher(): CoroutineContext = Dispatchers.IO
+    fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
 
     @Provides
     @Singleton
