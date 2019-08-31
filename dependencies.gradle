@@ -34,7 +34,7 @@ def versions = [
                 "serialization": "0.12.0",
         ],
         "material"            : "1.1.0-alpha09",
-        "mvrx"                : "1.0.2",
+        "mvrx"                : "1.1.0",
         "okhttp"              : "4.1.0",
         "playCore"            : "1.6.1",
         "peekAndPop"          : "1.1.0",

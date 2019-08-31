@@ -2,12 +2,12 @@ package com.satis.app.di
 
 import android.content.Context
 import androidx.fragment.app.FragmentFactory
+import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.satis.app.App
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
-import com.satis.app.common.annotations.UniqueId
 import com.satis.app.common.db.AppDatabase
 import com.satis.app.common.fragment.InjectingFragmentFactory
 import com.satis.app.common.keyvalue.KeyValueRepositoryImpl
@@ -74,12 +74,11 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAppUpdateManager(context: Context) = AppUpdateManagerFactory.create(context)
+    fun provideAppUpdateManager(context: Context): AppUpdateManager = AppUpdateManagerFactory.create(context)
 
     @Provides
     @Singleton
-    @UniqueId
-    fun provideUniqueId(prefs: Prefs) = prefs.uniqueId
+    fun provideUserId(prefs: Prefs) = prefs.userId
 
 }
 

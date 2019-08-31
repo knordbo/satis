@@ -1,8 +1,6 @@
 package com.satis.app.common.prefs
 
-import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
@@ -17,7 +15,7 @@ enum class Theme(val themeName: String) {
 }
 
 fun Theme.apply() = AppCompatDelegate.setDefaultNightMode(when (this) {
-    SYSTEM -> if (Build.VERSION.SDK_INT > 28) MODE_NIGHT_FOLLOW_SYSTEM else MODE_NIGHT_AUTO_BATTERY
+    SYSTEM -> MODE_NIGHT_FOLLOW_SYSTEM
     LIGHT -> MODE_NIGHT_NO
     DARK -> MODE_NIGHT_YES
 })

@@ -2,14 +2,14 @@ package com.satis.app.feature.cards.data
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import com.satis.app.common.annotations.UniqueId
+import com.satis.app.common.prefs.UserId
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import javax.inject.Inject
 
 class CardRepositoryImpl @Inject constructor(
-        @UniqueId private val userId: String,
+        private val userId: UserId,
         firebaseFirestore: FirebaseFirestore
 ) : CardRepository {
 

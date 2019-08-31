@@ -15,7 +15,6 @@ import com.airbnb.mvrx.withState
 import com.satis.app.R
 import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.common.navigation.Tab.HOME
-import com.satis.app.feature.cards.ui.AddCardView
 import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.utils.view.disableChangeAnimations
 import kotlinx.android.synthetic.main.feature_cards.*
@@ -80,12 +79,20 @@ class CardFragment @Inject constructor(
 
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.cardAdd -> {
-            AddCardView.createDialog(requireContext(), cardViewModel::addCard).show()
+            showAddCardFragment()
             true
         }
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun showAddCardFragment() {
+        val fragment = AddCardFragment()
+        fragment.setTargetFragment(this@CardFragment, 0)
+        fragment.show(requireFragmentManager(), ADD_CARD_FRAGMENT_TAG)
+    }
+
     fun createViewModel(state: CardState): CardViewModel = viewModelFactory.create(state)
 
 }
+
+private const val ADD_CARD_FRAGMENT_TAG = "ADD_CARD_FRAGMENT"

@@ -1,8 +1,6 @@
 package com.satis.app.feature.cards
 
-import com.airbnb.mvrx.FragmentViewModelContext
-import com.airbnb.mvrx.MvRxViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import com.airbnb.mvrx.*
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardRepository
 import com.satis.app.utils.coroutines.BaseViewModel
@@ -21,8 +19,37 @@ class CardViewModel @AssistedInject constructor(
         getCards()
     }
 
-    fun addCard(card: Card) {
-        cardRepository.addCard(card)
+    fun addCardTitleChanged(title: String) {
+        setState {
+            copy(creatingCard = creatingCard.copy(title = title))
+        }
+    }
+
+    fun addCardMessageChanged(message: String) {
+        setState {
+            copy(creatingCard = creatingCard.copy(message = message))
+        }
+    }
+
+    fun addCard() {
+        withState { state ->
+            if (state.creatingCard.title.isBlank()) {
+                setState {
+                    copy(creatingCardAsync = Fail(IllegalArgumentException()))
+                }
+            } else {
+                cardRepository.addCard(state.creatingCard)
+                setState {
+                    copy(
+                            creatingCard = Card(title = "", message = ""),
+                            creatingCardAsync = Success(state.creatingCard)
+                    )
+                }
+                setState {
+                    copy(creatingCardAsync = Uninitialized)
+                }
+            }
+        }
     }
 
     fun like(card: Card) {

@@ -3,71 +3,34 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:paddingStart="@dimen/key_line_med"
     android:paddingTop="@dimen/key_line_med"
     android:paddingEnd="@dimen/key_line_med"
     android:paddingBottom="@dimen/key_line_med"
->
+    >
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="2dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="2dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp"
-    >
+        android:layout_marginStart="@dimen/key_line_small"
+        android:layout_marginTop="@dimen/key_line_xsmall"
+        android:layout_marginEnd="@dimen/key_line_small"
+        android:layout_marginBottom="@dimen/key_line_xsmall"
+        app:cardCornerRadius="@dimen/key_line_xsmall"
+        app:cardElevation="@dimen/key_line_xsmall"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="8dp"
-            android:paddingEnd="8dp"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-        >
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Title"
-            />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/message"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
-                android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title"
-                tools:text="Message"
-            />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/likes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/message"
-                app:layout_constraintVertical_bias="1"
-                tools:text="2"
-            />
+            android:paddingStart="@dimen/key_line_med"
+            android:paddingTop="@dimen/key_line_med"
+            android:paddingEnd="@dimen/key_line_med"
+            android:paddingBottom="@dimen/key_line_med"
+            >
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/thumbUp"
@@ -78,21 +41,7 @@
                 app:layout_constraintTop_toBottomOf="@id/message"
                 app:layout_constraintVertical_bias="1"
                 app:srcCompat="@drawable/ic_thumb_up"
-            />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/dislikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
-                android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/thumbUp"
-                app:layout_constraintTop_toBottomOf="@id/message"
-                app:layout_constraintVertical_bias="1"
-                tools:text="0"
-            />
+                />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/thumbDown"
@@ -105,7 +54,58 @@
                 app:layout_constraintTop_toBottomOf="@id/message"
                 app:layout_constraintVertical_bias="1"
                 app:srcCompat="@drawable/ic_thumb_down"
-            />
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/likes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingEnd="@dimen/key_line_med"
+                android:textSize="@dimen/text_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/message"
+                app:layout_constraintVertical_bias="1"
+                tools:text="2"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/key_line_med"
+                android:textSize="@dimen/text_regular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Title"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dislikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/key_line_med"
+                android:paddingEnd="@dimen/key_line_med"
+                android:textSize="@dimen/text_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/thumbUp"
+                app:layout_constraintTop_toBottomOf="@id/message"
+                app:layout_constraintVertical_bias="1"
+                tools:text="0"
+                />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/key_line"
+                android:textSize="@dimen/text_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                tools:text="Message"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,6 +1,8 @@
 package com.satis.app.feature.cards.data
 
-fun DbCard.toModel(id: String, userId: String) = Card(
+import com.satis.app.common.prefs.UserId
+
+fun DbCard.toModel(id: String, userId: UserId) = Card(
         id = id,
         message = message,
         title = title,
@@ -12,4 +14,4 @@ fun DbCard.toModel(id: String, userId: String) = Card(
 
 fun Card.toDb() = DbCard(title = title, message = message)
 
-private fun Map<String, Boolean>.userIdInListAndTrue(userId: String) = filter { it.key == userId && it.value }.isNotEmpty()
+private fun Map<String, Boolean>.userIdInListAndTrue(userId: UserId) = filter { it.key == userId.value && it.value }.isNotEmpty()

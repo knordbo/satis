@@ -5,50 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="16dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp"
-    android:paddingTop="16dp"
->
+    android:paddingBottom="@dimen/key_line"
+    android:paddingEnd="@dimen/key_line"
+    android:paddingStart="@dimen/key_line"
+    android:paddingTop="@dimen/key_line"
+    >
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/versionNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-    />
+        android:textSize="@dimen/text_regular"
+        />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/buildTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20sp"
-    />
+        android:layout_marginTop="@dimen/key_line"
+        android:textSize="@dimen/text_regular"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/playgroundButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textSize="20sp"
+        android:layout_marginTop="@dimen/key_line"
+        android:textSize="@dimen/text_regular"
         android:text="@string/playground"
-    />
+        />
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/key_line"
         android:text="@string/log"
-        android:textSize="20sp"
-    />
+        android:textSize="@dimen/text_regular"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/logs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-    />
+        />
 
 </LinearLayout>

@@ -10,10 +10,10 @@ class PrefsImpl @Inject constructor(context: Context) : Prefs {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SHARED_PREFS, 0)
 
-    override val uniqueId: String
+    override val userId: UserId
         get() {
             val existingValue = sharedPreferences.getString(UNIQUE_USER_ID, null)
-            return if (existingValue != null) {
+            return UserId(if (existingValue != null) {
                 existingValue
             } else {
                 val id = UUID.randomUUID().toString()
@@ -21,7 +21,7 @@ class PrefsImpl @Inject constructor(context: Context) : Prefs {
                     putString(UNIQUE_USER_ID, id)
                 }
                 id
-            }
+            })
         }
 
     override var theme: Theme
