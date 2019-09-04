@@ -31,10 +31,16 @@
     <fragment
         android:id="@+id/image"
         android:name="com.satis.app.feature.images.ImageFragment"
+        android:label="{title}"
     >
         <argument
             android:name="photo"
             app:argType="com.satis.app.feature.images.PhotoState"
+        />
+
+        <argument
+            android:name="title"
+            app:argType="string"
         />
 
     </fragment>

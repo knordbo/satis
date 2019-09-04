@@ -40,7 +40,7 @@ class ImagesFragment @Inject constructor(
                         .build(),
                 imageViewPreloadSizeProvider = imageViewPreloadSizeProvider,
                 imageClicked = { photo ->
-                    findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo))
+                    findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo, photo.description.orEmpty()))
                 }
         )
     }
