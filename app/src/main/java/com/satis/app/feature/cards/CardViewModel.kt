@@ -10,10 +10,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CardViewModel @AssistedInject constructor(
-        @Assisted initialSate: CardState,
+        @Assisted initialState: CardState,
         private val cardRepository: CardRepository
 ) : BaseViewModel<CardState>(
-        initialState = initialSate
+        initialState = initialState
 ) {
     init {
         getCards()
@@ -76,7 +76,7 @@ class CardViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialSate: CardState): CardViewModel
+        fun create(initialState: CardState): CardViewModel
     }
 
     companion object : MvRxViewModelFactory<CardViewModel, CardState> {
