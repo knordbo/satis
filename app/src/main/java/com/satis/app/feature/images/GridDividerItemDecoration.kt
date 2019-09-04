@@ -16,7 +16,6 @@ class GridDividerItemDecoration(
     override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         parent.drawHorizontalDecoration(canvas)
         parent.drawVerticalDecoration(canvas)
-
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
