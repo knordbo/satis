@@ -41,11 +41,11 @@ class CardRepositoryImpl @Inject constructor(
     }
 
     override fun like(id: String, like: Boolean) {
-        setDiff(id, mapOf(LIKES to mapOf(userId to like)))
+        setDiff(id, mapOf(LIKES to mapOf(userId.value to like)))
     }
 
     override fun dislike(id: String, dislike: Boolean) {
-        setDiff(id, mapOf(DISLIKES to mapOf(userId to dislike)))
+        setDiff(id, mapOf(DISLIKES to mapOf(userId.value to dislike)))
     }
 
     private fun setDiff(id: String, diff: Any) {
