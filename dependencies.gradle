@@ -144,5 +144,5 @@ ext.deps = [
 
 ext.buildVersions = [
         "minSdk"   : 24,
-        "targetSdk": 28,
+        "targetSdk": 29,
 ]
