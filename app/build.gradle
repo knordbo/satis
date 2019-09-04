@@ -143,6 +143,9 @@ dependencies {
     // PeekAndPop
     implementation deps.peekAndPop
 
+    // PhotoView
+    implementation deps.photoView
+
     // Retrofit
     implementation deps.retrofit.retrofit
     implementation deps.retrofit.kotlinSerialization

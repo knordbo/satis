@@ -36,8 +36,9 @@ def versions = [
         "material"            : "1.1.0-alpha09",
         "mvrx"                : "1.1.0",
         "okhttp"              : "4.1.0",
-        "playCore"            : "1.6.1",
         "peekAndPop"          : "1.1.0",
+        "photoView"           : "2.3.0",
+        "playCore"            : "1.6.1",
         "retrofit"            : [
                 "kotlinSerialization": "0.4.0",
                 "retrofit"           : "2.6.1",
@@ -129,8 +130,9 @@ ext.deps = [
                 "okhttp"            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
                 "loggingInterceptor": "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         ],
-        "playCore"            : "com.google.android.play:core:$versions.playCore",
         "peekAndPop"          : "com.github.shalskar:PeekAndPop:$versions.peekAndPop",
+        "photoView"           : "com.github.chrisbanes:PhotoView:$versions.photoView",
+        "playCore"            : "com.google.android.play:core:$versions.playCore",
         "retrofit"            : [
                 "kotlinSerialization": "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:$versions.retrofit.kotlinSerialization",
                 "retrofit"           : "com.squareup.retrofit2:retrofit:$versions.retrofit.retrofit",
