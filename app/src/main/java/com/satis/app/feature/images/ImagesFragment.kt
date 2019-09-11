@@ -17,11 +17,10 @@ import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.R
 import com.satis.app.common.navigation.Tab.IMAGES
+import com.satis.app.databinding.FeatureImagesBinding
 import com.satis.app.feature.images.ui.ImagesAdapter
 import com.satis.app.utils.context.requireDrawable
 import com.satis.app.utils.view.disableChangeAnimations
-import kotlinx.android.synthetic.main.feature_images.*
-import kotlinx.android.synthetic.main.feature_images.view.*
 import javax.inject.Inject
 
 class ImagesFragment @Inject constructor(
@@ -36,7 +35,7 @@ class ImagesFragment @Inject constructor(
                 requestManager = Glide.with(this),
                 peekAndPop = PeekAndPop.Builder(requireActivity())
                         .peekLayout(R.layout.peek_image)
-                        .parentViewGroupToDisallowTouchEvents(view!!.images)
+                        .parentViewGroupToDisallowTouchEvents(binding.images)
                         .build(),
                 imageViewPreloadSizeProvider = imageViewPreloadSizeProvider,
                 imageClicked = { photo ->
@@ -45,8 +44,12 @@ class ImagesFragment @Inject constructor(
         )
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_images, container, false)
+    private lateinit var binding: FeatureImagesBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FeatureImagesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -57,13 +60,13 @@ class ImagesFragment @Inject constructor(
                 IMAGE_PRELOAD_SIZE
         )
 
-        images.adapter = adapter
-        images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
-        images.addOnScrollListener(preloader)
-        images.disableChangeAnimations()
+        binding.images.adapter = adapter
+        binding.images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
+        binding.images.addOnScrollListener(preloader)
+        binding.images.disableChangeAnimations()
 
         val dividerDrawable = requireContext().requireDrawable(R.drawable.divider)
-        images.addItemDecoration(GridDividerItemDecoration(dividerDrawable, dividerDrawable, COLUMNS))
+        binding.images.addItemDecoration(GridDividerItemDecoration(dividerDrawable, dividerDrawable, COLUMNS))
     }
 
     override fun invalidate() {
@@ -71,7 +74,7 @@ class ImagesFragment @Inject constructor(
             adapter.submitList(imageState.photoState)
             if (navigationState.reselectedTab == IMAGES) {
                 navigationViewModel.tabReselectedHandled()
-                images.smoothScrollToPosition(0)
+                binding.images.smoothScrollToPosition(0)
                 imagesViewModel.onReselected()
             }
         }

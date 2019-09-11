@@ -8,9 +8,8 @@ import androidx.core.widget.doAfterTextChanged
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import com.satis.app.R
+import com.satis.app.databinding.FeaturePlaygroundBinding
 import com.satis.app.utils.view.asyncText
-import kotlinx.android.synthetic.main.feature_playground.*
 import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
@@ -19,19 +18,23 @@ class PlaygroundFragment @Inject constructor(
 
     private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_playground, container, false)
+    private lateinit var binding: FeaturePlaygroundBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FeaturePlaygroundBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        queryInput.doAfterTextChanged {
+        binding.queryInput.doAfterTextChanged {
             playgroundViewModel.fetch(it.toString())
         }
     }
 
     override fun invalidate() {
         withState(playgroundViewModel) { state ->
-            items.asyncText = state.items.joinToString(separator = "\n") { it }
+            binding.items.asyncText = state.items.joinToString(separator = "\n") { it }
         }
     }
 

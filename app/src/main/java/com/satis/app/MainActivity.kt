@@ -16,8 +16,8 @@ import com.satis.app.common.navigation.Tab.ACCOUNT
 import com.satis.app.common.navigation.Tab.HOME
 import com.satis.app.common.navigation.Tab.IMAGES
 import com.satis.app.common.updater.ImmediateAppUpdater
+import com.satis.app.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
-import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : BaseMvRxActivity() {
@@ -41,11 +41,12 @@ class MainActivity : BaseMvRxActivity() {
         super.onCreate(savedInstanceState)
         appUpdateCalled = savedInstanceState?.getBoolean(APP_UPDATE_CALLED, false) ?: false
 
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        bottomNav.setupWithNavController(navigationController)
+        binding.bottomNav.setupWithNavController(navigationController)
         setupActionBarWithNavController(
                 navController = navigationController,
                 configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
@@ -56,7 +57,7 @@ class MainActivity : BaseMvRxActivity() {
                 navigationViewModel.tabSelected(tab)
             }
         }
-        bottomNav.setOnNavigationItemReselectedListener {
+        binding.bottomNav.setOnNavigationItemReselectedListener {
             navigationController.currentDestination?.runIfTab { tab ->
                 navigationViewModel.tabReselected(tab)
             }

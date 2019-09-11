@@ -10,36 +10,40 @@ import com.airbnb.mvrx.targetFragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
 import com.satis.app.common.mvrx.BaseMvRxDialogFragment
+import com.satis.app.databinding.AddCardBinding
 import com.satis.app.utils.view.hideKeyboard
 import com.satis.app.utils.view.showKeyboard
-import kotlinx.android.synthetic.main.add_card.*
 
 class AddCardFragment : BaseMvRxDialogFragment() {
 
     private val cardViewModel: CardViewModel by targetFragmentViewModel()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.add_card, container, false)
+    private lateinit var binding: AddCardBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = AddCardBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (savedInstanceState == null) {
-            title.requestFocus()
+            binding.title.requestFocus()
             requireContext().showKeyboard()
         }
-        submit.setOnClickListener {
+        binding.submit.setOnClickListener {
             cardViewModel.addCard()
         }
-        title.doAfterTextChanged { editable ->
+        binding.title.doAfterTextChanged { editable ->
             cardViewModel.addCardTitleChanged(editable.toString())
         }
-        message.doAfterTextChanged { editable ->
+        binding.message.doAfterTextChanged { editable ->
             cardViewModel.addCardMessageChanged(editable.toString())
         }
 
         cardViewModel.asyncSubscribe(viewLifecycleOwner, CardState::creatingCardAsync,
                 onSuccess = {
-                    requireContext().hideKeyboard(title)
+                    requireContext().hideKeyboard(binding.title)
                     dismiss()
                 },
                 onFail = {
@@ -48,11 +52,11 @@ class AddCardFragment : BaseMvRxDialogFragment() {
     }
 
     override fun invalidate() = withState(cardViewModel) { cardState ->
-        if (title.text.toString() != cardState.creatingCard.title) {
-            title.setText(cardState.creatingCard.title)
+        if (binding.title.text.toString() != cardState.creatingCard.title) {
+            binding.title.setText(cardState.creatingCard.title)
         }
-        if (message.text.toString() != cardState.creatingCard.message) {
-            message.setText(cardState.creatingCard.message)
+        if (binding.message.text.toString() != cardState.creatingCard.message) {
+            binding.message.setText(cardState.creatingCard.message)
         }
     }
 }

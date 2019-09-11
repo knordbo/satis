@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.satis.app.R
-import kotlinx.android.synthetic.main.feature_image.*
+import com.satis.app.databinding.FeatureImageBinding
 
 class ImageFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_image, container, false)
+    private lateinit var binding: FeatureImageBinding
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FeatureImageBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -24,7 +27,7 @@ class ImageFragment : Fragment() {
                         .load(photoState.thumbnailUrl)
                         .centerCrop())
                 .centerCrop()
-                .into(image)
+                .into(binding.image)
     }
 
 }

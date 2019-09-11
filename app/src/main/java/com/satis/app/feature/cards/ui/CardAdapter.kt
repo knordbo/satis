@@ -7,16 +7,14 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.satis.app.R
+import com.satis.app.databinding.CardItemBinding
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.ui.CardAdapter.CardViewHolder
 import com.satis.app.utils.view.asyncText
 import com.satis.app.utils.view.layoutInflater
-import kotlinx.android.synthetic.main.card_item.view.*
 
 class CardAdapter(
         private val onLikeClicked: ((Card) -> Unit),
@@ -46,15 +44,17 @@ class CardAdapter(
             private val onDislikeClicked: ((Card) -> Unit)
     ) : ViewHolder(view) {
 
-        fun bind(card: Card) = with(view) {
+        private val binding = CardItemBinding.bind(view)
+
+        fun bind(card: Card) = with(binding) {
             title.asyncText = card.title
             message.asyncText = card.message
 
             likes.asyncText = card.likes.toString()
             dislikes.asyncText = card.dislikes.toString()
 
-            thumbUp.setImageDrawable(tint(thumbUp.drawable, ContextCompat.getColor(context, if (card.hasLiked) R.color.blue else R.color.gray)))
-            thumbDown.setImageDrawable(tint(thumbDown.drawable, ContextCompat.getColor(context, if (card.hasDisliked) R.color.blue else R.color.gray)))
+            thumbUp.setImageDrawable(tint(thumbUp.drawable, ContextCompat.getColor(view.context, if (card.hasLiked) R.color.blue else R.color.gray)))
+            thumbDown.setImageDrawable(tint(thumbDown.drawable, ContextCompat.getColor(view.context, if (card.hasDisliked) R.color.blue else R.color.gray)))
 
             thumbUp.setOnClickListener {
                 onLikeClicked.invoke(card)

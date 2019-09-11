@@ -15,11 +15,11 @@ import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
+import com.satis.app.databinding.PeekImageBinding
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.ui.ImagesAdapter.ImageViewHolder
 import com.satis.app.utils.view.asyncText
 import com.satis.app.utils.view.layoutInflater
-import kotlinx.android.synthetic.main.peek_image.view.*
 
 class ImagesAdapter(
         private val requestManager: RequestManager,
@@ -33,7 +33,7 @@ class ImagesAdapter(
             override fun onPop(view: View, position: Int) {}
             override fun onPeek(view: View, position: Int) {
                 val item = getItem(position)
-                with(peekAndPop.peekView) {
+                with(PeekImageBinding.bind(peekAndPop.peekView)) {
                     username.asyncText = item.user.username
                     Glide.with(peekAndPop.peekView)
                             .load(item.user.userAvatar)

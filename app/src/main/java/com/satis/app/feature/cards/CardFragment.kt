@@ -15,9 +15,9 @@ import com.airbnb.mvrx.withState
 import com.satis.app.R
 import com.satis.app.common.navigation.NavigationViewModel
 import com.satis.app.common.navigation.Tab.HOME
+import com.satis.app.databinding.FeatureCardsBinding
 import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.utils.view.disableChangeAnimations
-import kotlinx.android.synthetic.main.feature_cards.*
 import javax.inject.Inject
 
 class CardFragment @Inject constructor(
@@ -40,18 +40,22 @@ class CardFragment @Inject constructor(
         )
     }
 
+    private lateinit var binding: FeatureCardsBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-            inflater.inflate(R.layout.feature_cards, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FeatureCardsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cards.adapter = cardsAdapter
-        cards.disableChangeAnimations()
+        binding.cards.adapter = cardsAdapter
+        binding.cards.disableChangeAnimations()
 
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
@@ -61,14 +65,14 @@ class CardFragment @Inject constructor(
             }
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
-        }).attachToRecyclerView(cards)
+        }).attachToRecyclerView(binding.cards)
     }
 
     override fun invalidate() = withState(cardViewModel, navigationViewModel) { cardState, navigationState ->
         cardsAdapter.submitList(cardState.cards)
         if (navigationState.reselectedTab == HOME) {
             navigationViewModel.tabReselectedHandled()
-            cards.smoothScrollToPosition(0)
+            binding.cards.smoothScrollToPosition(0)
         }
     }
 
