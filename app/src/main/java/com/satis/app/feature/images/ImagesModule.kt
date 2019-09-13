@@ -6,7 +6,7 @@ import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
 import com.satis.app.feature.images.work.ImageWorker
-import com.satis.app.utils.retrofit.create
+import com.satis.app.utils.network.create
 import com.satis.app.work.ChildWorkerFactory
 import com.satis.app.work.WorkerKey
 import dagger.Binds

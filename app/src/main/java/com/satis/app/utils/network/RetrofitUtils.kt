@@ -1,4 +1,4 @@
-package com.satis.app.utils.retrofit
+package com.satis.app.utils.network
 
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType

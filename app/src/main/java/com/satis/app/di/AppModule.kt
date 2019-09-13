@@ -18,7 +18,8 @@ import com.satis.app.common.logging.Logger
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.prefs.Prefs
-import com.satis.app.utils.retrofit.jsonMediaType
+import com.satis.app.utils.network.client
+import com.satis.app.utils.network.jsonMediaType
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -26,6 +27,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import javax.inject.Provider
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -44,7 +46,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
+    fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
             .baseUrl("https://dummy.com/")
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory(jsonMediaType()))
