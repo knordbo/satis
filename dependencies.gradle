@@ -22,7 +22,7 @@ def versions = [
         ],
         "fabric"              : "1.29.0",
         "firebaseCore"        : "17.2.0",
-        "firebaseFirestore"   : "21.1.0",
+        "firebaseFirestore"   : "21.1.1",
         "glide"               : "4.9.0",
         "googlePlayPublisher" : "2.5.0-SNAPSHOT",
         "googleServices"      : "4.0.0",
