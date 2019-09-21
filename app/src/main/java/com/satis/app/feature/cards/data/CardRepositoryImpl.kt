@@ -7,15 +7,15 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import javax.inject.Inject
+import javax.inject.Provider
 
 class CardRepositoryImpl @Inject constructor(
-        private val userId: UserId,
+        private val userIdProvider: Provider<UserId>,
         firebaseFirestore: FirebaseFirestore
 ) : CardRepository {
 
-    private val cardsCollection by lazy {
-        firebaseFirestore.collection(CARDS_COLLECTION)
-    }
+    private val userId by lazy(LazyThreadSafetyMode.NONE) { userIdProvider.get() }
+    private val cardsCollection by lazy { firebaseFirestore.collection(CARDS_COLLECTION) }
 
     override fun getCards(): Flow<List<Card>> = channelFlow {
         val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
