@@ -16,6 +16,8 @@ import com.satis.app.common.keyvalue.KeyValueRepository
 import com.satis.app.common.logging.LogDao
 import com.satis.app.common.logging.Logger
 import com.satis.app.common.logging.PersistedLogger
+import com.satis.app.common.navigation.NavigationReselection
+import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.utils.network.client
@@ -101,5 +103,9 @@ abstract class AppBindingModule {
 
     @Binds
     abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory
+
+    @Binds
+    @Singleton
+    abstract fun provideNavigationReselection(bind: NavigationReselectionImpl): NavigationReselection
 
 }

@@ -1,6 +1,5 @@
 package com.satis.app.common.logging
 
-import android.util.Log
 import com.satis.app.common.annotations.Io
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -18,7 +17,6 @@ class PersistedLogger @Inject constructor(
 ) : Logger {
 
     override fun log(tag: String, message: String) {
-        Log.d(tag, message)
         val timestamp = System.currentTimeMillis()
         GlobalScope.launch(io) {
             logDao.insertLog(LogEntity(

@@ -9,34 +9,26 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.BaseMvRxFragment
-import com.airbnb.mvrx.activityViewModel
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
-import com.satis.app.common.navigation.NavigationViewModel
-import com.satis.app.common.navigation.Tab.HOME
+import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureCardsBinding
 import com.satis.app.feature.cards.ui.CardAdapter
 import com.satis.app.utils.view.disableChangeAnimations
 import javax.inject.Inject
 
 class CardFragment @Inject constructor(
-        private val viewModelFactory: CardViewModel.Factory
+        private val viewModelFactory: CardViewModel.Factory,
+        private val navigationReselection: NavigationReselection
 ) : BaseMvRxFragment() {
 
     private val cardViewModel: CardViewModel by fragmentViewModel()
-    private val navigationViewModel: NavigationViewModel by activityViewModel()
     private val cardsAdapter by lazy {
         CardAdapter(
-                onLikeClicked = { card ->
-                    cardViewModel.like(card)
-                },
-                onDislikeClicked = { card ->
-                    cardViewModel.dislike(card)
-                },
-                onSwiped = { card ->
-                    cardViewModel.removeCard(card)
-                }
+                onLikeClicked = cardViewModel::like,
+                onDislikeClicked = cardViewModel::dislike,
+                onSwiped = cardViewModel::removeCard
         )
     }
 
@@ -66,14 +58,14 @@ class CardFragment @Inject constructor(
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
         }).attachToRecyclerView(binding.cards)
-    }
 
-    override fun invalidate() = withState(cardViewModel, navigationViewModel) { cardState, navigationState ->
-        cardsAdapter.submitList(cardState.cards)
-        if (navigationState.reselectedTab == HOME) {
-            navigationViewModel.tabReselectedHandled()
+        navigationReselection.addReselectionListener(viewLifecycleOwner, R.id.home) {
             binding.cards.smoothScrollToPosition(0)
         }
+    }
+
+    override fun invalidate() = withState(cardViewModel) { cardState ->
+        cardsAdapter.submitList(cardState.cards)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -92,7 +84,7 @@ class CardFragment @Inject constructor(
     private fun showAddCardFragment() {
         val fragment = AddCardFragment()
         fragment.setTargetFragment(this@CardFragment, 0)
-        fragment.show(requireFragmentManager(), ADD_CARD_FRAGMENT_TAG)
+        fragment.show(parentFragmentManager, ADD_CARD_FRAGMENT_TAG)
     }
 
     fun createViewModel(state: CardState): CardViewModel = viewModelFactory.create(state)
