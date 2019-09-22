@@ -6,6 +6,7 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.satis.app.App
+import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
 import com.satis.app.common.db.AppDatabase
@@ -20,7 +21,7 @@ import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.prefs.Prefs
-import com.satis.app.utils.network.client
+import com.satis.app.utils.network.clientProvider
 import com.satis.app.utils.network.jsonMediaType
 import dagger.Binds
 import dagger.Module
@@ -50,7 +51,7 @@ class AppModule {
     @Singleton
     fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
             .baseUrl("https://dummy.com/")
-            .client(okHttpClient)
+            .clientProvider(okHttpClient)
             .addConverterFactory(json.asConverterFactory(jsonMediaType()))
             .build()
 
@@ -69,7 +70,12 @@ class AppModule {
     @Provides
     @Singleton
     @Main
-    fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main
+    fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main.immediate
+
+    @Provides
+    @Singleton
+    @Background
+    fun provideBackgroundCoroutineContext(): CoroutineContext = Dispatchers.Default
 
     @Provides
     @Singleton
