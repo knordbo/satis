@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import javax.inject.Inject
 import javax.inject.Provider
+import javax.inject.Singleton
 
+@Singleton
 class CardRepositoryImpl @Inject constructor(
         private val userIdProvider: Provider<UserId>,
         firebaseFirestore: FirebaseFirestore

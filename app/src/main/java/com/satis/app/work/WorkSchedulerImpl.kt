@@ -10,7 +10,9 @@ import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.work.ImageWorker
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class WorkSchedulerImpl @Inject constructor(
         private val logger: Logger,
         private val workManager: WorkManager

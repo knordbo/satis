@@ -5,7 +5,9 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 import java.util.UUID
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class PrefsImpl @Inject constructor(context: Context) : Prefs {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SHARED_PREFS, 0)

@@ -8,7 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.airbnb.mvrx.BaseMvRxActivity
-import com.satis.app.common.navigation.NavigationReselection
+import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
@@ -22,7 +22,7 @@ class MainActivity : BaseMvRxActivity() {
 
     @Inject lateinit var fragmentFactory: FragmentFactory
     @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
-    @Inject lateinit var navigationReselection: NavigationReselection
+    @Inject lateinit var navigationReselectionUpdater: NavigationReselectionUpdater
 
     private val immediateAppUpdater: ImmediateAppUpdater by lazy {
         immediateAppUpdaterFactory.create(this)
@@ -47,7 +47,7 @@ class MainActivity : BaseMvRxActivity() {
         )
 
         binding.bottomNav.setOnNavigationItemReselectedListener { menuItem ->
-            navigationReselection.onNavigationItemReselected(menuItem.itemId)
+            navigationReselectionUpdater.onNavigationItemReselected(menuItem.itemId)
         }
     }
 

@@ -29,7 +29,6 @@ abstract class CardBindingModule {
     abstract fun provideCardFragment(bind: CardFragment): Fragment
 
     @Binds
-    @Singleton
     abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
 
 }

@@ -9,8 +9,10 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
+@Singleton
 class PersistedLogger @Inject constructor(
         private val logDao: LogDao,
         @Io private val io: CoroutineContext

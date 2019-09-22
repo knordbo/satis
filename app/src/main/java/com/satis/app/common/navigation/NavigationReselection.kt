@@ -6,8 +6,10 @@ import androidx.lifecycle.LifecycleOwner
 
 interface NavigationReselection {
     @MainThread
-    fun onNavigationItemReselected(@IdRes navigationId: Int)
-
-    @MainThread
     fun addReselectionListener(lifecycleOwner: LifecycleOwner, @IdRes navigationId: Int, callback: () -> Unit)
+}
+
+interface NavigationReselectionUpdater {
+    @MainThread
+    fun onNavigationItemReselected(@IdRes navigationId: Int)
 }

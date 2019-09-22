@@ -9,8 +9,10 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializerByTypeToken
 import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
+@Singleton
 class KeyValueRepositoryImpl @Inject constructor(
         private val keyValueDao: KeyValueDao,
         private val json: Json,

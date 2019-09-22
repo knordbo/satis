@@ -6,8 +6,10 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class NavigationReselectionImpl @Inject constructor() : NavigationReselection {
+@Singleton
+class NavigationReselectionImpl @Inject constructor() : NavigationReselection, NavigationReselectionUpdater {
 
     private val callbacks = mutableMapOf<@IdRes Int, () -> Unit>()
 

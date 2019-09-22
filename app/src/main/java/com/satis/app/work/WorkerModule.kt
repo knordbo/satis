@@ -34,7 +34,6 @@ abstract class WorkerBindingModule {
     abstract fun provideWorkerFactory(bind: InjectingWorkerFactory): WorkerFactory
 
     @Binds
-    @Singleton
     abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler
 
     @Binds

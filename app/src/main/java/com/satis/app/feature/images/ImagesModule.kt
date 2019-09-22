@@ -34,7 +34,6 @@ abstract class ImagesBindingModule {
     abstract fun provideImagesFragment(bind: ImagesFragment): Fragment
 
     @Binds
-    @Singleton
     abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
 
     @Binds
