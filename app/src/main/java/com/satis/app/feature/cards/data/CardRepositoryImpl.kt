@@ -12,7 +12,7 @@ import javax.inject.Singleton
 
 @Singleton
 class CardRepositoryImpl @Inject constructor(
-        private val userIdProvider: Provider<UserId>,
+        userIdProvider: Provider<UserId>,
         firebaseFirestore: FirebaseFirestore
 ) : CardRepository {
 

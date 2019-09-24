@@ -41,7 +41,7 @@ def versions = [
         "playCore"            : "1.6.3",
         "retrofit"            : [
                 "kotlinSerialization": "0.4.0",
-                "retrofit"           : "2.6.1",
+                "retrofit"           : "2.6.2",
         ],
         "rxAndroid"           : "2.1.1",
         "tinydancer"          : "0.1.2",
