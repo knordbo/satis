@@ -116,7 +116,6 @@ ext.deps = [
                 "coroutines"   : [
                         "android": "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlin.coroutines",
                         "common" : "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$versions.kotlin.coroutines",
-                        "rx2"    : "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$versions.kotlin.coroutines",
                 ],
                 "serialization": [
                         "runtime"      : "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$versions.kotlin.serialization",
