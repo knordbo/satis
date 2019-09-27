@@ -20,7 +20,7 @@ abstract class LogBindingModule {
     abstract fun providePersistedLogger(bind: PersistedLoggerImpl): PersistedLogger
 
     @Binds
-    abstract fun provideDispatchingLogger(bind: DispatchingLoggerImpl): Logger
+    abstract fun provideDelegatingLogger(bind: DelegatingLoggerImpl): Logger
 
     @Binds
     @IntoSet

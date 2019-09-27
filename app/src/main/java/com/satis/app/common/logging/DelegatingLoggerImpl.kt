@@ -4,7 +4,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class DispatchingLoggerImpl @Inject constructor(
+class DelegatingLoggerImpl @Inject constructor(
         private val loggers: Set<@JvmSuppressWildcards Logger>
 ) : Logger {
     override fun log(tag: String, message: String) {
