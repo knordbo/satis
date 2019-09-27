@@ -1,6 +1,7 @@
 package com.satis.app.di
 
 import com.satis.app.App
+import com.satis.app.common.logging.LogModule
 import com.satis.app.feature.account.AccountModule
 import com.satis.app.feature.cards.CardModule
 import com.satis.app.feature.images.ImagesModule
@@ -18,6 +19,7 @@ import javax.inject.Singleton
     AndroidInjectionModule::class,
     AssistedModule::class,
     AppModule::class,
+    LogModule::class,
     StartupModule::class,
     MainActivityModule::class,
     WorkerModule::class,

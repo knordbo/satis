@@ -6,7 +6,7 @@ import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.common.logging.LogEntry
-import com.satis.app.common.logging.Logger
+import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.feature.account.ui.formatted
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class PlaygroundViewModel @AssistedInject constructor(
         @Assisted initialState: PlaygroundState,
-        private val logger: Logger
+        private val logger: PersistedLogger
 ) : BaseViewModel<PlaygroundState>(
         initialState = initialState
 ) {

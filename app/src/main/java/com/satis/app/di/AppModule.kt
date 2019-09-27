@@ -14,9 +14,6 @@ import com.satis.app.common.fragment.InjectingFragmentFactory
 import com.satis.app.common.keyvalue.KeyValueRepositoryImpl
 import com.satis.app.common.keyvalue.KeyValueDao
 import com.satis.app.common.keyvalue.KeyValueRepository
-import com.satis.app.common.logging.LogDao
-import com.satis.app.common.logging.Logger
-import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
@@ -66,10 +63,6 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideLogDao(appDatabase: AppDatabase): LogDao = appDatabase.logDao()
-
-    @Provides
-    @Singleton
     @Main
     fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main.immediate
 
@@ -98,9 +91,6 @@ abstract class AppBindingModule {
 
     @Binds
     abstract fun provideKeyValueRepository(bind: KeyValueRepositoryImpl): KeyValueRepository
-
-    @Binds
-    abstract fun provideLogger(bind: PersistedLogger): Logger
 
     @Binds
     abstract fun providePrefs(bind: PrefsImpl): Prefs

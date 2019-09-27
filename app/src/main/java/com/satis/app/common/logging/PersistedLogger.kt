@@ -1,7 +1,7 @@
 package com.satis.app.common.logging
 
 import com.satis.app.common.annotations.Io
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
@@ -13,14 +13,16 @@ import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
 @Singleton
-class PersistedLogger @Inject constructor(
+class PersistedLoggerImpl @Inject constructor(
         private val logDao: LogDao,
         @Io private val io: CoroutineContext
-) : Logger {
+) : PersistedLogger, CoroutineScope {
+
+    override val coroutineContext: CoroutineContext = io
 
     override fun log(tag: String, message: String) {
         val timestamp = System.currentTimeMillis()
-        GlobalScope.launch(io) {
+        launch(io) {
             logDao.insertLog(LogEntity(
                     timestamp = timestamp,
                     tag = tag,
@@ -32,7 +34,7 @@ class PersistedLogger @Inject constructor(
     override fun streamLogs(): Flow<List<LogEntry>> = logDao.getLogStream()
             .filterNotNull()
             .map { logs ->
-                logs.map { it.toModel() }
+                logs.map(LogEntity::toModel)
             }
             .flowOn(io)
 
@@ -42,10 +44,11 @@ class PersistedLogger @Inject constructor(
         }
     }
 
-    private fun LogEntity.toModel() = LogEntry(
-            id = id,
-            timestamp = timestamp,
-            tag = tag,
-            message = message
-    )
 }
+
+private fun LogEntity.toModel() = LogEntry(
+        id = id,
+        timestamp = timestamp,
+        tag = tag,
+        message = message
+)
