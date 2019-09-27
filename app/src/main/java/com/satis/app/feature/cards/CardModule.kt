@@ -12,8 +12,9 @@ import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 @Module(includes = [CardBindingModule::class])
-class CardModule {
+object CardModule {
 
+    @JvmStatic
     @Singleton
     @Provides
     fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()

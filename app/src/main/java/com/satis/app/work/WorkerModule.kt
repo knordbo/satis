@@ -11,12 +11,14 @@ import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 @Module(includes = [WorkerBindingModule::class])
-class WorkerModule {
+object WorkerModule {
 
+    @JvmStatic
     @Provides
     @Singleton
     fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
 
+    @JvmStatic
     @Provides
     @Singleton
     fun provideConfiguration(workerFactory: WorkerFactory): Configuration =

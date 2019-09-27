@@ -6,13 +6,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
 
-@Module(includes = [StartupBindingModule::class])
-class StartupModule {
-
-}
-
 @Module
-abstract class StartupBindingModule {
+abstract class StartupModule {
 
     @Binds
     @Main

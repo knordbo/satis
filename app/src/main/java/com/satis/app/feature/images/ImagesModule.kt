@@ -17,8 +17,9 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 
 @Module(includes = [ImagesBindingModule::class])
-class ImagesModule {
+object ImagesModule {
 
+    @JvmStatic
     @Provides
     @Singleton
     fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()

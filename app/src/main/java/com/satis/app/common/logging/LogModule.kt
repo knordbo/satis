@@ -8,7 +8,8 @@ import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
 @Module(includes = [LogBindingModule::class])
-class LogModule {
+object LogModule {
+    @JvmStatic
     @Provides
     @Singleton
     fun provideLogDao(appDatabase: AppDatabase): LogDao = appDatabase.logDao()
