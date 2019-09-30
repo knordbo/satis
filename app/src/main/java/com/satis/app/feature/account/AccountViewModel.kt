@@ -3,11 +3,11 @@ package com.satis.app.feature.account
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
-import com.satis.app.BuildConfig
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
+import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class AccountViewModel @AssistedInject constructor(
         @Assisted initialState: AccountState,
         private val logger: PersistedLogger,
+        private val appInfoRetriever: AppInfoRetriever,
         private val prefs: Prefs
 ) : BaseViewModel<AccountState>(
         initialState = initialState
@@ -43,11 +44,14 @@ class AccountViewModel @AssistedInject constructor(
     }
 
     private fun getAccountState() {
-        setState {
-            copy(buildData = BuildData(
-                    versionNum = BuildConfig.VERSION_CODE,
-                    buildTime = BuildConfig.BUILD_TIME
-            ))
+        launch {
+            val appInfo = appInfoRetriever.getAppInfo()
+            setState {
+                copy(buildData = BuildData(
+                        versionNum = appInfo.versionCode,
+                        buildTime = appInfo.buildTime
+                ))
+            }
         }
     }
 

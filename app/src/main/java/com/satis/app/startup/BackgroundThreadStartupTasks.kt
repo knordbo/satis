@@ -8,10 +8,10 @@ import kotlin.coroutines.CoroutineContext
 
 class BackgroundThreadStartupTasks @Inject constructor(
         @Background private val tasks: Provider<Set<@JvmSuppressWildcards StartupTask>>,
-        @Background private val backgroundCoroutineContext: CoroutineContext
+        @Background private val background: CoroutineContext
 ) : StartupTasks {
     override suspend fun executeAll() {
-        withContext(backgroundCoroutineContext) {
+        withContext(background) {
             tasks.get().forEach(StartupTask::execute)
         }
     }
