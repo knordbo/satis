@@ -16,7 +16,13 @@ apply {
     plugin("androidx.navigation.safeargs")
 }
 
-val keystoreProperties = Properties().apply { load(FileInputStream(file("../keystore.properties"))) }
+val keystoreProperties = Properties().apply {
+    try {
+        load(FileInputStream(file("../keystore.properties")))
+    } catch (_ : Exception) {
+        // ignore
+    }
+}
 
 android {
     compileSdkVersion(BuildVersions.targetSdk)
