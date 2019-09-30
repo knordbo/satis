@@ -47,5 +47,4 @@ abstract class ImagesBindingModule {
     @WorkerKey(ImageWorker::class)
     abstract fun provideImageWorker(bind: ImageWorker.Factory): ChildWorkerFactory
 
-
 }
