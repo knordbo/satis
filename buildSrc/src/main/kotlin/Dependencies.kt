@@ -51,7 +51,6 @@ private object Versions {
         const val retrofit = "2.6.2"
     }
 
-    const val rxAndroid = "2.1.1"
     const val tinydancer = "0.1.2"
     const val stetho = "1.5.1"
     const val workManager = "2.3.0-alpha01"
@@ -152,10 +151,7 @@ object Deps {
     const val material = "com.google.android.material:material:${Versions.material}"
     const val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
 
-    object okhttp {
-        const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
-        const val loggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
-    }
+    const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
 
     const val peekAndPop = "com.github.shalskar:PeekAndPop:${Versions.peekAndPop}"
     const val photoView = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
@@ -169,20 +165,5 @@ object Deps {
     const val tinydancer = "com.github.brianPlummer:tinydancer:${Versions.tinydancer}"
     const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
 
-    object workManager {
-        const val runtime = "androidx.work:work-runtime-ktx:${Versions.workManager}"
-    }
-}
-
-object Repositories {
-    const val sonatype = "https://oss.sonatype.org/content/repositories/snapshots"
-    const val kotlinEap = "https://dl.bintray.com/kotlin/kotlin-eap"
-    const val kotlinX = "https://kotlin.bintray.com/kotlinx"
-    const val fabric = "https://maven.fabric.io/public"
-    const val jitpack = "https://jitpack.io"
-}
-
-object BuildVersions {
-    const val minSdk = 24
-    const val targetSdk = 29
+    const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
 }

@@ -1,12 +1,6 @@
 buildscript {
     repositories {
-        google()
-        jcenter()
-        maven(Repositories.sonatype)
-        maven(Repositories.kotlinEap)
-        maven(Repositories.kotlinX)
-        maven(Repositories.fabric)
-        maven(Repositories.jitpack)
+        defaultRepositories()
     }
     dependencies {
         classpath(Deps.androidGradlePlugin)
@@ -22,12 +16,7 @@ buildscript {
 
 allprojects {
     repositories {
-        google()
-        jcenter()
-        maven(Repositories.sonatype)
-        maven(Repositories.kotlinEap)
-        maven(Repositories.kotlinX)
-        maven(Repositories.jitpack)
+        defaultRepositories()
     }
 }
 

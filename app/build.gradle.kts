@@ -143,7 +143,7 @@ dependencies {
     implementation(Deps.mvrx)
 
     // OkHttp
-    implementation(Deps.okhttp.okhttp)
+    implementation(Deps.okhttp)
 
     // Google Play Core
     implementation(Deps.playCore)
@@ -165,7 +165,7 @@ dependencies {
     debugImplementation(Deps.stetho)
 
     // Work Manager
-    implementation(Deps.workManager.runtime)
+    implementation(Deps.workManager)
 
     // Unit Testing
     testImplementation(Deps.junit)
