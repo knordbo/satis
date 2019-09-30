@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.satis.app.databinding.FeatureImageBinding
+import javax.inject.Inject
 
-class ImageFragment : Fragment() {
+class ImageFragment @Inject constructor() : Fragment() {
 
     private lateinit var binding: FeatureImageBinding
 
