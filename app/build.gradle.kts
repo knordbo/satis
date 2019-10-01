@@ -93,7 +93,7 @@ dependencies {
     implementation(Deps.androidx.cardView)
     implementation(Deps.androidx.constraintLayout)
     implementation(Deps.androidx.coreKtx)
-    implementation(Deps.androidx.fragment)
+    implementation(Deps.androidx.fragment.fragment)
     implementation(Deps.androidx.concurrent) {
         exclude(group = "com.google.guava", module = "listenablefuture")
     }
@@ -173,10 +173,14 @@ dependencies {
     // Android Testing
     androidTestImplementation(Deps.androidx.test.runner)
     androidTestImplementation(Deps.androidx.test.rules)
+    androidTestImplementation(Deps.androidx.test.junit)
     androidTestImplementation(Deps.androidx.coreTesting)
     androidTestImplementation(Deps.androidx.espresso.core)
     androidTestImplementation(Deps.androidx.espresso.contrib)
     androidTestImplementation(Deps.androidx.espresso.intents)
+    debugImplementation(Deps.androidx.fragment.testing) {
+        exclude(group = "androidx.test", module = "core")
+    }
 }
 
 apply {

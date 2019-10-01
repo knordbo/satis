@@ -15,6 +15,7 @@ private object Versions {
         const val recyclerView = "1.1.0-beta04"
         const val room = "2.2.0-rc01"
         const val test = "1.3.0-alpha02"
+        const val testExt = "1.1.2-alpha02"
     }
 
     const val crashlytics = "2.10.1"
@@ -72,7 +73,10 @@ object Deps {
             const val intents = "androidx.test.espresso:espresso-intents:${Versions.androidx.espresso}"
         }
 
-        const val fragment = "androidx.fragment:fragment:${Versions.androidx.fragment}"
+        object fragment {
+            const val fragment = "androidx.fragment:fragment:${Versions.androidx.fragment}"
+            const val testing = "androidx.fragment:fragment-testing:${Versions.androidx.fragment}"
+        }
         const val concurrent = "androidx.concurrent:concurrent-futures:${Versions.androidx.concurrent}"
 
         object lifecycle {
@@ -99,6 +103,7 @@ object Deps {
         object test {
             const val runner = "androidx.test:runner:${Versions.androidx.test}"
             const val rules = "androidx.test:rules:${Versions.androidx.test}"
+            const val junit = "androidx.test.ext:junit:${Versions.androidx.testExt}"
         }
     }
 
