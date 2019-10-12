@@ -1,5 +1,5 @@
 private object Versions {
-    const val androidGradlePlugin = "3.6.0-alpha12"
+    const val androidGradlePlugin = "3.6.0-beta01"
 
     object androidx {
         const val appCompat = "1.1.0"
@@ -8,7 +8,7 @@ private object Versions {
         const val coreKtx = "1.2.0-beta01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha02"
-        const val fragment = "1.2.0-beta01"
+        const val fragment = "1.2.0-beta02"
         const val concurrent = "1.0.0"
         const val lifecycle = "2.2.0-beta01"
         const val navigation = "2.2.0-beta01"
@@ -41,7 +41,7 @@ private object Versions {
     }
 
     const val material = "1.1.0-beta01"
-    const val mvrx = "1.1.0"
+    const val mvrx = "1.2.0"
     const val okhttp = "4.2.2"
     const val peekAndPop = "1.1.0"
     const val photoView = "2.3.0"
