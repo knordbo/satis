@@ -21,7 +21,7 @@ import javax.inject.Inject
 class CardFragment @Inject constructor(
         private val viewModelFactory: CardViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment() {
+) : BaseMvRxFragment(), CardViewModel.Factory by viewModelFactory {
 
     private val cardViewModel: CardViewModel by fragmentViewModel()
     private val cardsAdapter by lazy {
@@ -86,8 +86,6 @@ class CardFragment @Inject constructor(
         fragment.setTargetFragment(this@CardFragment, 0)
         fragment.show(parentFragmentManager, ADD_CARD_FRAGMENT_TAG)
     }
-
-    fun createViewModel(state: CardState): CardViewModel = viewModelFactory.create(state)
 
 }
 

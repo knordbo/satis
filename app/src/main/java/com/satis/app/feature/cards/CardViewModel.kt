@@ -4,6 +4,7 @@ import com.airbnb.mvrx.*
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardRepository
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
@@ -76,13 +77,12 @@ class CardViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: CardState): CardViewModel
+        fun createCardViewModel(initialState: CardState): CardViewModel
     }
 
     companion object : MvRxViewModelFactory<CardViewModel, CardState> {
         override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel? {
-            val fragment: CardFragment = (viewModelContext as FragmentViewModelContext).fragment()
-            return fragment.createViewModel(state)
+            return viewModelContext.viewModelFactory<Factory>().createCardViewModel(state)
         }
     }
 }

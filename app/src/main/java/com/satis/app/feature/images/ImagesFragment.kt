@@ -24,7 +24,7 @@ import javax.inject.Inject
 class ImagesFragment @Inject constructor(
         private val viewModelFactory: ImagesViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment() {
+) : BaseMvRxFragment(), ImagesViewModel.Factory by viewModelFactory {
 
     private val imagesViewModel: ImagesViewModel by fragmentViewModel()
     private val imageViewPreloadSizeProvider = ViewPreloadSizeProvider<PhotoState>()
@@ -77,8 +77,6 @@ class ImagesFragment @Inject constructor(
             adapter.submitList(imageState.photoState)
         }
     }
-
-    fun createViewModel(state: ImagesState) = viewModelFactory.create(state)
 
 }
 

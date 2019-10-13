@@ -1,11 +1,11 @@
 package com.satis.app.feature.images
 
-import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
@@ -49,13 +49,12 @@ class ImagesViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: ImagesState): ImagesViewModel
+        fun createImagesViewModel(initialState: ImagesState): ImagesViewModel
     }
 
     companion object : MvRxViewModelFactory<ImagesViewModel, ImagesState> {
         override fun create(viewModelContext: ViewModelContext, state: ImagesState): ImagesViewModel? {
-            val fragment: ImagesFragment = (viewModelContext as FragmentViewModelContext).fragment()
-            return fragment.createViewModel(state)
+            return viewModelContext.viewModelFactory<Factory>().createImagesViewModel(state)
         }
     }
 }

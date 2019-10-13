@@ -1,6 +1,5 @@
 package com.satis.app.feature.account
 
-import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.common.logging.PersistedLogger
@@ -9,6 +8,7 @@ import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.utils.coroutines.BaseViewModel
+import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
@@ -57,13 +57,12 @@ class AccountViewModel @AssistedInject constructor(
 
     @AssistedInject.Factory
     interface Factory {
-        fun create(initialState: AccountState): AccountViewModel
+        fun createAccountViewModel(initialState: AccountState): AccountViewModel
     }
 
     companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
         override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? {
-            val fragment: AccountFragment = (viewModelContext as FragmentViewModelContext).fragment()
-            return fragment.createViewModel(state)
+            return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
         }
     }
 }

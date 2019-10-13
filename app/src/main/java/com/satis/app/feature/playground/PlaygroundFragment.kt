@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
         private val viewModelFactory: PlaygroundViewModel.Factory
-): BaseMvRxFragment() {
+): BaseMvRxFragment(), PlaygroundViewModel.Factory by viewModelFactory {
 
     private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
@@ -37,7 +37,5 @@ class PlaygroundFragment @Inject constructor(
             binding.items.asyncText = state.items.joinToString(separator = "\n") { it }
         }
     }
-
-    fun createViewModel(state: PlaygroundState) = viewModelFactory.create(state)
 
 }

@@ -20,7 +20,7 @@ import javax.inject.Inject
 class AccountFragment @Inject constructor(
         private val viewModelFactory: AccountViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment() {
+) : BaseMvRxFragment(), AccountViewModel.Factory by viewModelFactory {
 
     private val accountViewModel: AccountViewModel by fragmentViewModel()
     private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
@@ -83,7 +83,5 @@ class AccountFragment @Inject constructor(
         }
         else -> super.onOptionsItemSelected(item)
     }
-
-    fun createViewModel(state: AccountState): AccountViewModel = viewModelFactory.create(state)
 
 }
