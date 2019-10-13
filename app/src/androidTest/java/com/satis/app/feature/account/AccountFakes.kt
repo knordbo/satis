@@ -20,7 +20,7 @@ fun createAccountFragment(): AccountFragment {
 
 private fun createAccountViewModelFactory(): AccountViewModel.Factory {
     return object : AccountViewModel.Factory {
-        override fun create(initialState: AccountState): AccountViewModel {
+        override fun createAccountViewModel(initialState: AccountState): AccountViewModel {
             return AccountViewModel(
                     initialState = initialState,
                     logger = createPersistedLogger(),
