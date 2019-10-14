@@ -35,5 +35,5 @@ inline fun <reified F> ViewModelContext.viewModelFactory(): F {
         }
     }
     return activity as? F
-            ?: throw IllegalArgumentException("No view model factory found for ${F::class}")
+            ?: throw IllegalStateException("No view model factory found for ${F::class}")
 }
