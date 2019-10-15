@@ -41,7 +41,7 @@ private object Versions {
     }
 
     const val material = "1.1.0-beta01"
-    const val mvrx = "1.2.0"
+    const val mvrx = "1.2.1"
     const val okhttp = "4.2.2"
     const val peekAndPop = "1.1.0"
     const val photoView = "2.3.0"
