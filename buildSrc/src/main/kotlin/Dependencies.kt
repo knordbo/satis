@@ -27,7 +27,7 @@ private object Versions {
 
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.0"
-    const val firebaseFirestore = "21.1.1"
+    const val firebaseFirestore = "21.2.0"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.5.0-SNAPSHOT"
     const val googleServices = "4.0.0"
