@@ -1,20 +1,20 @@
 package com.satis.app
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.airbnb.mvrx.BaseMvRxActivity
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainActivity : BaseMvRxActivity() {
+class MainActivity : AppCompatActivity() {
 
     private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
 

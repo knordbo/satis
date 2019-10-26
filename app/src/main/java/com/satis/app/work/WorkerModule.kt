@@ -13,12 +13,10 @@ import javax.inject.Singleton
 @Module(includes = [WorkerBindingModule::class])
 object WorkerModule {
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideConfiguration(workerFactory: WorkerFactory): Configuration =

@@ -35,21 +35,17 @@ import kotlin.coroutines.CoroutineContext
 @Module(includes = [AppBindingModule::class])
 object AppModule {
 
-    @JvmStatic
     @Provides
     fun provideContext(application: App): Context = application.applicationContext
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideJson(): Json = Json.nonstrict
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideOkHttp(): OkHttpClient = OkHttpClient()
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
@@ -58,40 +54,33 @@ object AppModule {
             .addConverterFactory(json.asConverterFactory(jsonMediaType()))
             .build()
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideAppDatabase(context: Context): AppDatabase = AppDatabase.createDatabase(context)
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideKeyValueDao(appDatabase: AppDatabase): KeyValueDao = appDatabase.keyValueDao()
 
-    @JvmStatic
     @Provides
     @Singleton
     @Main
     fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main.immediate
 
-    @JvmStatic
     @Provides
     @Singleton
     @Background
     fun provideBackgroundCoroutineContext(): CoroutineContext = Dispatchers.Default
 
-    @JvmStatic
     @Provides
     @Singleton
     @Io
     fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideAppUpdateManager(context: Context): AppUpdateManager = AppUpdateManagerFactory.create(context)
 
-    @JvmStatic
     @Provides
     @Singleton
     fun provideUserId(prefs: Prefs) = prefs.userId

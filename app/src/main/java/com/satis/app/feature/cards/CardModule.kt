@@ -14,7 +14,6 @@ import javax.inject.Singleton
 @Module(includes = [CardBindingModule::class])
 object CardModule {
 
-    @JvmStatic
     @Singleton
     @Provides
     fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()

@@ -16,9 +16,9 @@ import kotlin.coroutines.CoroutineContext
 class App : DaggerApplication(), Configuration.Provider, CoroutineScope {
 
     @Inject lateinit var workConfiguration: Provider<Configuration>
-    @Inject @field:Main override lateinit var coroutineContext: CoroutineContext
-    @Inject @field:Main lateinit var mainThreadStartupTasks: StartupTasks
-    @Inject @field:Background lateinit var backgroundThreadStartupTasks: StartupTasks
+    @Inject @Main override lateinit var coroutineContext: CoroutineContext
+    @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
+    @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
 
     override fun onCreate() {
         super.onCreate()

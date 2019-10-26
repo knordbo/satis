@@ -1,19 +1,19 @@
 private object Versions {
-    const val androidGradlePlugin = "3.6.0-beta01"
+    const val androidGradlePlugin = "4.0.0-alpha01"
 
     object androidx {
         const val appCompat = "1.1.0"
         const val cardView = "1.0.0"
-        const val constraintLayout = "2.0.0-beta2" // TODO when bumping version delete the attrs.xml workaround
+        const val constraintLayout = "2.0.0-beta3"
         const val coreKtx = "1.2.0-beta01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha02"
-        const val fragment = "1.2.0-beta02"
+        const val fragment = "1.2.0-rc01"
         const val concurrent = "1.0.0"
-        const val lifecycle = "2.2.0-beta01"
-        const val navigation = "2.2.0-beta01"
-        const val recyclerView = "1.1.0-beta05"
-        const val room = "2.2.0"
+        const val lifecycle = "2.2.0-rc01"
+        const val navigation = "2.2.0-rc01"
+        const val recyclerView = "1.1.0-rc01"
+        const val room = "2.2.1"
         const val test = "1.3.0-alpha02"
         const val testExt = "1.1.2-alpha02"
     }
@@ -22,12 +22,12 @@ private object Versions {
 
     object dagger {
         const val assistedInject = "0.5.0"
-        const val dagger = "2.24"
+        const val dagger = "2.25.2"
     }
 
     const val fabric = "1.29.0"
-    const val firebaseCore = "17.2.0"
-    const val firebaseFirestore = "21.2.0"
+    const val firebaseCore = "17.2.1"
+    const val firebaseFirestore = "21.2.1"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.5.0-SNAPSHOT"
     const val googleServices = "4.0.0"
@@ -35,17 +35,17 @@ private object Versions {
     const val junit = "4.13-beta-3"
 
     object kotlin {
-        const val kotlin = "1.3.50"
-        const val coroutines = "1.3.2"
-        const val serialization = "0.13.0"
+        const val kotlin = "1.3.60-eap-76"
+        const val coroutines = "1.3.2-1.3.60-eap-76"
+        const val serialization = "0.14.0-1.3.60-eap-76"
     }
 
-    const val material = "1.1.0-beta01"
-    const val mvrx = "1.2.1"
+    const val material = "1.2.0-alpha01"
+    const val mvrx = "1.3.0"
     const val okhttp = "4.2.2"
     const val peekAndPop = "1.1.0"
     const val photoView = "2.3.0"
-    const val playCore = "1.6.3"
+    const val playCore = "1.6.4"
 
     object retrofit {
         const val kotlinSerialization = "0.4.0"
@@ -54,7 +54,7 @@ private object Versions {
 
     const val tinydancer = "0.1.2"
     const val stetho = "1.5.1"
-    const val workManager = "2.3.0-alpha02"
+    const val workManager = "2.3.0-alpha03"
 }
 
 object Deps {

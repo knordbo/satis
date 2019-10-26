@@ -9,7 +9,6 @@ import javax.inject.Singleton
 
 @Module(includes = [LogBindingModule::class])
 object LogModule {
-    @JvmStatic
     @Provides
     @Singleton
     fun provideLogDao(appDatabase: AppDatabase): LogDao = appDatabase.logDao()
