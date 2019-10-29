@@ -32,7 +32,7 @@ interface AppComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance application: App): AppComponent
+        fun create(@BindsInstance app: App): AppComponent
     }
 
 }

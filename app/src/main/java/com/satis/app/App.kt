@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.work.Configuration
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Main
+import com.satis.app.di.AppComponent
 import com.satis.app.di.DaggerAppComponent
 import com.satis.app.startup.StartupTasks
 import kotlinx.coroutines.CoroutineScope
@@ -20,9 +21,10 @@ class App : Application(), Configuration.Provider, CoroutineScope {
     @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
     @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
 
-    val appComponent by lazy { DaggerAppComponent.factory().create(this) }
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
+        appComponent = DaggerAppComponent.factory().create(this)
         appComponent.inject(this)
 
         super.onCreate()

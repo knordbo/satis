@@ -10,7 +10,6 @@ plugins {
     id("com.github.ben-manes.versions")
     id("io.fabric")
     id("com.github.triplet.play")
-    id("com.github.plnice.canidropjetifier") version("0.5")
 }
 
 apply {
