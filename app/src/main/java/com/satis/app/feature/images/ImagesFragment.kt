@@ -12,7 +12,6 @@ import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
-import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureImagesBinding
@@ -31,10 +30,6 @@ class ImagesFragment @Inject constructor(
     private val adapter by lazy {
         ImagesAdapter(
                 requestManager = Glide.with(this),
-                peekAndPop = PeekAndPop.Builder(requireActivity())
-                        .peekLayout(R.layout.peek_image)
-                        .parentViewGroupToDisallowTouchEvents(binding.images)
-                        .build(),
                 imageViewPreloadSizeProvider = imageViewPreloadSizeProvider,
                 imageClicked = { photo ->
                     findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo, photo.description.orEmpty()))

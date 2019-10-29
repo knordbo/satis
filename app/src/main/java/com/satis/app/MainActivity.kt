@@ -11,7 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
-import dagger.android.AndroidInjection
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
+        appComponent.inject(this)
         supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)

@@ -10,6 +10,7 @@ plugins {
     id("com.github.ben-manes.versions")
     id("io.fabric")
     id("com.github.triplet.play")
+    id("com.github.plnice.canidropjetifier") version("0.5")
 }
 
 apply {
@@ -112,10 +113,8 @@ dependencies {
 
     // Dagger
     implementation(Deps.dagger.dagger)
-    implementation(Deps.dagger.android)
     implementation(Deps.dagger.assistedInjectAnnotations)
     kapt(Deps.dagger.compiler)
-    kapt(Deps.dagger.androidProcessor)
     kapt(Deps.dagger.assistedInjectProcessor)
 
     // Firebase
@@ -148,9 +147,6 @@ dependencies {
     // Google Play Core
     implementation(Deps.playCore)
 
-    // PeekAndPop
-    implementation(Deps.peekAndPop)
-
     // PhotoView
     implementation(Deps.photoView)
 
@@ -160,9 +156,6 @@ dependencies {
 
     // Tiny Dancer
     implementation(Deps.tinydancer)
-
-    // Stetho
-    debugImplementation(Deps.stetho)
 
     // Work Manager
     implementation(Deps.workManager)

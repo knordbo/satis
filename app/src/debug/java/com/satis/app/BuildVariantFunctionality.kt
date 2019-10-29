@@ -4,5 +4,5 @@ import android.content.Context
 import com.facebook.stetho.Stetho
 
 fun configureBuildVariantFunctionality(context: Context) {
-    Stetho.initializeWithDefaults(context)
+    // init stuff like stetho
 }

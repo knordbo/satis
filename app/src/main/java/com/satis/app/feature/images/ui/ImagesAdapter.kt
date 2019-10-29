@@ -1,6 +1,5 @@
 package com.satis.app.feature.images.ui
 
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.widget.AppCompatImageView
@@ -11,39 +10,17 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.ListPreloader
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.RequestManager
-import com.bumptech.glide.request.RequestOptions.circleCropTransform
 import com.bumptech.glide.util.ViewPreloadSizeProvider
-import com.peekandpop.shalskar.peekandpop.PeekAndPop
 import com.satis.app.R
-import com.satis.app.databinding.PeekImageBinding
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.ui.ImagesAdapter.ImageViewHolder
-import com.satis.app.utils.view.asyncText
 import com.satis.app.utils.view.layoutInflater
 
 class ImagesAdapter(
         private val requestManager: RequestManager,
-        private val peekAndPop: PeekAndPop,
         private val imageViewPreloadSizeProvider: ViewPreloadSizeProvider<PhotoState>,
         private val imageClicked: (PhotoState) -> Unit
 ) : ListAdapter<PhotoState, ImageViewHolder>(Differ), ListPreloader.PreloadModelProvider<PhotoState> {
-
-    init {
-        peekAndPop.setOnGeneralActionListener(object : PeekAndPop.OnGeneralActionListener {
-            override fun onPop(view: View, position: Int) {}
-            override fun onPeek(view: View, position: Int) {
-                val item = getItem(position)
-                with(PeekImageBinding.bind(peekAndPop.peekView)) {
-                    username.asyncText = item.user.username
-                    Glide.with(peekAndPop.peekView)
-                            .load(item.user.userAvatar)
-                            .apply(circleCropTransform())
-                            .into(avatar)
-                    image.load(item)
-                }
-            }
-        })
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = parent.layoutInflater.inflate(R.layout.image_item, parent, false)
@@ -55,7 +32,6 @@ class ImagesAdapter(
         val item = getItem(position)
         with(holder.imageView) {
             load(item)
-            peekAndPop.addLongClickView(this, position)
             setOnClickListener {
                 imageClicked(item)
             }

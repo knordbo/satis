@@ -43,7 +43,6 @@ private object Versions {
     const val material = "1.2.0-alpha01"
     const val mvrx = "1.3.0"
     const val okhttp = "4.2.2"
-    const val peekAndPop = "1.1.0"
     const val photoView = "2.3.0"
     const val playCore = "1.6.4"
 
@@ -53,7 +52,6 @@ private object Versions {
     }
 
     const val tinydancer = "0.1.2"
-    const val stetho = "1.5.1"
     const val workManager = "2.3.0-alpha03"
 }
 
@@ -112,8 +110,6 @@ object Deps {
     object dagger {
         const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.dagger.assistedInject}"
         const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.dagger.assistedInject}"
-        const val android = "com.google.dagger:dagger-android:${Versions.dagger.dagger}"
-        const val androidProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger.dagger}"
         const val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger.dagger}"
         const val dagger = "com.google.dagger:dagger:${Versions.dagger.dagger}"
     }
@@ -158,7 +154,6 @@ object Deps {
 
     const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
 
-    const val peekAndPop = "com.github.shalskar:PeekAndPop:${Versions.peekAndPop}"
     const val photoView = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
     const val playCore = "com.google.android.play:core:${Versions.playCore}"
 
@@ -168,7 +163,6 @@ object Deps {
     }
 
     const val tinydancer = "com.github.brianPlummer:tinydancer:${Versions.tinydancer}"
-    const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
 
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
 }
