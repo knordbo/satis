@@ -6,21 +6,19 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.satis.app.App
+import com.satis.app.Database
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
-import com.satis.app.common.db.AppDatabase
 import com.satis.app.common.fragment.InjectingFragmentFactory
-import com.satis.app.common.keyvalue.KeyValueRepositoryImpl
-import com.satis.app.common.keyvalue.KeyValueDao
-import com.satis.app.common.keyvalue.KeyValueRepository
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
-import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.prefs.Prefs
+import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.utils.network.clientProvider
 import com.satis.app.utils.network.jsonMediaType
+import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -56,11 +54,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(context: Context): AppDatabase = AppDatabase.createDatabase(context)
-
-    @Provides
-    @Singleton
-    fun provideKeyValueDao(appDatabase: AppDatabase): KeyValueDao = appDatabase.keyValueDao()
+    fun provideDatabase(context: Context): Database = Database(AndroidSqliteDriver(Database.Schema, context, "satis.sqldelight.db"))
 
     @Provides
     @Singleton
@@ -89,9 +83,6 @@ object AppModule {
 
 @Module
 abstract class AppBindingModule {
-
-    @Binds
-    abstract fun provideKeyValueRepository(bind: KeyValueRepositoryImpl): KeyValueRepository
 
     @Binds
     abstract fun providePrefs(bind: PrefsImpl): Prefs

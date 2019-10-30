@@ -1,9 +1,11 @@
 package com.satis.app.common.logging
 
 import com.satis.app.common.annotations.Io
+import com.satis.app.common.logging.db.LogEntity
+import com.satis.app.common.logging.db.LogQueries
+import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -14,7 +16,7 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class PersistedLoggerImpl @Inject constructor(
-        private val logDao: LogDao,
+        private val logQueries: LogQueries,
         @Io private val io: CoroutineContext
 ) : PersistedLogger, CoroutineScope {
 
@@ -23,24 +25,24 @@ class PersistedLoggerImpl @Inject constructor(
     override fun log(tag: String, message: String) {
         val timestamp = System.currentTimeMillis()
         launch(io) {
-            logDao.insertLog(LogEntity(
+            logQueries.insertLog(
                     timestamp = timestamp,
                     tag = tag,
                     message = message
-            ))
+            )
         }
     }
 
-    override fun streamLogs(): Flow<List<LogEntry>> = logDao.getLogStream()
-            .filterNotNull()
+    override fun streamLogs(): Flow<List<LogEntry>> = logQueries.getLatestLogs()
+            .asFlow()
             .map { logs ->
-                logs.map(LogEntity::toModel)
+                logs.executeAsList().map(LogEntity::toModel)
             }
             .flowOn(io)
 
     override suspend fun searchLogs(query: String): List<LogEntry> {
         return withContext(io) {
-            logDao.searchLogs(query, query).map { it.toModel() }
+            logQueries.searchLogs(query).executeAsList().map(LogEntity::toModel)
         }
     }
 

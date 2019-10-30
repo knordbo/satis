@@ -10,6 +10,7 @@ plugins {
     id("com.github.ben-manes.versions")
     id("io.fabric")
     id("com.github.triplet.play")
+    id("com.squareup.sqldelight")
 }
 
 apply {
@@ -102,10 +103,7 @@ dependencies {
     implementation(Deps.androidx.navigation.fragmentKtx)
     implementation(Deps.androidx.navigation.uiKtx)
     implementation(Deps.androidx.recyclerView)
-    implementation(Deps.androidx.room.runtime)
-    implementation(Deps.androidx.room.ktx)
     kapt(Deps.androidx.lifecycle.compiler)
-    kapt(Deps.androidx.room.compiler)
 
     // Crashlytics
     implementation(Deps.crashlytics)
@@ -152,6 +150,10 @@ dependencies {
     // Retrofit
     implementation(Deps.retrofit.retrofit)
     implementation(Deps.retrofit.kotlinSerialization)
+
+    // SQLDelight
+    implementation(Deps.sqldelight.androidDriver)
+    implementation(Deps.sqldelight.coroutinesExtensions)
 
     // Tiny Dancer
     implementation(Deps.tinydancer)

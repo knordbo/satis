@@ -1,6 +1,7 @@
 package com.satis.app.common.logging
 
-import com.satis.app.common.db.AppDatabase
+import com.satis.app.Database
+import com.satis.app.common.logging.db.LogQueries
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -11,7 +12,7 @@ import javax.inject.Singleton
 object LogModule {
     @Provides
     @Singleton
-    fun provideLogDao(appDatabase: AppDatabase): LogDao = appDatabase.logDao()
+    fun provideLogQueries(database: Database): LogQueries = database.logQueries
 }
 
 @Module

@@ -1,0 +1,24 @@
+CREATE TABLE logEntity (
+  id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+  timestamp INTEGER NOT NULL,
+  tag TEXT NOT NULL,
+  message TEXT NOT NULL
+);
+
+CREATE INDEX logEntity_timestamp ON logEntity(timestamp);
+
+searchLogs:
+SELECT * FROM logEntity
+WHERE tag LIKE '%' || ?1 || '%'
+OR message LIKE '%' || ?1|| '%'
+ORDER BY timestamp
+DESC LIMIT 1000;
+
+getLatestLogs:
+SELECT * FROM logEntity
+ORDER BY timestamp
+DESC LIMIT 1000;
+
+insertLog:
+INSERT INTO logEntity (timestamp, tag, message)
+VALUES (?, ?, ?);

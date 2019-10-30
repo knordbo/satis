@@ -11,6 +11,7 @@ buildscript {
         classpath(Deps.fabric)
         classpath(Deps.androidx.navigation.safeArgs)
         classpath(Deps.googlePlayPublisher)
+        classpath(Deps.sqldelight.gradlePlugin)
     }
 }
 

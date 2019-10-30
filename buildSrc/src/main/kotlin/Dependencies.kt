@@ -13,7 +13,6 @@ private object Versions {
         const val lifecycle = "2.2.0-rc01"
         const val navigation = "2.2.0-rc01"
         const val recyclerView = "1.1.0-rc01"
-        const val room = "2.2.1"
         const val test = "1.3.0-alpha02"
         const val testExt = "1.1.2-alpha02"
     }
@@ -51,6 +50,7 @@ private object Versions {
         const val retrofit = "2.6.2"
     }
 
+    const val sqldelight = "1.2.0"
     const val tinydancer = "0.1.2"
     const val workManager = "2.3.0-alpha03"
 }
@@ -90,13 +90,6 @@ object Deps {
         }
 
         const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.androidx.recyclerView}"
-
-        object room {
-            const val runtime = "androidx.room:room-runtime:${Versions.androidx.room}"
-            const val compiler = "androidx.room:room-compiler:${Versions.androidx.room}"
-            const val ktx = "androidx.room:room-ktx:${Versions.androidx.room}"
-            const val testing = "androidx.room:room-testing:${Versions.androidx.room}"
-        }
 
         object test {
             const val runner = "androidx.test:runner:${Versions.androidx.test}"
@@ -162,7 +155,12 @@ object Deps {
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit.retrofit}"
     }
 
-    const val tinydancer = "com.github.brianPlummer:tinydancer:${Versions.tinydancer}"
+    object sqldelight {
+        const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
+        const val coroutinesExtensions = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqldelight}"
+        const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}"
+    }
 
+    const val tinydancer = "com.github.brianPlummer:tinydancer:${Versions.tinydancer}"
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
 }

@@ -1,0 +1,18 @@
+CREATE TABLE unsplashPhotoEntity (
+  id TEXT NOT NULL PRIMARY KEY,
+  urlRegular TEXT NOT NULL,
+  urlThumb TEXT NOT NULL,
+  userUsername TEXT NOT NULL,
+  userProfileImageMedium TEXT NOT NULL,
+  description TEXT
+);
+
+insertUnsplashPhoto:
+INSERT INTO unsplashPhotoEntity (id, urlRegular, urlThumb, userUsername, userProfileImageMedium, description)
+VALUES (?, ?, ?, ?, ?, ?);
+
+selectAll:
+SELECT * FROM unsplashPhotoEntity;
+
+deleteAll:
+DELETE FROM unsplashPhotoEntity;

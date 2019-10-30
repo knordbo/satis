@@ -1,8 +1,10 @@
 package com.satis.app.feature.images
 
 import androidx.fragment.app.Fragment
+import com.satis.app.Database
 import com.satis.app.common.fragment.FragmentKey
 import com.satis.app.feature.images.data.UnsplashApi
+import com.satis.app.feature.images.data.db.UnsplashQueries
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
 import com.satis.app.feature.images.work.ImageWorker
@@ -22,6 +24,10 @@ object ImagesModule {
     @Provides
     @Singleton
     fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()
+
+    @Provides
+    @Singleton
+    fun provideUnsplashQueries(database: Database): UnsplashQueries = database.unsplashQueries
 
 }
 
