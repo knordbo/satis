@@ -11,6 +11,7 @@
     <dimen name="peek_margin_horizontal">0dp</dimen>
     <dimen name="peek_margin_vertical">36dp</dimen>
 
+    <dimen name="text_tiny">12sp</dimen>
     <dimen name="text_small">18sp</dimen>
     <dimen name="text_regular">20sp</dimen>
     <dimen name="text_large">22sp</dimen>

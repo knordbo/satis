@@ -20,7 +20,7 @@ private object Versions {
     const val crashlytics = "2.10.1"
 
     object dagger {
-        const val assistedInject = "0.5.0"
+        const val assistedInject = "0.5.1"
         const val dagger = "2.25.2"
     }
 
@@ -31,7 +31,7 @@ private object Versions {
     const val googlePlayPublisher = "2.5.0-SNAPSHOT"
     const val googleServices = "4.0.0"
     const val gradleVersionsPlugin = "0.20.0"
-    const val junit = "4.13-beta-3"
+    const val junit = "4.13-rc-1"
 
     object kotlin {
         const val kotlin = "1.3.60-eap-76"

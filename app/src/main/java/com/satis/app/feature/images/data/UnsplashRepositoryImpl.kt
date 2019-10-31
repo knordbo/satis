@@ -46,29 +46,29 @@ class UnsplashRepositoryImpl @Inject constructor(
         unsplash.executeAsList().toState()
     }.flowOn(io)
 
-    private fun Unsplash.toState() = results.map {
+    private fun Unsplash.toState() = results.map { unsplashPhoto ->
         PhotoState(
-                id = it.id,
-                thumbnailUrl = Uri.parse(it.urls.thumb),
-                photoUrl = Uri.parse(it.urls.regular),
+                id = unsplashPhoto.id,
+                thumbnailUrl = Uri.parse(unsplashPhoto.urls.thumb),
+                photoUrl = Uri.parse(unsplashPhoto.urls.regular),
                 user = User(
-                        username = it.user.username,
-                        userAvatar = Uri.parse(it.user.profileImage.medium)
+                        username = unsplashPhoto.user.username,
+                        userAvatar = Uri.parse(unsplashPhoto.user.profileImage.medium)
                 ),
-                description = it.description
+                description = unsplashPhoto.description
         )
     }
 
-    private fun List<UnsplashPhotoEntity>.toState() = map {
+    private fun List<UnsplashPhotoEntity>.toState() = map { unsplashPhoto ->
         PhotoState(
-                id = it.id,
-                thumbnailUrl = Uri.parse(it.urlThumb),
-                photoUrl = Uri.parse(it.urlRegular),
+                id = unsplashPhoto.id,
+                thumbnailUrl = Uri.parse(unsplashPhoto.urlThumb),
+                photoUrl = Uri.parse(unsplashPhoto.urlRegular),
                 user = User(
-                        username = it.userUsername,
-                        userAvatar = Uri.parse(it.userProfileImageMedium)
+                        username = unsplashPhoto.userUsername,
+                        userAvatar = Uri.parse(unsplashPhoto.userProfileImageMedium)
                 ),
-                description = it.description
+                description = unsplashPhoto.description
         )
     }
 }
