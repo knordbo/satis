@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.ItemTouchHelper.START
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.NO_POSITION
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
+import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureCardsBinding
 import com.satis.app.feature.cards.ui.CardAdapter
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class CardFragment @Inject constructor(
         private val viewModelFactory: CardViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment(), CardViewModel.Factory by viewModelFactory {
+) : BaseFragment<FeatureCardsBinding>(), CardViewModel.Factory by viewModelFactory {
 
     private val cardViewModel: CardViewModel by fragmentViewModel()
     private val cardsAdapter by lazy {
@@ -32,16 +32,14 @@ class CardFragment @Inject constructor(
         )
     }
 
-    private lateinit var binding: FeatureCardsBinding
+    private lateinit var itemTouchHelper: ItemTouchHelper
+
+    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureCardsBinding? =
+            FeatureCardsBinding.inflate(inflater, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FeatureCardsBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,7 +47,7 @@ class CardFragment @Inject constructor(
         binding.cards.adapter = cardsAdapter
         binding.cards.disableChangeAnimations()
 
-        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
+        itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, START or END) {
             override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
                 if (viewHolder.adapterPosition != NO_POSITION) {
                     cardsAdapter.onSwiped(viewHolder.adapterPosition)
@@ -57,11 +55,18 @@ class CardFragment @Inject constructor(
             }
 
             override fun onMove(recyclerView: RecyclerView, viewHolder: ViewHolder, target: ViewHolder): Boolean = false
-        }).attachToRecyclerView(binding.cards)
+        })
+        itemTouchHelper.attachToRecyclerView(binding.cards)
 
         navigationReselection.addReselectionListener(viewLifecycleOwner, R.id.home) {
             binding.cards.smoothScrollToPosition(0)
         }
+    }
+
+    override fun onDestroyView() {
+        binding.cards.adapter = null
+        itemTouchHelper.attachToRecyclerView(null)
+        super.onDestroyView()
     }
 
     override fun invalidate() = withState(cardViewModel) { cardState ->

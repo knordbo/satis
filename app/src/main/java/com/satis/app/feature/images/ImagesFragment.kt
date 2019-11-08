@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.bumptech.glide.Glide
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
 import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.satis.app.R
+import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureImagesBinding
 import com.satis.app.feature.images.ui.ImagesAdapter
@@ -23,7 +23,7 @@ import javax.inject.Inject
 class ImagesFragment @Inject constructor(
         private val viewModelFactory: ImagesViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment(), ImagesViewModel.Factory by viewModelFactory {
+) : BaseFragment<FeatureImagesBinding>(), ImagesViewModel.Factory by viewModelFactory {
 
     private val imagesViewModel: ImagesViewModel by fragmentViewModel()
     private val imageViewPreloadSizeProvider = ViewPreloadSizeProvider<PhotoState>()
@@ -37,12 +37,8 @@ class ImagesFragment @Inject constructor(
         )
     }
 
-    private lateinit var binding: FeatureImagesBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FeatureImagesBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureImagesBinding? =
+            FeatureImagesBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -65,6 +61,11 @@ class ImagesFragment @Inject constructor(
             binding.images.smoothScrollToPosition(0)
             imagesViewModel.onReselected()
         }
+    }
+
+    override fun onDestroyView() {
+        binding.images.adapter = null
+        super.onDestroyView()
     }
 
     override fun invalidate() {

@@ -132,6 +132,9 @@ dependencies {
     implementation(Deps.kotlin.coroutines.android)
     implementation(Deps.kotlin.coroutines.common)
 
+    // Leak canary
+    debugImplementation(Deps.leakCanary)
+
     // Material Design
     implementation(Deps.material)
 

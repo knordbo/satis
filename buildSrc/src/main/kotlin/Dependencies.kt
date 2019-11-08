@@ -39,6 +39,7 @@ private object Versions {
         const val serialization = "0.14.0-1.3.60-eap-76"
     }
 
+    const val leakCanary = "2.0-beta-3"
     const val material = "1.2.0-alpha01"
     const val mvrx = "1.3.0"
     const val okhttp = "4.2.2"
@@ -142,6 +143,7 @@ object Deps {
         }
     }
 
+    const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
 

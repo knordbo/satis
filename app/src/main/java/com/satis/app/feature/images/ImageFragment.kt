@@ -6,17 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.databinding.FeatureImageBinding
 import javax.inject.Inject
 
-class ImageFragment @Inject constructor() : Fragment() {
+class ImageFragment @Inject constructor() : BaseFragment<FeatureImageBinding>() {
 
-    private lateinit var binding: FeatureImageBinding
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FeatureImageBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureImageBinding? =
+            FeatureImageBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

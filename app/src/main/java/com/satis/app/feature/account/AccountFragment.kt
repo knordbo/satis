@@ -3,10 +3,10 @@ package com.satis.app.feature.account
 import android.os.Bundle
 import android.view.*
 import androidx.navigation.fragment.findNavController
-import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
+import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.prefs.Theme
 import com.satis.app.databinding.FeatureAccountBinding
@@ -20,23 +20,19 @@ import javax.inject.Inject
 class AccountFragment @Inject constructor(
         private val viewModelFactory: AccountViewModel.Factory,
         private val navigationReselection: NavigationReselection
-) : BaseMvRxFragment(), AccountViewModel.Factory by viewModelFactory {
+) : BaseFragment<FeatureAccountBinding>(), AccountViewModel.Factory by viewModelFactory {
 
     private val accountViewModel: AccountViewModel by fragmentViewModel()
     private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
     private val logAdapter by lazy { LogAdapter() }
     private var previousState: AccountState? = null
 
-    private lateinit var binding: FeatureAccountBinding
+    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureAccountBinding? =
+            FeatureAccountBinding.inflate(inflater, container, false)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        binding = FeatureAccountBinding.inflate(inflater, container, false)
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +45,11 @@ class AccountFragment @Inject constructor(
         navigationReselection.addReselectionListener(viewLifecycleOwner, R.id.account) {
             binding.logs.smoothScrollToPosition(0)
         }
+    }
+
+    override fun onDestroyView() {
+        binding.logs.adapter = null
+        super.onDestroyView()
     }
 
     override fun invalidate() = withState(accountViewModel) { accountState ->
