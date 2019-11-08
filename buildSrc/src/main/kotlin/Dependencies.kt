@@ -1,17 +1,17 @@
 private object Versions {
-    const val androidGradlePlugin = "4.0.0-alpha01"
+    const val androidGradlePlugin = "4.0.0-alpha02"
 
     object androidx {
         const val appCompat = "1.1.0"
         const val cardView = "1.0.0"
         const val constraintLayout = "2.0.0-beta3"
-        const val coreKtx = "1.2.0-beta01"
+        const val coreKtx = "1.2.0-beta02"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha02"
-        const val fragment = "1.2.0-rc01"
+        const val fragment = "1.2.0-rc02"
         const val concurrent = "1.0.0"
-        const val lifecycle = "2.2.0-rc01"
-        const val navigation = "2.2.0-rc01"
+        const val lifecycle = "2.2.0-rc02"
+        const val navigation = "2.2.0-rc02"
         const val recyclerView = "1.1.0-rc01"
         const val test = "1.3.0-alpha02"
         const val testExt = "1.1.2-alpha02"
