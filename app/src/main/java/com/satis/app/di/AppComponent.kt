@@ -23,7 +23,8 @@ import javax.inject.Singleton
     AccountModule::class,
     CardModule::class,
     PlaygroundModule::class,
-    ImagesModule::class
+    ImagesModule::class,
+    VariantModule::class
 ])
 interface AppComponent {
 

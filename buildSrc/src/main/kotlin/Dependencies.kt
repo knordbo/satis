@@ -26,7 +26,8 @@ private object Versions {
 
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.1"
-    const val firebaseFirestore = "21.2.1"
+    const val firebaseFirestore = "21.3.0"
+    const val flipper = "0.27.0"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.5.0-SNAPSHOT"
     const val googleServices = "4.0.0"
@@ -51,6 +52,7 @@ private object Versions {
         const val retrofit = "2.6.2"
     }
 
+    const val soloader = "0.5.1"
     const val sqldelight = "1.2.0"
     const val tinydancer = "0.1.2"
     const val workManager = "2.3.0-alpha03"
@@ -115,6 +117,11 @@ object Deps {
         const val firestore = "com.google.firebase:firebase-firestore:${Versions.firebaseFirestore}"
     }
 
+    object flipper {
+        const val flipper = "com.facebook.flipper:flipper:${Versions.flipper}"
+        const val noop = "com.facebook.flipper:flipper-noop:${Versions.flipper}"
+    }
+
     object glide {
         const val compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
@@ -156,6 +163,8 @@ object Deps {
         const val kotlinSerialization = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:${Versions.retrofit.kotlinSerialization}"
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit.retrofit}"
     }
+
+    const val soloader = "com.facebook.soloader:soloader:${Versions.soloader}"
 
     object sqldelight {
         const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"

@@ -118,6 +118,11 @@ dependencies {
     implementation(Deps.firebase.core)
     implementation(Deps.firebase.firestore)
 
+    // Flipper - debugger
+    debugImplementation(Deps.flipper.flipper)
+    debugImplementation(Deps.soloader)
+    releaseImplementation(Deps.flipper.noop)
+
     // Glide
     implementation(Deps.glide.glide)
     implementation(Deps.glide.recyclerview)

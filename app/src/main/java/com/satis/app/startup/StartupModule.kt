@@ -5,6 +5,7 @@ import com.satis.app.common.annotations.Main
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoSet
+import dagger.multibindings.Multibinds
 
 @Module
 abstract class StartupModule {
@@ -13,14 +14,17 @@ abstract class StartupModule {
     @Main
     abstract fun provideMainThreadStartupTasks(bind: MainThreadStartupTasks): StartupTasks
 
-    @Binds
-    @IntoSet
+    @Multibinds
     @Main
-    abstract fun provideBuildVariantConfigurationTask(bind: BuildVariantConfigurationTask): StartupTask
+    abstract fun provideMainStartupTasksSet(): Set<StartupTask>
 
     @Binds
     @Background
     abstract fun provideBackgroundThreadStartupTasks(bind: BackgroundThreadStartupTasks): StartupTasks
+
+    @Multibinds
+    @Background
+    abstract fun provideBackgroundStartupTasksSet(): Set<StartupTask>
 
     @Binds
     @IntoSet
