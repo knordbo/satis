@@ -14,7 +14,7 @@ import retrofit2.Retrofit
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [NetworkBindingModule::class])
 object NetworkModule {
 
     @Provides
