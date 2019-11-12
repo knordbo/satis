@@ -52,7 +52,7 @@ private object Versions {
         const val retrofit = "2.6.2"
     }
 
-    const val soloader = "0.5.1"
+    const val soloader = "0.8.1"
     const val sqldelight = "1.2.0"
     const val tinydancer = "0.1.2"
     const val workManager = "2.3.0-alpha03"
