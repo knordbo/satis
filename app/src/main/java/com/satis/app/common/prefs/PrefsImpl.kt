@@ -3,14 +3,18 @@ package com.satis.app.common.prefs
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import com.satis.app.common.annotations.SharedPrefsName
 import java.util.UUID
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PrefsImpl @Inject constructor(context: Context) : Prefs {
+class PrefsImpl @Inject constructor(
+        context: Context,
+        @SharedPrefsName prefsName: String
+) : Prefs {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(SHARED_PREFS, 0)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, 0)
 
     override val userId: UserId
         get() {
@@ -38,6 +42,5 @@ class PrefsImpl @Inject constructor(context: Context) : Prefs {
         }
 }
 
-private const val SHARED_PREFS = "satis.shared.prefs"
 private const val UNIQUE_USER_ID = "UNIQUE_USER_ID"
 private const val THEME = "THEME"

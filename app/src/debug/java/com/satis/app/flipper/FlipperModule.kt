@@ -11,8 +11,10 @@ import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Main
+import com.satis.app.common.annotations.SharedPrefsName
 import com.satis.app.startup.StartupTask
 import dagger.Binds
 import dagger.Module
@@ -51,6 +53,12 @@ object FlipperModule {
                     .map(context::getDatabasePath)
         }))
     }
+
+    @Provides
+    @IntoSet
+    @Singleton
+    fun provideSharedPrefsPlugin(context: Context, @SharedPrefsName sharedPrefsName: String): FlipperPlugin =
+            SharedPreferencesFlipperPlugin(context, sharedPrefsName)
 
     @Provides
     @Singleton

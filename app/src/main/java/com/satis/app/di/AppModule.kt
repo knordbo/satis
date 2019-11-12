@@ -6,10 +6,7 @@ import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.satis.app.App
 import com.satis.app.Database
-import com.satis.app.common.annotations.Background
-import com.satis.app.common.annotations.DatabaseName
-import com.satis.app.common.annotations.Io
-import com.satis.app.common.annotations.Main
+import com.satis.app.common.annotations.*
 import com.satis.app.common.fragment.InjectingFragmentFactory
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.navigation.NavigationReselectionImpl
@@ -32,8 +29,13 @@ object AppModule {
 
     @Provides
     @Singleton
+    @SharedPrefsName
+    fun provideSharedPrefsName(): String = "satis.shared.prefs"
+
+    @Provides
+    @Singleton
     @DatabaseName
-    fun provideDatabasename(): String = "satis.sqldelight.db"
+    fun provideDatabaseName(): String = "satis.sqldelight.db"
 
     @Provides
     @Singleton
