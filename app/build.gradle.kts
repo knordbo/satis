@@ -120,6 +120,7 @@ dependencies {
 
     // Flipper - debugger
     debugImplementation(Deps.flipper.flipper)
+    debugImplementation(Deps.flipper.network)
     debugImplementation(Deps.soloader)
     releaseImplementation(Deps.flipper.noop)
 

@@ -119,6 +119,7 @@ object Deps {
 
     object flipper {
         const val flipper = "com.facebook.flipper:flipper:${Versions.flipper}"
+        const val network = "com.facebook.flipper:flipper-network-plugin:${Versions.flipper}"
         const val noop = "com.facebook.flipper:flipper-noop:${Versions.flipper}"
     }
 

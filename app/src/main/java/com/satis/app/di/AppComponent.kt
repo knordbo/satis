@@ -17,6 +17,7 @@ import javax.inject.Singleton
 @Component(modules = [
     AssistedModule::class,
     AppModule::class,
+    NetworkModule::class,
     LogModule::class,
     StartupModule::class,
     WorkerModule::class,
