@@ -35,7 +35,7 @@ private object Versions {
     const val junit = "4.13-rc-1"
 
     object kotlin {
-        const val kotlin = "1.3.60-eap-76"
+        const val kotlin = "1.3.60-eap-143"
         const val coroutines = "1.3.2-1.3.60-eap-76"
         const val serialization = "0.14.0-1.3.60-eap-76"
     }
