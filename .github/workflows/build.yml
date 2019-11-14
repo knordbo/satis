@@ -14,7 +14,7 @@ jobs:
       with:
         java-version: 1.8
     - name: Decrypt secrets
-      run: openssl enc -d -aes-256-cbc -in secrets.zip.enc -out secrets.zip -k ${{secrets.ENCRYPT_ZIP_KEY}} && unzip secrets.zip
+      run: openssl enc -d -aes-256-cbc -md sha256 -in secrets.zip.enc -out secrets.zip -k ${{secrets.ENCRYPT_ZIP_KEY}} && unzip secrets.zip
     - name: Build debug
       run: ./gradlew assembleDebug --stacktrace
     - name: Run tests
