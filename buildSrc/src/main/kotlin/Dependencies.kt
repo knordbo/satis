@@ -27,11 +27,11 @@ private object Versions {
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.1"
     const val firebaseFirestore = "21.3.0"
-    const val flipper = "0.27.0"
+    const val flipper = "0.28.0"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.6.0-SNAPSHOT"
     const val googleServices = "4.0.0"
-    const val gradleVersionsPlugin = "0.20.0"
+    const val gradleVersionsPlugin = "0.27.0"
     const val junit = "4.13-rc-1"
 
     object kotlin {
