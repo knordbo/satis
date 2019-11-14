@@ -28,6 +28,8 @@ val keystoreProperties = Properties().apply {
 android {
     compileSdkVersion(BuildVersions.targetSdk)
 
+    ndkVersion = "20.0.5594570" // TODO remove when newer supported by github https://help.github.com/en/actions/automating-your-workflow-with-github-actions/software-installed-on-github-hosted-runners
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
