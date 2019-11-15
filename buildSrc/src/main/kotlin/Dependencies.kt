@@ -1,5 +1,5 @@
 private object Versions {
-    const val androidGradlePlugin = "4.0.0-alpha02"
+    const val androidGradlePlugin = "4.0.0-alpha03"
 
     object androidx {
         const val appCompat = "1.1.0"
@@ -35,9 +35,9 @@ private object Versions {
     const val junit = "4.13-rc-1"
 
     object kotlin {
-        const val kotlin = "1.3.60-eap-143"
-        const val coroutines = "1.3.2-1.3.60-eap-76"
-        const val serialization = "0.14.0-1.3.60-eap-76"
+        const val kotlin = "1.3.60"
+        const val coroutines = "1.3.2"
+        const val serialization = "0.13.0"
     }
 
     const val leakCanary = "2.0-beta-3"
