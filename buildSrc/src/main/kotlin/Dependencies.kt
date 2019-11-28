@@ -1,18 +1,18 @@
 private object Versions {
-    const val androidGradlePlugin = "4.0.0-alpha03"
+    const val androidGradlePlugin = "4.0.0-alpha04"
 
     object androidx {
         const val appCompat = "1.1.0"
         const val cardView = "1.0.0"
         const val constraintLayout = "2.0.0-beta3"
-        const val coreKtx = "1.2.0-beta02"
+        const val coreKtx = "1.2.0-rc01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha02"
         const val fragment = "1.2.0-rc02"
         const val concurrent = "1.0.0"
         const val lifecycle = "2.2.0-rc02"
         const val navigation = "2.2.0-rc02"
-        const val recyclerView = "1.1.0-rc01"
+        const val recyclerView = "1.1.0"
         const val test = "1.3.0-alpha02"
         const val testExt = "1.1.2-alpha02"
     }
@@ -20,28 +20,28 @@ private object Versions {
     const val crashlytics = "2.10.1"
 
     object dagger {
-        const val assistedInject = "0.5.1"
+        const val assistedInject = "0.5.2"
         const val dagger = "2.25.2"
     }
 
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.1"
     const val firebaseFirestore = "21.3.0"
-    const val flipper = "0.28.0"
+    const val flipper = "0.29.2"
     const val glide = "4.10.0"
-    const val googlePlayPublisher = "2.6.0-SNAPSHOT"
+    const val googlePlayPublisher = "2.6.1"
     const val googleServices = "4.0.0"
     const val gradleVersionsPlugin = "0.27.0"
     const val junit = "4.13-rc-1"
 
     object kotlin {
-        const val kotlin = "1.3.60"
+        const val kotlin = "1.3.61"
         const val coroutines = "1.3.2"
-        const val serialization = "0.13.0"
+        const val serialization = "0.14.0"
     }
 
-    const val leakCanary = "2.0-beta-3"
-    const val material = "1.2.0-alpha01"
+    const val leakCanary = "2.0"
+    const val material = "1.2.0-alpha02"
     const val mvrx = "1.3.0"
     const val okhttp = "4.2.2"
     const val photoView = "2.3.0"
@@ -55,7 +55,7 @@ private object Versions {
     const val soloader = "0.8.0"
     const val sqldelight = "1.2.0"
     const val tinydancer = "0.1.2"
-    const val workManager = "2.3.0-alpha03"
+    const val workManager = "2.3.0-beta01"
 }
 
 object Deps {
