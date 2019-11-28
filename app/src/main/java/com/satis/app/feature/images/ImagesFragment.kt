@@ -37,8 +37,8 @@ class ImagesFragment @Inject constructor(
         )
     }
 
-    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureImagesBinding? =
-            FeatureImagesBinding.inflate(inflater, container, false)
+    override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImagesBinding? =
+            FeatureImagesBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

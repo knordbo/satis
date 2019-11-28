@@ -13,10 +13,10 @@ abstract class BaseFragment<Binding : ViewBinding> : BaseMvRxFragment() {
 
     val binding: Binding get() = _binding!!
 
-    abstract fun bind(inflater: LayoutInflater, container: ViewGroup?): Binding?
+    abstract val bind: (LayoutInflater, ViewGroup?, Boolean) -> Binding?
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        _binding = bind(inflater, container)
+        _binding = bind(inflater, container, false)
         return _binding?.root ?: super.onCreateView(inflater, container, savedInstanceState)
     }
 

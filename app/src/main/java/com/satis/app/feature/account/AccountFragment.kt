@@ -1,7 +1,12 @@
 package com.satis.app.feature.account
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
@@ -27,8 +32,8 @@ class AccountFragment @Inject constructor(
     private val logAdapter by lazy { LogAdapter() }
     private var previousState: AccountState? = null
 
-    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureAccountBinding? =
-            FeatureAccountBinding.inflate(inflater, container, false)
+    override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureAccountBinding? =
+            FeatureAccountBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

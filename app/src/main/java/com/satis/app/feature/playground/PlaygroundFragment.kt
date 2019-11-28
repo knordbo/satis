@@ -14,12 +14,12 @@ import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
         private val viewModelFactory: PlaygroundViewModel.Factory
-): BaseFragment<FeaturePlaygroundBinding>(), PlaygroundViewModel.Factory by viewModelFactory {
+) : BaseFragment<FeaturePlaygroundBinding>(), PlaygroundViewModel.Factory by viewModelFactory {
 
     private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
-    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeaturePlaygroundBinding? =
-            FeaturePlaygroundBinding.inflate(layoutInflater, container, false)
+    override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeaturePlaygroundBinding? =
+            FeaturePlaygroundBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

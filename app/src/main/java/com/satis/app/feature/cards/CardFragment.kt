@@ -1,7 +1,12 @@
 package com.satis.app.feature.cards
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.END
 import androidx.recyclerview.widget.ItemTouchHelper.START
@@ -34,8 +39,8 @@ class CardFragment @Inject constructor(
 
     private lateinit var itemTouchHelper: ItemTouchHelper
 
-    override fun bind(inflater: LayoutInflater, container: ViewGroup?): FeatureCardsBinding? =
-            FeatureCardsBinding.inflate(inflater, container, false)
+    override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureCardsBinding? =
+            FeatureCardsBinding::inflate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
