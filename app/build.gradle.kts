@@ -166,9 +166,6 @@ dependencies {
     implementation(Deps.sqldelight.androidDriver)
     implementation(Deps.sqldelight.coroutinesExtensions)
 
-    // Tiny Dancer
-    implementation(Deps.tinydancer)
-
     // Work Manager
     implementation(Deps.workManager)
 

@@ -27,12 +27,12 @@ private object Versions {
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.1"
     const val firebaseFirestore = "21.3.0"
-    const val flipper = "0.29.2"
+    const val flipper = "0.29.4"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.6.1"
     const val googleServices = "4.0.0"
     const val gradleVersionsPlugin = "0.27.0"
-    const val junit = "4.13-rc-1"
+    const val junit = "4.13-rc-2"
 
     object kotlin {
         const val kotlin = "1.3.61"
@@ -54,7 +54,6 @@ private object Versions {
 
     const val soloader = "0.8.0"
     const val sqldelight = "1.2.0"
-    const val tinydancer = "0.1.2"
     const val workManager = "2.3.0-beta01"
 }
 
@@ -173,6 +172,5 @@ object Deps {
         const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}"
     }
 
-    const val tinydancer = "com.github.brianPlummer:tinydancer:${Versions.tinydancer}"
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
 }
