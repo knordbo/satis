@@ -11,5 +11,5 @@ val View.layoutInflater: LayoutInflater
     get() = LayoutInflater.from(context)
 
 fun RecyclerView.disableChangeAnimations() {
-    (this.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+    (itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
 }

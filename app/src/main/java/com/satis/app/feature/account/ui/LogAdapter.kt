@@ -29,6 +29,5 @@ class LogAdapter : ListAdapter<LogEntry, LogViewHolder>(Differ) {
     private object Differ : DiffUtil.ItemCallback<LogEntry>() {
         override fun areItemsTheSame(oldItem: LogEntry, newItem: LogEntry): Boolean = oldItem.id == newItem.id
         override fun areContentsTheSame(oldItem: LogEntry, newItem: LogEntry): Boolean = oldItem == newItem
-
     }
 }
