@@ -6,14 +6,12 @@ import com.airbnb.mvrx.BaseMvRxViewModel
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MvRxState
 import com.airbnb.mvrx.ViewModelContext
-import com.satis.app.BuildConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel<S : MvRxState>(
-        initialState: S,
-        debugMode: Boolean = BuildConfig.DEBUG
-) : BaseMvRxViewModel<S>(initialState, debugMode), CoroutineScope {
+        initialState: S
+) : BaseMvRxViewModel<S>(initialState), CoroutineScope {
 
     init {
         logStateChanges()

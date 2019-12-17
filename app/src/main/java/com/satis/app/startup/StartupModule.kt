@@ -14,6 +14,11 @@ abstract class StartupModule {
     @Main
     abstract fun provideMainThreadStartupTasks(bind: MainThreadStartupTasks): StartupTasks
 
+    @Binds
+    @IntoSet
+    @Main
+    abstract fun provideMvRxInitTask(bind: MvRxInitTask): StartupTask
+
     @Multibinds
     @Main
     abstract fun provideMainStartupTasksSet(): Set<StartupTask>

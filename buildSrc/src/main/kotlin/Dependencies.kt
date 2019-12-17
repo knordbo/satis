@@ -1,10 +1,10 @@
 private object Versions {
-    const val androidGradlePlugin = "4.0.0-alpha04"
+    const val androidGradlePlugin = "4.0.0-alpha06"
 
     object androidx {
         const val appCompat = "1.2.0-alpha01"
         const val cardView = "1.0.0"
-        const val constraintLayout = "2.0.0-beta3"
+        const val constraintLayout = "2.0.0-beta4"
         const val coreKtx = "1.2.0-rc01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha03"
@@ -21,13 +21,13 @@ private object Versions {
 
     object dagger {
         const val assistedInject = "0.5.2"
-        const val dagger = "2.25.2"
+        const val dagger = "2.25.3"
     }
 
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.1"
-    const val firebaseFirestore = "21.3.0"
-    const val flipper = "0.30.0"
+    const val firebaseFirestore = "21.3.1"
+    const val flipper = "0.30.1"
     const val glide = "4.10.0"
     const val googlePlayPublisher = "2.6.1"
     const val googleServices = "4.0.0"
@@ -36,24 +36,24 @@ private object Versions {
 
     object kotlin {
         const val kotlin = "1.3.61"
-        const val coroutines = "1.3.2"
+        const val coroutines = "1.3.3"
         const val serialization = "0.14.0"
     }
 
     const val leakCanary = "2.0"
     const val material = "1.2.0-alpha02"
-    const val mvrx = "1.3.0"
+    const val mvrx = "2.0.0-alpha1"
     const val okhttp = "4.2.2"
     const val photoView = "2.3.0"
     const val playCore = "1.6.4"
 
     object retrofit {
         const val kotlinSerialization = "0.4.0"
-        const val retrofit = "2.6.2"
+        const val retrofit = "2.7.0"
     }
 
     const val soloader = "0.8.0"
-    const val sqldelight = "1.2.0"
+    const val sqldelight = "1.2.1"
     const val workManager = "2.3.0-beta01"
 }
 
