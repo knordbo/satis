@@ -74,7 +74,9 @@ android {
         pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
     }
 
-    viewBinding.isEnabled = true
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 play {
