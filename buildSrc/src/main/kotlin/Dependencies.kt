@@ -21,7 +21,7 @@ private object Versions {
 
     object dagger {
         const val assistedInject = "0.5.2"
-        const val dagger = "2.25.3"
+        const val dagger = "2.25.4"
     }
 
     const val fabric = "1.29.0"
@@ -32,7 +32,7 @@ private object Versions {
     const val googlePlayPublisher = "2.6.1"
     const val googleServices = "4.0.0"
     const val gradleVersionsPlugin = "0.27.0"
-    const val junit = "4.13-rc-2"
+    const val junit = "4.13"
 
     object kotlin {
         const val kotlin = "1.3.61"
@@ -40,10 +40,10 @@ private object Versions {
         const val serialization = "0.14.0"
     }
 
-    const val leakCanary = "2.0"
+    const val leakCanary = "2.1"
     const val material = "1.2.0-alpha03"
     const val mvrx = "2.0.0-alpha2"
-    const val okhttp = "4.2.2"
+    const val okhttp = "4.3.0"
     const val photoView = "2.3.0"
     const val playCore = "1.6.4"
 
