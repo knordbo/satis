@@ -49,7 +49,7 @@ private object Versions {
 
     object retrofit {
         const val kotlinSerialization = "0.4.0"
-        const val retrofit = "2.7.0"
+        const val retrofit = "2.7.1"
     }
 
     const val soloader = "0.8.0"
