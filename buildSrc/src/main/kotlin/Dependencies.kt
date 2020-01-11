@@ -1,5 +1,5 @@
 private object Versions {
-    const val androidGradlePlugin = "4.0.0-alpha07"
+    const val androidGradlePlugin = "4.0.0-alpha08"
 
     object androidx {
         const val appCompat = "1.2.0-alpha01"
@@ -8,7 +8,7 @@ private object Versions {
         const val coreKtx = "1.2.0-rc01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha03"
-        const val fragment = "1.2.0-rc04"
+        const val fragment = "1.2.0-rc05"
         const val concurrent = "1.1.0-alpha01"
         const val lifecycle = "2.2.0-rc03"
         const val navigation = "2.2.0-rc04"
@@ -54,7 +54,7 @@ private object Versions {
 
     const val soloader = "0.8.0"
     const val sqldelight = "1.2.1"
-    const val workManager = "2.3.0-beta02"
+    const val workManager = "2.3.0-rc01"
 }
 
 object Deps {
