@@ -25,7 +25,7 @@ private object Versions {
     }
 
     const val fabric = "1.29.0"
-    const val firebaseCore = "17.2.1"
+    const val firebaseCore = "17.2.2"
     const val firebaseFirestore = "21.3.1"
     const val flipper = "0.30.1"
     const val glide = "4.10.0"
