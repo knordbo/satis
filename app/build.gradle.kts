@@ -109,6 +109,9 @@ dependencies {
     implementation(Deps.androidx.recyclerView)
     kapt(Deps.androidx.lifecycle.compiler)
 
+    // Work Manager
+    implementation(Deps.androidx.workManager)
+
     // Crashlytics
     implementation(Deps.crashlytics)
 
@@ -167,9 +170,6 @@ dependencies {
     // SQLDelight
     implementation(Deps.sqldelight.androidDriver)
     implementation(Deps.sqldelight.coroutinesExtensions)
-
-    // Work Manager
-    implementation(Deps.workManager)
 
     // Unit Testing
     testImplementation(Deps.junit)
