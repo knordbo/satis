@@ -2,10 +2,10 @@ private object Versions {
     const val androidGradlePlugin = "4.0.0-alpha09"
 
     object androidx {
-        const val appCompat = "1.2.0-alpha01"
+        const val appCompat = "1.2.0-alpha02"
         const val cardView = "1.0.0"
         const val constraintLayout = "2.0.0-beta4"
-        const val coreKtx = "1.2.0-rc01"
+        const val coreKtx = "1.3.0-alpha01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha03"
         const val fragment = "1.2.0"
@@ -22,12 +22,12 @@ private object Versions {
 
     object dagger {
         const val assistedInject = "0.5.2"
-        const val dagger = "2.25.4"
+        const val dagger = "2.26"
     }
 
     const val fabric = "1.29.0"
     const val firebaseCore = "17.2.2"
-    const val firebaseFirestore = "21.3.1"
+    const val firebaseFirestore = "21.4.0"
     const val flipper = "0.30.2"
     const val glide = "4.11.0"
     const val googlePlayPublisher = "2.6.1"
@@ -53,7 +53,7 @@ private object Versions {
         const val retrofit = "2.7.1"
     }
 
-    const val soloader = "0.8.0"
+    const val soloader = "0.8.1"
     const val sqldelight = "1.2.2"
 }
 
