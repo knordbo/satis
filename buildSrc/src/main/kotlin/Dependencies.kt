@@ -8,14 +8,14 @@ private object Versions {
         const val coreKtx = "1.3.0-alpha01"
         const val coreTesting = "2.1.0"
         const val espresso = "3.3.0-alpha03"
-        const val fragment = "1.2.0"
+        const val fragment = "1.2.1"
         const val concurrent = "1.1.0-alpha01"
         const val lifecycle = "2.2.0"
-        const val navigation = "2.2.0"
+        const val navigation = "2.3.0-alpha01"
         const val recyclerView = "1.2.0-alpha01"
         const val test = "1.3.0-alpha03"
         const val testExt = "1.1.2-alpha03"
-        const val workManager = "2.3.0"
+        const val workManager = "2.3.1"
     }
 
     const val crashlytics = "2.10.1"
@@ -41,7 +41,7 @@ private object Versions {
         const val serialization = "0.14.0"
     }
 
-    const val leakCanary = "2.1"
+    const val leakCanary = "2.2"
     const val material = "1.2.0-alpha04"
     const val mvrx = "2.0.0-alpha2"
     const val okhttp = "4.3.1"
