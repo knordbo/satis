@@ -110,7 +110,9 @@ dependencies {
     kapt(Deps.androidx.lifecycle.compiler)
 
     // Work Manager
-    implementation(Deps.androidx.workManager)
+    implementation(Deps.androidx.workManager) {
+        exclude(group = "com.google.guava", module = "listenablefuture")
+    }
 
     // Crashlytics
     implementation(Deps.crashlytics)
