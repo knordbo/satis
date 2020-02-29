@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/key_line_small"
+    android:paddingBottom="@dimen/key_line_small"
+    android:textSize="@dimen/text_regular"
+    android:textStyle="bold"
+    />
