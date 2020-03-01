@@ -10,13 +10,13 @@ import org.junit.Test
 
 class AccountFragmentTest {
 
-    @Test
-    fun showsAppInfo() {
-        launchFragmentInContainer(themeResId = R.style.AppTheme) {
-            createAccountFragment()
-        }
-
-        onView(withId(R.id.versionNumber)).check(matches(withText("Version: 1")))
+  @Test
+  fun showsAppInfo() {
+    launchFragmentInContainer(themeResId = R.style.AppTheme) {
+      createAccountFragment()
     }
+
+    onView(withId(R.id.versionNumber)).check(matches(withText("Version: 1")))
+  }
 
 }

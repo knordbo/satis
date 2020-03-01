@@ -12,25 +12,25 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class ChargingNetworkWorker @AssistedInject constructor(
-        @Assisted context: Context,
-        @Assisted workerParameters: WorkerParameters,
-        @Io private val io: CoroutineContext,
-        private val logger: Logger
+    @Assisted context: Context,
+    @Assisted workerParameters: WorkerParameters,
+    @Io private val io: CoroutineContext,
+    private val logger: Logger
 ) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun doWork(): Result = withContext(io) {
-        try {
-            logger.log(LOG_TAG, "Starting in $isAppForegroundString")
-            logger.log(LOG_TAG, "Success")
-            Result.success()
-        } catch (t: Throwable) {
-            logger.log(LOG_TAG, "Failure")
-            Result.failure()
-        }
+  override suspend fun doWork(): Result = withContext(io) {
+    try {
+      logger.log(LOG_TAG, "Starting in $isAppForegroundString")
+      logger.log(LOG_TAG, "Success")
+      Result.success()
+    } catch (t: Throwable) {
+      logger.log(LOG_TAG, "Failure")
+      Result.failure()
     }
+  }
 
-    @AssistedInject.Factory
-    interface Factory : ChildWorkerFactory
+  @AssistedInject.Factory
+  interface Factory : ChildWorkerFactory
 
 }
 

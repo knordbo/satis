@@ -4,9 +4,9 @@ import com.satis.app.work.WorkScheduler
 import javax.inject.Inject
 
 class WorkSchedulerTask @Inject constructor(
-        private val workScheduler: WorkScheduler
+    private val workScheduler: WorkScheduler
 ) : StartupTask {
-    override fun execute() {
-        workScheduler.schedule()
-    }
+  override fun execute() {
+    workScheduler.schedule()
+  }
 }

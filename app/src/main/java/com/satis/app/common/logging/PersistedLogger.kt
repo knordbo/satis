@@ -16,41 +16,41 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class PersistedLoggerImpl @Inject constructor(
-        private val logQueries: LogQueries,
-        @Io private val io: CoroutineContext
+    private val logQueries: LogQueries,
+    @Io private val io: CoroutineContext
 ) : PersistedLogger, CoroutineScope {
 
-    override val coroutineContext: CoroutineContext = io
+  override val coroutineContext: CoroutineContext = io
 
-    override fun log(tag: String, message: String) {
-        val timestamp = System.currentTimeMillis()
-        launch(io) {
-            logQueries.insertLog(
-                    timestamp = timestamp,
-                    tag = tag,
-                    message = message
-            )
-        }
+  override fun log(tag: String, message: String) {
+    val timestamp = System.currentTimeMillis()
+    launch(io) {
+      logQueries.insertLog(
+          timestamp = timestamp,
+          tag = tag,
+          message = message
+      )
     }
+  }
 
-    override fun streamLogs(): Flow<List<LogEntry>> = logQueries.getLatestLogs()
-            .asFlow()
-            .map { logs ->
-                logs.executeAsList().map(LogEntity::toModel)
-            }
-            .flowOn(io)
+  override fun streamLogs(): Flow<List<LogEntry>> = logQueries.getLatestLogs()
+      .asFlow()
+      .map { logs ->
+        logs.executeAsList().map(LogEntity::toModel)
+      }
+      .flowOn(io)
 
-    override suspend fun searchLogs(query: String): List<LogEntry> {
-        return withContext(io) {
-            logQueries.searchLogs(query).executeAsList().map(LogEntity::toModel)
-        }
+  override suspend fun searchLogs(query: String): List<LogEntry> {
+    return withContext(io) {
+      logQueries.searchLogs(query).executeAsList().map(LogEntity::toModel)
     }
+  }
 
 }
 
 private fun LogEntity.toModel() = LogEntry(
-        id = id,
-        timestamp = timestamp,
-        tag = tag,
-        message = message
+    id = id,
+    timestamp = timestamp,
+    tag = tag,
+    message = message
 )

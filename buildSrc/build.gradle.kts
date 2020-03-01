@@ -1,13 +1,13 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
+  repositories {
+    jcenter()
+  }
 }
 
 repositories {
-    jcenter()
+  jcenter()
 }
 
 plugins {
-    `kotlin-dsl`
+  `kotlin-dsl`
 }

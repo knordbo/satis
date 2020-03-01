@@ -16,26 +16,26 @@ import kotlin.coroutines.CoroutineContext
 
 class App : Application(), Configuration.Provider, CoroutineScope {
 
-    @Inject lateinit var workConfiguration: Provider<Configuration>
-    @Inject @Main override lateinit var coroutineContext: CoroutineContext
-    @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
-    @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
+  @Inject lateinit var workConfiguration: Provider<Configuration>
+  @Inject @Main override lateinit var coroutineContext: CoroutineContext
+  @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
+  @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
 
-    lateinit var appComponent: AppComponent
+  lateinit var appComponent: AppComponent
 
-    override fun onCreate() {
-        appComponent = DaggerAppComponent.factory().create(this)
-        appComponent.inject(this)
+  override fun onCreate() {
+    appComponent = DaggerAppComponent.factory().create(this)
+    appComponent.inject(this)
 
-        super.onCreate()
+    super.onCreate()
 
-        launch {
-            mainThreadStartupTasks.executeAll()
-            backgroundThreadStartupTasks.executeAll()
-        }
+    launch {
+      mainThreadStartupTasks.executeAll()
+      backgroundThreadStartupTasks.executeAll()
     }
+  }
 
-    override fun getWorkManagerConfiguration(): Configuration = workConfiguration.get()
+  override fun getWorkManagerConfiguration(): Configuration = workConfiguration.get()
 
 }
 

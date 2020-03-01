@@ -11,35 +11,35 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 
 class ImmediateAppUpdater @AssistedInject constructor(
-        @Assisted private val activity: Activity,
-        private val appUpdateManager: AppUpdateManager,
-        private val logger: Logger
+    @Assisted private val activity: Activity,
+    private val appUpdateManager: AppUpdateManager,
+    private val logger: Logger
 ) {
 
-    fun startAppUpdateIfNeeded(initialCall: Boolean) {
-        appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            val shouldStartUpdate = initialCall && appUpdateInfo.updateAvailability() == UPDATE_AVAILABLE
-            val shouldContinueUpdate = appUpdateInfo.updateAvailability() == DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
-            if ((shouldStartUpdate || shouldContinueUpdate) && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
-                try {
-                    logger.log(LOG_TAG, "Starting app update")
-                    appUpdateManager.startUpdateFlowForResult(
-                            appUpdateInfo,
-                            IMMEDIATE,
-                            activity,
-                            IMMEDIATE_IN_APP_UPDATE
-                    )
-                } catch (e: IntentSender.SendIntentException) {
-                    logger.log(LOG_TAG, "SendIntentException: $e")
-                }
-            }
+  fun startAppUpdateIfNeeded(initialCall: Boolean) {
+    appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+      val shouldStartUpdate = initialCall && appUpdateInfo.updateAvailability() == UPDATE_AVAILABLE
+      val shouldContinueUpdate = appUpdateInfo.updateAvailability() == DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+      if ((shouldStartUpdate || shouldContinueUpdate) && appUpdateInfo.isUpdateTypeAllowed(IMMEDIATE)) {
+        try {
+          logger.log(LOG_TAG, "Starting app update")
+          appUpdateManager.startUpdateFlowForResult(
+              appUpdateInfo,
+              IMMEDIATE,
+              activity,
+              IMMEDIATE_IN_APP_UPDATE
+          )
+        } catch (e: IntentSender.SendIntentException) {
+          logger.log(LOG_TAG, "SendIntentException: $e")
         }
+      }
     }
+  }
 
-    @AssistedInject.Factory
-    interface Factory {
-        fun create(activity: Activity): ImmediateAppUpdater
-    }
+  @AssistedInject.Factory
+  interface Factory {
+    fun create(activity: Activity): ImmediateAppUpdater
+  }
 }
 
 private const val LOG_TAG = "ImmediateAppUpdater"

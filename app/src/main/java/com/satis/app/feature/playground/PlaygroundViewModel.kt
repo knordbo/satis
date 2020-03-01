@@ -15,38 +15,38 @@ import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
 class PlaygroundViewModel @AssistedInject constructor(
-        @Assisted initialState: PlaygroundState,
-        private val logger: PersistedLogger
+    @Assisted initialState: PlaygroundState,
+    private val logger: PersistedLogger
 ) : BaseViewModel<PlaygroundState>(
-        initialState = initialState
+    initialState = initialState
 ) {
-    init {
-        fetch("")
-    }
+  init {
+    fetch("")
+  }
 
-    fun fetch(query: String) {
-        launch {
-            val searchResults = logger.searchLogs(query).map(LogEntry::formatted)
-            setState {
-                copy(items = searchResults)
-            }
-        }
+  fun fetch(query: String) {
+    launch {
+      val searchResults = logger.searchLogs(query).map(LogEntry::formatted)
+      setState {
+        copy(items = searchResults)
+      }
     }
+  }
 
-    @AssistedInject.Factory
-    interface Factory {
-        fun createPlaygroundViewModel(initialState: PlaygroundState): PlaygroundViewModel
-    }
+  @AssistedInject.Factory
+  interface Factory {
+    fun createPlaygroundViewModel(initialState: PlaygroundState): PlaygroundViewModel
+  }
 
-    companion object : MvRxViewModelFactory<PlaygroundViewModel, PlaygroundState> {
-        override fun create(viewModelContext: ViewModelContext, state: PlaygroundState): PlaygroundViewModel {
-            return viewModelContext.viewModelFactory<Factory>().createPlaygroundViewModel(state)
-        }
+  companion object : MvRxViewModelFactory<PlaygroundViewModel, PlaygroundState> {
+    override fun create(viewModelContext: ViewModelContext, state: PlaygroundState): PlaygroundViewModel {
+      return viewModelContext.viewModelFactory<Factory>().createPlaygroundViewModel(state)
     }
+  }
 
 }
 
 @Parcelize
 data class PlaygroundState(
-        val items: List<String> = emptyList()
+    val items: List<String> = emptyList()
 ) : MvRxState, Parcelable

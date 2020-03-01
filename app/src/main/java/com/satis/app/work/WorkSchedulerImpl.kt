@@ -14,61 +14,61 @@ import javax.inject.Singleton
 
 @Singleton
 class WorkSchedulerImpl @Inject constructor(
-        private val logger: Logger,
-        private val workManager: WorkManager
+    private val logger: Logger,
+    private val workManager: WorkManager
 ) : WorkScheduler {
 
-    override fun schedule() {
-        logger.log(LOG_TAG, "Scheduling work")
-        recurringNetworkJob()
-        recurringChargingNetworkJob()
-        recurringImageFetchJob()
-        logger.log(LOG_TAG, "Done scheduling work")
-    }
+  override fun schedule() {
+    logger.log(LOG_TAG, "Scheduling work")
+    recurringNetworkJob()
+    recurringChargingNetworkJob()
+    recurringImageFetchJob()
+    logger.log(LOG_TAG, "Done scheduling work")
+  }
 
-    private fun recurringNetworkJob() {
-        val name = "network_job"
+  private fun recurringNetworkJob() {
+    val name = "network_job"
 
-        val constraints = Constraints.Builder()
-                .setRequiredNetworkType(CONNECTED)
-                .build()
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(CONNECTED)
+        .build()
 
-        val work = PeriodicWorkRequestBuilder<NetworkWorker>(5, TimeUnit.HOURS)
-                .setConstraints(constraints)
-                .build()
+    val work = PeriodicWorkRequestBuilder<NetworkWorker>(5, TimeUnit.HOURS)
+        .setConstraints(constraints)
+        .build()
 
-        workManager.enqueueUniquePeriodicWork(name, KEEP, work)
-    }
+    workManager.enqueueUniquePeriodicWork(name, KEEP, work)
+  }
 
-    private fun recurringChargingNetworkJob() {
-        val name = "charging_network_job"
+  private fun recurringChargingNetworkJob() {
+    val name = "charging_network_job"
 
-        val constraints = Constraints.Builder()
-                .setRequiredNetworkType(CONNECTED)
-                .setRequiresCharging(true)
-                .build()
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(CONNECTED)
+        .setRequiresCharging(true)
+        .build()
 
-        val work = PeriodicWorkRequestBuilder<ChargingNetworkWorker>(24, TimeUnit.HOURS)
-                .setConstraints(constraints)
-                .build()
+    val work = PeriodicWorkRequestBuilder<ChargingNetworkWorker>(24, TimeUnit.HOURS)
+        .setConstraints(constraints)
+        .build()
 
-        workManager.enqueueUniquePeriodicWork(name, KEEP, work)
-    }
+    workManager.enqueueUniquePeriodicWork(name, KEEP, work)
+  }
 
-    private fun recurringImageFetchJob() {
-        val name = "image_fetch_job"
+  private fun recurringImageFetchJob() {
+    val name = "image_fetch_job"
 
-        val constraints = Constraints.Builder()
-                .setRequiredNetworkType(UNMETERED)
-                .setRequiresCharging(true)
-                .build()
+    val constraints = Constraints.Builder()
+        .setRequiredNetworkType(UNMETERED)
+        .setRequiresCharging(true)
+        .build()
 
-        val work = PeriodicWorkRequestBuilder<ImageWorker>(4, TimeUnit.HOURS)
-                .setConstraints(constraints)
-                .build()
+    val work = PeriodicWorkRequestBuilder<ImageWorker>(4, TimeUnit.HOURS)
+        .setConstraints(constraints)
+        .build()
 
-        workManager.enqueueUniquePeriodicWork(name, KEEP, work)
-    }
+    workManager.enqueueUniquePeriodicWork(name, KEEP, work)
+  }
 
 }
 

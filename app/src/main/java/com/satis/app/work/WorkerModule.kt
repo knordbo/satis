@@ -13,37 +13,37 @@ import javax.inject.Singleton
 @Module(includes = [WorkerBindingModule::class])
 object WorkerModule {
 
-    @Provides
-    @Singleton
-    fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
+  @Provides
+  @Singleton
+  fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
 
-    @Provides
-    @Singleton
-    fun provideConfiguration(workerFactory: WorkerFactory): Configuration =
-            Configuration
-                    .Builder()
-                    .setWorkerFactory(workerFactory)
-                    .build()
+  @Provides
+  @Singleton
+  fun provideConfiguration(workerFactory: WorkerFactory): Configuration =
+      Configuration
+          .Builder()
+          .setWorkerFactory(workerFactory)
+          .build()
 
 }
 
 @Module
 abstract class WorkerBindingModule {
 
-    @Binds
-    abstract fun provideWorkerFactory(bind: InjectingWorkerFactory): WorkerFactory
+  @Binds
+  abstract fun provideWorkerFactory(bind: InjectingWorkerFactory): WorkerFactory
 
-    @Binds
-    abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler
+  @Binds
+  abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler
 
-    @Binds
-    @IntoMap
-    @WorkerKey(NetworkWorker::class)
-    abstract fun provideNetworkWorker(bind: NetworkWorker.Factory): ChildWorkerFactory
+  @Binds
+  @IntoMap
+  @WorkerKey(NetworkWorker::class)
+  abstract fun provideNetworkWorker(bind: NetworkWorker.Factory): ChildWorkerFactory
 
-    @Binds
-    @IntoMap
-    @WorkerKey(ChargingNetworkWorker::class)
-    abstract fun provideChargingNetworkWorker(bind: ChargingNetworkWorker.Factory): ChildWorkerFactory
+  @Binds
+  @IntoMap
+  @WorkerKey(ChargingNetworkWorker::class)
+  abstract fun provideChargingNetworkWorker(bind: ChargingNetworkWorker.Factory): ChildWorkerFactory
 
 }

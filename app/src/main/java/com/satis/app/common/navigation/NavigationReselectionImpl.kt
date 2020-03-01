@@ -11,20 +11,20 @@ import javax.inject.Singleton
 @Singleton
 class NavigationReselectionImpl @Inject constructor() : NavigationReselection, NavigationReselectionUpdater {
 
-    private val callbacks = mutableMapOf<@IdRes Int, () -> Unit>()
+  private val callbacks = mutableMapOf<@IdRes Int, () -> Unit>()
 
-    override fun onNavigationItemReselected(navigationId: Int) {
-        callbacks[navigationId]?.invoke()
-    }
+  override fun onNavigationItemReselected(navigationId: Int) {
+    callbacks[navigationId]?.invoke()
+  }
 
-    override fun addReselectionListener(lifecycleOwner: LifecycleOwner, @IdRes navigationId: Int, callback: () -> Unit) {
-        callbacks[navigationId] = callback
-        lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
-            @OnLifecycleEvent(ON_DESTROY)
-            fun onDestroy() {
-                callbacks -= navigationId
-            }
-        })
-    }
+  override fun addReselectionListener(lifecycleOwner: LifecycleOwner, @IdRes navigationId: Int, callback: () -> Unit) {
+    callbacks[navigationId] = callback
+    lifecycleOwner.lifecycle.addObserver(object : LifecycleObserver {
+      @OnLifecycleEvent(ON_DESTROY)
+      fun onDestroy() {
+        callbacks -= navigationId
+      }
+    })
+  }
 
 }

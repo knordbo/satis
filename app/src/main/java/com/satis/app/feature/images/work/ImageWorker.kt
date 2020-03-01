@@ -17,41 +17,41 @@ import java.util.concurrent.TimeUnit
 import kotlin.coroutines.CoroutineContext
 
 class ImageWorker @AssistedInject constructor(
-        @Assisted private val context: Context,
-        @Assisted workerParameters: WorkerParameters,
-        @Io private val io: CoroutineContext,
-        private val logger: Logger,
-        private val unsplashRepository: UnsplashRepository
+    @Assisted private val context: Context,
+    @Assisted workerParameters: WorkerParameters,
+    @Io private val io: CoroutineContext,
+    private val logger: Logger,
+    private val unsplashRepository: UnsplashRepository
 ) : CoroutineWorker(context, workerParameters) {
 
-    override suspend fun doWork(): Result = withContext(io) {
-        try {
-            logger.log(LOG_TAG, "Starting in $isAppForegroundString")
+  override suspend fun doWork(): Result = withContext(io) {
+    try {
+      logger.log(LOG_TAG, "Starting in $isAppForegroundString")
 
-            val popularImages = unsplashRepository.fetchPhotos(NATURE)
-            val requestManager = Glide.with(context)
-            popularImages
-                    .take(FETCH_IMAGE_COUNT)
-                    .forEach { photo ->
-                        requestManager
-                                .load(photo.photoUrl)
-                                .thumbnail(requestManager.load(photo.thumbnailUrl)
-                                        .centerCrop())
-                                .centerCrop()
-                                .submit()
-                                .get(5, TimeUnit.SECONDS)
-                    }
+      val popularImages = unsplashRepository.fetchPhotos(NATURE)
+      val requestManager = Glide.with(context)
+      popularImages
+          .take(FETCH_IMAGE_COUNT)
+          .forEach { photo ->
+            requestManager
+                .load(photo.photoUrl)
+                .thumbnail(requestManager.load(photo.thumbnailUrl)
+                    .centerCrop())
+                .centerCrop()
+                .submit()
+                .get(5, TimeUnit.SECONDS)
+          }
 
-            logger.log(LOG_TAG, "Success")
-            Result.success()
-        } catch (t: Throwable) {
-            logger.log(LOG_TAG, "Failure")
-            Result.failure()
-        }
+      logger.log(LOG_TAG, "Success")
+      Result.success()
+    } catch (t: Throwable) {
+      logger.log(LOG_TAG, "Failure")
+      Result.failure()
     }
+  }
 
-    @AssistedInject.Factory
-    interface Factory : ChildWorkerFactory
+  @AssistedInject.Factory
+  interface Factory : ChildWorkerFactory
 
 }
 

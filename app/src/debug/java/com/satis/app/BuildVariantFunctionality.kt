@@ -7,9 +7,9 @@ import com.facebook.flipper.plugins.inspector.DescriptorMapping
 import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 
 fun configureBuildVariantFunctionality(context: Context) {
-    if (FlipperUtils.shouldEnableFlipper(context)) {
-        val client = AndroidFlipperClient.getInstance(context)
-        client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
-        client.start()
-    }
+  if (FlipperUtils.shouldEnableFlipper(context)) {
+    val client = AndroidFlipperClient.getInstance(context)
+    client.addPlugin(InspectorFlipperPlugin(context, DescriptorMapping.withDefaults()))
+    client.start()
+  }
 }

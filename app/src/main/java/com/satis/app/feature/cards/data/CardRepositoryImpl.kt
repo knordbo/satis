@@ -16,50 +16,50 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class CardRepositoryImpl @Inject constructor(
-        userIdProvider: Provider<UserId>,
-        firebaseFirestore: FirebaseFirestore,
-        @Io private val io: CoroutineContext
+    userIdProvider: Provider<UserId>,
+    firebaseFirestore: FirebaseFirestore,
+    @Io private val io: CoroutineContext
 ) : CardRepository {
 
-    private val userId by lazy(LazyThreadSafetyMode.NONE) { userIdProvider.get() }
-    private val cardsCollection by lazy { firebaseFirestore.collection(CARDS_COLLECTION) }
+  private val userId by lazy(LazyThreadSafetyMode.NONE) { userIdProvider.get() }
+  private val cardsCollection by lazy { firebaseFirestore.collection(CARDS_COLLECTION) }
 
-    override fun getCards(): Flow<List<Card>> = channelFlow {
-        val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
-            if (querySnapshot != null && !isClosedForSend) {
-                launch(io) {
-                    val cards = querySnapshot.documents
-                            .mapNotNull {
-                                it.toObject(DbCard::class.java)?.toModel(it.id, userId)
-                            }
-                    offer(cards)
-                }
-            }
+  override fun getCards(): Flow<List<Card>> = channelFlow {
+    val listener = cardsCollection.addSnapshotListener { querySnapshot, _ ->
+      if (querySnapshot != null && !isClosedForSend) {
+        launch(io) {
+          val cards = querySnapshot.documents
+              .mapNotNull {
+                it.toObject(DbCard::class.java)?.toModel(it.id, userId)
+              }
+          offer(cards)
         }
-        awaitClose {
-            listener.remove()
-        }
-    }.flowOn(io)
-
-    override fun addCard(card: Card) {
-        cardsCollection.add(card.toDb())
+      }
     }
-
-    override fun removeCard(id: String) {
-        cardsCollection.document(id).delete()
+    awaitClose {
+      listener.remove()
     }
+  }.flowOn(io)
 
-    override fun like(id: String, like: Boolean) {
-        setDiff(id, mapOf(LIKES to mapOf(userId.value to like)))
-    }
+  override fun addCard(card: Card) {
+    cardsCollection.add(card.toDb())
+  }
 
-    override fun dislike(id: String, dislike: Boolean) {
-        setDiff(id, mapOf(DISLIKES to mapOf(userId.value to dislike)))
-    }
+  override fun removeCard(id: String) {
+    cardsCollection.document(id).delete()
+  }
 
-    private fun setDiff(id: String, diff: Any) {
-        cardsCollection.document(id).set(diff, SetOptions.merge())
-    }
+  override fun like(id: String, like: Boolean) {
+    setDiff(id, mapOf(LIKES to mapOf(userId.value to like)))
+  }
+
+  override fun dislike(id: String, dislike: Boolean) {
+    setDiff(id, mapOf(DISLIKES to mapOf(userId.value to dislike)))
+  }
+
+  private fun setDiff(id: String, diff: Any) {
+    cardsCollection.document(id).set(diff, SetOptions.merge())
+  }
 
 }
 

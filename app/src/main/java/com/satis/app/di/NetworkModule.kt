@@ -17,30 +17,30 @@ import javax.inject.Singleton
 @Module(includes = [NetworkBindingModule::class])
 object NetworkModule {
 
-    @Provides
-    @Singleton
-    fun provideJson(): Json = Json.nonstrict
+  @Provides
+  @Singleton
+  fun provideJson(): Json = Json.nonstrict
 
-    @Provides
-    @Singleton
-    fun provideOkHttp(interceptors: Set<@JvmSuppressWildcards Interceptor>): OkHttpClient = OkHttpClient.Builder()
-            .addNetworkInterceptors(interceptors)
-            .build()
+  @Provides
+  @Singleton
+  fun provideOkHttp(interceptors: Set<@JvmSuppressWildcards Interceptor>): OkHttpClient = OkHttpClient.Builder()
+      .addNetworkInterceptors(interceptors)
+      .build()
 
-    @Provides
-    @Singleton
-    fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
-            .baseUrl("https://dummy.com/")
-            .clientProvider(okHttpClient)
-            .addConverterFactory(json.asConverterFactory(jsonMediaType()))
-            .build()
+  @Provides
+  @Singleton
+  fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
+      .baseUrl("https://dummy.com/")
+      .clientProvider(okHttpClient)
+      .addConverterFactory(json.asConverterFactory(jsonMediaType()))
+      .build()
 
 }
 
 @Module
 abstract class NetworkBindingModule {
 
-    @Multibinds
-    abstract fun provideOkHttpInterceptors(): Set<Interceptor>
+  @Multibinds
+  abstract fun provideOkHttpInterceptors(): Set<Interceptor>
 
 }

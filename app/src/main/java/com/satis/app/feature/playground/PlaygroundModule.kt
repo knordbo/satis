@@ -9,9 +9,9 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class PlaygroundModule {
 
-    @Binds
-    @IntoMap
-    @FragmentKey(PlaygroundFragment::class)
-    abstract fun providePlaygroundFragment(bind: PlaygroundFragment): Fragment
+  @Binds
+  @IntoMap
+  @FragmentKey(PlaygroundFragment::class)
+  abstract fun providePlaygroundFragment(bind: PlaygroundFragment): Fragment
 
 }

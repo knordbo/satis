@@ -15,26 +15,26 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [
-    AssistedModule::class,
-    AppModule::class,
-    NetworkModule::class,
-    LogModule::class,
-    StartupModule::class,
-    WorkerModule::class,
-    AccountModule::class,
-    CardModule::class,
-    PlaygroundModule::class,
-    ImagesModule::class,
-    VariantModule::class
+  AssistedModule::class,
+  AppModule::class,
+  NetworkModule::class,
+  LogModule::class,
+  StartupModule::class,
+  WorkerModule::class,
+  AccountModule::class,
+  CardModule::class,
+  PlaygroundModule::class,
+  ImagesModule::class,
+  VariantModule::class
 ])
 interface AppComponent {
 
-    fun inject(app: App)
-    fun inject(activity: MainActivity)
+  fun inject(app: App)
+  fun inject(activity: MainActivity)
 
-    @Component.Factory
-    interface Factory {
-        fun create(@BindsInstance app: App): AppComponent
-    }
+  @Component.Factory
+  interface Factory {
+    fun create(@BindsInstance app: App): AppComponent
+  }
 
 }

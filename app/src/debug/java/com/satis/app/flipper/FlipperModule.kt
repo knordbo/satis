@@ -27,65 +27,65 @@ import javax.inject.Singleton
 @Module(includes = [FlipperBindingModule::class])
 object FlipperModule {
 
-    @Provides
-    @Singleton
-    fun provideFlipperClient(context: Context, plugins: Set<@JvmSuppressWildcards FlipperPlugin>): FlipperClient {
-        val client = AndroidFlipperClient.getInstance(context)
-        plugins.forEach(client::addPlugin)
-        return client
-    }
+  @Provides
+  @Singleton
+  fun provideFlipperClient(context: Context, plugins: Set<@JvmSuppressWildcards FlipperPlugin>): FlipperClient {
+    val client = AndroidFlipperClient.getInstance(context)
+    plugins.forEach(client::addPlugin)
+    return client
+  }
 
-    @Provides
-    @IntoSet
-    @Singleton
-    fun provideInspectorPlugin(context: Context): FlipperPlugin =
-            InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
+  @Provides
+  @IntoSet
+  @Singleton
+  fun provideInspectorPlugin(context: Context): FlipperPlugin =
+      InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
 
-    @Provides
-    @IntoSet
-    @Singleton
-    fun provideDatabasePlugin(context: Context, @DatabaseName databaseName: String): FlipperPlugin {
-        return DatabasesFlipperPlugin(SqliteDatabaseDriver(context, SqliteDatabaseProvider {
-            // Some random databases like the one from firestore closes which throws flipper off,
-            // therefore only listing our own database.
-            context.databaseList()
-                    .filter { it == databaseName }
-                    .map(context::getDatabasePath)
-        }))
-    }
+  @Provides
+  @IntoSet
+  @Singleton
+  fun provideDatabasePlugin(context: Context, @DatabaseName databaseName: String): FlipperPlugin {
+    return DatabasesFlipperPlugin(SqliteDatabaseDriver(context, SqliteDatabaseProvider {
+      // Some random databases like the one from firestore closes which throws flipper off,
+      // therefore only listing our own database.
+      context.databaseList()
+          .filter { it == databaseName }
+          .map(context::getDatabasePath)
+    }))
+  }
 
-    @Provides
-    @IntoSet
-    @Singleton
-    fun provideSharedPrefsPlugin(context: Context, @SharedPrefsName sharedPrefsName: String): FlipperPlugin =
-            SharedPreferencesFlipperPlugin(context, sharedPrefsName)
+  @Provides
+  @IntoSet
+  @Singleton
+  fun provideSharedPrefsPlugin(context: Context, @SharedPrefsName sharedPrefsName: String): FlipperPlugin =
+      SharedPreferencesFlipperPlugin(context, sharedPrefsName)
 
-    @Provides
-    @Singleton
-    fun provideNetworkPlugin(): NetworkFlipperPlugin = NetworkFlipperPlugin()
+  @Provides
+  @Singleton
+  fun provideNetworkPlugin(): NetworkFlipperPlugin = NetworkFlipperPlugin()
 
-    @Provides
-    @IntoSet
-    @Singleton
-    fun provideNetworkInterceptor(plugin: NetworkFlipperPlugin): Interceptor = FlipperOkhttpInterceptor(plugin)
+  @Provides
+  @IntoSet
+  @Singleton
+  fun provideNetworkInterceptor(plugin: NetworkFlipperPlugin): Interceptor = FlipperOkhttpInterceptor(plugin)
 
 }
 
 @Module
 abstract class FlipperBindingModule {
 
-    @Binds
-    @IntoSet
-    @Main
-    abstract fun provideFlipperInitTask(bind: FlipperInitTask): StartupTask
+  @Binds
+  @IntoSet
+  @Main
+  abstract fun provideFlipperInitTask(bind: FlipperInitTask): StartupTask
 
-    @Multibinds
-    abstract fun provideFlipperPlugins(): Set<FlipperPlugin>
+  @Multibinds
+  abstract fun provideFlipperPlugins(): Set<FlipperPlugin>
 
-    @Binds
-    @IntoSet
-    @Singleton
-    abstract fun provideNetworkPluginIntoSet(bind: NetworkFlipperPlugin): FlipperPlugin
+  @Binds
+  @IntoSet
+  @Singleton
+  abstract fun provideNetworkPluginIntoSet(bind: NetworkFlipperPlugin): FlipperPlugin
 
 
 }

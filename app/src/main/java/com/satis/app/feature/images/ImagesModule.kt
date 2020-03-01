@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import com.satis.app.Database
 import com.satis.app.common.fragment.FragmentKey
 import com.satis.app.feature.images.data.UnsplashApi
-import com.satis.app.feature.images.data.db.UnsplashQueries
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
+import com.satis.app.feature.images.data.db.UnsplashQueries
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.work.ChildWorkerFactory
 import com.satis.app.work.WorkerKey
@@ -21,35 +21,35 @@ import javax.inject.Singleton
 @Module(includes = [ImagesBindingModule::class])
 object ImagesModule {
 
-    @Provides
-    @Singleton
-    fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()
+  @Provides
+  @Singleton
+  fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()
 
-    @Provides
-    @Singleton
-    fun provideUnsplashQueries(database: Database): UnsplashQueries = database.unsplashQueries
+  @Provides
+  @Singleton
+  fun provideUnsplashQueries(database: Database): UnsplashQueries = database.unsplashQueries
 
 }
 
 @Module
 abstract class ImagesBindingModule {
 
-    @Binds
-    @IntoMap
-    @FragmentKey(ImagesFragment::class)
-    abstract fun provideImagesFragment(bind: ImagesFragment): Fragment
+  @Binds
+  @IntoMap
+  @FragmentKey(ImagesFragment::class)
+  abstract fun provideImagesFragment(bind: ImagesFragment): Fragment
 
-    @Binds
-    @IntoMap
-    @FragmentKey(ImageFragment::class)
-    abstract fun provideImageFragment(bind: ImageFragment): Fragment
+  @Binds
+  @IntoMap
+  @FragmentKey(ImageFragment::class)
+  abstract fun provideImageFragment(bind: ImageFragment): Fragment
 
-    @Binds
-    abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
+  @Binds
+  abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
 
-    @Binds
-    @IntoMap
-    @WorkerKey(ImageWorker::class)
-    abstract fun provideImageWorker(bind: ImageWorker.Factory): ChildWorkerFactory
+  @Binds
+  @IntoMap
+  @WorkerKey(ImageWorker::class)
+  abstract fun provideImageWorker(bind: ImageWorker.Factory): ChildWorkerFactory
 
 }

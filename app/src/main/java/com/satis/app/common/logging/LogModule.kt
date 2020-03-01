@@ -10,24 +10,24 @@ import javax.inject.Singleton
 
 @Module(includes = [LogBindingModule::class])
 object LogModule {
-    @Provides
-    @Singleton
-    fun provideLogQueries(database: Database): LogQueries = database.logQueries
+  @Provides
+  @Singleton
+  fun provideLogQueries(database: Database): LogQueries = database.logQueries
 }
 
 @Module
 abstract class LogBindingModule {
-    @Binds
-    abstract fun providePersistedLogger(bind: PersistedLoggerImpl): PersistedLogger
+  @Binds
+  abstract fun providePersistedLogger(bind: PersistedLoggerImpl): PersistedLogger
 
-    @Binds
-    abstract fun provideDelegatingLogger(bind: DelegatingLoggerImpl): Logger
+  @Binds
+  abstract fun provideDelegatingLogger(bind: DelegatingLoggerImpl): Logger
 
-    @Binds
-    @IntoSet
-    abstract fun providePersistedLoggerForSet(bind: PersistedLoggerImpl): Logger
+  @Binds
+  @IntoSet
+  abstract fun providePersistedLoggerForSet(bind: PersistedLoggerImpl): Logger
 
-    @Binds
-    @IntoSet
-    abstract fun provideAndroidLoggerForSet(bind: AndroidLoggerImpl): Logger
+  @Binds
+  @IntoSet
+  abstract fun provideAndroidLoggerForSet(bind: AndroidLoggerImpl): Logger
 }

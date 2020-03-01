@@ -17,58 +17,58 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class UnsplashRepositoryImpl @Inject constructor(
-        @Io private val io: CoroutineContext,
-        private val unsplashApi: UnsplashApi,
-        private val unsplashQueries: UnsplashQueries
+    @Io private val io: CoroutineContext,
+    private val unsplashApi: UnsplashApi,
+    private val unsplashQueries: UnsplashQueries
 ) : UnsplashRepository {
 
-    override suspend fun fetchPhotos(query: String): List<PhotoState> {
-        return withContext(io) {
-            val photos = unsplashApi.searchPhotos(query = query)
-            unsplashQueries.transaction {
-                unsplashQueries.deleteAll()
-                for (photo in photos.results) {
-                    unsplashQueries.insertUnsplashPhoto(
-                            id = photo.id,
-                            urlRegular = photo.urls.regular,
-                            urlThumb = photo.urls.thumb,
-                            userUsername = photo.user.username,
-                            userProfileImageMedium = photo.user.profileImage.medium,
-                            description = photo.description
-                    )
-                }
-            }
-            photos.toState()
+  override suspend fun fetchPhotos(query: String): List<PhotoState> {
+    return withContext(io) {
+      val photos = unsplashApi.searchPhotos(query = query)
+      unsplashQueries.transaction {
+        unsplashQueries.deleteAll()
+        for (photo in photos.results) {
+          unsplashQueries.insertUnsplashPhoto(
+              id = photo.id,
+              urlRegular = photo.urls.regular,
+              urlThumb = photo.urls.thumb,
+              userUsername = photo.user.username,
+              userProfileImageMedium = photo.user.profileImage.medium,
+              description = photo.description
+          )
         }
+      }
+      photos.toState()
     }
+  }
 
-    override fun streamPhotos(query: String): Flow<List<PhotoState>> = unsplashQueries.selectAll().asFlow().map { unsplash ->
-        unsplash.executeAsList().toState()
-    }.flowOn(io)
+  override fun streamPhotos(query: String): Flow<List<PhotoState>> = unsplashQueries.selectAll().asFlow().map { unsplash ->
+    unsplash.executeAsList().toState()
+  }.flowOn(io)
 
-    private fun Unsplash.toState() = results.map { unsplashPhoto ->
-        PhotoState(
-                id = unsplashPhoto.id,
-                thumbnailUrl = Uri.parse(unsplashPhoto.urls.thumb),
-                photoUrl = Uri.parse(unsplashPhoto.urls.regular),
-                user = User(
-                        username = unsplashPhoto.user.username,
-                        userAvatar = Uri.parse(unsplashPhoto.user.profileImage.medium)
-                ),
-                description = unsplashPhoto.description
-        )
-    }
+  private fun Unsplash.toState() = results.map { unsplashPhoto ->
+    PhotoState(
+        id = unsplashPhoto.id,
+        thumbnailUrl = Uri.parse(unsplashPhoto.urls.thumb),
+        photoUrl = Uri.parse(unsplashPhoto.urls.regular),
+        user = User(
+            username = unsplashPhoto.user.username,
+            userAvatar = Uri.parse(unsplashPhoto.user.profileImage.medium)
+        ),
+        description = unsplashPhoto.description
+    )
+  }
 
-    private fun List<UnsplashPhotoEntity>.toState() = map { unsplashPhoto ->
-        PhotoState(
-                id = unsplashPhoto.id,
-                thumbnailUrl = Uri.parse(unsplashPhoto.urlThumb),
-                photoUrl = Uri.parse(unsplashPhoto.urlRegular),
-                user = User(
-                        username = unsplashPhoto.userUsername,
-                        userAvatar = Uri.parse(unsplashPhoto.userProfileImageMedium)
-                ),
-                description = unsplashPhoto.description
-        )
-    }
+  private fun List<UnsplashPhotoEntity>.toState() = map { unsplashPhoto ->
+    PhotoState(
+        id = unsplashPhoto.id,
+        thumbnailUrl = Uri.parse(unsplashPhoto.urlThumb),
+        photoUrl = Uri.parse(unsplashPhoto.urlRegular),
+        user = User(
+            username = unsplashPhoto.userUsername,
+            userAvatar = Uri.parse(unsplashPhoto.userProfileImageMedium)
+        ),
+        description = unsplashPhoto.description
+    )
+  }
 }

@@ -15,54 +15,54 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class AccountViewModel @AssistedInject constructor(
-        @Assisted initialState: AccountState,
-        private val logger: PersistedLogger,
-        private val appInfoRetriever: AppInfoRetriever,
-        private val prefs: Prefs
+    @Assisted initialState: AccountState,
+    private val logger: PersistedLogger,
+    private val appInfoRetriever: AppInfoRetriever,
+    private val prefs: Prefs
 ) : BaseViewModel<AccountState>(
-        initialState = initialState
+    initialState = initialState
 ) {
 
-    init {
-        getAccountState()
-        streamLogs()
-    }
+  init {
+    getAccountState()
+    streamLogs()
+  }
 
-    fun setTheme(theme: Theme) {
-        prefs.theme = theme
-        theme.apply()
-    }
+  fun setTheme(theme: Theme) {
+    prefs.theme = theme
+    theme.apply()
+  }
 
-    private fun streamLogs() {
-        launch {
-            logger.streamLogs().collect { logs ->
-                setState {
-                    copy(logs = logs)
-                }
-            }
+  private fun streamLogs() {
+    launch {
+      logger.streamLogs().collect { logs ->
+        setState {
+          copy(logs = logs)
         }
+      }
     }
+  }
 
-    private fun getAccountState() {
-        launch {
-            val appInfo = appInfoRetriever.getAppInfo()
-            setState {
-                copy(buildData = BuildData(
-                        versionNum = appInfo.versionCode,
-                        buildTime = appInfo.buildTime
-                ))
-            }
-        }
+  private fun getAccountState() {
+    launch {
+      val appInfo = appInfoRetriever.getAppInfo()
+      setState {
+        copy(buildData = BuildData(
+            versionNum = appInfo.versionCode,
+            buildTime = appInfo.buildTime
+        ))
+      }
     }
+  }
 
-    @AssistedInject.Factory
-    interface Factory {
-        fun createAccountViewModel(initialState: AccountState): AccountViewModel
-    }
+  @AssistedInject.Factory
+  interface Factory {
+    fun createAccountViewModel(initialState: AccountState): AccountViewModel
+  }
 
-    companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
-        override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? {
-            return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
-        }
+  companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
+    override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? {
+      return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
     }
+  }
 }

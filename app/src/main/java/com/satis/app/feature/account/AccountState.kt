@@ -8,12 +8,12 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class AccountState(
-        @PersistState val buildData: BuildData? = null,
-        @PersistState val logs: List<LogEntry> = emptyList()
+    @PersistState val buildData: BuildData? = null,
+    @PersistState val logs: List<LogEntry> = emptyList()
 ) : MvRxState, Parcelable
 
 @Parcelize
 data class BuildData(
-        val versionNum: Int,
-        val buildTime: Long
+    val versionNum: Int,
+    val buildTime: Long
 ) : Parcelable

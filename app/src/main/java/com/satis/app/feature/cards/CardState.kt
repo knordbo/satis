@@ -11,7 +11,7 @@ import kotlinx.android.parcel.RawValue
 
 @Parcelize
 data class CardState(
-        @PersistState val cards: List<Card> = emptyList(),
-        @PersistState val creatingCard: Card = Card(title = "", message = ""),
-        val creatingCardAsync: @RawValue Async<Card> = Uninitialized
+    @PersistState val cards: List<Card> = emptyList(),
+    @PersistState val creatingCard: Card = Card(title = "", message = ""),
+    val creatingCardAsync: @RawValue Async<Card> = Uninitialized
 ) : MvRxState, Parcelable

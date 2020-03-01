@@ -14,21 +14,21 @@ import javax.inject.Singleton
 @Module(includes = [CardBindingModule::class])
 object CardModule {
 
-    @Singleton
-    @Provides
-    fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
+  @Singleton
+  @Provides
+  fun provideFirebaseFirestore() = FirebaseFirestore.getInstance()
 
 }
 
 @Module
 abstract class CardBindingModule {
 
-    @Binds
-    @IntoMap
-    @FragmentKey(CardFragment::class)
-    abstract fun provideCardFragment(bind: CardFragment): Fragment
+  @Binds
+  @IntoMap
+  @FragmentKey(CardFragment::class)
+  abstract fun provideCardFragment(bind: CardFragment): Fragment
 
-    @Binds
-    abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
+  @Binds
+  abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
 
 }

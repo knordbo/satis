@@ -11,12 +11,12 @@ import dagger.multibindings.IntoMap
 @Module
 abstract class AccountModule {
 
-    @Binds
-    abstract fun provideAppInfoRetriever(bind: AppInfoRetrieverImpl): AppInfoRetriever
+  @Binds
+  abstract fun provideAppInfoRetriever(bind: AppInfoRetrieverImpl): AppInfoRetriever
 
-    @Binds
-    @IntoMap
-    @FragmentKey(AccountFragment::class)
-    abstract fun provideAccountFragment(bind: AccountFragment): Fragment
+  @Binds
+  @IntoMap
+  @FragmentKey(AccountFragment::class)
+  abstract fun provideAccountFragment(bind: AccountFragment): Fragment
 
 }

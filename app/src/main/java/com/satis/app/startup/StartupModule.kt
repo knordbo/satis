@@ -10,34 +10,34 @@ import dagger.multibindings.Multibinds
 @Module
 abstract class StartupModule {
 
-    @Binds
-    @Main
-    abstract fun provideMainThreadStartupTasks(bind: MainThreadStartupTasks): StartupTasks
+  @Binds
+  @Main
+  abstract fun provideMainThreadStartupTasks(bind: MainThreadStartupTasks): StartupTasks
 
-    @Binds
-    @IntoSet
-    @Main
-    abstract fun provideMvRxInitTask(bind: MvRxInitTask): StartupTask
+  @Binds
+  @IntoSet
+  @Main
+  abstract fun provideMvRxInitTask(bind: MvRxInitTask): StartupTask
 
-    @Multibinds
-    @Main
-    abstract fun provideMainStartupTasksSet(): Set<StartupTask>
+  @Multibinds
+  @Main
+  abstract fun provideMainStartupTasksSet(): Set<StartupTask>
 
-    @Binds
-    @Background
-    abstract fun provideBackgroundThreadStartupTasks(bind: BackgroundThreadStartupTasks): StartupTasks
+  @Binds
+  @Background
+  abstract fun provideBackgroundThreadStartupTasks(bind: BackgroundThreadStartupTasks): StartupTasks
 
-    @Multibinds
-    @Background
-    abstract fun provideBackgroundStartupTasksSet(): Set<StartupTask>
+  @Multibinds
+  @Background
+  abstract fun provideBackgroundStartupTasksSet(): Set<StartupTask>
 
-    @Binds
-    @IntoSet
-    @Background
-    abstract fun provideThemeLoaderTask(bind: ThemeLoaderTask): StartupTask
+  @Binds
+  @IntoSet
+  @Background
+  abstract fun provideThemeLoaderTask(bind: ThemeLoaderTask): StartupTask
 
-    @Binds
-    @IntoSet
-    @Background
-    abstract fun provideWorkSchedulerTask(bind: WorkSchedulerTask): StartupTask
+  @Binds
+  @IntoSet
+  @Background
+  abstract fun provideWorkSchedulerTask(bind: WorkSchedulerTask): StartupTask
 }

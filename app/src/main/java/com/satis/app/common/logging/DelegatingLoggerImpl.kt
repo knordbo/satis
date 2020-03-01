@@ -5,11 +5,11 @@ import javax.inject.Singleton
 
 @Singleton
 class DelegatingLoggerImpl @Inject constructor(
-        private val loggers: Set<@JvmSuppressWildcards Logger>
+    private val loggers: Set<@JvmSuppressWildcards Logger>
 ) : Logger {
-    override fun log(tag: String, message: String) {
-        loggers.forEach { logger ->
-            logger.log(tag, message)
-        }
+  override fun log(tag: String, message: String) {
+    loggers.forEach { logger ->
+      logger.log(tag, message)
     }
+  }
 }

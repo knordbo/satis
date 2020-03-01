@@ -11,20 +11,20 @@ import javax.inject.Inject
 
 class ImageFragment @Inject constructor() : BaseFragment<FeatureImageBinding>() {
 
-    override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImageBinding? =
-            FeatureImageBinding::inflate
+  override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImageBinding? =
+      FeatureImageBinding::inflate
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val photoState = ImageFragmentArgs.fromBundle(requireArguments()).photo
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    val photoState = ImageFragmentArgs.fromBundle(requireArguments()).photo
 
-        Glide.with(this)
-                .load(photoState.photoUrl)
-                .thumbnail(Glide.with(this)
-                        .load(photoState.thumbnailUrl)
-                        .centerCrop())
-                .centerCrop()
-                .into(binding.image)
-    }
+    Glide.with(this)
+        .load(photoState.photoUrl)
+        .thumbnail(Glide.with(this)
+            .load(photoState.thumbnailUrl)
+            .centerCrop())
+        .centerCrop()
+        .into(binding.image)
+  }
 
 }
