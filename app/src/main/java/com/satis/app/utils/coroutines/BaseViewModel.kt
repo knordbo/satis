@@ -10,28 +10,30 @@ import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel<S : MvRxState>(
-        initialState: S
+    initialState: S
 ) : BaseMvRxViewModel<S>(initialState), CoroutineScope {
 
-    init {
-        logStateChanges()
-    }
+  init {
+    logStateChanges()
+  }
 
-    override val coroutineContext: CoroutineContext
-        get() = viewModelScope.coroutineContext
+  override val coroutineContext: CoroutineContext
+    get() = viewModelScope.coroutineContext
 
 }
 
 inline fun <reified F> ViewModelContext.viewModelFactory(): F {
-    if (this is FragmentViewModelContext) {
-        var fragment: Fragment? = fragment
-        while (fragment != null) {
-            if (fragment is F) {
-                return fragment
-            }
-            fragment = fragment.parentFragment
-        }
+  if (this is FragmentViewModelContext) {
+    var fragment: Fragment? = fragment
+    while (fragment != null) {
+      if (fragment is F) {
+        return fragment
+      }
+      fragment = fragment.parentFragment
     }
-    return activity as? F
-            ?: throw IllegalStateException("No view model factory found for ${F::class}")
+  }
+  if (activity is F) {
+    return activity as F
+  }
+  throw IllegalStateException("No view model factory found for ${F::class}")
 }
