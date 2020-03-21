@@ -7,14 +7,14 @@ private object Versions {
     const val constraintLayout = "2.0.0-beta4"
     const val coreKtx = "1.3.0-alpha02"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.3.0-alpha04"
-    const val fragment = "1.3.0-alpha01"
+    const val espresso = "3.3.0-alpha05"
+    const val fragment = "1.3.0-alpha02"
     const val concurrent = "1.1.0-alpha01"
     const val lifecycle = "2.2.0"
-    const val navigation = "2.3.0-alpha03"
+    const val navigation = "2.3.0-alpha04"
     const val recyclerView = "1.2.0-alpha01"
-    const val test = "1.3.0-alpha04"
-    const val testExt = "1.1.2-alpha04"
+    const val test = "1.3.0-alpha05"
+    const val testExt = "1.1.2-alpha05"
     const val workManager = "2.4.0-alpha01"
   }
 
@@ -22,13 +22,13 @@ private object Versions {
 
   object dagger {
     const val assistedInject = "0.5.2"
-    const val dagger = "2.26"
+    const val dagger = "2.27"
   }
 
   const val fabric = "1.29.0"
   const val firebaseCore = "17.2.3"
   const val firebaseFirestore = "21.4.1"
-  const val flipper = "0.32.2"
+  const val flipper = "0.34.0"
   const val glide = "4.11.0"
   const val googlePlayPublisher = "2.7.2"
   const val googleServices = "4.0.0"
@@ -44,13 +44,13 @@ private object Versions {
   const val leakCanary = "2.2"
   const val material = "1.2.0-alpha05"
   const val mvrx = "2.0.0-alpha2"
-  const val okhttp = "4.4.0"
+  const val okhttp = "4.4.1"
   const val photoView = "2.3.0"
-  const val playCore = "1.6.5"
+  const val playCore = "1.7.1"
 
   object retrofit {
     const val kotlinSerialization = "0.5.0"
-    const val retrofit = "2.7.1"
+    const val retrofit = "2.7.2"
   }
 
   const val soloader = "0.8.2"
