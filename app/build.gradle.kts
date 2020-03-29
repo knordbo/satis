@@ -43,8 +43,8 @@ android {
     applicationId = "com.satis.app"
     minSdkVersion(BuildVersions.minSdk)
     targetSdkVersion(BuildVersions.targetSdk)
-    versionCode = 1
-    versionName = "1.0"
+    versionCode = getVersionCodeOrDefault().toInt()
+    versionName = getVersionCodeOrDefault()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField("String", "UNSPLASH_CLIENT_ID", "\"${keystoreProperties["unsplashClientId"]}\"")
   }
@@ -83,7 +83,6 @@ play {
   defaultToAppBundles = true
   serviceAccountCredentials = file("../service-account.json")
   track = "internal"
-  resolutionStrategy = "auto"
 }
 
 androidExtensions {
@@ -192,3 +191,5 @@ dependencies {
 apply {
   plugin("com.google.gms.google-services")
 }
+
+fun getVersionCodeOrDefault(): String = System.getenv("GITHUB_RUN_NUMBER") ?: "1"

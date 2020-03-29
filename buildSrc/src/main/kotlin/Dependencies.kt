@@ -28,7 +28,7 @@ private object Versions {
   const val fabric = "1.29.0"
   const val firebaseCore = "17.2.3"
   const val firebaseFirestore = "21.4.1"
-  const val flipper = "0.34.0"
+  const val flipper = "0.35.0"
   const val glide = "4.11.0"
   const val googlePlayPublisher = "2.7.2"
   const val googleServices = "4.0.0"
@@ -36,21 +36,21 @@ private object Versions {
   const val junit = "4.13"
 
   object kotlin {
-    const val kotlin = "1.3.70"
-    const val coroutines = "1.3.4"
-    const val serialization = "0.20.0"
+    const val kotlin = "1.4-M1"
+    const val coroutines = "1.3.5-1.4-M1"
+    const val serialization = "0.20.0-1.4-M1"
   }
 
   const val leakCanary = "2.2"
   const val material = "1.2.0-alpha05"
   const val mvrx = "2.0.0-alpha2"
-  const val okhttp = "4.4.1"
+  const val okhttp = "4.5.0-RC1"
   const val photoView = "2.3.0"
   const val playCore = "1.7.1"
 
   object retrofit {
     const val kotlinSerialization = "0.5.0"
-    const val retrofit = "2.7.2"
+    const val retrofit = "2.8.1"
   }
 
   const val soloader = "0.8.2"
