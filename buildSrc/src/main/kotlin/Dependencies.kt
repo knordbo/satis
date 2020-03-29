@@ -10,7 +10,7 @@ private object Versions {
     const val espresso = "3.3.0-alpha05"
     const val fragment = "1.3.0-alpha02"
     const val concurrent = "1.1.0-alpha01"
-    const val lifecycle = "2.3.0-alpha01"
+    const val lifecycle = "2.2.0"
     const val navigation = "2.3.0-alpha04"
     const val recyclerView = "1.2.0-alpha01"
     const val test = "1.3.0-alpha05"
