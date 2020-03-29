@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import androidx.core.app.AppComponentFactory
-import com.satis.app.di.DaggerAppComponent
 
 class InjectingAppComponentFactory : AppComponentFactory() {
 
