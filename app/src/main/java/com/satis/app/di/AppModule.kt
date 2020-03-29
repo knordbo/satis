@@ -1,11 +1,14 @@
 package com.satis.app.di
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.satis.app.App
 import com.satis.app.Database
+import com.satis.app.MainActivity
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
@@ -17,6 +20,7 @@ import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
+import com.satis.app.utils.context.ContextHolder
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
 import dagger.Module
@@ -29,7 +33,7 @@ import kotlin.coroutines.CoroutineContext
 object AppModule {
 
   @Provides
-  fun provideContext(application: App): Context = application.applicationContext
+  fun provideContext(): Context = ContextHolder.context
 
   @Provides
   @Singleton
@@ -73,6 +77,12 @@ object AppModule {
 
 @Module
 abstract class AppBindingModule {
+
+  @Binds
+  abstract fun provideApp(bind: App): Application
+
+  @Binds
+  abstract fun provideMainActivity(bind: MainActivity): Activity
 
   @Binds
   abstract fun providePrefs(bind: PrefsImpl): Prefs

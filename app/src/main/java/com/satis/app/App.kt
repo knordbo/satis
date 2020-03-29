@@ -1,31 +1,26 @@
 package com.satis.app
 
 import android.app.Application
-import android.content.Context
 import androidx.work.Configuration
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Main
-import com.satis.app.di.AppComponent
-import com.satis.app.di.DaggerAppComponent
 import com.satis.app.startup.StartupTasks
+import com.satis.app.utils.context.ContextHolder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.coroutines.CoroutineContext
 
-class App : Application(), Configuration.Provider, CoroutineScope {
-
-  @Inject lateinit var workConfiguration: Provider<Configuration>
-  @Inject @Main override lateinit var coroutineContext: CoroutineContext
-  @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
-  @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
-
-  lateinit var appComponent: AppComponent
+class App @Inject constructor(
+    private val workConfiguration: Provider<Configuration>,
+    @Main override val coroutineContext: CoroutineContext,
+    @Main private val mainThreadStartupTasks: StartupTasks,
+    @Background private val backgroundThreadStartupTasks: StartupTasks
+) : Application(), Configuration.Provider, CoroutineScope {
 
   override fun onCreate() {
-    appComponent = DaggerAppComponent.factory().create(this)
-    appComponent.inject(this)
+    ContextHolder.context = applicationContext
 
     super.onCreate()
 
@@ -38,5 +33,3 @@ class App : Application(), Configuration.Provider, CoroutineScope {
   override fun getWorkManagerConfiguration(): Configuration = workConfiguration.get()
 
 }
-
-val Context.appComponent get() = (applicationContext as App).appComponent

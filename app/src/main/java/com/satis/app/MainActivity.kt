@@ -13,22 +13,21 @@ import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity @Inject constructor(
+    private val fragmentFactory: FragmentFactory,
+    private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
+    private val navigationReselectionUpdater: NavigationReselectionUpdater
+) : AppCompatActivity() {
 
   private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
 
   private var appUpdateCalled = false
-
-  @Inject lateinit var fragmentFactory: FragmentFactory
-  @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
-  @Inject lateinit var navigationReselectionUpdater: NavigationReselectionUpdater
 
   private val immediateAppUpdater: ImmediateAppUpdater by lazy {
     immediateAppUpdaterFactory.create(this)
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
-    appComponent.inject(this)
     supportFragmentManager.fragmentFactory = fragmentFactory
 
     super.onCreate(savedInstanceState)
