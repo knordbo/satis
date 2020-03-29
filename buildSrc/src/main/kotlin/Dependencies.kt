@@ -30,7 +30,7 @@ private object Versions {
   const val firebaseFirestore = "21.4.1"
   const val flipper = "0.35.0"
   const val glide = "4.11.0"
-  const val googlePlayPublisher = "2.7.2"
+  const val googlePlayPublisher = "2.8.0-SNAPSHOT"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.27.0"
   const val junit = "4.13"
