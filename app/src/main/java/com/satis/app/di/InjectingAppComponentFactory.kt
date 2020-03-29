@@ -1,4 +1,4 @@
-package com.satis.app
+package com.satis.app.di
 
 import android.app.Activity
 import android.app.Application
