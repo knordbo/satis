@@ -43,8 +43,8 @@ android {
     applicationId = "com.satis.app"
     minSdkVersion(BuildVersions.minSdk)
     targetSdkVersion(BuildVersions.targetSdk)
-    versionCode = getVersionCodeOrDefault().toInt()
-    versionName = getVersionCodeOrDefault()
+    versionCode = versionCodeOrDefault
+    versionName = versionCodeOrDefault.toString()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     buildConfigField("String", "UNSPLASH_CLIENT_ID", "\"${keystoreProperties["unsplashClientId"]}\"")
   }
@@ -192,4 +192,11 @@ apply {
   plugin("com.google.gms.google-services")
 }
 
-fun getVersionCodeOrDefault(): String = System.getenv("GITHUB_RUN_NUMBER") ?: "1"
+val versionCodeOrDefault: Int get() {
+  val githubRunNumber = System.getenv("GITHUB_RUN_NUMBER")
+  return if (githubRunNumber != null) {
+    githubRunNumber.toInt() + 1000
+  } else {
+    1
+  }
+}
