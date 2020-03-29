@@ -8,7 +8,7 @@ import com.satis.app.di.DaggerAppComponent
 
 class InjectingAppComponentFactory : AppComponentFactory() {
 
-  private val appComponent = DaggerAppComponent.factory().create()
+  private val appComponent = DaggerAppComponent.create()
 
   override fun instantiateApplicationCompat(cl: ClassLoader, className: String): Application =
       appComponent.provideApp()

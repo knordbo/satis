@@ -27,13 +27,6 @@ import javax.inject.Singleton
   VariantModule::class
 ])
 interface AppComponent {
-
   fun provideApp(): App
   fun provideMainActivity(): Activity
-
-  @Component.Factory
-  interface Factory {
-    fun create(): AppComponent
-  }
-
 }
