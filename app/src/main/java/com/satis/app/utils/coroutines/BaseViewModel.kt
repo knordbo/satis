@@ -32,8 +32,6 @@ inline fun <reified F> ViewModelContext.viewModelFactory(): F {
       fragment = fragment.parentFragment
     }
   }
-  if (activity is F) {
-    return activity as F
-  }
-  throw IllegalStateException("No view model factory found for ${F::class}")
+  return activity as? F
+      ?: throw IllegalStateException("No view model factory found for ${F::class}")
 }

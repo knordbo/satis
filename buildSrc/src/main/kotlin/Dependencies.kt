@@ -36,9 +36,9 @@ private object Versions {
   const val junit = "4.13"
 
   object kotlin {
-    const val kotlin = "1.4-M1"
-    const val coroutines = "1.3.5-1.4-M1"
-    const val serialization = "0.20.0-1.4-M1"
+    const val kotlin = "1.3.70"
+    const val coroutines = "1.3.4"
+    const val serialization = "0.20.0"
   }
 
   const val leakCanary = "2.2"

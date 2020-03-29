@@ -7,7 +7,6 @@ import androidx.work.WorkerFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
 @Module(includes = [WorkerBindingModule::class])
@@ -35,15 +34,5 @@ abstract class WorkerBindingModule {
 
   @Binds
   abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler
-
-  @Binds
-  @IntoMap
-  @WorkerKey(NetworkWorker::class)
-  abstract fun provideNetworkWorker(bind: NetworkWorker.Factory): ChildWorkerFactory
-
-  @Binds
-  @IntoMap
-  @WorkerKey(ChargingNetworkWorker::class)
-  abstract fun provideChargingNetworkWorker(bind: ChargingNetworkWorker.Factory): ChildWorkerFactory
 
 }
