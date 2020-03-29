@@ -1,6 +1,7 @@
 package com.satis.app.di
 
 import android.app.Activity
+import androidx.core.app.AppComponentFactory
 import com.satis.app.App
 import com.satis.app.common.logging.LogModule
 import com.satis.app.feature.account.AccountModule
@@ -28,5 +29,5 @@ import javax.inject.Singleton
 ])
 interface AppComponent {
   fun provideApp(): App
-  fun provideMainActivity(): Activity
+  fun provideActivityFactory(): AppComponentFactory
 }

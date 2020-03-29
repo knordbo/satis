@@ -13,5 +13,5 @@ class InjectingAppComponentFactory : AppComponentFactory() {
       appComponent.provideApp()
 
   override fun instantiateActivityCompat(cl: ClassLoader, className: String, intent: Intent?): Activity =
-      appComponent.provideMainActivity()
+      appComponent.provideActivityFactory().instantiateActivityCompat(cl, className, intent)
 }

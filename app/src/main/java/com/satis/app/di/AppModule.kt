@@ -3,12 +3,15 @@ package com.satis.app.di
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.core.app.AppComponentFactory
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.satis.app.App
 import com.satis.app.Database
 import com.satis.app.MainActivity
+import com.satis.app.common.activity.ActivityKey
+import com.satis.app.common.activity.InjectingActivityFactory
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
@@ -25,6 +28,7 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.multibindings.IntoMap
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
@@ -82,10 +86,15 @@ abstract class AppBindingModule {
   abstract fun provideApp(bind: App): Application
 
   @Binds
+  @IntoMap
+  @ActivityKey(MainActivity::class)
   abstract fun provideMainActivity(bind: MainActivity): Activity
 
   @Binds
   abstract fun providePrefs(bind: PrefsImpl): Prefs
+
+  @Binds
+  abstract fun provideActivityFactory(bind: InjectingActivityFactory): AppComponentFactory
 
   @Binds
   abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory
