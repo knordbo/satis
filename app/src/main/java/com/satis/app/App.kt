@@ -20,9 +20,9 @@ class App @Inject constructor(
 ) : Application(), Configuration.Provider, CoroutineScope {
 
   override fun onCreate() {
-    ContextHolder.context = applicationContext
-
     super.onCreate()
+
+    ContextHolder.context = applicationContext
 
     launch {
       mainThreadStartupTasks.executeAll()

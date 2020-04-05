@@ -2,20 +2,20 @@ private object Versions {
   const val androidGradlePlugin = "4.1.0-alpha04"
 
   object androidx {
-    const val appCompat = "1.2.0-alpha03"
+    const val appCompat = "1.2.0-beta01"
     const val cardView = "1.0.0"
     const val constraintLayout = "2.0.0-beta4"
-    const val coreKtx = "1.3.0-alpha02"
+    const val coreKtx = "1.3.0-beta01"
     const val coreTesting = "2.1.0"
     const val espresso = "3.3.0-alpha05"
-    const val fragment = "1.3.0-alpha02"
+    const val fragment = "1.3.0-alpha03"
     const val concurrent = "1.1.0-alpha01"
-    const val lifecycle = "2.2.0"
+    const val lifecycle = "2.3.0-alpha01"
     const val navigation = "2.3.0-alpha04"
-    const val recyclerView = "1.2.0-alpha01"
+    const val recyclerView = "1.2.0-alpha02"
     const val test = "1.3.0-alpha05"
     const val testExt = "1.1.2-alpha05"
-    const val workManager = "2.4.0-alpha01"
+    const val workManager = "2.4.0-alpha02"
   }
 
   const val crashlytics = "2.10.1"
@@ -26,9 +26,9 @@ private object Versions {
   }
 
   const val fabric = "1.29.0"
-  const val firebaseCore = "17.2.3"
-  const val firebaseFirestore = "21.4.1"
-  const val flipper = "0.35.0"
+  const val firebaseCore = "17.3.0"
+  const val firebaseFirestore = "21.4.2"
+  const val flipper = "0.36.0"
   const val glide = "4.11.0"
   const val googlePlayPublisher = "2.7.3"
   const val googleServices = "4.0.0"
@@ -46,7 +46,7 @@ private object Versions {
   const val mvrx = "2.0.0-alpha2"
   const val okhttp = "4.5.0-RC1"
   const val photoView = "2.3.0"
-  const val playCore = "1.7.1"
+  const val playCore = "1.7.2"
 
   object retrofit {
     const val kotlinSerialization = "0.5.0"
@@ -54,7 +54,7 @@ private object Versions {
   }
 
   const val soloader = "0.8.2"
-  const val sqldelight = "1.2.2"
+  const val sqldelight = "1.3.0"
 }
 
 object Deps {
@@ -82,7 +82,7 @@ object Deps {
 
     object lifecycle {
       const val runtime = "androidx.lifecycle:lifecycle-runtime:${Versions.androidx.lifecycle}"
-      const val extensions = "androidx.lifecycle:lifecycle-extensions:${Versions.androidx.lifecycle}"
+      const val process = "androidx.lifecycle:lifecycle-process:${Versions.androidx.lifecycle}"
       const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.androidx.lifecycle}"
     }
 

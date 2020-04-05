@@ -101,7 +101,7 @@ dependencies {
   implementation(Deps.androidx.concurrent) {
     exclude(group = "com.google.guava", module = "listenablefuture")
   }
-  implementation(Deps.androidx.lifecycle.extensions)
+  implementation(Deps.androidx.lifecycle.process)
   implementation(Deps.androidx.lifecycle.runtime)
   implementation(Deps.androidx.navigation.fragmentKtx)
   implementation(Deps.androidx.navigation.uiKtx)
