@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
+import coil.api.load
 import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.databinding.FeatureImageBinding
 import javax.inject.Inject
@@ -17,14 +17,7 @@ class ImageFragment @Inject constructor() : BaseFragment<FeatureImageBinding>() 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
     val photoState = ImageFragmentArgs.fromBundle(requireArguments()).photo
-
-    Glide.with(this)
-        .load(photoState.photoUrl)
-        .thumbnail(Glide.with(this)
-            .load(photoState.thumbnailUrl)
-            .centerCrop())
-        .centerCrop()
-        .into(binding.image)
+    binding.image.load(photoState.photoUrl)
   }
 
 }

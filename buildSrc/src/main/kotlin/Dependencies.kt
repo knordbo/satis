@@ -18,6 +18,7 @@ private object Versions {
     const val workManager = "2.4.0-alpha02"
   }
 
+  const val coil = "0.9.5"
   const val crashlytics = "2.10.1"
 
   object dagger {
@@ -29,7 +30,6 @@ private object Versions {
   const val firebaseCore = "17.3.0"
   const val firebaseFirestore = "21.4.2"
   const val flipper = "0.36.0"
-  const val glide = "4.11.0"
   const val googlePlayPublisher = "2.7.3"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.27.0"
@@ -103,6 +103,7 @@ object Deps {
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.androidx.workManager}"
   }
 
+  const val coil = "io.coil-kt:coil:${Versions.coil}"
   const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
 
   object dagger {
@@ -123,12 +124,6 @@ object Deps {
     const val flipper = "com.facebook.flipper:flipper:${Versions.flipper}"
     const val network = "com.facebook.flipper:flipper-network-plugin:${Versions.flipper}"
     const val noop = "com.facebook.flipper:flipper-noop:${Versions.flipper}"
-  }
-
-  object glide {
-    const val compiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val recyclerview = "com.github.bumptech.glide:recyclerview-integration:${Versions.glide}"
   }
 
   const val googlePlayPublisher = "com.github.triplet.gradle:play-publisher:${Versions.googlePlayPublisher}"

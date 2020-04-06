@@ -3,7 +3,8 @@ package com.satis.app.feature.images.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import com.bumptech.glide.Glide
+import coil.Coil
+import coil.api.get
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
@@ -13,8 +14,11 @@ import com.satis.app.work.ChildWorkerFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 import kotlinx.coroutines.withContext
-import java.util.concurrent.TimeUnit
+import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.coroutines.CoroutineContext
+import kotlin.time.DurationUnit
+import kotlin.time.ExperimentalTime
+import kotlin.time.toDuration
 
 class ImageWorker @AssistedInject constructor(
     @Assisted private val context: Context,
@@ -24,22 +28,18 @@ class ImageWorker @AssistedInject constructor(
     private val unsplashRepository: UnsplashRepository
 ) : CoroutineWorker(context, workerParameters) {
 
+  @ExperimentalTime
   override suspend fun doWork(): Result = withContext(io) {
     try {
       logger.log(LOG_TAG, "Starting in $isAppForegroundString")
 
       val popularImages = unsplashRepository.fetchPhotos(NATURE)
-      val requestManager = Glide.with(context)
       popularImages
           .take(FETCH_IMAGE_COUNT)
           .forEach { photo ->
-            requestManager
-                .load(photo.photoUrl)
-                .thumbnail(requestManager.load(photo.thumbnailUrl)
-                    .centerCrop())
-                .centerCrop()
-                .submit()
-                .get(5, TimeUnit.SECONDS)
+            withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
+              Coil.get(photo.photoUrl)
+            }
           }
 
       logger.log(LOG_TAG, "Success")

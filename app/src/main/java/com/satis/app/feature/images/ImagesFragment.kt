@@ -8,9 +8,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import com.bumptech.glide.Glide
-import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader
-import com.bumptech.glide.util.ViewPreloadSizeProvider
 import com.satis.app.R
 import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.navigation.NavigationReselection
@@ -26,11 +23,8 @@ class ImagesFragment @Inject constructor(
 ) : BaseFragment<FeatureImagesBinding>(), ImagesViewModel.Factory by viewModelFactory {
 
   private val imagesViewModel: ImagesViewModel by fragmentViewModel()
-  private val imageViewPreloadSizeProvider = ViewPreloadSizeProvider<PhotoState>()
   private val adapter by lazy {
     ImagesAdapter(
-        requestManager = Glide.with(this),
-        imageViewPreloadSizeProvider = imageViewPreloadSizeProvider,
         imageClicked = { photo ->
           findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo, photo.description.orEmpty()))
         }
@@ -42,16 +36,9 @@ class ImagesFragment @Inject constructor(
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
-    val preloader = RecyclerViewPreloader(
-        Glide.with(this@ImagesFragment),
-        adapter,
-        imageViewPreloadSizeProvider,
-        IMAGE_PRELOAD_SIZE
-    )
 
     binding.images.adapter = adapter
     binding.images.layoutManager = GridLayoutManager(requireContext(), COLUMNS)
-    binding.images.addOnScrollListener(preloader)
     binding.images.disableChangeAnimations()
 
     val dividerDrawable = requireContext().requireDrawable(R.drawable.divider)
@@ -76,5 +63,4 @@ class ImagesFragment @Inject constructor(
 
 }
 
-private const val IMAGE_PRELOAD_SIZE = 20
 private const val COLUMNS = 3

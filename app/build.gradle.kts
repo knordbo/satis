@@ -113,6 +113,9 @@ dependencies {
     exclude(group = "com.google.guava", module = "listenablefuture")
   }
 
+  // Coil
+  implementation(Deps.coil)
+
   // Crashlytics
   implementation(Deps.crashlytics)
 
@@ -131,11 +134,6 @@ dependencies {
   debugImplementation(Deps.flipper.network)
   debugImplementation(Deps.soloader)
   releaseImplementation(Deps.flipper.noop)
-
-  // Glide
-  implementation(Deps.glide.glide)
-  implementation(Deps.glide.recyclerview)
-  kapt(Deps.glide.compiler)
 
   // Kotlin
   implementation(Deps.kotlin.serialization.runtime)
