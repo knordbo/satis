@@ -1,6 +1,7 @@
 package com.satis.app.feature.account
 
 import com.satis.app.common.logging.LogEntry
+import com.satis.app.common.logging.Logger
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.prefs.Prefs
@@ -14,7 +15,8 @@ import kotlinx.coroutines.flow.flowOf
 fun createAccountFragment(): AccountFragment {
   return AccountFragment(
       viewModelFactory = createAccountViewModelFactory(),
-      navigationReselection = createNavigationReselection()
+      navigationReselection = createNavigationReselection(),
+      logger = createLogger()
   )
 }
 
@@ -32,6 +34,10 @@ private fun createAccountViewModelFactory(): AccountViewModel.Factory {
 }
 
 private fun createNavigationReselection() = NavigationReselectionImpl()
+
+private fun createLogger() = object: Logger {
+  override fun log(tag: String, message: String) = Unit
+}
 
 private fun createPrefs(): Prefs {
   return object : Prefs {

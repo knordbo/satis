@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
@@ -17,7 +18,7 @@ class MainActivity @Inject constructor(
     private val fragmentFactory: FragmentFactory,
     private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
     private val navigationReselectionUpdater: NavigationReselectionUpdater
-) : AppCompatActivity() {
+) : AppCompatActivity(), IntentSenderForResultStarter {
 
   private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
 

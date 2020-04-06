@@ -14,7 +14,7 @@ class PrefsImpl @Inject constructor(
     @SharedPrefsName prefsName: String
 ) : Prefs {
 
-  private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, 0)
+  private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
 
   override val userId: UserId
     get() {
@@ -31,10 +31,13 @@ class PrefsImpl @Inject constructor(
     }
 
   override var theme: Theme
-    get() = Theme.values()
-        .firstOrNull {
-          sharedPreferences.getString(THEME, null) == it.themeName
-        } ?: Theme.SYSTEM
+    get() {
+      val currentTheme = sharedPreferences.getString(THEME, null)
+      return Theme.values()
+          .firstOrNull { theme ->
+            theme.themeName == currentTheme
+          } ?: Theme.SYSTEM
+    }
     set(value) {
       sharedPreferences.edit {
         putString(THEME, value.themeName)
