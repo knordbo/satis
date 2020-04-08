@@ -44,7 +44,7 @@ private object Versions {
   const val leakCanary = "2.2"
   const val material = "1.2.0-alpha05"
   const val mvrx = "2.0.0-alpha2"
-  const val okhttp = "4.5.0-RC1"
+  const val okhttp = "4.5.0"
   const val photoView = "2.3.0"
   const val playCore = "1.7.2"
 
