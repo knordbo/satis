@@ -1,5 +1,5 @@
 private object Versions {
-  const val androidGradlePlugin = "4.1.0-alpha04"
+  const val androidGradlePlugin = "4.1.0-alpha05"
 
   object androidx {
     const val appCompat = "1.2.0-beta01"
@@ -29,7 +29,7 @@ private object Versions {
   const val fabric = "1.29.0"
   const val firebaseCore = "17.3.0"
   const val firebaseFirestore = "21.4.2"
-  const val flipper = "0.36.0"
+  const val flipper = "0.37.0"
   const val googlePlayPublisher = "2.7.3"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.27.0"
