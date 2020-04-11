@@ -7,7 +7,7 @@ import javax.inject.Inject
 class ThemeLoaderTask @Inject constructor(
     private val prefs: Prefs
 ) : StartupTask {
-  override fun execute() {
+  override suspend fun execute() {
     prefs.theme.apply()
   }
 }

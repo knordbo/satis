@@ -12,7 +12,9 @@ class MainThreadStartupTasks @Inject constructor(
 ) : StartupTasks {
   override suspend fun executeAll() {
     withContext(main) {
-      tasks.get().forEach(StartupTask::execute)
+      tasks.get().forEach { startupTask ->
+        startupTask.execute()
+      }
     }
   }
 }

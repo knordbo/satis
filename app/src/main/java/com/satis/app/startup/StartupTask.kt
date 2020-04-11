@@ -1,5 +1,5 @@
 package com.satis.app.startup
 
 interface StartupTask {
-  fun execute()
+  suspend fun execute()
 }

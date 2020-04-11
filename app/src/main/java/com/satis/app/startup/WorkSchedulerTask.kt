@@ -6,7 +6,7 @@ import javax.inject.Inject
 class WorkSchedulerTask @Inject constructor(
     private val workScheduler: WorkScheduler
 ) : StartupTask {
-  override fun execute() {
+  override suspend fun execute() {
     workScheduler.schedule()
   }
 }

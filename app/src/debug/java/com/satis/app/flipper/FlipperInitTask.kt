@@ -12,7 +12,7 @@ class FlipperInitTask @Inject constructor(
     private val context: Context,
     private val flipperClient: Provider<FlipperClient>
 ) : StartupTask {
-  override fun execute() {
+  override suspend fun execute() {
     SoLoader.init(context, false)
 
     if (FlipperUtils.shouldEnableFlipper(context)) {

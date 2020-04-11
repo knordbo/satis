@@ -1,6 +1,7 @@
 package com.satis.app.startup
 
 import com.satis.app.common.annotations.Background
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Provider
@@ -12,7 +13,11 @@ class BackgroundThreadStartupTasks @Inject constructor(
 ) : StartupTasks {
   override suspend fun executeAll() {
     withContext(background) {
-      tasks.get().forEach(StartupTask::execute)
+      tasks.get().forEach { startupTask ->
+        launch {
+          startupTask.execute()
+        }
+      }
     }
   }
 }
