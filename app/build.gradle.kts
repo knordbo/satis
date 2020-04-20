@@ -190,7 +190,7 @@ apply {
   plugin("com.google.gms.google-services")
 }
 
-val versionCodeOrDefault: Int get() {
+private val versionCodeOrDefault: Int get() {
   val githubRunNumber = System.getenv("GITHUB_RUN_NUMBER")
   return if (githubRunNumber != null) {
     githubRunNumber.toInt() + 1000
