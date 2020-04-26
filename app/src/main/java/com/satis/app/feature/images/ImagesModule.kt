@@ -8,7 +8,7 @@ import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
 import com.satis.app.feature.images.data.db.UnsplashQueries
-import com.satis.app.feature.images.startup.UnsplashTask
+import com.satis.app.feature.images.startup.UnsplashPreloadTask
 import com.satis.app.feature.images.work.ImageWorker
 import com.satis.app.startup.StartupTask
 import com.satis.app.work.ChildWorkerFactory
@@ -59,6 +59,6 @@ abstract class ImagesBindingModule {
   @Binds
   @IntoSet
   @Background
-  abstract fun provideUnsplashTask(bind: UnsplashTask): StartupTask
+  abstract fun provideUnsplashTask(bind: UnsplashPreloadTask): StartupTask
 
 }

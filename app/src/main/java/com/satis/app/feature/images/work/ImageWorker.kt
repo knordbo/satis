@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import coil.Coil
-import coil.api.get
+import coil.request.GetRequest
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
@@ -38,7 +38,10 @@ class ImageWorker @AssistedInject constructor(
           .take(FETCH_IMAGE_COUNT)
           .forEach { photo ->
             withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
-              Coil.get(photo.photoUrl)
+              Coil.imageLoader(context)
+                  .execute(GetRequest.Builder(context)
+                      .data(photo.photoUrl)
+                      .build())
             }
           }
 
@@ -55,5 +58,5 @@ class ImageWorker @AssistedInject constructor(
 
 }
 
-private const val FETCH_IMAGE_COUNT = 10
+private const val FETCH_IMAGE_COUNT = 20
 private const val LOG_TAG = "ImageWorker"
