@@ -1,6 +1,5 @@
 package com.satis.app.di
 
-import android.app.Activity
 import androidx.core.app.AppComponentFactory
 import com.satis.app.App
 import com.satis.app.common.logging.LogModule
