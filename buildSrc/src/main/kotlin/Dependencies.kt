@@ -7,14 +7,14 @@ private object Versions {
     const val constraintLayout = "2.0.0-beta6"
     const val coreKtx = "1.4.0-alpha01"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.3.0-beta02"
+    const val espresso = "3.3.0-rc01"
     const val fragment = "1.3.0-alpha05"
     const val concurrent = "1.1.0-alpha01"
     const val lifecycle = "2.3.0-alpha03"
     const val navigation = "2.3.0-beta01"
     const val recyclerView = "1.2.0-alpha03"
-    const val test = "1.3.0-beta02"
-    const val testExt = "1.1.2-beta02"
+    const val test = "1.3.0-rc01"
+    const val testExt = "1.1.2-rc01"
     const val workManager = "2.4.0-beta01"
   }
 
@@ -23,13 +23,13 @@ private object Versions {
 
   object dagger {
     const val assistedInject = "0.5.2"
-    const val dagger = "2.27"
+    const val dagger = "2.28"
   }
 
   const val fabric = "1.29.0"
-  const val firebaseCore = "17.4.2"
+  const val firebaseCore = "17.4.3"
   const val firebaseFirestore = "21.4.3"
-  const val flipper = "0.43.0"
+  const val flipper = "0.45.0"
   const val googlePlayPublisher = "2.7.3"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.27.0"
@@ -37,12 +37,12 @@ private object Versions {
 
   object kotlin {
     const val kotlin = "1.3.70"
-    const val coroutines = "1.3.4"
+    const val coroutines = "1.3.7"
     const val serialization = "0.20.0"
   }
 
   const val leakCanary = "2.3"
-  const val material = "1.2.0-alpha06"
+  const val material = "1.3.0-alpha01"
   const val mvrx = "2.0.0-alpha2"
   const val okhttp = "4.7.2"
   const val photoView = "2.3.0"
