@@ -9,12 +9,12 @@ import androidx.core.widget.doAfterTextChanged
 import com.airbnb.mvrx.targetFragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
-import com.satis.app.common.mvrx.BaseMvRxDialogFragment
+import com.satis.app.common.fragment.BaseDialogFragment
 import com.satis.app.databinding.AddCardBinding
 import com.satis.app.utils.view.hideKeyboard
 import com.satis.app.utils.view.showKeyboard
 
-class AddCardFragment : BaseMvRxDialogFragment() {
+class AddCardFragment : BaseDialogFragment() {
 
   private val cardViewModel: CardViewModel by targetFragmentViewModel()
 
@@ -41,7 +41,7 @@ class AddCardFragment : BaseMvRxDialogFragment() {
       cardViewModel.addCardMessageChanged(editable.toString())
     }
 
-    cardViewModel.asyncSubscribe(viewLifecycleOwner, CardState::creatingCardAsync,
+    cardViewModel.onAsync(CardState::creatingCardAsync,
         onSuccess = {
           requireContext().hideKeyboard(binding.title)
           dismiss()

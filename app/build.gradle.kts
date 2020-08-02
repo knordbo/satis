@@ -139,6 +139,7 @@ dependencies {
   implementation(Deps.kotlin.serialization.runtime)
   implementation(Deps.kotlin.serialization.runtimeCommon)
   implementation(Deps.kotlin.stdlib)
+  implementation(Deps.kotlin.reflect)
 
   // Kotlin Coroutines
   implementation(Deps.kotlin.coroutines.android)

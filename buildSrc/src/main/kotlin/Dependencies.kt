@@ -4,18 +4,18 @@ private object Versions {
   object androidx {
     const val appCompat = "1.3.0-alpha01"
     const val cardView = "1.0.0"
-    const val constraintLayout = "2.0.0-beta7"
+    const val constraintLayout = "2.0.0-rc01"
     const val coreKtx = "1.5.0-alpha01"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.3.0-rc01"
-    const val fragment = "1.3.0-alpha06"
-    const val concurrent = "1.1.0-alpha01"
-    const val lifecycle = "2.3.0-alpha04"
-    const val navigation = "2.3.0-rc01"
-    const val recyclerView = "1.2.0-alpha03"
-    const val test = "1.3.0-rc01"
-    const val testExt = "1.1.2-rc01"
-    const val workManager = "2.4.0-beta01"
+    const val espresso = "3.3.0-rc02"
+    const val fragment = "1.3.0-alpha07"
+    const val concurrent = "1.1.0-rc01"
+    const val lifecycle = "2.3.0-alpha06"
+    const val navigation = "2.3.0"
+    const val recyclerView = "1.2.0-alpha05"
+    const val test = "1.3.0-rc02"
+    const val testExt = "1.1.2-rc02"
+    const val workManager = "2.4.0"
   }
 
   const val coil = "0.11.0"
@@ -23,13 +23,13 @@ private object Versions {
 
   object dagger {
     const val assistedInject = "0.5.2"
-    const val dagger = "2.28"
+    const val dagger = "2.28.3"
   }
 
   const val fabric = "1.29.0"
-  const val firebaseCore = "17.4.3"
-  const val firebaseFirestore = "21.4.3"
-  const val flipper = "0.47.0"
+  const val firebaseCore = "17.4.4"
+  const val firebaseFirestore = "21.5.0"
+  const val flipper = "0.51.0"
   const val googlePlayPublisher = "2.8.0"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.28.0"
@@ -42,11 +42,11 @@ private object Versions {
   }
 
   const val leakCanary = "2.4"
-  const val material = "1.3.0-alpha01"
-  const val mvrx = "2.0.0-alpha2"
-  const val okhttp = "4.7.2"
+  const val material = "1.3.0-alpha02"
+  const val mvrx = "2.0.0-alpha4"
+  const val okhttp = "4.8.0"
   const val photoView = "2.3.0"
-  const val playCore = "1.7.3"
+  const val playCore = "1.8.0"
 
   object retrofit {
     const val kotlinSerialization = "0.5.0"
@@ -54,7 +54,7 @@ private object Versions {
   }
 
   const val soloader = "0.9.0"
-  const val sqldelight = "1.3.0"
+  const val sqldelight = "1.4.0"
 }
 
 object Deps {
@@ -132,8 +132,8 @@ object Deps {
   const val junit = "junit:junit:${Versions.junit}"
 
   object kotlin {
+    const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin.kotlin}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin.kotlin}"
-    const val test = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin.kotlin}"
     const val plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin.kotlin}"
 
     object coroutines {
