@@ -35,7 +35,7 @@ class AccountFragment @Inject constructor(
   }
 
   private val accountViewModel: AccountViewModel by fragmentViewModel()
-  private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.YY HH:mm", Locale.US) }
+  private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.yy HH:mm", Locale.US) }
   private val logAdapter by lazy { LogAdapter() }
   private var previousState: AccountState? = null
 
