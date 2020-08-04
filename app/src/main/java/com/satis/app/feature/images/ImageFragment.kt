@@ -12,7 +12,7 @@ import javax.inject.Inject
 class ImageFragment @Inject constructor() : BaseFragment<FeatureImageBinding>() {
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImageBinding? =
-      FeatureImageBinding::inflate
+    FeatureImageBinding::inflate
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

@@ -13,8 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 class WorkSchedulerImpl @Inject constructor(
-    private val logger: Logger,
-    private val workManager: WorkManager
+  private val logger: Logger,
+  private val workManager: WorkManager
 ) : WorkScheduler {
 
   override fun schedule() {
@@ -27,13 +27,13 @@ class WorkSchedulerImpl @Inject constructor(
     val name = "image_fetch_job"
 
     val constraints = Constraints.Builder()
-        .setRequiredNetworkType(UNMETERED)
-        .setRequiresCharging(true)
-        .build()
+      .setRequiredNetworkType(UNMETERED)
+      .setRequiresCharging(true)
+      .build()
 
     val work = PeriodicWorkRequestBuilder<ImageWorker>(24, TimeUnit.HOURS)
-        .setConstraints(constraints)
-        .build()
+      .setConstraints(constraints)
+      .build()
 
     workManager.enqueueUniquePeriodicWork(name, KEEP, work)
   }

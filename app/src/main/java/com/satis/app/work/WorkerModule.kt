@@ -19,10 +19,10 @@ object WorkerModule {
   @Provides
   @Singleton
   fun provideConfiguration(workerFactory: WorkerFactory): Configuration =
-      Configuration
-          .Builder()
-          .setWorkerFactory(workerFactory)
-          .build()
+    Configuration
+      .Builder()
+      .setWorkerFactory(workerFactory)
+      .build()
 
 }
 

@@ -39,7 +39,7 @@ object FlipperModule {
   @IntoSet
   @Singleton
   fun provideInspectorPlugin(context: Context): FlipperPlugin =
-      InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
+    InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
 
   @Provides
   @IntoSet
@@ -49,8 +49,8 @@ object FlipperModule {
       // Some random databases like the one from firestore closes which throws flipper off,
       // therefore only listing our own database.
       context.databaseList()
-          .filter { it == databaseName }
-          .map(context::getDatabasePath)
+        .filter { it == databaseName }
+        .map(context::getDatabasePath)
     }))
   }
 
@@ -58,7 +58,7 @@ object FlipperModule {
   @IntoSet
   @Singleton
   fun provideSharedPrefsPlugin(context: Context, @SharedPrefsName sharedPrefsName: String): FlipperPlugin =
-      SharedPreferencesFlipperPlugin(context, sharedPrefsName)
+    SharedPreferencesFlipperPlugin(context, sharedPrefsName)
 
   @Provides
   @Singleton

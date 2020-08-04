@@ -13,10 +13,10 @@ import javax.inject.Provider
 import kotlin.coroutines.CoroutineContext
 
 class App @Inject constructor(
-    private val workConfiguration: Provider<Configuration>,
-    @Main override val coroutineContext: CoroutineContext,
-    @Main private val mainThreadStartupTasks: StartupTasks,
-    @Background private val backgroundThreadStartupTasks: StartupTasks
+  private val workConfiguration: Provider<Configuration>,
+  @Main override val coroutineContext: CoroutineContext,
+  @Main private val mainThreadStartupTasks: StartupTasks,
+  @Background private val backgroundThreadStartupTasks: StartupTasks
 ) : Application(), Configuration.Provider, CoroutineScope {
 
   override fun onCreate() {

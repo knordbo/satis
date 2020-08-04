@@ -1,22 +1,22 @@
 <resources>
-    <string name="app_name">Satis</string>
+  <string name="app_name">Satis</string>
 
-    <string name="card_add_header">Add card</string>
-    <string name="card_add">Add</string>
-    <string name="card_title_hint">Title…</string>
-    <string name="card_message_hint">Message…</string>
-    <string name="card_message_no_title">Please enter a title</string>
+  <string name="card_add_header">Add card</string>
+  <string name="card_add">Add</string>
+  <string name="card_title_hint">Title…</string>
+  <string name="card_message_hint">Message…</string>
+  <string name="card_message_no_title">Please enter a title</string>
 
-    <string name="theme_system">System theme</string>
-    <string name="theme_light">Light theme</string>
-    <string name="theme_dark">Dark theme</string>
+  <string name="theme_system">System theme</string>
+  <string name="theme_light">Light theme</string>
+  <string name="theme_dark">Dark theme</string>
 
-    <string name="version_info">Version: %1$d</string>
-    <string name="build_time_info">Build time: %1$s</string>
-    <string name="log">Log</string>
+  <string name="version_info">Version: %1$d</string>
+  <string name="build_time_info">Build time: %1$s</string>
+  <string name="log">Log</string>
 
-    <string name="home">Home</string>
-    <string name="images">Images</string>
-    <string name="account">Account</string>
-    <string name="playground">Playground</string>
+  <string name="home">Home</string>
+  <string name="images">Images</string>
+  <string name="account">Account</string>
+  <string name="playground">Playground</string>
 </resources>

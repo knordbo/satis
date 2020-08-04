@@ -11,7 +11,7 @@ object DateHeaderViewBinder {
 
   @JvmStatic
   fun createViewHolder(parent: ViewGroup) =
-      DateHeaderViewHolder(parent.layoutInflater.inflate(R.layout.header_item, parent, false) as AppCompatTextView)
+    DateHeaderViewHolder(parent.layoutInflater.inflate(R.layout.header_item, parent, false) as AppCompatTextView)
 
   class DateHeaderViewHolder(private val view: AppCompatTextView) : RecyclerView.ViewHolder(view) {
     fun bind(header: String) {

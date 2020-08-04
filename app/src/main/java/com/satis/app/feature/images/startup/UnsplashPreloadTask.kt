@@ -11,22 +11,22 @@ import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
 class UnsplashPreloadTask @Inject constructor(
-    private val context: Context,
-    private val unsplashRepository: UnsplashRepository
+  private val context: Context,
+  private val unsplashRepository: UnsplashRepository
 ) : StartupTask {
   override suspend fun execute() {
     unsplashRepository.streamPhotos(NATURE)
-        .firstOrNull()
-        ?.take(PRELOAD_IMAGE_COUNT)
-        ?.forEach { photo ->
-          // Load up the images from disk if there, increasing the chance it will be in
-          // memory by the time it is accessed.
-          Coil.imageLoader(context)
-              .execute(GetRequest.Builder(context)
-                  .data(photo.photoUrl)
-                  .networkCachePolicy(CachePolicy.DISABLED)
-                  .build())
-        }
+      .firstOrNull()
+      ?.take(PRELOAD_IMAGE_COUNT)
+      ?.forEach { photo ->
+        // Load up the images from disk if there, increasing the chance it will be in
+        // memory by the time it is accessed.
+        Coil.imageLoader(context)
+          .execute(GetRequest.Builder(context)
+            .data(photo.photoUrl)
+            .networkCachePolicy(CachePolicy.DISABLED)
+            .build())
+      }
   }
 }
 

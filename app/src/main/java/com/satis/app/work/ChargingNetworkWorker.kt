@@ -12,10 +12,10 @@ import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
 class ChargingNetworkWorker @AssistedInject constructor(
-    @Assisted context: Context,
-    @Assisted workerParameters: WorkerParameters,
-    @Io private val io: CoroutineContext,
-    private val logger: Logger
+  @Assisted context: Context,
+  @Assisted workerParameters: WorkerParameters,
+  @Io private val io: CoroutineContext,
+  private val logger: Logger
 ) : CoroutineWorker(context, workerParameters) {
 
   override suspend fun doWork(): Result = withContext(io) {

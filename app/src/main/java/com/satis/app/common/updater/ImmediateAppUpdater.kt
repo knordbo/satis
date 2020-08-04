@@ -11,9 +11,9 @@ import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
 
 class ImmediateAppUpdater @AssistedInject constructor(
-    @Assisted private val intentSenderForResultStarter: IntentSenderForResultStarter,
-    private val appUpdateManager: AppUpdateManager,
-    private val logger: Logger
+  @Assisted private val intentSenderForResultStarter: IntentSenderForResultStarter,
+  private val appUpdateManager: AppUpdateManager,
+  private val logger: Logger
 ) {
 
   fun startAppUpdateIfNeeded(initialCall: Boolean) {
@@ -24,10 +24,10 @@ class ImmediateAppUpdater @AssistedInject constructor(
         try {
           logger.log(LOG_TAG, "Starting app update")
           appUpdateManager.startUpdateFlowForResult(
-              appUpdateInfo,
-              IMMEDIATE,
-              intentSenderForResultStarter,
-              IMMEDIATE_IN_APP_UPDATE
+            appUpdateInfo,
+            IMMEDIATE,
+            intentSenderForResultStarter,
+            IMMEDIATE_IN_APP_UPDATE
           )
         } catch (e: IntentSender.SendIntentException) {
           logger.log(LOG_TAG, "SendIntentException: $e")

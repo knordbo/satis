@@ -17,9 +17,9 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class UnsplashRepositoryImpl @Inject constructor(
-    @Io private val io: CoroutineContext,
-    private val unsplashApi: UnsplashApi,
-    private val unsplashQueries: UnsplashQueries
+  @Io private val io: CoroutineContext,
+  private val unsplashApi: UnsplashApi,
+  private val unsplashQueries: UnsplashQueries
 ) : UnsplashRepository {
 
   override suspend fun fetchPhotos(query: String): List<PhotoState> {
@@ -29,12 +29,12 @@ class UnsplashRepositoryImpl @Inject constructor(
         unsplashQueries.deleteAll()
         for (photo in photos.results) {
           unsplashQueries.insertUnsplashPhoto(
-              id = photo.id,
-              urlRegular = photo.urls.regular,
-              urlThumb = photo.urls.thumb,
-              userUsername = photo.user.username,
-              userProfileImageMedium = photo.user.profileImage.medium,
-              description = photo.description
+            id = photo.id,
+            urlRegular = photo.urls.regular,
+            urlThumb = photo.urls.thumb,
+            userUsername = photo.user.username,
+            userProfileImageMedium = photo.user.profileImage.medium,
+            description = photo.description
           )
         }
       }
@@ -48,27 +48,27 @@ class UnsplashRepositoryImpl @Inject constructor(
 
   private fun Unsplash.toState() = results.map { unsplashPhoto ->
     PhotoState(
-        id = unsplashPhoto.id,
-        thumbnailUrl = Uri.parse(unsplashPhoto.urls.thumb),
-        photoUrl = Uri.parse(unsplashPhoto.urls.regular),
-        user = User(
-            username = unsplashPhoto.user.username,
-            userAvatar = Uri.parse(unsplashPhoto.user.profileImage.medium)
-        ),
-        description = unsplashPhoto.description
+      id = unsplashPhoto.id,
+      thumbnailUrl = Uri.parse(unsplashPhoto.urls.thumb),
+      photoUrl = Uri.parse(unsplashPhoto.urls.regular),
+      user = User(
+        username = unsplashPhoto.user.username,
+        userAvatar = Uri.parse(unsplashPhoto.user.profileImage.medium)
+      ),
+      description = unsplashPhoto.description
     )
   }
 
   private fun List<UnsplashPhotoEntity>.toState() = map { unsplashPhoto ->
     PhotoState(
-        id = unsplashPhoto.id,
-        thumbnailUrl = Uri.parse(unsplashPhoto.urlThumb),
-        photoUrl = Uri.parse(unsplashPhoto.urlRegular),
-        user = User(
-            username = unsplashPhoto.userUsername,
-            userAvatar = Uri.parse(unsplashPhoto.userProfileImageMedium)
-        ),
-        description = unsplashPhoto.description
+      id = unsplashPhoto.id,
+      thumbnailUrl = Uri.parse(unsplashPhoto.urlThumb),
+      photoUrl = Uri.parse(unsplashPhoto.urlRegular),
+      user = User(
+        username = unsplashPhoto.userUsername,
+        userAvatar = Uri.parse(unsplashPhoto.userProfileImageMedium)
+      ),
+      description = unsplashPhoto.description
     )
   }
 }

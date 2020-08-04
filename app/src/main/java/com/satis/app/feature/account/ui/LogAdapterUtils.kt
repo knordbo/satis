@@ -15,10 +15,10 @@ fun DateHeaderViewHolder.bind(item: DateHeaderAdapterItem) {
 }
 
 fun List<LogEntry>.toAdapterItems(): List<LogAdapterItem> =
-    groupBy { logEntry ->
-      logEntry.timestamp.toLocalDate()
-    }.flatMap { (day, logEntriesInDay) ->
-      listOf(DateHeaderAdapterItem(day)) + logEntriesInDay.map(::LogEntryAdapterItem)
-    }
+  groupBy { logEntry ->
+    logEntry.timestamp.toLocalDate()
+  }.flatMap { (day, logEntriesInDay) ->
+    listOf(DateHeaderAdapterItem(day)) + logEntriesInDay.map(::LogEntryAdapterItem)
+  }
 
 private fun Long.toLocalDate() = Date(this).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()

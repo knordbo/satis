@@ -15,12 +15,12 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class AccountViewModel @AssistedInject constructor(
-    @Assisted initialState: AccountState,
-    private val logger: PersistedLogger,
-    private val appInfoRetriever: AppInfoRetriever,
-    private val prefs: Prefs
+  @Assisted initialState: AccountState,
+  private val logger: PersistedLogger,
+  private val appInfoRetriever: AppInfoRetriever,
+  private val prefs: Prefs
 ) : BaseViewModel<AccountState>(
-    initialState = initialState
+  initialState = initialState
 ) {
 
   init {
@@ -48,8 +48,8 @@ class AccountViewModel @AssistedInject constructor(
       val appInfo = appInfoRetriever.getAppInfo()
       setState {
         copy(buildData = BuildData(
-            versionNum = appInfo.versionCode,
-            buildTime = appInfo.buildTime
+          versionNum = appInfo.versionCode,
+          buildTime = appInfo.buildTime
         ))
       }
     }

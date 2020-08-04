@@ -10,8 +10,8 @@ import javax.inject.Singleton
 
 @Singleton
 class PrefsImpl @Inject constructor(
-    context: Context,
-    @SharedPrefsName prefsName: String
+  context: Context,
+  @SharedPrefsName prefsName: String
 ) : Prefs {
 
   private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
@@ -34,9 +34,9 @@ class PrefsImpl @Inject constructor(
     get() {
       val currentTheme = sharedPreferences.getString(THEME, null)
       return Theme.values()
-          .firstOrNull { theme ->
-            theme.themeName == currentTheme
-          } ?: Theme.SYSTEM
+        .firstOrNull { theme ->
+          theme.themeName == currentTheme
+        } ?: Theme.SYSTEM
     }
     set(value) {
       sharedPreferences.edit {

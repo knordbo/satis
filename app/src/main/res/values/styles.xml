@@ -1,13 +1,13 @@
 <resources>
 
-    <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/color_primary</item>
-        <item name="colorAccent">@color/color_accent</item>
-        <item name="colorPrimaryDark">@color/color_primary_dark</item>
-        <item name="android:windowLightStatusBar">@bool/is_light</item>
-        <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
-    </style>
+  <style name="BaseAppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/color_primary</item>
+    <item name="colorAccent">@color/color_accent</item>
+    <item name="colorPrimaryDark">@color/color_primary_dark</item>
+    <item name="android:windowLightStatusBar">@bool/is_light</item>
+    <item name="appBarLayoutStyle">@style/Widget.MaterialComponents.AppBarLayout.Surface</item>
+  </style>
 
-    <style name="AppTheme" parent="BaseAppTheme"/>
+  <style name="AppTheme" parent="BaseAppTheme" />
 
 </resources>

@@ -52,12 +52,12 @@ object AppModule {
   @Provides
   @Singleton
   fun provideDatabase(context: Context, @DatabaseName databaseName: String): Database =
-      Database(AndroidSqliteDriver(
-          schema = Database.Schema,
-          context = context,
-          name = databaseName,
-          useNoBackupDirectory = true
-      ))
+    Database(AndroidSqliteDriver(
+      schema = Database.Schema,
+      context = context,
+      name = databaseName,
+      useNoBackupDirectory = true
+    ))
 
   @Provides
   @Singleton

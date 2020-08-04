@@ -13,13 +13,13 @@ import com.satis.app.utils.view.asyncText
 import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
-    private val viewModelFactory: PlaygroundViewModel.Factory
+  private val viewModelFactory: PlaygroundViewModel.Factory
 ) : BaseFragment<FeaturePlaygroundBinding>(), PlaygroundViewModel.Factory by viewModelFactory {
 
   private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeaturePlaygroundBinding? =
-      FeaturePlaygroundBinding::inflate
+    FeaturePlaygroundBinding::inflate
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

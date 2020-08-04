@@ -12,10 +12,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ImagesViewModel @AssistedInject constructor(
-    @Assisted initialState: ImagesState,
-    private val unsplashRepository: UnsplashRepository
+  @Assisted initialState: ImagesState,
+  private val unsplashRepository: UnsplashRepository
 ) : BaseViewModel<ImagesState>(
-    initialState = initialState
+  initialState = initialState
 ) {
 
   init {

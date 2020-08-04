@@ -11,7 +11,7 @@ object LogViewBinder {
 
   @JvmStatic
   fun createViewHolder(parent: ViewGroup) =
-      LogViewHolder(parent.layoutInflater.inflate(R.layout.log_item, parent, false) as AppCompatTextView)
+    LogViewHolder(parent.layoutInflater.inflate(R.layout.log_item, parent, false) as AppCompatTextView)
 
   class LogViewHolder(private val view: AppCompatTextView) : RecyclerView.ViewHolder(view) {
     fun bind(message: String) {

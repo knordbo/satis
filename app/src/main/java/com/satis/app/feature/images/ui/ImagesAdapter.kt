@@ -13,7 +13,7 @@ import com.satis.app.feature.images.ui.ImagesAdapter.ImageViewHolder
 import com.satis.app.utils.view.layoutInflater
 
 class ImagesAdapter(
-    private val imageClicked: (PhotoState) -> Unit
+  private val imageClicked: (PhotoState) -> Unit
 ) : ListAdapter<PhotoState, ImageViewHolder>(Differ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {

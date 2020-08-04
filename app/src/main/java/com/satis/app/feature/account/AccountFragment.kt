@@ -25,9 +25,9 @@ import java.util.*
 import javax.inject.Inject
 
 class AccountFragment @Inject constructor(
-    private val viewModelFactory: AccountViewModel.Factory,
-    private val navigationReselection: NavigationReselection,
-    private val logger: Logger
+  private val viewModelFactory: AccountViewModel.Factory,
+  private val navigationReselection: NavigationReselection,
+  private val logger: Logger
 ) : BaseFragment<FeatureAccountBinding>(), AccountViewModel.Factory by viewModelFactory {
 
   companion object {
@@ -40,7 +40,7 @@ class AccountFragment @Inject constructor(
   private var previousState: AccountState? = null
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureAccountBinding? =
-      FeatureAccountBinding::inflate
+    FeatureAccountBinding::inflate
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

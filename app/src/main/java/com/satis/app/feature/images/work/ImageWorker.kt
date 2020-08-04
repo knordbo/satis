@@ -21,11 +21,11 @@ import kotlin.time.ExperimentalTime
 import kotlin.time.toDuration
 
 class ImageWorker @AssistedInject constructor(
-    @Assisted private val context: Context,
-    @Assisted workerParameters: WorkerParameters,
-    @Io private val io: CoroutineContext,
-    private val logger: Logger,
-    private val unsplashRepository: UnsplashRepository
+  @Assisted private val context: Context,
+  @Assisted workerParameters: WorkerParameters,
+  @Io private val io: CoroutineContext,
+  private val logger: Logger,
+  private val unsplashRepository: UnsplashRepository
 ) : CoroutineWorker(context, workerParameters) {
 
   @ExperimentalTime
@@ -35,15 +35,15 @@ class ImageWorker @AssistedInject constructor(
 
       val popularImages = unsplashRepository.fetchPhotos(NATURE)
       popularImages
-          .take(FETCH_IMAGE_COUNT)
-          .forEach { photo ->
-            withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
-              Coil.imageLoader(context)
-                  .execute(GetRequest.Builder(context)
-                      .data(photo.photoUrl)
-                      .build())
-            }
+        .take(FETCH_IMAGE_COUNT)
+        .forEach { photo ->
+          withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
+            Coil.imageLoader(context)
+              .execute(GetRequest.Builder(context)
+                .data(photo.photoUrl)
+                .build())
           }
+        }
 
       logger.log(LOG_TAG, "Success")
       Result.success()

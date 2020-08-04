@@ -15,29 +15,29 @@ class LogAdapter : ListAdapter<LogAdapterItem, RecyclerView.ViewHolder>(Differ) 
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-      when (viewType) {
-        VIEW_TYPE_LOG_ENTRY_ITEM_VIEW_TYPE -> LogViewBinder.createViewHolder(parent)
-        VIEW_TYPE_DATE_HEADER_ITEM_VIEW_TYPE -> DateHeaderViewBinder.createViewHolder(parent)
-        else -> throw RuntimeException("uh oh!")
-      }
+    when (viewType) {
+      VIEW_TYPE_LOG_ENTRY_ITEM_VIEW_TYPE -> LogViewBinder.createViewHolder(parent)
+      VIEW_TYPE_DATE_HEADER_ITEM_VIEW_TYPE -> DateHeaderViewBinder.createViewHolder(parent)
+      else -> throw RuntimeException("uh oh!")
+    }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) =
-      when (val item = getItem(position)) {
-        is LogEntryAdapterItem -> (holder as LogViewHolder).bind(item)
-        is DateHeaderAdapterItem -> (holder as DateHeaderViewHolder).bind(item)
-      }
+    when (val item = getItem(position)) {
+      is LogEntryAdapterItem -> (holder as LogViewHolder).bind(item)
+      is DateHeaderAdapterItem -> (holder as DateHeaderViewHolder).bind(item)
+    }
 
   override fun getItemViewType(position: Int): Int =
-      when (getItem(position)) {
-        is LogEntryAdapterItem -> VIEW_TYPE_LOG_ENTRY_ITEM_VIEW_TYPE
-        is DateHeaderAdapterItem -> VIEW_TYPE_DATE_HEADER_ITEM_VIEW_TYPE
-      }
+    when (getItem(position)) {
+      is LogEntryAdapterItem -> VIEW_TYPE_LOG_ENTRY_ITEM_VIEW_TYPE
+      is DateHeaderAdapterItem -> VIEW_TYPE_DATE_HEADER_ITEM_VIEW_TYPE
+    }
 
   private object Differ : DiffUtil.ItemCallback<LogAdapterItem>() {
     override fun areItemsTheSame(oldItem: LogAdapterItem, newItem: LogAdapterItem): Boolean =
-        oldItem::class == newItem::class && oldItem.id == newItem.id
+      oldItem::class == newItem::class && oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: LogAdapterItem, newItem: LogAdapterItem): Boolean =
-        oldItem::class == newItem::class && oldItem == newItem
+      oldItem::class == newItem::class && oldItem == newItem
   }
 }

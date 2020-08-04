@@ -16,9 +16,9 @@ import kotlin.coroutines.CoroutineContext
 
 @Singleton
 class CardRepositoryImpl @Inject constructor(
-    userIdProvider: Provider<UserId>,
-    firebaseFirestore: FirebaseFirestore,
-    @Io private val io: CoroutineContext
+  userIdProvider: Provider<UserId>,
+  firebaseFirestore: FirebaseFirestore,
+  @Io private val io: CoroutineContext
 ) : CardRepository {
 
   private val userId by lazy(LazyThreadSafetyMode.NONE) { userIdProvider.get() }
@@ -29,9 +29,9 @@ class CardRepositoryImpl @Inject constructor(
       if (querySnapshot != null && !isClosedForSend) {
         launch(io) {
           val cards = querySnapshot.documents
-              .mapNotNull {
-                it.toObject(DbCard::class.java)?.toModel(it.id, userId)
-              }
+            .mapNotNull {
+              it.toObject(DbCard::class.java)?.toModel(it.id, userId)
+            }
           offer(cards)
         }
       }

@@ -8,22 +8,22 @@ data class Unsplash(val results: List<UnsplashPhoto>)
 
 @Serializable
 data class UnsplashPhoto(
-    val id: String,
-    val urls: Urls,
-    val user: User,
-    val description: String?
+  val id: String,
+  val urls: Urls,
+  val user: User,
+  val description: String?
 )
 
 @Serializable
 data class Urls(
-    val regular: String,
-    val thumb: String
+  val regular: String,
+  val thumb: String
 )
 
 @Serializable
 data class User(
-    val username: String,
-    @SerialName("profile_image") val profileImage: ProfileImage
+  val username: String,
+  @SerialName("profile_image") val profileImage: ProfileImage
 )
 
 @Serializable

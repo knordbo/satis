@@ -15,9 +15,9 @@ import com.satis.app.databinding.ActivityMainBinding
 import javax.inject.Inject
 
 class MainActivity @Inject constructor(
-    private val fragmentFactory: FragmentFactory,
-    private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
-    private val navigationReselectionUpdater: NavigationReselectionUpdater
+  private val fragmentFactory: FragmentFactory,
+  private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
+  private val navigationReselectionUpdater: NavigationReselectionUpdater
 ) : AppCompatActivity(), IntentSenderForResultStarter {
 
   private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
@@ -41,8 +41,8 @@ class MainActivity @Inject constructor(
 
     binding.bottomNav.setupWithNavController(navigationController)
     setupActionBarWithNavController(
-        navController = navigationController,
-        configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
+      navController = navigationController,
+      configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
     )
 
     binding.bottomNav.setOnNavigationItemReselectedListener { menuItem ->

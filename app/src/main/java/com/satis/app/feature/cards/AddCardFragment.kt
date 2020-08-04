@@ -42,13 +42,13 @@ class AddCardFragment : BaseDialogFragment() {
     }
 
     cardViewModel.onAsync(CardState::creatingCardAsync,
-        onSuccess = {
-          requireContext().hideKeyboard(binding.title)
-          dismiss()
-        },
-        onFail = {
-          Toast.makeText(context, R.string.card_message_no_title, Toast.LENGTH_SHORT).show()
-        })
+      onSuccess = {
+        requireContext().hideKeyboard(binding.title)
+        dismiss()
+      },
+      onFail = {
+        Toast.makeText(context, R.string.card_message_no_title, Toast.LENGTH_SHORT).show()
+      })
   }
 
   override fun invalidate() = withState(cardViewModel) { cardState ->

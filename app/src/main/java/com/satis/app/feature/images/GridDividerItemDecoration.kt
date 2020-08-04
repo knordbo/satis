@@ -8,9 +8,9 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class GridDividerItemDecoration(
-    private val horizontalDivider: Drawable,
-    private val verticalDivider: Drawable,
-    private val columns: Int
+  private val horizontalDivider: Drawable,
+  private val verticalDivider: Drawable,
+  private val columns: Int
 ) : RecyclerView.ItemDecoration() {
 
   override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
@@ -46,10 +46,10 @@ class GridDividerItemDecoration(
 
       if (firstRowChild != null && lastRowChild != null) {
         horizontalDivider.setBounds(
-            firstRowChild.left - horizontalDivider.intrinsicWidth,
-            firstRowChild.top,
-            firstRowChild.left,
-            lastRowChild.bottom
+          firstRowChild.left - horizontalDivider.intrinsicWidth,
+          firstRowChild.top,
+          firstRowChild.left,
+          lastRowChild.bottom
         )
         horizontalDivider.draw(canvas)
       }
@@ -72,10 +72,10 @@ class GridDividerItemDecoration(
 
       if (leftmostChild != null && rightmostChild != null) {
         verticalDivider.setBounds(
-            leftmostChild.left,
-            leftmostChild.top - verticalDivider.intrinsicHeight,
-            rightmostChild.right,
-            leftmostChild.top
+          leftmostChild.left,
+          leftmostChild.top - verticalDivider.intrinsicHeight,
+          rightmostChild.right,
+          leftmostChild.top
         )
         verticalDivider.draw(canvas)
       }

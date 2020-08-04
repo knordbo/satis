@@ -17,16 +17,16 @@ import com.satis.app.utils.view.asyncText
 import com.satis.app.utils.view.layoutInflater
 
 class CardAdapter(
-    private val onLikeClicked: ((Card) -> Unit),
-    private val onDislikeClicked: ((Card) -> Unit),
-    private val onSwiped: ((Card) -> Unit)
+  private val onLikeClicked: ((Card) -> Unit),
+  private val onDislikeClicked: ((Card) -> Unit),
+  private val onSwiped: ((Card) -> Unit)
 ) : ListAdapter<Card, CardViewHolder>(Differ) {
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
     return CardViewHolder(
-        view = parent.layoutInflater.inflate(R.layout.card_item, parent, false),
-        onLikeClicked = onLikeClicked,
-        onDislikeClicked = onDislikeClicked
+      view = parent.layoutInflater.inflate(R.layout.card_item, parent, false),
+      onLikeClicked = onLikeClicked,
+      onDislikeClicked = onDislikeClicked
     )
   }
 
@@ -39,9 +39,9 @@ class CardAdapter(
   }
 
   class CardViewHolder(
-      private val view: View,
-      private val onLikeClicked: ((Card) -> Unit),
-      private val onDislikeClicked: ((Card) -> Unit)
+    private val view: View,
+    private val onLikeClicked: ((Card) -> Unit),
+    private val onDislikeClicked: ((Card) -> Unit)
   ) : ViewHolder(view) {
 
     private val binding = CardItemBinding.bind(view)

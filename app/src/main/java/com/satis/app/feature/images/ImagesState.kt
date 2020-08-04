@@ -8,20 +8,20 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ImagesState(
-    @PersistState val photoState: List<PhotoState> = emptyList()
+  @PersistState val photoState: List<PhotoState> = emptyList()
 ) : MvRxState, Parcelable
 
 @Parcelize
 data class PhotoState(
-    val id: String,
-    val thumbnailUrl: Uri,
-    val photoUrl: Uri,
-    val user: User,
-    val description: String?
+  val id: String,
+  val thumbnailUrl: Uri,
+  val photoUrl: Uri,
+  val user: User,
+  val description: String?
 ) : Parcelable
 
 @Parcelize
 data class User(
-    val username: String,
-    val userAvatar: Uri
+  val username: String,
+  val userAvatar: Uri
 ) : Parcelable

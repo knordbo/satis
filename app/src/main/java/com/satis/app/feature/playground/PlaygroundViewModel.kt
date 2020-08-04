@@ -15,10 +15,10 @@ import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
 
 class PlaygroundViewModel @AssistedInject constructor(
-    @Assisted initialState: PlaygroundState,
-    private val logger: PersistedLogger
+  @Assisted initialState: PlaygroundState,
+  private val logger: PersistedLogger
 ) : BaseViewModel<PlaygroundState>(
-    initialState = initialState
+  initialState = initialState
 ) {
   init {
     fetch("")
@@ -48,5 +48,5 @@ class PlaygroundViewModel @AssistedInject constructor(
 
 @Parcelize
 data class PlaygroundState(
-    val items: List<String> = emptyList()
+  val items: List<String> = emptyList()
 ) : MvRxState, Parcelable

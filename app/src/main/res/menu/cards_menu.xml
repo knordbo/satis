@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:ignore="AlwaysShowAction"
->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  tools:ignore="AlwaysShowAction"
+  >
 
-    <item
-        android:id="@+id/cardAdd"
-        android:title="@string/card_add_header"
-        app:showAsAction="always"
+  <item
+    android:id="@+id/cardAdd"
+    android:title="@string/card_add_header"
+    app:showAsAction="always"
     />
 
 </menu>

@@ -15,10 +15,10 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CardViewModel @AssistedInject constructor(
-    @Assisted initialState: CardState,
-    private val cardRepository: CardRepository
+  @Assisted initialState: CardState,
+  private val cardRepository: CardRepository
 ) : BaseViewModel<CardState>(
-    initialState = initialState
+  initialState = initialState
 ) {
   init {
     getCards()
@@ -46,8 +46,8 @@ class CardViewModel @AssistedInject constructor(
         cardRepository.addCard(state.creatingCard)
         setState {
           copy(
-              creatingCard = Card(title = "", message = ""),
-              creatingCardAsync = Success(state.creatingCard)
+            creatingCard = Card(title = "", message = ""),
+            creatingCardAsync = Success(state.creatingCard)
           )
         }
         setState {

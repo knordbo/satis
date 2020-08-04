@@ -24,23 +24,23 @@ import com.satis.app.utils.view.disableChangeAnimations
 import javax.inject.Inject
 
 class CardFragment @Inject constructor(
-    private val viewModelFactory: CardViewModel.Factory,
-    private val navigationReselection: NavigationReselection
+  private val viewModelFactory: CardViewModel.Factory,
+  private val navigationReselection: NavigationReselection
 ) : BaseFragment<FeatureCardsBinding>(), CardViewModel.Factory by viewModelFactory {
 
   private val cardViewModel: CardViewModel by fragmentViewModel()
   private val cardsAdapter by lazy {
     CardAdapter(
-        onLikeClicked = cardViewModel::like,
-        onDislikeClicked = cardViewModel::dislike,
-        onSwiped = cardViewModel::removeCard
+      onLikeClicked = cardViewModel::like,
+      onDislikeClicked = cardViewModel::dislike,
+      onSwiped = cardViewModel::removeCard
     )
   }
 
   private lateinit var itemTouchHelper: ItemTouchHelper
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureCardsBinding? =
-      FeatureCardsBinding::inflate
+    FeatureCardsBinding::inflate
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

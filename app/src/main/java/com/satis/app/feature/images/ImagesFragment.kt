@@ -18,21 +18,21 @@ import com.satis.app.utils.view.disableChangeAnimations
 import javax.inject.Inject
 
 class ImagesFragment @Inject constructor(
-    private val viewModelFactory: ImagesViewModel.Factory,
-    private val navigationReselection: NavigationReselection
+  private val viewModelFactory: ImagesViewModel.Factory,
+  private val navigationReselection: NavigationReselection
 ) : BaseFragment<FeatureImagesBinding>(), ImagesViewModel.Factory by viewModelFactory {
 
   private val imagesViewModel: ImagesViewModel by fragmentViewModel()
   private val adapter by lazy {
     ImagesAdapter(
-        imageClicked = { photo ->
-          findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo, photo.description.orEmpty()))
-        }
+      imageClicked = { photo ->
+        findNavController().navigate(ImagesFragmentDirections.actionImagesToImage(photo, photo.description.orEmpty()))
+      }
     )
   }
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImagesBinding? =
-      FeatureImagesBinding::inflate
+    FeatureImagesBinding::inflate
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

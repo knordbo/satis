@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 
 open class BaseViewModel<S : MvRxState>(
-    initialState: S
+  initialState: S
 ) : MavericksViewModel<S>(initialState), CoroutineScope {
 
   override val coroutineContext: CoroutineContext
@@ -28,5 +28,5 @@ inline fun <reified F> ViewModelContext.viewModelFactory(): F {
     }
   }
   return activity as? F
-      ?: throw IllegalStateException("No view model factory found for ${F::class}")
+    ?: throw IllegalStateException("No view model factory found for ${F::class}")
 }

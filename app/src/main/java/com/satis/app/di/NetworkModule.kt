@@ -21,27 +21,27 @@ object NetworkModule {
   @Provides
   @Singleton
   fun provideJson(): Json = Json(
-      JsonConfiguration(
-          isLenient = true,
-          ignoreUnknownKeys = true,
-          serializeSpecialFloatingPointValues = true,
-          useArrayPolymorphism = true
-      )
+    JsonConfiguration(
+      isLenient = true,
+      ignoreUnknownKeys = true,
+      serializeSpecialFloatingPointValues = true,
+      useArrayPolymorphism = true
+    )
   )
 
   @Provides
   @Singleton
   fun provideOkHttp(interceptors: Set<@JvmSuppressWildcards Interceptor>): OkHttpClient = OkHttpClient.Builder()
-      .addNetworkInterceptors(interceptors)
-      .build()
+    .addNetworkInterceptors(interceptors)
+    .build()
 
   @Provides
   @Singleton
   fun provideRetrofit(okHttpClient: Provider<OkHttpClient>, json: Json): Retrofit = Retrofit.Builder()
-      .baseUrl("https://dummy.com/")
-      .clientProvider(okHttpClient)
-      .addConverterFactory(json.asConverterFactory(jsonMediaType()))
-      .build()
+    .baseUrl("https://dummy.com/")
+    .clientProvider(okHttpClient)
+    .addConverterFactory(json.asConverterFactory(jsonMediaType()))
+    .build()
 
 }
 

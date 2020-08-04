@@ -13,9 +13,9 @@ import kotlinx.coroutines.flow.flowOf
 
 fun createAccountFragment(): AccountFragment {
   return AccountFragment(
-      viewModelFactory = createAccountViewModelFactory(),
-      navigationReselection = createNavigationReselection(),
-      logger = createPersistedLogger()
+    viewModelFactory = createAccountViewModelFactory(),
+    navigationReselection = createNavigationReselection(),
+    logger = createPersistedLogger()
   )
 }
 
@@ -23,10 +23,10 @@ private fun createAccountViewModelFactory(): AccountViewModel.Factory {
   return object : AccountViewModel.Factory {
     override fun createAccountViewModel(initialState: AccountState): AccountViewModel {
       return AccountViewModel(
-          initialState = initialState,
-          logger = createPersistedLogger(),
-          appInfoRetriever = createAppInfoRetriever(),
-          prefs = createPrefs()
+        initialState = initialState,
+        logger = createPersistedLogger(),
+        appInfoRetriever = createAppInfoRetriever(),
+        prefs = createPrefs()
       )
     }
   }
@@ -44,8 +44,8 @@ private fun createPrefs(): Prefs {
 private fun createAppInfoRetriever(): AppInfoRetriever {
   return object : AppInfoRetriever {
     override suspend fun getAppInfo(): AppInfo = AppInfo(
-        versionCode = 1,
-        buildTime = 1
+      versionCode = 1,
+      buildTime = 1
     )
   }
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class InjectingActivityFactory @Inject constructor(
-    private val creators: Map<Class<out Activity>, @JvmSuppressWildcards Provider<Activity>>
+  private val creators: Map<Class<out Activity>, @JvmSuppressWildcards Provider<Activity>>
 ) : AppComponentFactory() {
 
   override fun instantiateActivityCompat(cl: ClassLoader, className: String, intent: Intent?): Activity {

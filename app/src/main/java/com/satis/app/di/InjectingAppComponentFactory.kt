@@ -10,8 +10,8 @@ class InjectingAppComponentFactory : AppComponentFactory() {
   private val appComponent = DaggerAppComponent.create()
 
   override fun instantiateApplicationCompat(cl: ClassLoader, className: String): Application =
-      appComponent.provideApp()
+    appComponent.provideApp()
 
   override fun instantiateActivityCompat(cl: ClassLoader, className: String, intent: Intent?): Activity =
-      appComponent.provideActivityFactory().instantiateActivityCompat(cl, className, intent)
+    appComponent.provideActivityFactory().instantiateActivityCompat(cl, className, intent)
 }
