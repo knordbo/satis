@@ -80,9 +80,9 @@ android {
 }
 
 play {
-  defaultToAppBundles = true
-  serviceAccountCredentials = file("../service-account.json")
-  track = "internal"
+  defaultToAppBundles.set(true)
+  serviceAccountCredentials.set(file("../service-account.json"))
+  track.set("internal")
 }
 
 androidExtensions {
