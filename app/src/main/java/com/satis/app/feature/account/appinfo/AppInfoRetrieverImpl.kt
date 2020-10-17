@@ -16,7 +16,7 @@ class AppInfoRetrieverImpl @Inject constructor(
   override suspend fun getAppInfo(): AppInfo {
     return withContext(background) {
       AppInfo(
-        versionCode = context.packageManager.getPackageInfo(context.packageName, 0).versionCode,
+        versionCode = context.packageManager.getPackageInfo(context.packageName, 0).longVersionCode,
         buildTime = BuildConfig.BUILD_TIME
       )
     }

@@ -36,9 +36,9 @@ private object Versions {
   const val junit = "4.13"
 
   object kotlin {
-    const val kotlin = "1.3.70"
+    const val kotlin = "1.4.10"
     const val coroutines = "1.3.7"
-    const val serialization = "0.20.0"
+    const val serialization = "1.0.0-RC"
   }
 
   const val leakCanary = "2.4"
@@ -49,7 +49,7 @@ private object Versions {
   const val playCore = "1.8.0"
 
   object retrofit {
-    const val kotlinSerialization = "0.5.0"
+    const val kotlinSerialization = "0.6.0"
     const val retrofit = "2.9.0"
   }
 
@@ -142,8 +142,7 @@ object Deps {
     }
 
     object serialization {
-      const val runtime = "org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Versions.kotlin.serialization}"
-      const val runtimeCommon = "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:${Versions.kotlin.serialization}"
+      const val runtime = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.kotlin.serialization}"
       const val serialization = "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin.kotlin}"
     }
   }

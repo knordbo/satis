@@ -8,7 +8,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.multibindings.Multibinds
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -20,14 +19,12 @@ object NetworkModule {
 
   @Provides
   @Singleton
-  fun provideJson(): Json = Json(
-    JsonConfiguration(
-      isLenient = true,
-      ignoreUnknownKeys = true,
-      serializeSpecialFloatingPointValues = true,
-      useArrayPolymorphism = true
-    )
-  )
+  fun provideJson(): Json = Json {
+    isLenient = true
+    ignoreUnknownKeys = true
+    allowSpecialFloatingPointValues = true
+    useArrayPolymorphism = true
+  }
 
   @Provides
   @Singleton

@@ -14,6 +14,6 @@ data class AccountState(
 
 @Parcelize
 data class BuildData(
-  val versionNum: Int,
+  val versionNum: Long,
   val buildTime: Long
 ) : Parcelable
