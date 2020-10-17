@@ -5,8 +5,8 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import coil.api.clear
-import coil.api.load
+import coil.clear
+import coil.load
 import com.satis.app.R
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.ui.ImagesAdapter.ImageViewHolder

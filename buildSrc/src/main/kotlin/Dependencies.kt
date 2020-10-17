@@ -18,7 +18,7 @@ private object Versions {
     const val workManager = "2.5.0-alpha03"
   }
 
-  const val coil = "0.11.0"
+  const val coil = "1.0.0-rc3"
   const val crashlytics = "2.10.1"
 
   object dagger {

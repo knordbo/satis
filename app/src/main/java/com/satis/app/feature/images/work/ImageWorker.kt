@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import coil.Coil
-import coil.request.GetRequest
+import coil.request.ImageRequest
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
@@ -39,7 +39,7 @@ class ImageWorker @AssistedInject constructor(
         .forEach { photo ->
           withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
             Coil.imageLoader(context)
-              .execute(GetRequest.Builder(context)
+              .execute(ImageRequest.Builder(context)
                 .data(photo.photoUrl)
                 .build())
           }
