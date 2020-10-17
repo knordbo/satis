@@ -136,7 +136,7 @@ dependencies {
   releaseImplementation(Deps.flipper.noop)
 
   // Kotlin
-  implementation(Deps.kotlin.serialization.runtime)
+  implementation(Deps.kotlin.serialization.json)
   implementation(Deps.kotlin.stdlib)
   implementation(Deps.kotlin.reflect)
 
