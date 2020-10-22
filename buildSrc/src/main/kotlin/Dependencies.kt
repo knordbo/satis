@@ -1,5 +1,5 @@
 private object Versions {
-  const val androidGradlePlugin = "4.2.0-alpha14"
+  const val androidGradlePlugin = "4.2.0-alpha07"
 
   object androidx {
     const val appCompat = "1.3.0-alpha02"
