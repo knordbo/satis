@@ -3,6 +3,7 @@ buildscript {
     defaultRepositories()
   }
   dependencies {
+    classpath("xml-apis:xml-apis:1.4.01") // https://github.com/cashapp/sqldelight/issues/1343
     classpath(Deps.androidGradlePlugin)
     classpath(Deps.kotlin.plugin)
     classpath(Deps.kotlin.serialization.serialization)
