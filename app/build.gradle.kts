@@ -138,6 +138,7 @@ dependencies {
 
   // Coil
   implementation(Deps.coil)
+  implementation(Deps.accompanistCoil)
 
   // Crashlytics
   implementation(Deps.crashlytics)

@@ -18,6 +18,7 @@ object Versions {
     const val workManager = "2.5.0-alpha03"
   }
 
+  const val accompanistCoil = "0.4.1"
   const val coil = "1.0.0-rc3"
   const val compose = "1.0.0-alpha09"
   const val crashlytics = "2.10.1"
@@ -118,6 +119,7 @@ object Deps {
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.androidx.workManager}"
   }
 
+  const val accompanistCoil = "dev.chrisbanes.accompanist:accompanist-coil:${Versions.accompanistCoil}"
   const val coil = "io.coil-kt:coil:${Versions.coil}"
   const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
 
