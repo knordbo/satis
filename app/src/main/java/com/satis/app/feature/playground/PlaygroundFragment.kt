@@ -4,34 +4,65 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doAfterTextChanged
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit.Companion.Sp
+import androidx.fragment.app.Fragment
+import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
-import com.airbnb.mvrx.withState
-import com.satis.app.common.fragment.BaseFragment
-import com.satis.app.databinding.FeaturePlaygroundBinding
-import com.satis.app.utils.view.asyncText
 import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
   private val viewModelFactory: PlaygroundViewModel.Factory
-) : BaseFragment<FeaturePlaygroundBinding>(), PlaygroundViewModel.Factory by viewModelFactory {
+) : Fragment(), MavericksView, PlaygroundViewModel.Factory by viewModelFactory {
 
   private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
-  override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeaturePlaygroundBinding? =
-    FeaturePlaygroundBinding::inflate
-
-  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-    super.onViewCreated(view, savedInstanceState)
-    binding.queryInput.doAfterTextChanged {
-      playgroundViewModel.fetch(it.toString())
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    return ComposeView(inflater.context).apply {
+      layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+      setContent {
+        MaterialTheme {
+          Column(
+            modifier = Modifier.padding(Dp(16f))
+          ) {
+            val queryState = remember { mutableStateOf(TextFieldValue()) }
+            TextField(
+              value = queryState.value,
+              modifier = Modifier.padding(bottom = Dp(8f)),
+              onValueChange = { value ->
+                queryState.value = value
+                playgroundViewModel.fetch(value.text)
+              })
+            val state = playgroundViewModel.stateFlow.collectAsState(PlaygroundState())
+            LazyColumn {
+              items(state.value.items) { item ->
+                Text(
+                  text = item,
+                  style = TextStyle(
+                    fontSize = Sp(12)
+                  )
+                )
+              }
+            }
+          }
+        }
+      }
     }
   }
 
-  override fun invalidate() {
-    withState(playgroundViewModel) { state ->
-      binding.items.asyncText = state.items.joinToString(separator = "\n") { it }
-    }
-  }
-
+  override fun invalidate() = Unit
 }
