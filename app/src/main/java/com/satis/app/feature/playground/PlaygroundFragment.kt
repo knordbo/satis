@@ -30,7 +30,7 @@ class PlaygroundFragment @Inject constructor(
 
   private val playgroundViewModel: PlaygroundViewModel by fragmentViewModel()
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
     return ComposeView(inflater.context).apply {
       layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
       setContent {
@@ -53,7 +53,8 @@ class PlaygroundFragment @Inject constructor(
                   text = item,
                   style = TextStyle(
                     fontSize = Sp(12)
-                  )
+                  ),
+                  color = MaterialTheme.colors.onSurface
                 )
               }
             }
