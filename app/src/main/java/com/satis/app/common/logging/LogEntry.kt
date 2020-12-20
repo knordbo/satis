@@ -1,7 +1,7 @@
 package com.satis.app.common.logging
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class LogEntry(

@@ -1,5 +1,5 @@
-private object Versions {
-  const val androidGradlePlugin = "4.2.0-alpha07"
+object Versions {
+  const val androidGradlePlugin = "4.2.0-beta02"
 
   object androidx {
     const val appCompat = "1.3.0-alpha02"
@@ -19,6 +19,7 @@ private object Versions {
   }
 
   const val coil = "1.0.0-rc3"
+  const val compose = "1.0.0-alpha09"
   const val crashlytics = "2.10.1"
 
   object dagger {
@@ -30,13 +31,13 @@ private object Versions {
   const val firebaseCore = "17.5.1"
   const val firebaseFirestore = "21.7.1"
   const val flipper = "0.63.0"
-  const val googlePlayPublisher = "3.0.0-SNAPSHOT"
+  const val googlePlayPublisher = "3.2.0-SNAPSHOT"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.28.0"
   const val junit = "4.13.1"
 
   object kotlin {
-    const val kotlin = "1.4.10"
+    const val kotlin = "1.4.21"
     const val coroutines = "1.3.8"
     const val serialization = "1.0.0"
   }
@@ -66,6 +67,20 @@ object Deps {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidx.constraintLayout}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.androidx.coreKtx}"
     const val coreTesting = "androidx.arch.core:core-testing:${Versions.androidx.coreTesting}"
+
+    object compose {
+      const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
+      const val layout = "androidx.compose.foundation:foundation-layout:${Versions.compose}"
+      const val material = "androidx.compose.material:material:${Versions.compose}"
+      const val materialIconsExtended = "androidx.compose.material:material-icons-extended:${Versions.compose}"
+      const val runtime = "androidx.compose.runtime:runtime:${Versions.compose}"
+      const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:${Versions.compose}"
+      const val tooling = "androidx.compose.ui:ui-tooling:${Versions.compose}"
+      const val test = "androidx.compose.ui:ui-test:${Versions.compose}"
+      const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+      const val uiUtil = "androidx.compose.ui:ui-util:${Versions.compose}"
+      const val viewBinding = "androidx.compose.ui:ui-viewbinding:${Versions.compose}"
+    }
 
     object espresso {
       const val core = "androidx.test.espresso:espresso-core:${Versions.androidx.espresso}"

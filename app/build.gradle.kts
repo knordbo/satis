@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.FileInputStream
 import java.util.*
 
@@ -5,7 +6,7 @@ plugins {
   id("com.android.application")
   kotlin("android")
   kotlin("kapt")
-  id("kotlin-android-extensions")
+  id("kotlin-parcelize")
   id("kotlinx-serialization")
   id("com.github.ben-manes.versions")
   id("io.fabric")
@@ -37,6 +38,18 @@ android {
 
   kotlinOptions {
     jvmTarget = "1.8"
+  }
+
+  composeOptions {
+    kotlinCompilerVersion = Versions.kotlin.kotlin
+    kotlinCompilerExtensionVersion = Versions.compose
+  }
+
+  tasks.withType(KotlinCompile::class.java).configureEach {
+    kotlinOptions {
+      jvmTarget = "1.8"
+      freeCompilerArgs = freeCompilerArgs + listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check")
+    }
   }
 
   defaultConfig {
@@ -76,6 +89,7 @@ android {
 
   buildFeatures {
     viewBinding = true
+    compose = true
   }
 }
 
@@ -83,10 +97,6 @@ play {
   defaultToAppBundles.set(true)
   serviceAccountCredentials.set(file("../service-account.json"))
   track.set("internal")
-}
-
-androidExtensions {
-  isExperimental = true
 }
 
 dependencies {
@@ -107,6 +117,17 @@ dependencies {
   implementation(Deps.androidx.navigation.uiKtx)
   implementation(Deps.androidx.recyclerView)
   kapt(Deps.androidx.lifecycle.compiler)
+
+  // Compose
+  implementation(Deps.androidx.compose.layout)
+  implementation(Deps.androidx.compose.material)
+  implementation(Deps.androidx.compose.materialIconsExtended)
+  implementation(Deps.androidx.compose.tooling)
+  implementation(Deps.androidx.compose.uiUtil)
+  implementation(Deps.androidx.compose.runtime)
+  implementation(Deps.androidx.compose.runtimeLivedata)
+  implementation(Deps.androidx.compose.viewBinding)
+  androidTestImplementation(Deps.androidx.compose.uiTest)
 
   // Work Manager
   implementation(Deps.androidx.workManager) {

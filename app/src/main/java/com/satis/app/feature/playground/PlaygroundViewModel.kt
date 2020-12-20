@@ -11,8 +11,8 @@ import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
-import kotlinx.android.parcel.Parcelize
 import kotlinx.coroutines.launch
+import kotlinx.parcelize.Parcelize
 
 class PlaygroundViewModel @AssistedInject constructor(
   @Assisted initialState: PlaygroundState,
