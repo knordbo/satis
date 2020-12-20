@@ -85,6 +85,7 @@ android {
     pickFirst("META-INF/atomicfu.kotlin_module")
     pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
     pickFirst("META-INF/kotlinx-serialization-runtime.kotlin_module")
+    pickFirst("META-INF/AL2.0")
   }
 
   buildFeatures {
