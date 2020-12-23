@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
+import com.satis.app.common.fragment.BaseViewBindingFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureCardsBinding
 import com.satis.app.feature.cards.ui.CardAdapter
@@ -26,7 +26,7 @@ import javax.inject.Inject
 class CardFragment @Inject constructor(
   private val viewModelFactory: CardViewModel.Factory,
   private val navigationReselection: NavigationReselection
-) : BaseFragment<FeatureCardsBinding>(), CardViewModel.Factory by viewModelFactory {
+) : BaseViewBindingFragment<FeatureCardsBinding>(), CardViewModel.Factory by viewModelFactory {
 
   private val cardViewModel: CardViewModel by fragmentViewModel()
   private val cardsAdapter by lazy {

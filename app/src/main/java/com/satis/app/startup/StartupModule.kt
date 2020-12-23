@@ -19,6 +19,11 @@ abstract class StartupModule {
   @Main
   abstract fun provideMvRxInitTask(bind: MvRxInitTask): StartupTask
 
+  @Binds
+  @IntoSet
+  @Main
+  abstract fun provideThemeLoaderTask(bind: ThemeLoaderTask): StartupTask
+
   @Multibinds
   @Main
   abstract fun provideMainStartupTasksSet(): Set<StartupTask>
@@ -30,11 +35,6 @@ abstract class StartupModule {
   @Multibinds
   @Background
   abstract fun provideBackgroundStartupTasksSet(): Set<StartupTask>
-
-  @Binds
-  @IntoSet
-  @Background
-  abstract fun provideThemeLoaderTask(bind: ThemeLoaderTask): StartupTask
 
   @Binds
   @IntoSet

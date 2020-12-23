@@ -20,13 +20,13 @@ fun AppTheme(
 }
 
 private val lightColors = lightColors(
-  primary = Color(0x3f51b5),
+  primary = Color(0xFF3f51b5),
   primaryVariant = Color.White,
-  secondary = Color(0x607d8b)
+  secondary = Color(0xFF607d8b)
 )
 
 private val darkColors = darkColors(
-  primary = Color(0x757de8),
+  primary = Color(0xFF757de8),
   primaryVariant = Color.Black,
-  secondary = Color(0x607d8b)
+  secondary = Color(0xFF607d8b)
 )

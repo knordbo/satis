@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import coil.load
-import com.satis.app.common.fragment.BaseFragment
+import com.satis.app.common.fragment.BaseViewBindingFragment
 import com.satis.app.databinding.FeatureImageBinding
 import javax.inject.Inject
 
-class ImageFragment @Inject constructor() : BaseFragment<FeatureImageBinding>() {
+class ImageFragment @Inject constructor() : BaseViewBindingFragment<FeatureImageBinding>() {
 
   override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImageBinding? =
     FeatureImageBinding::inflate

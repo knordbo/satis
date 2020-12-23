@@ -18,5 +18,10 @@
     android:title="@string/theme_dark"
     app:showAsAction="never"
     />
+  <item
+      android:id="@+id/playground"
+      android:title="@string/playground"
+      app:showAsAction="never"
+      />
 
 </menu>

@@ -13,9 +13,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
-import androidx.fragment.app.Fragment
-import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
+import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.theme.AppTheme
 import com.satis.app.feature.images.ImagesState
 import com.satis.app.feature.images.ImagesViewModel
@@ -24,7 +23,7 @@ import javax.inject.Inject
 
 class PlaygroundFragment @Inject constructor(
   private val viewModelFactory: ImagesViewModel.Factory
-) : Fragment(), MavericksView, ImagesViewModel.Factory by viewModelFactory {
+) : BaseFragment(), ImagesViewModel.Factory by viewModelFactory {
 
   private val imagesViewModel: ImagesViewModel by fragmentViewModel()
 
@@ -50,6 +49,4 @@ class PlaygroundFragment @Inject constructor(
       }
     }
   }
-
-  override fun invalidate() = Unit
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
+import com.satis.app.common.fragment.BaseViewBindingFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.databinding.FeatureImagesBinding
 import com.satis.app.feature.images.ui.ImagesAdapter
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class ImagesFragment @Inject constructor(
   private val viewModelFactory: ImagesViewModel.Factory,
   private val navigationReselection: NavigationReselection
-) : BaseFragment<FeatureImagesBinding>(), ImagesViewModel.Factory by viewModelFactory {
+) : BaseViewBindingFragment<FeatureImagesBinding>(), ImagesViewModel.Factory by viewModelFactory {
 
   private val imagesViewModel: ImagesViewModel by fragmentViewModel()
   private val adapter by lazy {
