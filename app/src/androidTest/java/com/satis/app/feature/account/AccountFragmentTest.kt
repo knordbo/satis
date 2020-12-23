@@ -1,22 +1,23 @@
 package com.satis.app.feature.account
 
-import androidx.fragment.app.testing.launchFragmentInContainer
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
-import com.satis.app.R
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import com.satis.app.feature.account.ui.AccountContent
+import org.junit.Rule
 import org.junit.Test
 
 class AccountFragmentTest {
 
+  @get:Rule
+  val composeTestRule = createComposeRule()
+
   @Test
   fun showsAppInfo() {
-    launchFragmentInContainer(themeResId = R.style.AppTheme) {
-      createAccountFragment()
+    composeTestRule.setContent {
+      AccountContent(createAccountViewModel())
     }
-
-    onView(withId(R.id.versionNumber)).check(matches(withText("Version: 1")))
+    composeTestRule.onNodeWithText("Version: 1").assertIsDisplayed()
   }
 
 }
