@@ -12,6 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.satis.app.R
 import com.satis.app.common.theme.AppTheme
 import com.satis.app.feature.account.AccountState
@@ -26,7 +28,7 @@ fun AccountContent(viewModel: AccountViewModel) =
   AppTheme {
     val state = viewModel.stateFlow.collectAsState(AccountState())
     Column(
-      modifier = Modifier.padding(Dp(16f))
+      modifier = Modifier.padding(16.dp)
     ) {
       val buildData = state.value.buildData
       if (buildData != null) {
@@ -45,14 +47,14 @@ fun AccountContent(viewModel: AccountViewModel) =
           when (item) {
             is DateHeaderItem -> Text(
               text = item.date.formatted,
-              fontSize = TextUnit.Sp(20),
+              fontSize = 20.sp,
               fontWeight = FontWeight.Bold,
-              modifier = Modifier.padding(vertical = Dp(4f)),
+              modifier = Modifier.padding(vertical = 4.dp),
               color = MaterialTheme.colors.onSurface,
             )
             is LogEntryItem -> Text(
               text = item.logEntry.formatted,
-              fontSize = TextUnit.Sp(12),
+              fontSize = 12.sp,
               color = MaterialTheme.colors.onSurface,
             )
           }
@@ -65,7 +67,7 @@ fun AccountContent(viewModel: AccountViewModel) =
 @Composable
 private fun AccountText(text: String) = Text(
   text = text,
-  modifier = Modifier.padding(bottom = Dp(8f)),
+  modifier = Modifier.padding(bottom = 8.dp),
   color = MaterialTheme.colors.onSurface,
   style = MaterialTheme.typography.h6,
 )
