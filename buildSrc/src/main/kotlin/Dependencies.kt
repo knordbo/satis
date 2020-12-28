@@ -4,34 +4,34 @@ object Versions {
   object androidx {
     const val appCompat = "1.3.0-alpha02"
     const val cardView = "1.0.0"
-    const val constraintLayout = "2.0.2"
-    const val coreKtx = "1.5.0-alpha04"
+    const val constraintLayout = "2.1.0-alpha2"
+    const val coreKtx = "1.5.0-alpha05"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.4.0-alpha01"
-    const val fragment = "1.3.0-beta01"
+    const val espresso = "3.4.0-alpha02"
+    const val fragment = "1.3.0-rc01"
     const val concurrent = "1.1.0"
-    const val lifecycle = "2.3.0-beta01"
-    const val navigation = "2.3.1"
-    const val recyclerView = "1.2.0-alpha06"
-    const val test = "1.3.1-alpha01"
-    const val testExt = "1.1.3-alpha01"
-    const val workManager = "2.5.0-alpha03"
+    const val lifecycle = "2.3.0-rc01"
+    const val navigation = "2.3.2"
+    const val recyclerView = "1.2.0-beta01"
+    const val test = "1.3.1-alpha02"
+    const val testExt = "1.1.3-alpha02"
+    const val workManager = "2.5.0-beta02"
   }
 
   const val accompanistCoil = "0.4.1"
-  const val coil = "1.0.0-rc3"
+  const val coil = "1.1.0"
   const val compose = "1.0.0-alpha09"
   const val crashlytics = "2.10.1"
 
   object dagger {
     const val assistedInject = "0.6.0"
-    const val dagger = "2.29.1"
+    const val dagger = "2.30.1"
   }
 
   const val fabric = "1.29.0"
-  const val firebaseCore = "17.5.1"
-  const val firebaseFirestore = "21.7.1"
-  const val flipper = "0.63.0"
+  const val firebaseCore = "18.0.0"
+  const val firebaseFirestore = "22.0.1"
+  const val flipper = "0.69.0"
   const val googlePlayPublisher = "3.2.0-SNAPSHOT"
   const val googleServices = "4.0.0"
   const val gradleVersionsPlugin = "0.28.0"
@@ -40,15 +40,15 @@ object Versions {
   object kotlin {
     const val kotlin = "1.4.21"
     const val coroutines = "1.3.8"
-    const val serialization = "1.0.0"
+    const val serialization = "1.0.1"
   }
 
   const val leakCanary = "2.5"
-  const val material = "1.3.0-alpha03"
+  const val material = "1.3.0-beta01"
   const val mvrx = "2.0.0-alpha7"
   const val okhttp = "4.10.0-RC1"
   const val photoView = "2.3.0"
-  const val playCore = "1.8.2"
+  const val playCore = "1.9.0"
 
   object retrofit {
     const val kotlinSerialization = "0.8.0"
