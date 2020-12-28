@@ -7,14 +7,14 @@ object Versions {
     const val constraintLayout = "2.1.0-alpha2"
     const val coreKtx = "1.5.0-alpha05"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.4.0-alpha02"
+    const val espresso = "3.4.0-alpha01"
     const val fragment = "1.3.0-rc01"
     const val concurrent = "1.1.0"
     const val lifecycle = "2.3.0-rc01"
     const val navigation = "2.3.2"
     const val recyclerView = "1.2.0-beta01"
-    const val test = "1.3.1-alpha02"
-    const val testExt = "1.1.3-alpha02"
+    const val test = "1.3.1-alpha01"
+    const val testExt = "1.1.3-alpha01"
     const val workManager = "2.5.0-beta02"
   }
 
