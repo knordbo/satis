@@ -1,5 +1,6 @@
 package com.satis.app.feature.account.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -8,7 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.AmbientClipboardManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,6 +28,7 @@ private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM
 fun AccountContent(viewModel: AccountViewModel) =
   AppTheme {
     val state = viewModel.stateFlow.collectAsState(AccountState())
+    val clipboardManager = AmbientClipboardManager.current
     Column(
       modifier = Modifier.padding(16.dp)
     ) {
@@ -39,6 +43,11 @@ fun AccountContent(viewModel: AccountViewModel) =
       }
       AccountText(
         text = stringResource(R.string.notification_token, state.value.notificationToken.orEmpty()),
+        onClick = {
+          clipboardManager.setText(
+            AnnotatedString(state.value.notificationToken.orEmpty())
+          )
+        }
       )
       AccountText(
         text = stringResource(R.string.log),
@@ -66,9 +75,13 @@ fun AccountContent(viewModel: AccountViewModel) =
 
 
 @Composable
-private fun AccountText(text: String) = Text(
+private fun AccountText(text: String, onClick: (() -> Unit)? = null) = Text(
   text = text,
-  modifier = Modifier.padding(bottom = 8.dp),
+  modifier = Modifier.padding(bottom = 8.dp).then(if (onClick != null) {
+    Modifier.clickable(onClick = onClick)
+  } else {
+    Modifier
+  }),
   color = MaterialTheme.colors.onSurface,
   style = MaterialTheme.typography.h6,
 )
