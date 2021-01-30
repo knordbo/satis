@@ -9,7 +9,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AccountState(
   @PersistState val buildData: BuildData? = null,
-  @PersistState val logs: List<LogEntry> = emptyList()
+  @PersistState val logs: List<LogEntry> = emptyList(),
+  @PersistState val notificationToken: String? = null,
 ) : MvRxState, Parcelable
 
 @Parcelize

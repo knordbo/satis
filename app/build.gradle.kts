@@ -150,8 +150,10 @@ dependencies {
   kapt(Deps.dagger.assistedInjectProcessor)
 
   // Firebase
-  implementation(Deps.firebase.core)
+  implementation(platform(Deps.firebase.bom))
+  implementation(Deps.firebase.analytics)
   implementation(Deps.firebase.firestore)
+  implementation(Deps.firebase.messaging)
 
   // Flipper - debugger
   debugImplementation(Deps.flipper.flipper)

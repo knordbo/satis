@@ -3,7 +3,6 @@ package com.satis.app.di
 import android.app.Activity
 import android.app.Application
 import android.content.Context
-import androidx.core.app.AppComponentFactory
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -12,6 +11,7 @@ import com.satis.app.Database
 import com.satis.app.MainActivity
 import com.satis.app.common.activity.ActivityKey
 import com.satis.app.common.activity.InjectingActivityFactory
+import com.satis.app.common.activity.InjectingActivityFactoryImpl
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
@@ -23,6 +23,8 @@ import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
+import com.satis.app.common.service.InjectingServiceFactory
+import com.satis.app.common.service.InjectingServiceFactoryImpl
 import com.satis.app.utils.context.ContextHolder
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
@@ -96,10 +98,13 @@ abstract class AppBindingModule {
   abstract fun provideMainActivity(bind: MainActivity): Activity
 
   @Binds
-  abstract fun providePrefs(bind: PrefsImpl): Prefs
+  abstract fun provideActivityFactory(bind: InjectingActivityFactoryImpl): InjectingActivityFactory
 
   @Binds
-  abstract fun provideActivityFactory(bind: InjectingActivityFactory): AppComponentFactory
+  abstract fun provideServiceFactory(bind: InjectingServiceFactoryImpl): InjectingServiceFactory
+
+  @Binds
+  abstract fun providePrefs(bind: PrefsImpl): Prefs
 
   @Binds
   abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory

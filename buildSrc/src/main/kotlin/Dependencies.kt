@@ -29,8 +29,7 @@ object Versions {
   }
 
   const val fabric = "1.29.0"
-  const val firebaseCore = "18.0.0"
-  const val firebaseFirestore = "22.0.1"
+  const val firebase = "26.4.0"
   const val flipper = "0.69.0"
   const val googlePlayPublisher = "3.2.0-agp4.2-2"
   const val googleServices = "4.0.0"
@@ -133,8 +132,10 @@ object Deps {
   const val fabric = "io.fabric.tools:gradle:${Versions.fabric}"
 
   object firebase {
-    const val core = "com.google.firebase:firebase-core:${Versions.firebaseCore}"
-    const val firestore = "com.google.firebase:firebase-firestore:${Versions.firebaseFirestore}"
+    const val bom = "com.google.firebase:firebase-bom:${Versions.firebase}"
+    const val analytics = "com.google.firebase:firebase-analytics-ktx"
+    const val firestore = "com.google.firebase:firebase-firestore-ktx"
+    const val messaging = "com.google.firebase:firebase-messaging-ktx"
   }
 
   object flipper {

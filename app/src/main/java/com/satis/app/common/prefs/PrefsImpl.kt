@@ -43,7 +43,16 @@ class PrefsImpl @Inject constructor(
         putString(THEME, value.themeName)
       }
     }
+
+  override var notificationToken: String?
+    get() = sharedPreferences.getString(NOTIFICATION_TOKEN, null)
+    set(value) {
+      sharedPreferences.edit {
+        putString(NOTIFICATION_TOKEN, value)
+      }
+    }
 }
 
 private const val UNIQUE_USER_ID = "UNIQUE_USER_ID"
 private const val THEME = "THEME"
+private const val NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

@@ -7,6 +7,7 @@ import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
+import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
@@ -18,7 +19,8 @@ class AccountViewModel @AssistedInject constructor(
   @Assisted initialState: AccountState,
   private val logger: PersistedLogger,
   private val appInfoRetriever: AppInfoRetriever,
-  private val prefs: Prefs
+  private val prefs: Prefs,
+  private val notificationRepository: NotificationRepository,
 ) : BaseViewModel<AccountState>(
   initialState = initialState
 ) {
@@ -26,6 +28,7 @@ class AccountViewModel @AssistedInject constructor(
   init {
     getAccountState()
     streamLogs()
+    streamNotificationToken()
   }
 
   fun setTheme(theme: Theme) {
@@ -38,6 +41,16 @@ class AccountViewModel @AssistedInject constructor(
       logger.streamLogs().collect { logs ->
         setState {
           copy(logs = logs)
+        }
+      }
+    }
+  }
+
+  private fun streamNotificationToken() {
+    launch {
+      notificationRepository.getToken().collect { token ->
+        setState {
+          copy(notificationToken = token)
         }
       }
     }

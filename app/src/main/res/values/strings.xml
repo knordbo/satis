@@ -13,6 +13,7 @@
 
   <string name="version_info">Version: %1$d</string>
   <string name="build_time_info">Build time: %1$s</string>
+  <string name="notification_token">Notification token: %1$s</string>
   <string name="log">Log</string>
 
   <string name="home">Home</string>

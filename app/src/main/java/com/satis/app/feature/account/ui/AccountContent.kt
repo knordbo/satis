@@ -10,8 +10,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satis.app.R
@@ -38,10 +36,13 @@ fun AccountContent(viewModel: AccountViewModel) =
         AccountText(
           text = stringResource(R.string.build_time_info, simpleDateFormat.format(Date(buildData.buildTime))),
         )
-        AccountText(
-          text = stringResource(R.string.log),
-        )
       }
+      AccountText(
+        text = stringResource(R.string.notification_token, state.value.notificationToken.orEmpty()),
+      )
+      AccountText(
+        text = stringResource(R.string.log),
+      )
       LazyColumn {
         items(state.value.logs.toListItems()) { item ->
           when (item) {
