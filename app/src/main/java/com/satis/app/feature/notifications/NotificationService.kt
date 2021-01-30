@@ -4,24 +4,25 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.feature.notifications.data.NotificationRepository
+import com.satis.app.feature.notifications.data.toPushNotification
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class NotificationService @Inject constructor(
   private val notificationRepository: NotificationRepository,
+  private val notificationHandler: PushNotificationHandler,
   private val logger: PersistedLogger,
 ): FirebaseMessagingService() {
 
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
-    val data = remoteMessage.data
-    val notification = remoteMessage.notification
-    val message = when {
-      data.isNotEmpty() -> data.toString()
-      notification != null -> notification.title + notification.body
-      else -> ""
+    val pushNotification = remoteMessage.toPushNotification()
+    if (pushNotification != null) {
+      logger.log(LOG_TAG, "Received notification: $pushNotification")
+      notificationHandler.handle(pushNotification)
+    } else {
+      logger.log(LOG_TAG, "Received broken notification")
     }
-    logger.log(LOG_TAG, "Received $message")
   }
 
   override fun onNewToken(token: String) {

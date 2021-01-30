@@ -22,4 +22,10 @@ abstract class NotificationBindingModule {
   @Binds
   abstract fun provideNotificationRepository(bind: NotificationRepositoryImpl): NotificationRepository
 
+  @Binds
+  abstract fun provideNotificationChannelHelper(bind: NotificationChannelHelperImpl): NotificationChannelHelper
+
+  @Binds
+  abstract fun providePushNotificationHandler(bind: PushNotificationHandlerImpl): PushNotificationHandler
+
 }

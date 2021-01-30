@@ -3,6 +3,7 @@ package com.satis.app.di
 import android.app.Activity
 import android.app.Application
 import android.content.Context
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentFactory
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -83,6 +84,10 @@ object AppModule {
   @Provides
   @Singleton
   fun provideUserId(prefs: Prefs) = prefs.userId
+
+  @Provides
+  @Singleton
+  fun provideNotificationManager(context: Context): NotificationManagerCompat = NotificationManagerCompat.from(context)
 
 }
 
