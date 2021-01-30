@@ -20,4 +20,12 @@ class AccountFragmentTest {
     composeTestRule.onNodeWithText("Version: 1").assertIsDisplayed()
   }
 
+  @Test
+  fun showsNotificationToken() {
+    composeTestRule.setContent {
+      AccountContent(createAccountViewModel())
+    }
+    composeTestRule.onNodeWithText("Notification token: my_token").assertIsDisplayed()
+  }
+
 }
