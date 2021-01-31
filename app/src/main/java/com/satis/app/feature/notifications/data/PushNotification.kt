@@ -1,25 +1,21 @@
 package com.satis.app.feature.notifications.data
 
-import com.google.firebase.messaging.RemoteMessage
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class PushNotification(
-  val id: String,
-  val title: String,
-  val body: String,
-  val url: String?,
-  val isSilent: Boolean,
-  val isImportant: Boolean,
+  @SerialName("id") val id: String,
+  @SerialName("title") val title: String,
+  @SerialName("body") val body: String,
+  @SerialName("icon") val icon: Icon?,
+  @SerialName("url") val url: String?,
+  @SerialName("is_silent") val isSilent: Boolean,
+  @SerialName("is_important") val isImportant: Boolean,
 )
 
-fun RemoteMessage.toPushNotification(): PushNotification? = try {
-  PushNotification(
-    id = data["id"]!!,
-    title = data["title"]!!,
-    body = data["body"]!!,
-    url = data["url"],
-    isSilent = data["is_silent"]!!.toBoolean(),
-    isImportant = data["is_important"]!!.toBoolean(),
-  )
-} catch (t: Throwable) {
-  null
-}
+@Serializable
+data class Icon(
+  @SerialName("url") val url: String,
+  @SerialName("use_circle_crop") val useCircleCrop: Boolean
+)

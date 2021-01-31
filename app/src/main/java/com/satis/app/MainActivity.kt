@@ -1,5 +1,7 @@
 package com.satis.app
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentFactory
@@ -62,6 +64,10 @@ class MainActivity @Inject constructor(
   }
 
   override fun onSupportNavigateUp() = navigationController.navigateUp()
+
+  companion object {
+    fun getIntent(context: Context) = Intent(context, MainActivity::class.java)
+  }
 
 }
 

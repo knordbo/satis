@@ -3,7 +3,7 @@ package com.satis.app.feature.images.work
 import android.content.Context
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
-import coil.Coil
+import coil.imageLoader
 import coil.request.ImageRequest
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.Logger
@@ -25,7 +25,7 @@ class ImageWorker @AssistedInject constructor(
   @Assisted workerParameters: WorkerParameters,
   @Io private val io: CoroutineContext,
   private val logger: Logger,
-  private val unsplashRepository: UnsplashRepository
+  private val unsplashRepository: UnsplashRepository,
 ) : CoroutineWorker(context, workerParameters) {
 
   @ExperimentalTime
@@ -38,7 +38,7 @@ class ImageWorker @AssistedInject constructor(
         .take(FETCH_IMAGE_COUNT)
         .forEach { photo ->
           withTimeoutOrNull(5.toDuration(DurationUnit.SECONDS)) {
-            Coil.imageLoader(context)
+            context.imageLoader
               .execute(ImageRequest.Builder(context)
                 .data(photo.photoUrl)
                 .build())

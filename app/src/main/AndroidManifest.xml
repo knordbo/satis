@@ -19,6 +19,7 @@
     >
     <activity
       android:name=".MainActivity"
+      android:launchMode="singleTop"
       tools:ignore="Instantiatable"
       >
       <intent-filter>
