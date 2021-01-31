@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.satis.app.R
 import com.satis.app.feature.notifications.data.PushNotification
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -35,6 +36,7 @@ class PushNotificationHandlerImpl @Inject constructor(
       .setContentText(body)
       .setAutoCancel(true)
       .setContentIntent(pendingIntent)
+      .setSmallIcon(R.drawable.ic_notification)
       .setChannelId(notificationChannelHelper.getChannelId(this))
       .build()
 

@@ -16,7 +16,7 @@ fun RemoteMessage.toPushNotification(): PushNotification? = try {
     id = data["id"]!!,
     title = data["title"]!!,
     body = data["body"]!!,
-    url = data["url"]!!,
+    url = data["url"],
     isSilent = data["is_silent"]!!.toBoolean(),
     isImportant = data["is_important"]!!.toBoolean(),
   )
