@@ -3,6 +3,7 @@ package com.satis.app.feature.notifications
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -13,6 +14,7 @@ import coil.transform.CircleCropTransformation
 import com.satis.app.MainActivity
 import com.satis.app.R
 import com.satis.app.feature.notifications.data.PushNotification
+import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,35 +32,42 @@ class PushNotificationHandlerImpl @Inject constructor(
   }
 
   private suspend fun PushNotification.showNotification() {
-    val intent = if (url != null) {
-      Intent(Intent.ACTION_VIEW, Uri.parse(url))
-    } else {
-      MainActivity.getIntent(context)
-    }
-    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-
-    val icon = if (icon != null) {
-      val request = ImageRequest.Builder(context)
-        .transformations(if (icon.useCircleCrop) listOf(CircleCropTransformation()) else emptyList())
-        .data(icon.url)
-        .build()
-      context.imageLoader.execute(request).drawable?.toBitmap()
-    } else {
-      null
-    }
-
     val notification = NotificationCompat.Builder(context, DEFAULT_CHANNEL)
       .setContentTitle(title)
       .setContentText(body)
       .setAutoCancel(true)
-      .setContentIntent(pendingIntent)
+      .setContentIntent(getPendingIntent())
       .setSmallIcon(R.drawable.ic_notification)
-      .setLargeIcon(icon)
+      .setLargeIcon(getIcon())
       .setChannelId(notificationChannelHelper.getChannelId(this))
       .build()
 
     notificationManager.notify(id, 0, notification)
   }
+
+  private fun PushNotification.getPendingIntent(): PendingIntent? {
+    val intent = if (url != null) {
+      Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    } else {
+      MainActivity.getIntent(context)
+    }
+    return PendingIntent.getActivity(context, 0, intent, 0)
+  }
+
+  private suspend fun PushNotification.getIcon(): Bitmap? = if (icon != null) {
+    withTimeoutOrNull(MAX_TIME_SPENT_DOWNLOADING_LARGE_ICON) {
+      val request = ImageRequest.Builder(context)
+        .transformations(if (icon.useCircleCrop) listOf(CircleCropTransformation()) else emptyList())
+        .size(LARGE_ICON_SIZE)
+        .data(icon.url)
+        .build()
+      context.imageLoader.execute(request).drawable?.toBitmap()
+    }
+  } else {
+    null
+  }
 }
 
 private const val DEFAULT_CHANNEL = "default"
+private const val LARGE_ICON_SIZE = 196
+private const val MAX_TIME_SPENT_DOWNLOADING_LARGE_ICON = 5000L
