@@ -34,7 +34,7 @@ class PushNotificationHandlerImpl @Inject constructor(
   private suspend fun PushNotification.showNotification() {
     val notification = NotificationCompat.Builder(context, DEFAULT_CHANNEL)
       .setContentTitle(title)
-      .setContentText(body)
+      .setStyle(NotificationCompat.BigTextStyle().bigText(body))
       .setAutoCancel(true)
       .setContentIntent(getPendingIntent())
       .setSmallIcon(R.drawable.ic_notification)
