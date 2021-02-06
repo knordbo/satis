@@ -8,6 +8,7 @@ import android.view.*
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
@@ -67,17 +68,20 @@ class NotificationFragment @Inject constructor(
                   Row {
                     Text(
                       text = notification.title,
-                      style = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 16.sp)
+                      style = TextStyle(fontWeight = FontWeight.SemiBold, fontSize = 16.sp),
+                      color = MaterialTheme.colors.onBackground,
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
                       text = DateUtils.getRelativeTimeSpanString(notification.createdAt, System.currentTimeMillis(), 0).toString(),
                       style = TextStyle(fontSize = 14.sp),
+                      color = MaterialTheme.colors.onBackground,
                     )
                   }
                   Text(
                     text = notification.body,
-                    style = TextStyle(fontSize = 14.sp)
+                    style = TextStyle(fontSize = 14.sp),
+                    color = MaterialTheme.colors.onBackground,
                   )
                 }
               }
