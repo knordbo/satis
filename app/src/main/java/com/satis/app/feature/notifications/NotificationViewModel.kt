@@ -36,6 +36,12 @@ class NotificationViewModel @AssistedInject constructor(
     }
   }
 
+  fun notificationSeen(id: String) {
+    launch {
+      notificationRepository.notificationSeen(id)
+    }
+  }
+
   @AssistedInject.Factory
   interface Factory {
     fun createNotificationViewModel(initialState: NotificationState): NotificationViewModel

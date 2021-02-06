@@ -10,4 +10,5 @@ interface NotificationRepository {
   fun streamNotifications(): Flow<List<Notification>>
   suspend fun insertNotification(pushNotification: PushNotification)
   suspend fun deleteAll()
+  suspend fun notificationSeen(id: String)
 }

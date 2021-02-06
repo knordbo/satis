@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import com.satis.app.R
@@ -52,6 +53,9 @@ class NotificationFragment @Inject constructor(
                     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(notification.url)))
                   }
                 }) {
+                LaunchedEffect(Unit) {
+                  notificationViewModel.notificationSeen(notification.id)
+                }
                 if (notification.icon != null) {
                   CoilImage(
                     contentScale = ContentScale.Crop,

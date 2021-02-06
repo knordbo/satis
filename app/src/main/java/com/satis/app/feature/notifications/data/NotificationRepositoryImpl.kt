@@ -1,5 +1,6 @@
 package com.satis.app.feature.notifications.data
 
+import androidx.core.app.NotificationManagerCompat
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.feature.notifications.Icon
@@ -19,6 +20,7 @@ class NotificationRepositoryImpl @Inject constructor(
   private val prefs: Prefs,
   @Io private val io: CoroutineContext,
   private val notificationQueries: NotificationQueries,
+  private val notificationManager: NotificationManagerCompat,
 ) : NotificationRepository {
 
   private val _tokenFlow: MutableStateFlow<String> = MutableStateFlow("")
@@ -68,6 +70,10 @@ class NotificationRepositoryImpl @Inject constructor(
 
   override suspend fun deleteAll() = withContext(io) {
     notificationQueries.deleteAll()
+  }
+
+  override suspend fun notificationSeen(id: String) {
+    notificationManager.cancel(id, 0)
   }
 
   private fun updateFlow() {
