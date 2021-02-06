@@ -74,7 +74,7 @@ class AccountViewModel @AssistedInject constructor(
   }
 
   companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
-    override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel? {
+    override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel {
       return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
     }
   }

@@ -50,6 +50,12 @@
     />
 
   <fragment
+    android:id="@+id/notification"
+    android:name="com.satis.app.feature.notifications.NotificationFragment"
+    android:label="@string/notifications"
+    />
+
+  <fragment
     android:id="@+id/account"
     android:name="com.satis.app.feature.account.AccountFragment"
     android:label="@string/account"

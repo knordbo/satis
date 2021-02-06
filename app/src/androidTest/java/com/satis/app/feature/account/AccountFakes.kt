@@ -7,7 +7,9 @@ import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.UserId
 import com.satis.app.feature.account.appinfo.AppInfo
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
+import com.satis.app.feature.notifications.Notification
 import com.satis.app.feature.notifications.data.NotificationRepository
+import com.satis.app.feature.notifications.data.PushNotification
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 
@@ -50,5 +52,7 @@ private fun createNotificationRepository(): NotificationRepository {
   return object : NotificationRepository {
     override fun getToken(): Flow<String> = flowOf("my_token")
     override suspend fun updateToken(token: String) = Unit
+    override suspend fun getNotifications(offset: Int, pageSize: Int): List<Notification> = emptyList()
+    override suspend fun insertNotification(pushNotification: PushNotification) = Unit
   }
 }

@@ -1,0 +1,20 @@
+CREATE TABLE notificationEntity (
+  id TEXT NOT NULL PRIMARY KEY,
+  title TEXT NOT NULL,
+  body TEXT NOT NULL,
+  iconUrl TEXT,
+  iconUseCircleCrop INTEGER AS Boolean,
+  url TEXT,
+  createdAt INTEGER NOT NULL,
+  isSilent INTEGER AS Boolean NOT NULL,
+  isImportant INTEGER AS Boolean NOT NULL
+);
+
+CREATE INDEX notificationEntity_createdAt ON notificationEntity(createdAt);
+
+insertNotification:
+INSERT INTO notificationEntity (id, title, body, iconUrl, iconUseCircleCrop, url, createdAt, isSilent, isImportant)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+notifications:
+SELECT * FROM notificationEntity ORDER BY createdAt LIMIT :limit OFFSET :offset;

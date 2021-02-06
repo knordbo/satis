@@ -17,6 +17,12 @@
     />
 
   <item
+    android:id="@+id/notification"
+    android:icon="@drawable/ic_notification"
+    android:title="@string/notifications"
+    />
+
+  <item
     android:id="@+id/account"
     android:icon="@drawable/ic_account"
     android:title="@string/account"

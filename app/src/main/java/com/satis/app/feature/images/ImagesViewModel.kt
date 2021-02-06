@@ -53,7 +53,7 @@ class ImagesViewModel @AssistedInject constructor(
   }
 
   companion object : MvRxViewModelFactory<ImagesViewModel, ImagesState> {
-    override fun create(viewModelContext: ViewModelContext, state: ImagesState): ImagesViewModel? {
+    override fun create(viewModelContext: ViewModelContext, state: ImagesState): ImagesViewModel {
       return viewModelContext.viewModelFactory<Factory>().createImagesViewModel(state)
     }
   }

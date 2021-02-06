@@ -1,4 +1,4 @@
-package com.satis.app.feature.notifications
+package com.satis.app.feature.notifications.system
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -10,7 +10,9 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NotificationService @Inject constructor(
   private val notificationRepository: NotificationRepository,
   private val notificationHandler: PushNotificationHandler,
@@ -23,7 +25,7 @@ class NotificationService @Inject constructor(
       try {
         val jsonStr = remoteMessage.data["json"]!!
         val pushNotification: PushNotification = json.decodeFromString(jsonStr)
-        logger.log(LOG_TAG, "Received notification: $pushNotification")
+        logger.log(LOG_TAG, "Received notification: ${pushNotification.id}")
         notificationHandler.handle(pushNotification)
       } catch (t: Throwable) {
         logger.log(LOG_TAG, "Received broken notification: $t")

@@ -85,7 +85,7 @@ class CardViewModel @AssistedInject constructor(
   }
 
   companion object : MvRxViewModelFactory<CardViewModel, CardState> {
-    override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel? {
+    override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel {
       return viewModelContext.viewModelFactory<Factory>().createCardViewModel(state)
     }
   }

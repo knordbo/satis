@@ -44,7 +44,7 @@ class MainActivity @Inject constructor(
     binding.bottomNav.setupWithNavController(navigationController)
     setupActionBarWithNavController(
       navController = navigationController,
-      configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.account))
+      configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.notification, R.id.account))
     )
 
     binding.bottomNav.setOnNavigationItemReselectedListener { menuItem ->

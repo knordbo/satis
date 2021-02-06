@@ -1,4 +1,4 @@
-package com.satis.app.feature.notifications
+package com.satis.app.feature.notifications.system
 
 import com.satis.app.feature.notifications.data.PushNotification
 

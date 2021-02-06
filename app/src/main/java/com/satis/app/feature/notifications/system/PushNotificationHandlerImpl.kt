@@ -1,4 +1,4 @@
-package com.satis.app.feature.notifications
+package com.satis.app.feature.notifications.system
 
 import android.app.PendingIntent
 import android.content.Context
@@ -13,6 +13,7 @@ import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.satis.app.MainActivity
 import com.satis.app.R
+import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.feature.notifications.data.PushNotification
 import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
@@ -23,11 +24,13 @@ class PushNotificationHandlerImpl @Inject constructor(
   private val context: Context,
   private val notificationManager: NotificationManagerCompat,
   private val notificationChannelHelper: NotificationChannelHelper,
+  private val notificationRepository: NotificationRepository,
 ) : PushNotificationHandler {
 
   override suspend fun handle(pushNotification: PushNotification) {
     if (!pushNotification.isSilent) {
       pushNotification.showNotification()
+      notificationRepository.insertNotification(pushNotification)
     }
   }
 
