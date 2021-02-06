@@ -30,6 +30,12 @@ class NotificationViewModel @AssistedInject constructor(
     }
   }
 
+  fun deleteAll() {
+    launch {
+      notificationRepository.deleteAll()
+    }
+  }
+
   @AssistedInject.Factory
   interface Factory {
     fun createNotificationViewModel(initialState: NotificationState): NotificationViewModel

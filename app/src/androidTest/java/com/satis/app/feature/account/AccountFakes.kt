@@ -55,5 +55,6 @@ private fun createNotificationRepository(): NotificationRepository {
     override suspend fun getNotifications(offset: Int, pageSize: Int): List<Notification> = emptyList()
     override fun streamNotifications(): Flow<List<Notification>> = flowOf()
     override suspend fun insertNotification(pushNotification: PushNotification) = Unit
+    override suspend fun deleteAll() = Unit
   }
 }

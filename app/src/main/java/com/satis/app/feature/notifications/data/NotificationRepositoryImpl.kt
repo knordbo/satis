@@ -66,6 +66,10 @@ class NotificationRepositoryImpl @Inject constructor(
     )
   }
 
+  override suspend fun deleteAll() = withContext(io) {
+    notificationQueries.deleteAll()
+  }
+
   private fun updateFlow() {
     val notificationToken = prefs.notificationToken
     if (notificationToken != null) {

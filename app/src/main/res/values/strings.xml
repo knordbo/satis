@@ -24,4 +24,6 @@
 
   <string name="notification_channel_regular_priority">Regular notification channel"</string>
   <string name="notification_channel_high_priority">High priority notification channel"</string>
+
+  <string name="delete">Delete</string>
 </resources>
