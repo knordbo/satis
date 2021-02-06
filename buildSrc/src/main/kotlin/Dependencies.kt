@@ -21,14 +21,13 @@ object Versions {
   const val accompanistCoil = "0.4.1"
   const val coil = "1.1.0"
   const val compose = "1.0.0-alpha09"
-  const val crashlytics = "2.10.1"
+  const val crashlyticsGradle = "2.4.1"
 
   object dagger {
     const val assistedInject = "0.6.0"
     const val dagger = "2.30.1"
   }
 
-  const val fabric = "1.29.0"
   const val firebase = "26.4.0"
   const val flipper = "0.69.0"
   const val googlePlayPublisher = "3.2.0-agp4.2-2"
@@ -120,7 +119,7 @@ object Deps {
 
   const val accompanistCoil = "dev.chrisbanes.accompanist:accompanist-coil:${Versions.accompanistCoil}"
   const val coil = "io.coil-kt:coil:${Versions.coil}"
-  const val crashlytics = "com.crashlytics.sdk.android:crashlytics:${Versions.crashlytics}"
+  const val crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
 
   object dagger {
     const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.dagger.assistedInject}"
@@ -129,11 +128,10 @@ object Deps {
     const val dagger = "com.google.dagger:dagger:${Versions.dagger.dagger}"
   }
 
-  const val fabric = "io.fabric.tools:gradle:${Versions.fabric}"
-
   object firebase {
     const val bom = "com.google.firebase:firebase-bom:${Versions.firebase}"
     const val analytics = "com.google.firebase:firebase-analytics-ktx"
+    const val crashlytics = "com.google.firebase:firebase-crashlytics-ktx"
     const val firestore = "com.google.firebase:firebase-firestore-ktx"
     const val messaging = "com.google.firebase:firebase-messaging-ktx"
   }

@@ -9,9 +9,9 @@ plugins {
   id("kotlin-parcelize")
   id("kotlinx-serialization")
   id("com.github.ben-manes.versions")
-  id("io.fabric")
   id("com.github.triplet.play")
   id("com.squareup.sqldelight")
+  id("com.google.firebase.crashlytics")
 }
 
 apply {
@@ -140,9 +140,6 @@ dependencies {
   implementation(Deps.coil)
   implementation(Deps.accompanistCoil)
 
-  // Crashlytics
-  implementation(Deps.crashlytics)
-
   // Dagger
   implementation(Deps.dagger.dagger)
   implementation(Deps.dagger.assistedInjectAnnotations)
@@ -152,6 +149,7 @@ dependencies {
   // Firebase
   implementation(platform(Deps.firebase.bom))
   implementation(Deps.firebase.analytics)
+  implementation(Deps.firebase.crashlytics)
   implementation(Deps.firebase.firestore)
   implementation(Deps.firebase.messaging)
 

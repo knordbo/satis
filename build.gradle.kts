@@ -9,7 +9,7 @@ buildscript {
     classpath(Deps.kotlin.serialization.serialization)
     classpath(Deps.googleServices)
     classpath(Deps.gradleVersionsPlugin)
-    classpath(Deps.fabric)
+    classpath(Deps.crashlyticsGradle)
     classpath(Deps.androidx.navigation.safeArgs)
     classpath(Deps.googlePlayPublisher)
     classpath(Deps.sqldelight.gradlePlugin)
