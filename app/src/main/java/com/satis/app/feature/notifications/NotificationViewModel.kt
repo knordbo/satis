@@ -7,6 +7,7 @@ import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.coroutines.viewModelFactory
 import com.squareup.inject.assisted.Assisted
 import com.squareup.inject.assisted.AssistedInject
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class NotificationViewModel @AssistedInject constructor(
@@ -16,20 +17,14 @@ class NotificationViewModel @AssistedInject constructor(
   initialState = initialState
 ) {
   init {
-    fetchNextNotificationPage()
+    streamNotifications()
   }
 
-  private fun fetchNextNotificationPage() {
-    withState { currentState ->
-      launch {
-        val newNotifications = notificationRepository.getNotifications(
-          offset = currentState.notifications.size
-        )
+  private fun streamNotifications() {
+    launch {
+      notificationRepository.streamNotifications().collect { notifications ->
         setState {
-          copy(
-            notifications = notifications + newNotifications,
-            hasLoadedAllNotifications = newNotifications.isEmpty(),
-          )
+          copy(notifications = notifications)
         }
       }
     }

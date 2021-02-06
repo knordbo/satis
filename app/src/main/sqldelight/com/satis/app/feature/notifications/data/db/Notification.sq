@@ -16,5 +16,8 @@ insertNotification:
 INSERT INTO notificationEntity (id, title, body, iconUrl, iconUseCircleCrop, url, createdAt, isSilent, isImportant)
 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);
 
+streamNotifications:
+SELECT * FROM notificationEntity ORDER BY createdAt DESC;
+
 notifications:
-SELECT * FROM notificationEntity ORDER BY createdAt LIMIT :limit OFFSET :offset;
+SELECT * FROM notificationEntity ORDER BY createdAt DESC LIMIT :limit OFFSET :offset;

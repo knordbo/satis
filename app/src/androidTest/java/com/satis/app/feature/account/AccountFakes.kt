@@ -53,6 +53,7 @@ private fun createNotificationRepository(): NotificationRepository {
     override fun getToken(): Flow<String> = flowOf("my_token")
     override suspend fun updateToken(token: String) = Unit
     override suspend fun getNotifications(offset: Int, pageSize: Int): List<Notification> = emptyList()
+    override fun streamNotifications(): Flow<List<Notification>> = flowOf()
     override suspend fun insertNotification(pushNotification: PushNotification) = Unit
   }
 }

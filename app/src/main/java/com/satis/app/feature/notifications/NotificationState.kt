@@ -8,7 +8,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NotificationState(
   @PersistState val notifications: List<Notification> = emptyList(),
-  @PersistState val hasLoadedAllNotifications: Boolean = false,
 ): MvRxState, Parcelable
 
 @Parcelize

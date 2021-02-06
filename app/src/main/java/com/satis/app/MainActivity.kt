@@ -19,7 +19,7 @@ import javax.inject.Inject
 class MainActivity @Inject constructor(
   private val fragmentFactory: FragmentFactory,
   private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
-  private val navigationReselectionUpdater: NavigationReselectionUpdater
+  private val navigationReselectionUpdater: NavigationReselectionUpdater,
 ) : AppCompatActivity(), IntentSenderForResultStarter {
 
   private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
