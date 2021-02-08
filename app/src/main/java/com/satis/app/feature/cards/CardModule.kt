@@ -31,4 +31,7 @@ abstract class CardBindingModule {
   @Binds
   abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
 
+  @Binds
+  abstract fun provideCardViewModelFactory(bind: CardViewModel.FactoryImpl): CardViewModel.Factory
+
 }

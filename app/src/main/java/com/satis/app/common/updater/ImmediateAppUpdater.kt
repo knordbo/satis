@@ -7,13 +7,14 @@ import com.google.android.play.core.install.model.AppUpdateType.IMMEDIATE
 import com.google.android.play.core.install.model.UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import com.satis.app.common.logging.Logger
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 
 class ImmediateAppUpdater @AssistedInject constructor(
   @Assisted private val intentSenderForResultStarter: IntentSenderForResultStarter,
   private val appUpdateManager: AppUpdateManager,
-  private val logger: Logger
+  private val logger: Logger,
 ) {
 
   fun startAppUpdateIfNeeded(initialCall: Boolean) {
@@ -36,10 +37,12 @@ class ImmediateAppUpdater @AssistedInject constructor(
     }
   }
 
-  @AssistedInject.Factory
   interface Factory {
     fun create(intentSenderForResultStarter: IntentSenderForResultStarter): ImmediateAppUpdater
   }
+
+  @AssistedFactory
+  interface FactoryImpl : Factory
 }
 
 private const val LOG_TAG = "ImmediateAppUpdater"

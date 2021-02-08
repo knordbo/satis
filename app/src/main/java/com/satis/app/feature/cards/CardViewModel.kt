@@ -9,8 +9,9 @@ import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.coroutines.viewModelFactory
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -79,10 +80,12 @@ class CardViewModel @AssistedInject constructor(
     }
   }
 
-  @AssistedInject.Factory
   interface Factory {
     fun createCardViewModel(initialState: CardState): CardViewModel
   }
+
+  @AssistedFactory
+  interface FactoryImpl : Factory
 
   companion object : MvRxViewModelFactory<CardViewModel, CardState> {
     override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel {

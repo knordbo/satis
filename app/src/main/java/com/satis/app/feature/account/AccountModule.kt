@@ -15,6 +15,9 @@ abstract class AccountModule {
   abstract fun provideAppInfoRetriever(bind: AppInfoRetrieverImpl): AppInfoRetriever
 
   @Binds
+  abstract fun provideAccountViewModelFactory(bind: AccountViewModel.FactoryImpl): AccountViewModel.Factory
+
+  @Binds
   @IntoMap
   @FragmentKey(AccountFragment::class)
   abstract fun provideAccountFragment(bind: AccountFragment): Fragment

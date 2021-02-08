@@ -11,8 +11,9 @@ import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import com.satis.app.work.ChildWorkerFactory
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.coroutines.CoroutineContext
@@ -53,8 +54,10 @@ class ImageWorker @AssistedInject constructor(
     }
   }
 
-  @AssistedInject.Factory
-  interface Factory : ChildWorkerFactory
+  @AssistedFactory
+  interface Factory : ChildWorkerFactory {
+    override fun create(context: Context, workerParameters: WorkerParameters): ImageWorker
+  }
 
 }
 

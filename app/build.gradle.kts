@@ -142,9 +142,7 @@ dependencies {
 
   // Dagger
   implementation(Deps.dagger.dagger)
-  implementation(Deps.dagger.assistedInjectAnnotations)
   kapt(Deps.dagger.compiler)
-  kapt(Deps.dagger.assistedInjectProcessor)
 
   // Firebase
   implementation(platform(Deps.firebase.bom))

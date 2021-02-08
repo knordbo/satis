@@ -24,8 +24,7 @@ object Versions {
   const val crashlyticsGradle = "2.4.1"
 
   object dagger {
-    const val assistedInject = "0.6.0"
-    const val dagger = "2.30.1"
+    const val dagger = "2.31.2"
   }
 
   const val firebase = "26.4.0"
@@ -122,8 +121,6 @@ object Deps {
   const val crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
 
   object dagger {
-    const val assistedInjectAnnotations = "com.squareup.inject:assisted-inject-annotations-dagger2:${Versions.dagger.assistedInject}"
-    const val assistedInjectProcessor = "com.squareup.inject:assisted-inject-processor-dagger2:${Versions.dagger.assistedInject}"
     const val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger.dagger}"
     const val dagger = "com.google.dagger:dagger:${Versions.dagger.dagger}"
   }

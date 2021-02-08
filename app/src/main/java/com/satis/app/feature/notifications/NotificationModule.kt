@@ -40,6 +40,9 @@ abstract class NotificationBindingModule {
   abstract fun providePushNotificationHandler(bind: PushNotificationHandlerImpl): PushNotificationHandler
 
   @Binds
+  abstract fun provideNotificationViewModelFactory(bind: NotificationViewModel.FactoryImpl): NotificationViewModel.Factory
+
+  @Binds
   @IntoMap
   @FragmentKey(NotificationFragment::class)
   abstract fun provideNotificationFragment(bind: NotificationFragment): Fragment

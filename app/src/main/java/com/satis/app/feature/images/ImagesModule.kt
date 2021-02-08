@@ -52,6 +52,9 @@ abstract class ImagesBindingModule {
   abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
 
   @Binds
+  abstract fun provideImageViewModelFactory(bind: ImagesViewModel.FactoryImpl): ImagesViewModel.Factory
+
+  @Binds
   @IntoMap
   @WorkerKey(ImageWorker::class)
   abstract fun provideImageWorker(bind: ImageWorker.Factory): ChildWorkerFactory

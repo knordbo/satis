@@ -26,6 +26,7 @@ import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.service.InjectingServiceFactory
 import com.satis.app.common.service.InjectingServiceFactoryImpl
+import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.utils.context.ContextHolder
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
@@ -119,5 +120,8 @@ abstract class AppBindingModule {
 
   @Binds
   abstract fun provideNavigationReselectionUpdater(bind: NavigationReselectionImpl): NavigationReselectionUpdater
+
+  @Binds
+  abstract fun provideImmediateAppUpdaterFactory(bind: ImmediateAppUpdater.FactoryImpl): ImmediateAppUpdater.Factory
 
 }

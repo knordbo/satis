@@ -10,8 +10,9 @@ import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.utils.coroutines.BaseViewModel
 import com.satis.app.utils.coroutines.viewModelFactory
-import com.squareup.inject.assisted.Assisted
-import com.squareup.inject.assisted.AssistedInject
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
@@ -68,10 +69,12 @@ class AccountViewModel @AssistedInject constructor(
     }
   }
 
-  @AssistedInject.Factory
   interface Factory {
     fun createAccountViewModel(initialState: AccountState): AccountViewModel
   }
+
+  @AssistedFactory
+  interface FactoryImpl : Factory
 
   companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
     override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel {
