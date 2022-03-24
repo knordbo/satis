@@ -4,12 +4,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.AmbientClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -22,13 +23,18 @@ import com.satis.app.feature.account.AccountViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-private val simpleDateFormat: SimpleDateFormat by lazy { SimpleDateFormat("dd.MM.yy HH:mm", Locale.US) }
+private val simpleDateFormat: SimpleDateFormat by lazy {
+  SimpleDateFormat(
+    "dd.MM.yy HH:mm",
+    Locale.US
+  )
+}
 
 @Composable
 fun AccountContent(viewModel: AccountViewModel) =
   AppTheme {
     val state = viewModel.stateFlow.collectAsState(AccountState())
-    val clipboardManager = AmbientClipboardManager.current
+    val clipboardManager = LocalClipboardManager.current
     Column(
       modifier = Modifier.padding(16.dp)
     ) {
@@ -38,7 +44,10 @@ fun AccountContent(viewModel: AccountViewModel) =
           text = stringResource(R.string.version_info, buildData.versionNum),
         )
         AccountText(
-          text = stringResource(R.string.build_time_info, simpleDateFormat.format(Date(buildData.buildTime))),
+          text = stringResource(
+            R.string.build_time_info,
+            simpleDateFormat.format(Date(buildData.buildTime))
+          ),
         )
       }
       AccountText(
@@ -77,11 +86,15 @@ fun AccountContent(viewModel: AccountViewModel) =
 @Composable
 private fun AccountText(text: String, onClick: (() -> Unit)? = null) = Text(
   text = text,
-  modifier = Modifier.padding(bottom = 8.dp).then(if (onClick != null) {
-    Modifier.clickable(onClick = onClick)
-  } else {
-    Modifier
-  }),
+  modifier = Modifier
+    .padding(bottom = 8.dp)
+    .then(
+      if (onClick != null) {
+        Modifier.clickable(onClick = onClick)
+      } else {
+        Modifier
+      }
+    ),
   color = MaterialTheme.colors.onSurface,
   style = MaterialTheme.typography.h6,
 )

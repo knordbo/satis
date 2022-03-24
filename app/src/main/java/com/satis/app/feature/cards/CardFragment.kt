@@ -12,12 +12,14 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter.Companion.tint
 import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -66,7 +68,8 @@ class CardFragment @Inject constructor(
                       modifier = Modifier.padding(end = 8.dp),
                     )
                     Image(
-                      imageVector = vectorResource(R.drawable.ic_thumb_up),
+                      painter = painterResource(R.drawable.ic_thumb_up),
+                      contentDescription = null,
                       colorFilter = tint(if (card.hasLiked) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface),
                       modifier = Modifier.clickable {
                         cardViewModel.like(card)
@@ -78,7 +81,8 @@ class CardFragment @Inject constructor(
                       modifier = Modifier.padding(start = 8.dp, end = 8.dp),
                     )
                     Image(
-                      imageVector = vectorResource(R.drawable.ic_thumb_down),
+                      painter = painterResource(R.drawable.ic_thumb_down),
+                      contentDescription = null,
                       colorFilter = tint(if (card.hasDisliked) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface),
                       modifier = Modifier.clickable {
                         cardViewModel.dislike(card)
@@ -86,7 +90,8 @@ class CardFragment @Inject constructor(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Image(
-                      imageVector = vectorResource(R.drawable.ic_delete),
+                      painter = painterResource(R.drawable.ic_delete),
+                      contentDescription = null,
                       colorFilter = tint(MaterialTheme.colors.onSurface),
                       modifier = Modifier.clickable {
                         cardViewModel.removeCard(card)

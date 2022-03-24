@@ -5,6 +5,8 @@ import android.app.Application
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentFactory
+import app.cash.sqldelight.adapter.primitive.BooleanColumnAdapter
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.satis.app.App
@@ -27,8 +29,8 @@ import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.service.InjectingServiceFactory
 import com.satis.app.common.service.InjectingServiceFactoryImpl
 import com.satis.app.common.updater.ImmediateAppUpdater
+import com.satis.app.feature.notifications.data.db.NotificationEntity
 import com.satis.app.utils.context.ContextHolder
-import com.squareup.sqldelight.android.AndroidSqliteDriver
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -55,13 +57,23 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideDatabase(context: Context, @DatabaseName databaseName: String): Database =
-    Database(AndroidSqliteDriver(
-      schema = Database.Schema,
-      context = context,
-      name = databaseName,
-      useNoBackupDirectory = true
-    ))
+  fun provideDatabase(
+    context: Context,
+    @DatabaseName databaseName: String,
+  ): Database =
+    Database(
+      driver = AndroidSqliteDriver(
+        schema = Database.Schema,
+        context = context,
+        name = databaseName,
+        useNoBackupDirectory = true
+      ),
+      notificationEntityAdapter = NotificationEntity.Adapter(
+        iconUseCircleCropAdapter = BooleanColumnAdapter,
+        isSilentAdapter = BooleanColumnAdapter,
+        isImportantAdapter = BooleanColumnAdapter,
+      ),
+    )
 
   @Provides
   @Singleton
@@ -80,7 +92,8 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideAppUpdateManager(context: Context): AppUpdateManager = AppUpdateManagerFactory.create(context)
+  fun provideAppUpdateManager(context: Context): AppUpdateManager =
+    AppUpdateManagerFactory.create(context)
 
   @Provides
   @Singleton
@@ -88,7 +101,8 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideNotificationManager(context: Context): NotificationManagerCompat = NotificationManagerCompat.from(context)
+  fun provideNotificationManager(context: Context): NotificationManagerCompat =
+    NotificationManagerCompat.from(context)
 
 }
 

@@ -1,59 +1,57 @@
 object Versions {
-  const val androidGradlePlugin = "4.2.0-beta04"
+  const val androidGradlePlugin = "7.1.0"
 
   object androidx {
-    const val appCompat = "1.3.0-alpha02"
+    const val appCompat = "1.6.0-alpha01"
     const val cardView = "1.0.0"
-    const val constraintLayout = "2.1.0-alpha2"
-    const val coreKtx = "1.5.0-alpha05"
+    const val constraintLayout = "2.1.3"
+    const val coreKtx = "1.9.0-alpha01"
     const val coreTesting = "2.1.0"
-    const val espresso = "3.4.0-alpha01"
-    const val fragment = "1.3.0-rc01"
+    const val espresso = "3.5.0-alpha05"
+    const val fragment = "1.5.0-alpha04"
     const val concurrent = "1.1.0"
-    const val lifecycle = "2.3.0-rc01"
-    const val navigation = "2.3.2"
-    const val recyclerView = "1.2.0-beta01"
-    const val test = "1.3.1-alpha01"
-    const val testExt = "1.1.3-alpha01"
-    const val workManager = "2.5.0-beta02"
+    const val lifecycle = "2.5.0-alpha05"
+    const val navigation = "2.5.0-alpha03"
+    const val recyclerView = "1.3.0-alpha01"
+    const val test = "1.4.1-alpha05"
+    const val testExt = "1.1.4-alpha05"
+    const val workManager = "2.8.0-alpha01"
   }
 
-  const val accompanistCoil = "0.4.1"
-  const val coil = "1.1.0"
-  const val compose = "1.0.0-alpha09"
+  const val coil = "2.0.0-rc02"
+  const val compose = "1.2.0-alpha06"
   const val crashlyticsGradle = "2.4.1"
 
   object dagger {
-    const val dagger = "2.31.2"
+    const val dagger = "2.41"
   }
 
-  const val firebase = "26.4.0"
-  const val flipper = "0.69.0"
-  const val googlePlayPublisher = "3.2.0-agp4.2-2"
-  const val googleServices = "4.0.0"
+  const val firebase = "29.2.1"
+  const val flipper = "0.140.0"
+  const val googlePlayPublisher = "3.7.0"
+  const val googleServices = "4.3.10"
   const val gradleVersionsPlugin = "0.28.0"
-  const val junit = "4.13.1"
+  const val junit = "4.13.2"
 
   object kotlin {
-    const val kotlin = "1.4.21"
+    const val kotlin = "1.6.10"
     const val coroutines = "1.3.8"
-    const val serialization = "1.0.1"
+    const val serialization = "1.3.2"
   }
 
-  const val leakCanary = "2.5"
-  const val material = "1.3.0-beta01"
-  const val mvrx = "2.0.0-alpha7"
+  const val leakCanary = "2.8.1"
+  const val material = "1.6.0-beta01"
+  const val mvrx = "2.0.0-beta3"
   const val okhttp = "4.10.0-RC1"
-  const val photoView = "2.3.0"
-  const val playCore = "1.9.0"
+  const val playCore = "1.10.3"
 
   object retrofit {
     const val kotlinSerialization = "0.8.0"
     const val retrofit = "2.9.0"
   }
 
-  const val soloader = "0.9.0"
-  const val sqldelight = "1.4.4"
+  const val soloader = "0.10.3"
+  const val sqldelight = "2.0.0-SNAPSHOT"
 }
 
 object Deps {
@@ -116,8 +114,11 @@ object Deps {
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.androidx.workManager}"
   }
 
-  const val accompanistCoil = "dev.chrisbanes.accompanist:accompanist-coil:${Versions.accompanistCoil}"
-  const val coil = "io.coil-kt:coil:${Versions.coil}"
+  object coil {
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
+    const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
+  }
+
   const val crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
 
   object dagger {
@@ -166,7 +167,6 @@ object Deps {
 
   const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
 
-  const val photoView = "com.github.chrisbanes:PhotoView:${Versions.photoView}"
   const val playCore = "com.google.android.play:core:${Versions.playCore}"
 
   object retrofit {
@@ -177,8 +177,9 @@ object Deps {
   const val soloader = "com.facebook.soloader:soloader:${Versions.soloader}"
 
   object sqldelight {
-    const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.sqldelight}"
-    const val coroutinesExtensions = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqldelight}"
-    const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.sqldelight}"
+    const val androidDriver = "app.cash.sqldelight:android-driver:${Versions.sqldelight}"
+    const val coroutinesExtensions = "app.cash.sqldelight:coroutines-extensions:${Versions.sqldelight}"
+    const val gradlePlugin = "app.cash.sqldelight:gradle-plugin:${Versions.sqldelight}"
+    const val primitiveAdapters = "app.cash.sqldelight:primitive-adapters:${Versions.sqldelight}"
   }
 }

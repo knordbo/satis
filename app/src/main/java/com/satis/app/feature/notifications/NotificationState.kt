@@ -1,14 +1,14 @@
 package com.satis.app.feature.notifications
 
 import android.os.Parcelable
-import com.airbnb.mvrx.MvRxState
+import com.airbnb.mvrx.MavericksState
 import com.airbnb.mvrx.PersistState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class NotificationState(
   @PersistState val notifications: List<Notification> = emptyList(),
-): MvRxState, Parcelable
+): MavericksState, Parcelable
 
 @Parcelize
 data class Notification(

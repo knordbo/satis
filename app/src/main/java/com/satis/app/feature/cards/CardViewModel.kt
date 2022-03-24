@@ -1,7 +1,7 @@
 package com.satis.app.feature.cards
 
 import com.airbnb.mvrx.Fail
-import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.ViewModelContext
@@ -12,7 +12,6 @@ import com.satis.app.utils.coroutines.viewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CardViewModel @AssistedInject constructor(
@@ -87,7 +86,7 @@ class CardViewModel @AssistedInject constructor(
   @AssistedFactory
   interface FactoryImpl : Factory
 
-  companion object : MvRxViewModelFactory<CardViewModel, CardState> {
+  companion object : MavericksViewModelFactory<CardViewModel, CardState> {
     override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel {
       return viewModelContext.viewModelFactory<Factory>().createCardViewModel(state)
     }

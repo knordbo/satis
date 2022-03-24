@@ -18,7 +18,6 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.coroutines.CoroutineContext
 import kotlin.time.DurationUnit
-import kotlin.time.ExperimentalTime
 import kotlin.time.toDuration
 
 class ImageWorker @AssistedInject constructor(
@@ -29,7 +28,6 @@ class ImageWorker @AssistedInject constructor(
   private val unsplashRepository: UnsplashRepository,
 ) : CoroutineWorker(context, workerParameters) {
 
-  @ExperimentalTime
   override suspend fun doWork(): Result = withContext(io) {
     try {
       logger.log(LOG_TAG, "Starting in $isAppForegroundString")

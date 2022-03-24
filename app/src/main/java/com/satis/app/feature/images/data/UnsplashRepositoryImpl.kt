@@ -42,9 +42,10 @@ class UnsplashRepositoryImpl @Inject constructor(
     }
   }
 
-  override fun streamPhotos(query: String): Flow<List<PhotoState>> = unsplashQueries.selectAll().asFlow().map { unsplash ->
-    unsplash.executeAsList().toState()
-  }.flowOn(io)
+  override fun streamPhotos(query: String): Flow<List<PhotoState>> =
+    unsplashQueries.selectAll().asFlow().map { unsplash ->
+      unsplash.executeAsList().toState()
+    }.flowOn(io)
 
   private fun Unsplash.toState() = results.map { unsplashPhoto ->
     PhotoState(

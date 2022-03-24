@@ -4,28 +4,39 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
-import com.satis.app.R
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil.transform.CircleCropTransformation
+import coil.compose.AsyncImage
 import com.airbnb.mvrx.fragmentViewModel
+import com.satis.app.R
 import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.theme.AppTheme
-import dev.chrisbanes.accompanist.coil.CoilImage
 import javax.inject.Inject
 
 class NotificationFragment @Inject constructor(
@@ -39,7 +50,11 @@ class NotificationFragment @Inject constructor(
     setHasOptionsMenu(true)
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
     return ComposeView(inflater.context).apply {
       setContent {
         val state = notificationViewModel.stateFlow.collectAsState(NotificationState())
@@ -57,14 +72,13 @@ class NotificationFragment @Inject constructor(
                   notificationViewModel.notificationSeen(notification.id)
                 }
                 if (notification.icon != null) {
-                  CoilImage(
+                  AsyncImage(
+                    model = notification.icon.url,
+                    contentDescription = null,
                     contentScale = ContentScale.Crop,
-                    modifier = Modifier.size(32.dp).align(Alignment.CenterVertically),
-                    data = notification.icon.url,
-                    requestBuilder = {
-                      transformations(if (notification.icon.useCircleCrop) listOf(CircleCropTransformation()) else emptyList())
-                    }
-                  )
+                    modifier = Modifier.size(32.dp).align(Alignment.CenterVertically).let {
+                      if (notification.icon.useCircleCrop) it.clip(CircleShape) else it
+                    })
                 }
                 Column(
                   modifier = Modifier.padding(start = 16.dp)
@@ -77,7 +91,11 @@ class NotificationFragment @Inject constructor(
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
-                      text = DateUtils.getRelativeTimeSpanString(notification.createdAt, System.currentTimeMillis(), 0).toString(),
+                      text = DateUtils.getRelativeTimeSpanString(
+                        notification.createdAt,
+                        System.currentTimeMillis(),
+                        0
+                      ).toString(),
                       style = TextStyle(fontSize = 14.sp),
                       color = MaterialTheme.colors.onBackground,
                     )

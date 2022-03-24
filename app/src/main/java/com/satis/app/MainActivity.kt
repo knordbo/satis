@@ -47,7 +47,7 @@ class MainActivity @Inject constructor(
       configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.notification, R.id.account))
     )
 
-    binding.bottomNav.setOnNavigationItemReselectedListener { menuItem ->
+    binding.bottomNav.setOnItemReselectedListener { menuItem ->
       navigationReselectionUpdater.onNavigationItemReselected(menuItem.itemId)
     }
   }

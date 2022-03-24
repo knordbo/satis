@@ -7,7 +7,7 @@ import com.satis.app.feature.notifications.Icon
 import com.satis.app.feature.notifications.Notification
 import com.satis.app.feature.notifications.data.db.NotificationEntity
 import com.satis.app.feature.notifications.data.db.NotificationQueries
-import com.squareup.sqldelight.Query
+import app.cash.sqldelight.Query
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext

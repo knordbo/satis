@@ -32,7 +32,7 @@ class CardRepositoryImpl @Inject constructor(
             .mapNotNull {
               it.toObject(DbCard::class.java)?.toModel(it.id, userId)
             }
-          offer(cards)
+          trySend(cards).isSuccess
         }
       }
     }

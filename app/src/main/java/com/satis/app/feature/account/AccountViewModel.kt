@@ -1,6 +1,6 @@
 package com.satis.app.feature.account
 
-import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.Prefs
@@ -13,7 +13,6 @@ import com.satis.app.utils.coroutines.viewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class AccountViewModel @AssistedInject constructor(
@@ -76,7 +75,7 @@ class AccountViewModel @AssistedInject constructor(
   @AssistedFactory
   interface FactoryImpl : Factory
 
-  companion object : MvRxViewModelFactory<AccountViewModel, AccountState> {
+  companion object : MavericksViewModelFactory<AccountViewModel, AccountState> {
     override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel {
       return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
     }

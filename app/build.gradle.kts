@@ -10,7 +10,7 @@ plugins {
   id("kotlinx-serialization")
   id("com.github.ben-manes.versions")
   id("com.github.triplet.play")
-  id("com.squareup.sqldelight")
+  id("app.cash.sqldelight")
   id("com.google.firebase.crashlytics")
 }
 
@@ -32,12 +32,12 @@ android {
   ndkVersion = BuildVersions.ndk
 
   compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
   }
 
   kotlinOptions {
-    jvmTarget = "1.8"
+    jvmTarget = "11"
   }
 
   composeOptions {
@@ -47,7 +47,7 @@ android {
 
   tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions {
-      jvmTarget = "1.8"
+      jvmTarget = "11"
       freeCompilerArgs = freeCompilerArgs + listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check")
     }
   }
@@ -137,8 +137,8 @@ dependencies {
   }
 
   // Coil
-  implementation(Deps.coil)
-  implementation(Deps.accompanistCoil)
+  implementation(Deps.coil.coil)
+  implementation(Deps.coil.coilCompose)
 
   // Dagger
   implementation(Deps.dagger.dagger)
@@ -181,9 +181,6 @@ dependencies {
   // Google Play Core
   implementation(Deps.playCore)
 
-  // PhotoView
-  implementation(Deps.photoView)
-
   // Retrofit
   implementation(Deps.retrofit.retrofit)
   implementation(Deps.retrofit.kotlinSerialization)
@@ -191,6 +188,7 @@ dependencies {
   // SQLDelight
   implementation(Deps.sqldelight.androidDriver)
   implementation(Deps.sqldelight.coroutinesExtensions)
+  implementation(Deps.sqldelight.primitiveAdapters)
 
   // Unit Testing
   testImplementation(Deps.junit)

@@ -3,12 +3,12 @@ package com.satis.app.utils.coroutines
 import androidx.fragment.app.Fragment
 import com.airbnb.mvrx.FragmentViewModelContext
 import com.airbnb.mvrx.MavericksViewModel
-import com.airbnb.mvrx.MvRxState
+import com.airbnb.mvrx.MavericksState
 import com.airbnb.mvrx.ViewModelContext
 import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
 
-open class BaseViewModel<S : MvRxState>(
+open class BaseViewModel<S : MavericksState>(
   initialState: S
 ) : MavericksViewModel<S>(initialState), CoroutineScope {
 
