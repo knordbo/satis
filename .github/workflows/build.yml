@@ -31,5 +31,5 @@ jobs:
           api-level: 29
           script: ./gradlew connectedCheck
       - name: Publish to play store
-        run: ./gradlew publishRelease
+        run: ./gradlew publishReleaseBundle
         if: success() && github.ref == 'refs/heads/master'
