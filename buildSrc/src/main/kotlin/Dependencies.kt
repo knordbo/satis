@@ -2,6 +2,7 @@ object Versions {
   const val androidGradlePlugin = "7.1.0"
 
   object androidx {
+    const val activity = "1.6.0-alpha01"
     const val appCompat = "1.6.0-alpha01"
     const val cardView = "1.0.0"
     const val constraintLayout = "2.1.3"
@@ -58,6 +59,7 @@ object Deps {
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 
   object androidx {
+    const val activity = "androidx.activity:activity-ktx:${Versions.androidx.activity}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.androidx.appCompat}"
     const val cardView = "androidx.cardview:cardview:${Versions.androidx.cardView}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidx.constraintLayout}"
