@@ -27,7 +27,7 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-  compileSdkPreview = BuildVersions.targetSdk
+  compileSdkPreview = BuildVersions.compileSdk
 
   ndkVersion = BuildVersions.ndk
 
@@ -55,7 +55,7 @@ android {
   defaultConfig {
     applicationId = "com.satis.app"
     minSdk = BuildVersions.minSdk
-    targetSdkPreview = BuildVersions.targetSdk
+    targetSdk = BuildVersions.targetSdk
     versionCode = versionCodeOrDefault
     versionName = versionCodeOrDefault.toString()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
