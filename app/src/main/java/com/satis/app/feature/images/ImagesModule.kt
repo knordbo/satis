@@ -1,9 +1,7 @@
 package com.satis.app.feature.images
 
-import androidx.fragment.app.Fragment
 import com.satis.app.Database
 import com.satis.app.common.annotations.Background
-import com.satis.app.common.fragment.FragmentKey
 import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
@@ -43,20 +41,7 @@ object ImagesModule {
 abstract class ImagesBindingModule {
 
   @Binds
-  @IntoMap
-  @FragmentKey(ImagesFragment::class)
-  abstract fun provideImagesFragment(bind: ImagesFragment): Fragment
-
-  @Binds
-  @IntoMap
-  @FragmentKey(ImageFragment::class)
-  abstract fun provideImageFragment(bind: ImageFragment): Fragment
-
-  @Binds
   abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
-
-  @Binds
-  abstract fun provideImageViewModelFactory(bind: ImagesViewModel.FactoryImpl): ImagesViewModel.Factory
 
   @Binds
   @IntoMap

@@ -4,15 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import coil.load
-import com.satis.app.common.fragment.BaseViewBindingFragment
 import com.satis.app.databinding.FeatureImageBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class ImageFragment @Inject constructor() : BaseViewBindingFragment<FeatureImageBinding>() {
+@AndroidEntryPoint
+class ImageFragment : Fragment() {
 
-  override val bind: (LayoutInflater, ViewGroup?, Boolean) -> FeatureImageBinding? =
-    FeatureImageBinding::inflate
+  private lateinit var binding: FeatureImageBinding
+
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View {
+    binding = FeatureImageBinding.inflate(inflater, container, false)
+    return binding.root
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)

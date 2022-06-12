@@ -1,22 +1,31 @@
 package com.satis.app.feature.notifications
 
-import com.airbnb.mvrx.MavericksViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.satis.app.feature.notifications.data.NotificationRepository
-import com.satis.app.utils.coroutines.BaseViewModel
-import com.satis.app.utils.coroutines.viewModelFactory
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class NotificationViewModel @AssistedInject constructor(
-  @Assisted initialState: NotificationState,
+@HiltViewModel
+class NotificationViewModel @Inject constructor(
   private val notificationRepository: NotificationRepository,
-) : BaseViewModel<NotificationState>(
-  initialState = initialState
-) {
-  init {
+) : ViewModel(), CoroutineScope {
+
+  override val coroutineContext: CoroutineContext
+    get() = viewModelScope.coroutineContext
+
+  private val _state: MutableStateFlow<NotificationState> =
+    MutableStateFlow(value = NotificationState())
+  val state: StateFlow<NotificationState> = _state.asStateFlow()
+
+
+  fun load() {
     streamNotifications()
   }
 
@@ -42,16 +51,7 @@ class NotificationViewModel @AssistedInject constructor(
     }
   }
 
-  interface Factory {
-    fun createNotificationViewModel(initialState: NotificationState): NotificationViewModel
-  }
-
-  @AssistedFactory
-  interface FactoryImpl: Factory
-
-  companion object : MavericksViewModelFactory<NotificationViewModel, NotificationState> {
-    override fun create(viewModelContext: ViewModelContext, state: NotificationState): NotificationViewModel {
-      return viewModelContext.viewModelFactory<Factory>().createNotificationViewModel(state)
-    }
+  private fun setState(update: NotificationState.() -> NotificationState) {
+    _state.value = _state.value.update()
   }
 }

@@ -1,14 +1,12 @@
 package com.satis.app.feature.notifications
 
 import android.os.Parcelable
-import com.airbnb.mvrx.MavericksState
-import com.airbnb.mvrx.PersistState
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class NotificationState(
-  @PersistState val notifications: List<Notification> = emptyList(),
-): MavericksState, Parcelable
+  val notifications: List<Notification> = emptyList(),
+) : Parcelable
 
 @Parcelize
 data class Notification(
@@ -25,5 +23,5 @@ data class Notification(
 @Parcelize
 data class Icon(
   val url: String,
-  val useCircleCrop: Boolean
-): Parcelable
+  val useCircleCrop: Boolean,
+) : Parcelable

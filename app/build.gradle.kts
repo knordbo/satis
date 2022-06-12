@@ -177,9 +177,6 @@ dependencies {
   // Material Design
   implementation(Deps.material)
 
-  // MvRx
-  implementation(Deps.mvrx)
-
   // OkHttp
   implementation(Deps.okhttp)
 

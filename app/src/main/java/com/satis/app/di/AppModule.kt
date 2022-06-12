@@ -2,7 +2,6 @@ package com.satis.app.di
 
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
-import androidx.fragment.app.FragmentFactory
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -12,7 +11,6 @@ import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
 import com.satis.app.common.annotations.SharedPrefsName
-import com.satis.app.common.fragment.InjectingFragmentFactory
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
@@ -95,9 +93,6 @@ abstract class AppBindingModule {
 
   @Binds
   abstract fun providePrefs(bind: PrefsImpl): Prefs
-
-  @Binds
-  abstract fun provideFragmentFactory(bind: InjectingFragmentFactory): FragmentFactory
 
   @Binds
   abstract fun provideNavigationReselection(bind: NavigationReselectionImpl): NavigationReselection

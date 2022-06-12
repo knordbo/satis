@@ -29,18 +29,24 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.theme.AppTheme
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class CardFragment @Inject constructor(
-  private val viewModelFactory: CardViewModel.Factory,
-) : BaseFragment(), CardViewModel.Factory by viewModelFactory {
+@AndroidEntryPoint
+class CardFragment : Fragment() {
 
-  private val cardViewModel: CardViewModel by fragmentViewModel()
+  private val cardViewModel: CardViewModel by viewModels()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (savedInstanceState == null) {
+      cardViewModel.load()
+    }
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -50,7 +56,7 @@ class CardFragment @Inject constructor(
     return ComposeView(inflater.context).apply {
       layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
       setContent {
-        val state = cardViewModel.stateFlow.collectAsState(CardState())
+        val state = cardViewModel.state.collectAsState(CardState())
         AppTheme {
           LazyColumn {
             items(state.value.cards) { card ->

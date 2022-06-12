@@ -10,7 +10,6 @@ import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,7 +25,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
 
-  @Inject lateinit var fragmentFactory: FragmentFactory
   @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
   @Inject lateinit var navigationReselectionUpdater: NavigationReselectionUpdater
 
@@ -40,7 +38,6 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    supportFragmentManager.fragmentFactory = fragmentFactory
 
     appUpdateCalled = savedInstanceState?.getBoolean(APP_UPDATE_CALLED, false) ?: false
 

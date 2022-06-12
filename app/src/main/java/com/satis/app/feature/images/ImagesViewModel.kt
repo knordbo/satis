@@ -1,38 +1,44 @@
 package com.satis.app.feature.images
 
-import com.airbnb.mvrx.MavericksViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
-import com.satis.app.utils.coroutines.BaseViewModel
-import com.satis.app.utils.coroutines.viewModelFactory
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class ImagesViewModel @AssistedInject constructor(
-  @Assisted initialState: ImagesState,
-  private val unsplashRepository: UnsplashRepository
-) : BaseViewModel<ImagesState>(
-  initialState = initialState
-) {
+@HiltViewModel
+class ImagesViewModel @Inject constructor(
+  private val unsplashRepository: UnsplashRepository,
+) : ViewModel(), CoroutineScope {
 
-  private val _events: MutableSharedFlow<Event> = MutableSharedFlow()
-  val events: SharedFlow<Event> = _events.asSharedFlow()
+  override val coroutineContext: CoroutineContext
+    get() = viewModelScope.coroutineContext
 
-  init {
+  private val _state: MutableStateFlow<ImagesState> = MutableStateFlow(value = ImagesState())
+  val state: StateFlow<ImagesState> = _state.asStateFlow()
+
+  fun load() {
     fetchPhotos()
     streamPhotos()
   }
 
   fun onReselected() {
     fetchPhotos()
-    launch {
-      _events.emit(Event.ScrollToTop)
+    setState {
+      copy(scrollEvent = ScrollEvent.ScrollToTop)
+    }
+  }
+
+  fun scrollEventHandled() {
+    setState {
+      copy(scrollEvent = ScrollEvent.None)
     }
   }
 
@@ -46,6 +52,10 @@ class ImagesViewModel @AssistedInject constructor(
     }
   }
 
+  private fun setState(update: ImagesState.() -> ImagesState) {
+    _state.value = _state.value.update()
+  }
+
   private fun fetchPhotos() {
     launch {
       try {
@@ -55,22 +65,4 @@ class ImagesViewModel @AssistedInject constructor(
       }
     }
   }
-
-  interface Factory {
-    fun createImagesViewModel(initialState: ImagesState): ImagesViewModel
-  }
-
-  @AssistedFactory
-  interface FactoryImpl : Factory
-
-  companion object : MavericksViewModelFactory<ImagesViewModel, ImagesState> {
-    override fun create(viewModelContext: ViewModelContext, state: ImagesState): ImagesViewModel {
-      return viewModelContext.viewModelFactory<Factory>().createImagesViewModel(state)
-    }
-  }
-}
-
-sealed class Event {
-  object ScrollToTop : Event()
-  object Initial : Event()
 }

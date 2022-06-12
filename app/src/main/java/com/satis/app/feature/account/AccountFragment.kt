@@ -9,20 +9,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.findNavController
-import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.ui.AccountContent
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class AccountFragment @Inject constructor(
-  private val viewModelFactory: AccountViewModel.Factory,
-) : BaseFragment(), AccountViewModel.Factory by viewModelFactory {
+@AndroidEntryPoint
+class AccountFragment : Fragment() {
 
-  private val accountViewModel: AccountViewModel by fragmentViewModel()
+  private val accountViewModel: AccountViewModel by viewModels()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (savedInstanceState == null) {
+      accountViewModel.load()
+    }
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -43,10 +48,6 @@ class AccountFragment @Inject constructor(
           }
           R.id.themeDark -> {
             accountViewModel.setTheme(Theme.DARK)
-            true
-          }
-          R.id.playground -> {
-            findNavController().navigate(R.id.playground)
             true
           }
           else -> false

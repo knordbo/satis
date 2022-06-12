@@ -42,7 +42,6 @@ object Versions {
 
   const val leakCanary = "2.8.1"
   const val material = "1.6.0-beta01"
-  const val mvrx = "2.0.0-beta3"
   const val okhttp = "4.10.0-RC1"
   const val playCore = "1.10.3"
 
@@ -166,7 +165,6 @@ object Deps {
 
   const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
   const val material = "com.google.android.material:material:${Versions.material}"
-  const val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
 
   const val okhttp = "com.squareup.okhttp3:okhttp:${Versions.okhttp}"
 

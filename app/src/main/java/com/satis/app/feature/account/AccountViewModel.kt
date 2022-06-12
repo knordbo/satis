@@ -1,31 +1,37 @@
 package com.satis.app.feature.account
 
-import com.airbnb.mvrx.MavericksViewModelFactory
-import com.airbnb.mvrx.ViewModelContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.feature.notifications.data.NotificationRepository
-import com.satis.app.utils.coroutines.BaseViewModel
-import com.satis.app.utils.coroutines.viewModelFactory
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class AccountViewModel @AssistedInject constructor(
-  @Assisted initialState: AccountState,
+@HiltViewModel
+class AccountViewModel @Inject constructor(
   private val logger: PersistedLogger,
   private val appInfoRetriever: AppInfoRetriever,
   private val prefs: Prefs,
   private val notificationRepository: NotificationRepository,
-) : BaseViewModel<AccountState>(
-  initialState = initialState
-) {
+) : ViewModel(), CoroutineScope {
 
-  init {
+  override val coroutineContext: CoroutineContext
+    get() = viewModelScope.coroutineContext
+
+  private val _state: MutableStateFlow<AccountState> = MutableStateFlow(value = AccountState())
+  val state: StateFlow<AccountState> = _state.asStateFlow()
+
+  fun load() {
     getAccountState()
     streamLogs()
     streamNotificationToken()
@@ -68,16 +74,7 @@ class AccountViewModel @AssistedInject constructor(
     }
   }
 
-  interface Factory {
-    fun createAccountViewModel(initialState: AccountState): AccountViewModel
-  }
-
-  @AssistedFactory
-  interface FactoryImpl : Factory
-
-  companion object : MavericksViewModelFactory<AccountViewModel, AccountState> {
-    override fun create(viewModelContext: ViewModelContext, state: AccountState): AccountViewModel {
-      return viewModelContext.viewModelFactory<Factory>().createAccountViewModel(state)
-    }
+  private fun setState(update: AccountState.() -> AccountState) {
+    _state.value = _state.value.update()
   }
 }

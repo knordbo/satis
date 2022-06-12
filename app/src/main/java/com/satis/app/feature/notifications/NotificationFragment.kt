@@ -33,19 +33,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import coil.compose.AsyncImage
-import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.theme.AppTheme
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
-class NotificationFragment @Inject constructor(
-  private val viewModelFactory: NotificationViewModel.Factory,
-) : BaseFragment(), NotificationViewModel.Factory by viewModelFactory {
+@AndroidEntryPoint
+class NotificationFragment : Fragment() {
 
-  private val notificationViewModel: NotificationViewModel by fragmentViewModel()
+  private val notificationViewModel: NotificationViewModel by viewModels()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (savedInstanceState == null) {
+      notificationViewModel.load()
+    }
+  }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
@@ -74,7 +80,7 @@ class NotificationFragment @Inject constructor(
   ): View {
     return ComposeView(inflater.context).apply {
       setContent {
-        val state = notificationViewModel.stateFlow.collectAsState(NotificationState())
+        val state = notificationViewModel.state.collectAsState(NotificationState())
         AppTheme {
           LazyColumn {
             items(state.value.notifications) { notification ->

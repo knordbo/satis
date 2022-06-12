@@ -2,14 +2,12 @@ package com.satis.app.feature.images
 
 import android.net.Uri
 import android.os.Parcelable
-import com.airbnb.mvrx.MavericksState
-import com.airbnb.mvrx.PersistState
 import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class ImagesState(
-  @PersistState val photoState: List<PhotoState> = emptyList()
-) : MavericksState, Parcelable
+  val photoState: List<PhotoState> = emptyList(),
+  val scrollEvent: ScrollEvent = ScrollEvent.None,
+)
 
 @Parcelize
 data class PhotoState(
@@ -17,11 +15,16 @@ data class PhotoState(
   val thumbnailUrl: Uri,
   val photoUrl: Uri,
   val user: User,
-  val description: String?
+  val description: String?,
 ) : Parcelable
 
 @Parcelize
 data class User(
   val username: String,
-  val userAvatar: Uri
+  val userAvatar: Uri,
 ) : Parcelable
+
+sealed class ScrollEvent {
+  object None : ScrollEvent()
+  object ScrollToTop : ScrollEvent()
+}

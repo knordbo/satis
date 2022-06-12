@@ -45,11 +45,6 @@
   </fragment>
 
   <fragment
-    android:id="@+id/playground"
-    android:name="com.satis.app.feature.playground.PlaygroundFragment"
-    />
-
-  <fragment
     android:id="@+id/notification"
     android:name="com.satis.app.feature.notifications.NotificationFragment"
     android:label="@string/notifications"

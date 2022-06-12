@@ -1,26 +1,30 @@
 package com.satis.app.feature.cards
 
-import com.airbnb.mvrx.Fail
-import com.airbnb.mvrx.MavericksViewModelFactory
-import com.airbnb.mvrx.Success
-import com.airbnb.mvrx.Uninitialized
-import com.airbnb.mvrx.ViewModelContext
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.satis.app.feature.cards.data.Card
 import com.satis.app.feature.cards.data.CardRepository
-import com.satis.app.utils.coroutines.BaseViewModel
-import com.satis.app.utils.coroutines.viewModelFactory
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class CardViewModel @AssistedInject constructor(
-  @Assisted initialState: CardState,
-  private val cardRepository: CardRepository
-) : BaseViewModel<CardState>(
-  initialState = initialState
-) {
-  init {
+@HiltViewModel
+class CardViewModel @Inject constructor(
+  private val cardRepository: CardRepository,
+) : ViewModel(), CoroutineScope {
+
+  override val coroutineContext: CoroutineContext
+    get() = viewModelScope.coroutineContext
+
+  private val _state: MutableStateFlow<CardState> = MutableStateFlow(value = CardState())
+  val state: StateFlow<CardState> = _state.asStateFlow()
+
+  fun load() {
     getCards()
   }
 
@@ -37,23 +41,22 @@ class CardViewModel @AssistedInject constructor(
   }
 
   fun addCard() {
-    withState { state ->
-      if (state.creatingCard.title.isBlank()) {
-        setState {
-          copy(creatingCardAsync = Fail(IllegalArgumentException()))
-        }
+    setState {
+      if (creatingCard.title.isBlank()) {
+        copy(creatingCardEvent = CreatingCardEvent.NoTitle)
       } else {
-        cardRepository.addCard(state.creatingCard)
-        setState {
-          copy(
-            creatingCard = Card(title = "", message = ""),
-            creatingCardAsync = Success(state.creatingCard)
-          )
-        }
-        setState {
-          copy(creatingCardAsync = Uninitialized)
-        }
+        cardRepository.addCard(creatingCard)
+        copy(
+          creatingCard = Card(title = "", message = ""),
+          creatingCardEvent = CreatingCardEvent.Success
+        )
       }
+    }
+  }
+
+  fun addCardEventHandled() {
+    setState {
+      copy(creatingCardEvent = CreatingCardEvent.None)
     }
   }
 
@@ -79,16 +82,7 @@ class CardViewModel @AssistedInject constructor(
     }
   }
 
-  interface Factory {
-    fun createCardViewModel(initialState: CardState): CardViewModel
-  }
-
-  @AssistedFactory
-  interface FactoryImpl : Factory
-
-  companion object : MavericksViewModelFactory<CardViewModel, CardState> {
-    override fun create(viewModelContext: ViewModelContext, state: CardState): CardViewModel {
-      return viewModelContext.viewModelFactory<Factory>().createCardViewModel(state)
-    }
+  private fun setState(update: CardState.() -> CardState) {
+    _state.value = _state.value.update()
   }
 }

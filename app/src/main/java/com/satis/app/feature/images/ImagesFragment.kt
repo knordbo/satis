@@ -20,38 +20,49 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import coil.compose.AsyncImage
-import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
-import com.satis.app.common.fragment.BaseFragment
 import com.satis.app.common.navigation.NavigationReselection
 import com.satis.app.common.theme.AppTheme
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class ImagesFragment @Inject constructor(
-  private val viewModelFactory: ImagesViewModel.Factory,
-  private val navigationReselection: NavigationReselection,
-) : BaseFragment(), ImagesViewModel.Factory by viewModelFactory {
+@AndroidEntryPoint
+class ImagesFragment : Fragment() {
 
-  private val imagesViewModel: ImagesViewModel by fragmentViewModel()
+  @Inject lateinit var navigationReselection: NavigationReselection
+
+  private val imagesViewModel: ImagesViewModel by viewModels()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    if (savedInstanceState == null) {
+      imagesViewModel.load()
+    }
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View {
     return ComposeView(inflater.context).apply {
       layoutParams = ViewGroup.LayoutParams(MATCH_PARENT, MATCH_PARENT)
       setContent {
         AppTheme {
-          val state = imagesViewModel.stateFlow.collectAsState(ImagesState())
+          val state = imagesViewModel.state.collectAsState(ImagesState())
           val lazyListState = rememberLazyListState()
 
-          val event = imagesViewModel.events.collectAsState(Event.Initial)
-          LaunchedEffect(event.value) {
-            if (event.value == Event.ScrollToTop) {
+          val scrollEvent = state.value.scrollEvent
+          LaunchedEffect(scrollEvent) {
+            if (scrollEvent == ScrollEvent.ScrollToTop) {
               lazyListState.scrollToItem(0)
+            }
+            if (scrollEvent != ScrollEvent.None) {
+              imagesViewModel.scrollEventHandled()
             }
           }
 
@@ -94,7 +105,6 @@ class ImagesFragment @Inject constructor(
     super.onViewCreated(view, savedInstanceState)
     navigationReselection.addReselectionListener(viewLifecycleOwner, R.id.images) {
       imagesViewModel.onReselected()
-
     }
   }
 

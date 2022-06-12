@@ -33,7 +33,7 @@ private val simpleDateFormat: SimpleDateFormat by lazy {
 @Composable
 fun AccountContent(viewModel: AccountViewModel) =
   AppTheme {
-    val state = viewModel.stateFlow.collectAsState(AccountState())
+    val state = viewModel.state.collectAsState(AccountState())
     val clipboardManager = LocalClipboardManager.current
     Column(
       modifier = Modifier.padding(16.dp)
