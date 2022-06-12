@@ -6,6 +6,8 @@ import com.satis.app.utils.network.clientProvider
 import com.satis.app.utils.network.jsonMediaType
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.Multibinds
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
@@ -14,7 +16,8 @@ import retrofit2.Retrofit
 import javax.inject.Provider
 import javax.inject.Singleton
 
-@Module(includes = [NetworkBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object NetworkModule {
 
   @Provides
@@ -42,6 +45,7 @@ object NetworkModule {
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class NetworkBindingModule {
 

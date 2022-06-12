@@ -7,14 +7,18 @@ import androidx.work.WorkerFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-@Module(includes = [WorkerBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object WorkerModule {
 
   @Provides
   @Singleton
-  fun provideWorkManager(context: Context): WorkManager = WorkManager.getInstance(context)
+  fun provideWorkManager(@ApplicationContext context: Context): WorkManager = WorkManager.getInstance(context)
 
   @Provides
   @Singleton
@@ -26,6 +30,7 @@ object WorkerModule {
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class WorkerBindingModule {
 

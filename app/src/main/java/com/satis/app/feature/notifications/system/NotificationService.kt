@@ -5,18 +5,20 @@ import com.google.firebase.messaging.RemoteMessage
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.feature.notifications.data.PushNotification
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-class NotificationService @Inject constructor(
-  private val notificationRepository: NotificationRepository,
-  private val notificationHandler: PushNotificationHandler,
-  private val logger: PersistedLogger,
-  private val json: Json,
-): FirebaseMessagingService() {
+@AndroidEntryPoint
+class NotificationService : FirebaseMessagingService() {
+
+  @Inject lateinit var notificationRepository: NotificationRepository
+  @Inject lateinit var notificationHandler: PushNotificationHandler
+  @Inject lateinit var logger: PersistedLogger
+  @Inject lateinit var json: Json
 
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
     GlobalScope.launch {

@@ -7,11 +7,12 @@ import coil.request.ImageRequest
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.startup.StartupTask
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
 import javax.inject.Inject
 
 class UnsplashPreloadTask @Inject constructor(
-  private val context: Context,
+  @ApplicationContext private val context: Context,
   private val unsplashRepository: UnsplashRepository
 ) : StartupTask {
   override suspend fun execute() {

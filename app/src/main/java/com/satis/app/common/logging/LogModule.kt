@@ -5,16 +5,20 @@ import com.satis.app.common.logging.db.LogQueries
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import javax.inject.Singleton
 
-@Module(includes = [LogBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object LogModule {
   @Provides
   @Singleton
   fun provideLogQueries(database: Database): LogQueries = database.logQueries
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class LogBindingModule {
   @Binds

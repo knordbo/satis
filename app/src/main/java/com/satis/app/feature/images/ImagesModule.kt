@@ -16,13 +16,16 @@ import com.satis.app.work.WorkerKey
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.IntoSet
 import retrofit2.Retrofit
 import retrofit2.create
 import javax.inject.Singleton
 
-@Module(includes = [ImagesBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object ImagesModule {
 
   @Provides
@@ -35,6 +38,7 @@ object ImagesModule {
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class ImagesBindingModule {
 

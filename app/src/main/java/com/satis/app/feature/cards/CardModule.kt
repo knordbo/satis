@@ -8,10 +8,13 @@ import com.satis.app.feature.cards.data.CardRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import javax.inject.Singleton
 
-@Module(includes = [CardBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object CardModule {
 
   @Singleton
@@ -20,6 +23,7 @@ object CardModule {
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class CardBindingModule {
 

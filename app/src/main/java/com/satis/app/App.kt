@@ -5,24 +5,23 @@ import androidx.work.Configuration
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Main
 import com.satis.app.startup.StartupTasks
-import com.satis.app.utils.context.ContextHolder
+import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 import kotlin.coroutines.CoroutineContext
 
-class App @Inject constructor(
-  private val workConfiguration: Provider<Configuration>,
-  @Main override val coroutineContext: CoroutineContext,
-  @Main private val mainThreadStartupTasks: StartupTasks,
-  @Background private val backgroundThreadStartupTasks: StartupTasks
-) : Application(), Configuration.Provider, CoroutineScope {
+@HiltAndroidApp
+class App : Application(), Configuration.Provider, CoroutineScope {
+
+  @Inject lateinit var workConfiguration: Provider<Configuration>
+  @Inject @Main lateinit var mainCoroutineContext: CoroutineContext
+  @Inject @Main lateinit var mainThreadStartupTasks: StartupTasks
+  @Inject @Background lateinit var backgroundThreadStartupTasks: StartupTasks
 
   override fun onCreate() {
     super.onCreate()
-
-    ContextHolder.context = applicationContext
 
     launch {
       mainThreadStartupTasks.executeAll()
@@ -31,5 +30,8 @@ class App @Inject constructor(
   }
 
   override fun getWorkManagerConfiguration(): Configuration = workConfiguration.get()
+
+  override val coroutineContext: CoroutineContext
+    get() = mainCoroutineContext
 
 }

@@ -24,7 +24,7 @@ object Versions {
   const val crashlyticsGradle = "2.4.1"
 
   object dagger {
-    const val dagger = "2.41"
+    const val hilt = "2.41"
   }
 
   const val firebase = "29.2.1"
@@ -124,8 +124,9 @@ object Deps {
   const val crashlyticsGradle = "com.google.firebase:firebase-crashlytics-gradle:${Versions.crashlyticsGradle}"
 
   object dagger {
-    const val compiler = "com.google.dagger:dagger-compiler:${Versions.dagger.dagger}"
-    const val dagger = "com.google.dagger:dagger:${Versions.dagger.dagger}"
+    const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.dagger.hilt}"
+    const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.dagger.hilt}"
+    const val hilt = "com.google.dagger:hilt-android:${Versions.dagger.hilt}"
   }
 
   object firebase {

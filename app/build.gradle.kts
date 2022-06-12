@@ -12,6 +12,7 @@ plugins {
   id("com.github.triplet.play")
   id("app.cash.sqldelight")
   id("com.google.firebase.crashlytics")
+  id("dagger.hilt.android.plugin")
 }
 
 apply {
@@ -48,7 +49,8 @@ android {
   tasks.withType(KotlinCompile::class.java).configureEach {
     kotlinOptions {
       jvmTarget = "11"
-      freeCompilerArgs = freeCompilerArgs + listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check")
+      freeCompilerArgs =
+        freeCompilerArgs + listOf("-Xallow-jvm-ir-dependencies", "-Xskip-prerelease-check")
     }
   }
 
@@ -59,7 +61,9 @@ android {
     versionCode = versionCodeOrDefault
     versionName = versionCodeOrDefault.toString()
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    buildConfigField("String", "UNSPLASH_CLIENT_ID", "\"${keystoreProperties["unsplashClientId"]}\"")
+    buildConfigField("String",
+      "UNSPLASH_CLIENT_ID",
+      "\"${keystoreProperties["unsplashClientId"]}\"")
   }
   signingConfigs {
     create("release") {
@@ -142,8 +146,8 @@ dependencies {
   implementation(Deps.coil.coilCompose)
 
   // Dagger
-  implementation(Deps.dagger.dagger)
-  kapt(Deps.dagger.compiler)
+  implementation(Deps.dagger.hilt)
+  kapt(Deps.dagger.hiltCompiler)
 
   // Firebase
   implementation(platform(Deps.firebase.bom))
@@ -205,6 +209,10 @@ dependencies {
   debugImplementation(Deps.androidx.fragment.testing) {
     exclude(group = "androidx.test", module = "core")
   }
+}
+
+kapt {
+  correctErrorTypes = true
 }
 
 apply {

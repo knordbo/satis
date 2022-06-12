@@ -5,11 +5,12 @@ import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.core.FlipperClient
 import com.facebook.soloader.SoLoader
 import com.satis.app.startup.StartupTask
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Provider
 
 class FlipperInitTask @Inject constructor(
-  private val context: Context,
+  @ApplicationContext private val context: Context,
   private val flipperClient: Provider<FlipperClient>
 ) : StartupTask {
   override suspend fun execute() {

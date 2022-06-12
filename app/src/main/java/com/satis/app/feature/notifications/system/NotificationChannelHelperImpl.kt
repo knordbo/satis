@@ -6,12 +6,13 @@ import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import com.satis.app.R
 import com.satis.app.feature.notifications.data.PushNotification
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class NotificationChannelHelperImpl @Inject constructor(
-  private val context: Context,
+  @ApplicationContext private val context: Context,
   private val notificationManager: NotificationManagerCompat,
 ): NotificationChannelHelper {
 

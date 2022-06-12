@@ -4,9 +4,12 @@ import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.Main
 import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class StartupModule {
 

@@ -19,17 +19,24 @@ import com.satis.app.startup.StartupTask
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoSet
 import dagger.multibindings.Multibinds
 import okhttp3.Interceptor
 import javax.inject.Singleton
 
-@Module(includes = [FlipperBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object FlipperModule {
 
   @Provides
   @Singleton
-  fun provideFlipperClient(context: Context, plugins: Set<@JvmSuppressWildcards FlipperPlugin>): FlipperClient {
+  fun provideFlipperClient(
+    @ApplicationContext context: Context,
+    plugins: Set<@JvmSuppressWildcards FlipperPlugin>,
+  ): FlipperClient {
     val client = AndroidFlipperClient.getInstance(context)
     plugins.forEach(client::addPlugin)
     return client
@@ -38,13 +45,16 @@ object FlipperModule {
   @Provides
   @IntoSet
   @Singleton
-  fun provideInspectorPlugin(context: Context): FlipperPlugin =
+  fun provideInspectorPlugin(@ApplicationContext context: Context): FlipperPlugin =
     InspectorFlipperPlugin(context, DescriptorMapping.withDefaults())
 
   @Provides
   @IntoSet
   @Singleton
-  fun provideDatabasePlugin(context: Context, @DatabaseName databaseName: String): FlipperPlugin {
+  fun provideDatabasePlugin(
+    @ApplicationContext context: Context,
+    @DatabaseName databaseName: String,
+  ): FlipperPlugin {
     return DatabasesFlipperPlugin(SqliteDatabaseDriver(context, SqliteDatabaseProvider {
       // Some random databases like the one from firestore closes which throws flipper off,
       // therefore only listing our own database.
@@ -57,7 +67,10 @@ object FlipperModule {
   @Provides
   @IntoSet
   @Singleton
-  fun provideSharedPrefsPlugin(context: Context, @SharedPrefsName sharedPrefsName: String): FlipperPlugin =
+  fun provideSharedPrefsPlugin(
+    @ApplicationContext context: Context,
+    @SharedPrefsName sharedPrefsName: String,
+  ): FlipperPlugin =
     SharedPreferencesFlipperPlugin(context, sharedPrefsName)
 
   @Provides
@@ -67,10 +80,12 @@ object FlipperModule {
   @Provides
   @IntoSet
   @Singleton
-  fun provideNetworkInterceptor(plugin: NetworkFlipperPlugin): Interceptor = FlipperOkhttpInterceptor(plugin)
+  fun provideNetworkInterceptor(plugin: NetworkFlipperPlugin): Interceptor =
+    FlipperOkhttpInterceptor(plugin)
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class FlipperBindingModule {
 
@@ -86,6 +101,5 @@ abstract class FlipperBindingModule {
   @IntoSet
   @Singleton
   abstract fun provideNetworkPluginIntoSet(bind: NetworkFlipperPlugin): FlipperPlugin
-
 
 }

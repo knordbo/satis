@@ -20,13 +20,15 @@ import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class MainActivity @Inject constructor(
-  private val fragmentFactory: FragmentFactory,
-  private val immediateAppUpdaterFactory: ImmediateAppUpdater.Factory,
-  private val navigationReselectionUpdater: NavigationReselectionUpdater,
-) : AppCompatActivity(), IntentSenderForResultStarter {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
+
+  @Inject lateinit var fragmentFactory: FragmentFactory
+  @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
+  @Inject lateinit var navigationReselectionUpdater: NavigationReselectionUpdater
 
   private val navigationController: NavController by lazy { findNavController(R.id.navigationHostFragment) }
 
@@ -37,9 +39,9 @@ class MainActivity @Inject constructor(
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
     supportFragmentManager.fragmentFactory = fragmentFactory
 
-    super.onCreate(savedInstanceState)
     appUpdateCalled = savedInstanceState?.getBoolean(APP_UPDATE_CALLED, false) ?: false
 
     val binding = ActivityMainBinding.inflate(layoutInflater)

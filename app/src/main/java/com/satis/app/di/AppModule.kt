@@ -1,19 +1,12 @@
 package com.satis.app.di
 
-import android.app.Activity
-import android.app.Application
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentFactory
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.satis.app.App
 import com.satis.app.Database
-import com.satis.app.MainActivity
-import com.satis.app.common.activity.ActivityKey
-import com.satis.app.common.activity.InjectingActivityFactory
-import com.satis.app.common.activity.InjectingActivityFactoryImpl
 import com.satis.app.common.annotations.Background
 import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
@@ -25,23 +18,20 @@ import com.satis.app.common.navigation.NavigationReselectionImpl
 import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
-import com.satis.app.common.service.InjectingServiceFactory
-import com.satis.app.common.service.InjectingServiceFactoryImpl
 import com.satis.app.common.updater.ImmediateAppUpdater
-import com.satis.app.utils.context.ContextHolder
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import dagger.multibindings.IntoMap
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
-@Module(includes = [AppBindingModule::class])
+@InstallIn(SingletonComponent::class)
+@Module
 object AppModule {
-
-  @Provides
-  fun provideContext(): Context = ContextHolder.context
 
   @Provides
   @Singleton
@@ -56,7 +46,7 @@ object AppModule {
   @Provides
   @Singleton
   fun provideDatabase(
-    context: Context,
+    @ApplicationContext context: Context,
     @DatabaseName databaseName: String,
   ): Database =
     Database(
@@ -85,7 +75,7 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideAppUpdateManager(context: Context): AppUpdateManager =
+  fun provideAppUpdateManager(@ApplicationContext context: Context): AppUpdateManager =
     AppUpdateManagerFactory.create(context)
 
   @Provides
@@ -94,27 +84,14 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideNotificationManager(context: Context): NotificationManagerCompat =
+  fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat =
     NotificationManagerCompat.from(context)
 
 }
 
+@InstallIn(SingletonComponent::class)
 @Module
 abstract class AppBindingModule {
-
-  @Binds
-  abstract fun provideApp(bind: App): Application
-
-  @Binds
-  @IntoMap
-  @ActivityKey(MainActivity::class)
-  abstract fun provideMainActivity(bind: MainActivity): Activity
-
-  @Binds
-  abstract fun provideActivityFactory(bind: InjectingActivityFactoryImpl): InjectingActivityFactory
-
-  @Binds
-  abstract fun provideServiceFactory(bind: InjectingServiceFactoryImpl): InjectingServiceFactory
 
   @Binds
   abstract fun providePrefs(bind: PrefsImpl): Prefs

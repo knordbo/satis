@@ -13,6 +13,7 @@ buildscript {
     classpath(Deps.androidx.navigation.safeArgs)
     classpath(Deps.googlePlayPublisher)
     classpath(Deps.sqldelight.gradlePlugin)
+    classpath(Deps.dagger.hiltGradlePlugin)
   }
 }
 
