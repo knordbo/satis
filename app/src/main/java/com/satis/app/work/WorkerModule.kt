@@ -1,9 +1,9 @@
 package com.satis.app.work
 
 import android.content.Context
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.WorkManager
-import androidx.work.WorkerFactory
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -18,11 +18,12 @@ object WorkerModule {
 
   @Provides
   @Singleton
-  fun provideWorkManager(@ApplicationContext context: Context): WorkManager = WorkManager.getInstance(context)
+  fun provideWorkManager(@ApplicationContext context: Context): WorkManager =
+    WorkManager.getInstance(context)
 
   @Provides
   @Singleton
-  fun provideConfiguration(workerFactory: WorkerFactory): Configuration =
+  fun provideConfiguration(workerFactory: HiltWorkerFactory): Configuration =
     Configuration
       .Builder()
       .setWorkerFactory(workerFactory)
@@ -33,9 +34,6 @@ object WorkerModule {
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class WorkerBindingModule {
-
-  @Binds
-  abstract fun provideWorkerFactory(bind: InjectingWorkerFactory): WorkerFactory
 
   @Binds
   abstract fun provideWorkScheduler(bind: WorkSchedulerImpl): WorkScheduler

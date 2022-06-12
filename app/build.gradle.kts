@@ -147,7 +147,9 @@ dependencies {
 
   // Dagger
   implementation(Deps.dagger.hilt)
+  implementation(Deps.dagger.hiltWork)
   kapt(Deps.dagger.hiltCompiler)
+  kapt(Deps.dagger.hiltWorkCompiler)
 
   // Firebase
   implementation(platform(Deps.firebase.bom))

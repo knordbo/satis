@@ -25,6 +25,7 @@ object Versions {
 
   object dagger {
     const val hilt = "2.41"
+    const val work = "1.0.0"
   }
 
   const val firebase = "29.2.1"
@@ -125,6 +126,8 @@ object Deps {
   object dagger {
     const val hiltCompiler = "com.google.dagger:hilt-compiler:${Versions.dagger.hilt}"
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.dagger.hilt}"
+    const val hiltWork = "androidx.hilt:hilt-work:${Versions.dagger.work}"
+    const val hiltWorkCompiler = "androidx.hilt:hilt-compiler:${Versions.dagger.work}"
     const val hilt = "com.google.dagger:hilt-android:${Versions.dagger.hilt}"
   }
 
