@@ -5,7 +5,6 @@ import android.app.Application
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.FragmentFactory
-import app.cash.sqldelight.adapter.primitive.BooleanColumnAdapter
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
@@ -29,7 +28,6 @@ import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.service.InjectingServiceFactory
 import com.satis.app.common.service.InjectingServiceFactoryImpl
 import com.satis.app.common.updater.ImmediateAppUpdater
-import com.satis.app.feature.notifications.data.db.NotificationEntity
 import com.satis.app.utils.context.ContextHolder
 import dagger.Binds
 import dagger.Module
@@ -67,11 +65,6 @@ object AppModule {
         context = context,
         name = databaseName,
         useNoBackupDirectory = true
-      ),
-      notificationEntityAdapter = NotificationEntity.Adapter(
-        iconUseCircleCropAdapter = BooleanColumnAdapter,
-        isSilentAdapter = BooleanColumnAdapter,
-        isImportantAdapter = BooleanColumnAdapter,
       ),
     )
 

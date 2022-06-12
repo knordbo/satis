@@ -1,9 +1,15 @@
 package com.satis.app
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.os.BuildCompat
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -44,12 +50,20 @@ class MainActivity @Inject constructor(
     binding.bottomNav.setupWithNavController(navigationController)
     setupActionBarWithNavController(
       navController = navigationController,
-      configuration = AppBarConfiguration(setOf(R.id.home, R.id.images, R.id.notification, R.id.account))
+      configuration = AppBarConfiguration(
+        setOf(
+          R.id.home,
+          R.id.images,
+          R.id.notification,
+          R.id.account,
+        )
+      )
     )
 
     binding.bottomNav.setOnItemReselectedListener { menuItem ->
       navigationReselectionUpdater.onNavigationItemReselected(menuItem.itemId)
     }
+    checkNotificationPermission()
   }
 
   override fun onResume() {
@@ -64,6 +78,22 @@ class MainActivity @Inject constructor(
   }
 
   override fun onSupportNavigateUp() = navigationController.navigateUp()
+
+  @SuppressLint("UnsafeOptInUsageError")
+  private fun checkNotificationPermission() {
+    if (!BuildCompat.isAtLeastT()) {
+      return
+    }
+    if (ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.POST_NOTIFICATIONS
+      ) != PackageManager.PERMISSION_GRANTED
+    ) {
+      registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+      ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
+    }
+  }
 
   companion object {
     fun getIntent(context: Context) = Intent(context, MainActivity::class.java)

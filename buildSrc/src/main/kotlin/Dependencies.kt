@@ -2,11 +2,11 @@ object Versions {
   const val androidGradlePlugin = "7.1.0"
 
   object androidx {
-    const val activity = "1.6.0-alpha01"
+    const val activity = "1.6.0-alpha04"
     const val appCompat = "1.6.0-alpha01"
     const val cardView = "1.0.0"
     const val constraintLayout = "2.1.3"
-    const val coreKtx = "1.9.0-alpha01"
+    const val coreKtx = "1.9.0-alpha04"
     const val coreTesting = "2.1.0"
     const val espresso = "3.5.0-alpha05"
     const val fragment = "1.5.0-alpha04"
@@ -52,7 +52,7 @@ object Versions {
   }
 
   const val soloader = "0.10.3"
-  const val sqldelight = "2.0.0-SNAPSHOT"
+  const val sqldelight = "2.0.0-alpha01"
 }
 
 object Deps {
