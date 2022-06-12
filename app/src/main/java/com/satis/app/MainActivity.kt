@@ -5,11 +5,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.os.BuildCompat
 import androidx.fragment.app.FragmentFactory
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -81,18 +81,17 @@ class MainActivity @Inject constructor(
 
   @SuppressLint("UnsafeOptInUsageError")
   private fun checkNotificationPermission() {
-    if (!BuildCompat.isAtLeastT()) {
-      return
+    if (Build.VERSION.SDK_INT >= 33
+      && applicationInfo.targetSdkVersion >= 33
+      && ContextCompat.checkSelfPermission(
+        this,
+        Manifest.permission.POST_NOTIFICATIONS
+      ) != PackageManager.PERMISSION_GRANTED
+    ) {
+      registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+      ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
-//    if (ContextCompat.checkSelfPermission(
-//        this,
-//        Manifest.permission.POST_NOTIFICATIONS
-//      ) != PackageManager.PERMISSION_GRANTED
-//    ) {
-//      registerForActivityResult(
-//        ActivityResultContracts.RequestPermission()
-//      ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
-//    }
   }
 
   companion object {
