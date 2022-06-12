@@ -1,8 +1,15 @@
 package com.satis.app.feature.account
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
@@ -17,43 +24,50 @@ class AccountFragment @Inject constructor(
 
   private val accountViewModel: AccountViewModel by fragmentViewModel()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setHasOptionsMenu(true)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    requireActivity().addMenuProvider(
+      object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+          menuInflater.inflate(R.menu.account_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean = when (menuItem.itemId) {
+          R.id.themeSystem -> {
+            accountViewModel.setTheme(Theme.SYSTEM)
+            true
+          }
+          R.id.themeLight -> {
+            accountViewModel.setTheme(Theme.LIGHT)
+            true
+          }
+          R.id.themeDark -> {
+            accountViewModel.setTheme(Theme.DARK)
+            true
+          }
+          R.id.playground -> {
+            findNavController().navigate(R.id.playground)
+            true
+          }
+          else -> false
+        }
+      },
+      viewLifecycleOwner, Lifecycle.State.RESUMED,
+    )
   }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+  override fun onCreateView(
+    inflater: LayoutInflater,
+    container: ViewGroup?,
+    savedInstanceState: Bundle?,
+  ): View {
     return ComposeView(inflater.context).apply {
-      layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+      layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+        ViewGroup.LayoutParams.MATCH_PARENT)
       setContent {
         AccountContent(accountViewModel)
       }
     }
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    super.onCreateOptionsMenu(menu, inflater)
-    inflater.inflate(R.menu.account_menu, menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-    R.id.themeSystem -> {
-      accountViewModel.setTheme(Theme.SYSTEM)
-      true
-    }
-    R.id.themeLight -> {
-      accountViewModel.setTheme(Theme.LIGHT)
-      true
-    }
-    R.id.themeDark -> {
-      accountViewModel.setTheme(Theme.DARK)
-      true
-    }
-    R.id.playground -> {
-      findNavController().navigate(R.id.playground)
-      true
-    }
-    else -> super.onOptionsItemSelected(item)
   }
 
 }

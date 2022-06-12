@@ -32,6 +32,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import coil.compose.AsyncImage
 import com.airbnb.mvrx.fragmentViewModel
 import com.satis.app.R
@@ -45,15 +47,30 @@ class NotificationFragment @Inject constructor(
 
   private val notificationViewModel: NotificationViewModel by fragmentViewModel()
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setHasOptionsMenu(true)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
+    requireActivity().addMenuProvider(
+      object : MenuProvider {
+        override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+          menuInflater.inflate(R.menu.notification_menu, menu)
+        }
+
+        override fun onMenuItemSelected(menuItem: MenuItem): Boolean =
+          if (menuItem.itemId == R.id.delete) {
+            notificationViewModel.deleteAll()
+            true
+          } else {
+            false
+          }
+      },
+      viewLifecycleOwner, Lifecycle.State.RESUMED,
+    )
   }
 
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
-    savedInstanceState: Bundle?
+    savedInstanceState: Bundle?,
   ): View {
     return ComposeView(inflater.context).apply {
       setContent {
@@ -111,20 +128,6 @@ class NotificationFragment @Inject constructor(
           }
         }
       }
-    }
-  }
-
-  override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-    super.onCreateOptionsMenu(menu, inflater)
-    inflater.inflate(R.menu.notification_menu, menu)
-  }
-
-  override fun onOptionsItemSelected(item: MenuItem): Boolean {
-    return if (item.itemId == R.id.delete) {
-      notificationViewModel.deleteAll()
-      true
-    } else {
-      super.onOptionsItemSelected(item)
     }
   }
 
