@@ -84,15 +84,15 @@ class MainActivity @Inject constructor(
     if (!BuildCompat.isAtLeastT()) {
       return
     }
-    if (ContextCompat.checkSelfPermission(
-        this,
-        Manifest.permission.POST_NOTIFICATIONS
-      ) != PackageManager.PERMISSION_GRANTED
-    ) {
-      registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-      ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
-    }
+//    if (ContextCompat.checkSelfPermission(
+//        this,
+//        Manifest.permission.POST_NOTIFICATIONS
+//      ) != PackageManager.PERMISSION_GRANTED
+//    ) {
+//      registerForActivityResult(
+//        ActivityResultContracts.RequestPermission()
+//      ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
+//    }
   }
 
   companion object {

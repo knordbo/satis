@@ -27,7 +27,7 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
-  compileSdkPreview = BuildVersions.compileSdk
+  compileSdk = BuildVersions.compileSdk
 
   ndkVersion = BuildVersions.ndk
 
