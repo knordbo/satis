@@ -11,9 +11,6 @@ import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
 import com.satis.app.common.annotations.SharedPrefsName
-import com.satis.app.common.navigation.NavigationReselection
-import com.satis.app.common.navigation.NavigationReselectionImpl
-import com.satis.app.common.navigation.NavigationReselectionUpdater
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.updater.ImmediateAppUpdater
@@ -93,12 +90,6 @@ abstract class AppBindingModule {
 
   @Binds
   abstract fun providePrefs(bind: PrefsImpl): Prefs
-
-  @Binds
-  abstract fun provideNavigationReselection(bind: NavigationReselectionImpl): NavigationReselection
-
-  @Binds
-  abstract fun provideNavigationReselectionUpdater(bind: NavigationReselectionImpl): NavigationReselectionUpdater
 
   @Binds
   abstract fun provideImmediateAppUpdaterFactory(bind: ImmediateAppUpdater.FactoryImpl): ImmediateAppUpdater.Factory

@@ -3,7 +3,7 @@ package com.satis.app.feature.account
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithText
-import com.satis.app.feature.account.ui.AccountContent
+import com.satis.app.feature.account.ui.AccountScreen
 import org.junit.Rule
 import org.junit.Test
 
@@ -15,7 +15,7 @@ class AccountFragmentTest {
   @Test
   fun showsAppInfo() {
     composeTestRule.setContent {
-      AccountContent(createAccountViewModel())
+      AccountScreen(createAccountViewModel())
     }
     composeTestRule.onNodeWithText("Version: 1").assertIsDisplayed()
   }
@@ -23,7 +23,7 @@ class AccountFragmentTest {
   @Test
   fun showsNotificationToken() {
     composeTestRule.setContent {
-      AccountContent(createAccountViewModel())
+      AccountScreen(createAccountViewModel())
     }
     composeTestRule.onNodeWithText("Notification token: my_token").assertIsDisplayed()
   }

@@ -5,10 +5,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.res.stringResource
@@ -17,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satis.app.R
-import com.satis.app.common.theme.AppTheme
+import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.AccountState
 import com.satis.app.feature.account.AccountViewModel
 import java.text.SimpleDateFormat
@@ -31,8 +43,10 @@ private val simpleDateFormat: SimpleDateFormat by lazy {
 }
 
 @Composable
-fun AccountContent(viewModel: AccountViewModel) =
-  AppTheme {
+fun AccountScreen(viewModel: AccountViewModel) {
+  Scaffold(topBar = {
+    AccountAppBar(viewModel)
+  }) {
     val state = viewModel.state.collectAsState(AccountState())
     val clipboardManager = LocalClipboardManager.current
     Column(
@@ -51,7 +65,8 @@ fun AccountContent(viewModel: AccountViewModel) =
         )
       }
       AccountText(
-        text = stringResource(R.string.notification_token, state.value.notificationToken.orEmpty()),
+        text = stringResource(R.string.notification_token,
+          state.value.notificationToken.orEmpty()),
         onClick = {
           clipboardManager.setText(
             AnnotatedString(state.value.notificationToken.orEmpty())
@@ -81,6 +96,40 @@ fun AccountContent(viewModel: AccountViewModel) =
       }
     }
   }
+}
+
+@Composable
+private fun AccountAppBar(viewModel: AccountViewModel) {
+  var showMenu by remember { mutableStateOf(false) }
+
+  TopAppBar(
+    title = {
+      Text(stringResource(id = R.string.account))
+    },
+    actions = {
+      IconButton(onClick = { showMenu = !showMenu }) {
+        Icon(Icons.Default.MoreVert, contentDescription = null)
+      }
+      DropdownMenu(expanded = showMenu, onDismissRequest = { showMenu = false }) {
+        DropdownMenuItem(onClick = {
+          viewModel.setTheme(Theme.SYSTEM)
+        }) {
+          Text(stringResource(id = R.string.theme_system))
+        }
+        DropdownMenuItem(onClick = {
+          viewModel.setTheme(Theme.LIGHT)
+        }) {
+          Text(stringResource(id = R.string.theme_light))
+        }
+        DropdownMenuItem(onClick = {
+          viewModel.setTheme(Theme.DARK)
+        }) {
+          Text(stringResource(id = R.string.theme_dark))
+        }
+      }
+    }
+  )
+}
 
 
 @Composable

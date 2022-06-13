@@ -25,7 +25,7 @@ class NotificationViewModel @Inject constructor(
   val state: StateFlow<NotificationState> = _state.asStateFlow()
 
 
-  fun load() {
+  init {
     streamNotifications()
   }
 

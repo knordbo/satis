@@ -31,7 +31,7 @@ class AccountViewModel @Inject constructor(
   private val _state: MutableStateFlow<AccountState> = MutableStateFlow(value = AccountState())
   val state: StateFlow<AccountState> = _state.asStateFlow()
 
-  fun load() {
+  init {
     getAccountState()
     streamLogs()
     streamNotificationToken()

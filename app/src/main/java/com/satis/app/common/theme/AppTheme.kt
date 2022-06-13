@@ -22,7 +22,7 @@ fun AppTheme(
 private val lightColors = lightColors(
   primary = Color(0xFF3f51b5),
   primaryVariant = Color.White,
-  secondary = Color(0xFF607d8b)
+  secondary = Color(0xFF607d8b),
 )
 
 private val darkColors = darkColors(

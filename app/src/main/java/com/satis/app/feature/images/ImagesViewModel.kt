@@ -24,22 +24,9 @@ class ImagesViewModel @Inject constructor(
   private val _state: MutableStateFlow<ImagesState> = MutableStateFlow(value = ImagesState())
   val state: StateFlow<ImagesState> = _state.asStateFlow()
 
-  fun load() {
+  init {
     fetchPhotos()
     streamPhotos()
-  }
-
-  fun onReselected() {
-    fetchPhotos()
-    setState {
-      copy(scrollEvent = ScrollEvent.ScrollToTop)
-    }
-  }
-
-  fun scrollEventHandled() {
-    setState {
-      copy(scrollEvent = ScrollEvent.None)
-    }
   }
 
   private fun streamPhotos() {

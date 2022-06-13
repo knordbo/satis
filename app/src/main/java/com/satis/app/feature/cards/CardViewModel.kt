@@ -24,7 +24,7 @@ class CardViewModel @Inject constructor(
   private val _state: MutableStateFlow<CardState> = MutableStateFlow(value = CardState())
   val state: StateFlow<CardState> = _state.asStateFlow()
 
-  fun load() {
+  init {
     getCards()
   }
 

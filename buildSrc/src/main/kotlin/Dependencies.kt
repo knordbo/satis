@@ -3,6 +3,7 @@ object Versions {
 
   object androidx {
     const val activity = "1.6.0-alpha04"
+    const val activityCompose = "1.6.0-alpha03"
     const val appCompat = "1.6.0-alpha01"
     const val cardView = "1.0.0"
     const val constraintLayout = "2.1.3"
@@ -25,6 +26,7 @@ object Versions {
 
   object dagger {
     const val hilt = "2.41"
+    const val hiltNavigation = "1.0.0"
     const val work = "1.0.0"
   }
 
@@ -60,6 +62,7 @@ object Deps {
 
   object androidx {
     const val activity = "androidx.activity:activity-ktx:${Versions.androidx.activity}"
+    const val activityCompose = "androidx.activity:activity-compose:${Versions.androidx.activityCompose}"
     const val appCompat = "androidx.appcompat:appcompat:${Versions.androidx.appCompat}"
     const val cardView = "androidx.cardview:cardview:${Versions.androidx.cardView}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidx.constraintLayout}"
@@ -94,12 +97,14 @@ object Deps {
     const val concurrent = "androidx.concurrent:concurrent-futures:${Versions.androidx.concurrent}"
 
     object lifecycle {
-      const val runtime = "androidx.lifecycle:lifecycle-runtime:${Versions.androidx.lifecycle}"
-      const val process = "androidx.lifecycle:lifecycle-process:${Versions.androidx.lifecycle}"
       const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.androidx.lifecycle}"
+      const val process = "androidx.lifecycle:lifecycle-process:${Versions.androidx.lifecycle}"
+      const val runtime = "androidx.lifecycle:lifecycle-runtime:${Versions.androidx.lifecycle}"
+      const val viewmodelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.androidx.lifecycle}"
     }
 
     object navigation {
+      const val compose = "androidx.navigation:navigation-compose:${Versions.androidx.navigation}"
       const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.androidx.navigation}"
       const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.androidx.navigation}"
       const val uiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.androidx.navigation}"
@@ -128,6 +133,7 @@ object Deps {
     const val hiltGradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:${Versions.dagger.hilt}"
     const val hiltWork = "androidx.hilt:hilt-work:${Versions.dagger.work}"
     const val hiltWorkCompiler = "androidx.hilt:hilt-compiler:${Versions.dagger.work}"
+    const val hiltNavigationCompose = "androidx.hilt:hilt-navigation-compose:${Versions.dagger.hiltNavigation}"
     const val hilt = "com.google.dagger:hilt-android:${Versions.dagger.hilt}"
   }
 

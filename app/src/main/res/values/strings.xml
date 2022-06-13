@@ -20,7 +20,6 @@
   <string name="images">Images</string>
   <string name="notifications">Notifications</string>
   <string name="account">Account</string>
-  <string name="playground">Playground</string>
 
   <string name="notification_channel_regular_priority">Regular notification channel"</string>
   <string name="notification_channel_high_priority">High priority notification channel"</string>

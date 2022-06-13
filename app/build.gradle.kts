@@ -110,6 +110,7 @@ dependencies {
 
   // AndroidX
   implementation(Deps.androidx.activity)
+  implementation(Deps.androidx.activityCompose)
   implementation(Deps.androidx.appCompat)
   implementation(Deps.androidx.cardView)
   implementation(Deps.androidx.constraintLayout)
@@ -120,12 +121,15 @@ dependencies {
   }
   implementation(Deps.androidx.lifecycle.process)
   implementation(Deps.androidx.lifecycle.runtime)
+  implementation(Deps.androidx.lifecycle.viewmodelCompose)
+  implementation(Deps.androidx.navigation.compose)
   implementation(Deps.androidx.navigation.fragmentKtx)
   implementation(Deps.androidx.navigation.uiKtx)
   implementation(Deps.androidx.recyclerView)
   kapt(Deps.androidx.lifecycle.compiler)
 
   // Compose
+  implementation(Deps.androidx.compose.foundation)
   implementation(Deps.androidx.compose.layout)
   implementation(Deps.androidx.compose.material)
   implementation(Deps.androidx.compose.materialIconsExtended)
@@ -147,6 +151,7 @@ dependencies {
 
   // Dagger
   implementation(Deps.dagger.hilt)
+  implementation(Deps.dagger.hiltNavigationCompose)
   implementation(Deps.dagger.hiltWork)
   kapt(Deps.dagger.hiltCompiler)
   kapt(Deps.dagger.hiltWorkCompiler)
