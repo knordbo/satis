@@ -120,15 +120,22 @@ private fun CardAppBar(viewModel: CardViewModel, state: State<CardState>) {
 
   val creatingCardEvent = state.value.creatingCardEvent
 
+  val closeDialog = {
+    openDialog.value = false
+  }
+
   LaunchedEffect(creatingCardEvent) {
-    when (creatingCardEvent) {
-      CreatingCardEvent.NoTitle -> {
-        Toast.makeText(context, R.string.card_message_no_title, Toast.LENGTH_SHORT).show()
+    if (creatingCardEvent != CreatingCardEvent.None) {
+      when (creatingCardEvent) {
+        CreatingCardEvent.NoTitle -> {
+          Toast.makeText(context, R.string.card_message_no_title, Toast.LENGTH_SHORT).show()
+        }
+        CreatingCardEvent.Success -> {
+          closeDialog()
+        }
+        CreatingCardEvent.None -> Unit
       }
-      CreatingCardEvent.Success -> {
-        openDialog.value = false
-      }
-      CreatingCardEvent.None -> Unit
+      viewModel.addCardEventHandled()
     }
   }
 
@@ -146,7 +153,7 @@ private fun CardAppBar(viewModel: CardViewModel, state: State<CardState>) {
           },
       )
       if (openDialog.value) {
-        OpenDialog(viewModel = viewModel, onDismiss = { openDialog.value = false }, state = state)
+        OpenDialog(viewModel = viewModel, onDismiss = closeDialog, state = state)
       }
     }
   )
