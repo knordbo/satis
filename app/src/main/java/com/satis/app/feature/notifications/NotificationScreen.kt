@@ -34,11 +34,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.satis.app.R
 
+
 @Composable
-fun NotificationScreen(viewModel: NotificationViewModel) {
+fun NotificationScreen() {
+  NotificationScreen(hiltViewModel())
+}
+
+@Composable
+private fun NotificationScreen(viewModel: NotificationViewModel) {
   Scaffold(topBar = {
     NotificationAppBar(viewModel)
   }) {

@@ -28,6 +28,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.satis.app.R
 import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.AccountState
@@ -43,7 +44,12 @@ private val simpleDateFormat: SimpleDateFormat by lazy {
 }
 
 @Composable
-fun AccountScreen(viewModel: AccountViewModel) {
+fun AccountScreen() {
+  AccountScreen(hiltViewModel())
+}
+
+@Composable
+private fun AccountScreen(viewModel: AccountViewModel) {
   Scaffold(topBar = {
     AccountAppBar(viewModel)
   }) {

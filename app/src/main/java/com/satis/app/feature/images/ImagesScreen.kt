@@ -18,12 +18,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.satis.app.R
 
 @Composable
-fun ImagesScreen(navController: NavController, imagesViewModel: ImagesViewModel) {
+fun ImagesScreen(
+  navController: NavController,
+) {
+  ImagesScreen(navController = navController, imagesViewModel = hiltViewModel())
+}
+
+@Composable
+private fun ImagesScreen(
+  navController: NavController,
+  imagesViewModel: ImagesViewModel,
+) {
   Scaffold(topBar = {
     TopAppBar(title = {
       Text(stringResource(id = R.string.images))

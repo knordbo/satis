@@ -27,7 +27,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.ContextCompat
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavType
@@ -90,12 +89,12 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
           NavHost(navController,
             startDestination = Screen.Home.route,
             Modifier.padding(innerPadding)) {
-            composable(Screen.Home.route) { CardScreen(hiltViewModel()) }
+            composable(Screen.Home.route) { CardScreen() }
             composable(Screen.Images.route) {
-              ImagesScreen(navController = navController, imagesViewModel = hiltViewModel())
+              ImagesScreen(navController = navController)
             }
-            composable(Screen.Notifications.route) { NotificationScreen(hiltViewModel()) }
-            composable(Screen.Account.route) { AccountScreen(hiltViewModel()) }
+            composable(Screen.Notifications.route) { NotificationScreen() }
+            composable(Screen.Account.route) { AccountScreen() }
             composable("image?photoUrl={photoUrl}&description={description}", arguments = listOf(
               navArgument("photoUrl") { type = NavType.StringType },
               navArgument("description") {

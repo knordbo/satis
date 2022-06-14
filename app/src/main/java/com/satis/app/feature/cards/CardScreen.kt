@@ -16,6 +16,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.ThumbDown
+import androidx.compose.material.icons.filled.ThumbUp
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
@@ -26,16 +30,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.satis.app.R
 
 @Composable
-fun CardScreen(viewModel: CardViewModel) {
+fun CardScreen(viewModel: CardViewModel = hiltViewModel()) {
   val state = viewModel.state.collectAsState(CardState())
   Scaffold(topBar = {
     CardAppBar(viewModel, state)
@@ -68,7 +72,7 @@ fun CardScreen(viewModel: CardViewModel) {
                 modifier = Modifier.padding(end = 8.dp),
               )
               Image(
-                painter = painterResource(R.drawable.ic_thumb_up),
+                imageVector = Icons.Default.ThumbUp,
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(if (card.hasLiked) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface),
                 modifier = Modifier.clickable {
@@ -81,7 +85,7 @@ fun CardScreen(viewModel: CardViewModel) {
                 modifier = Modifier.padding(start = 8.dp, end = 8.dp),
               )
               Image(
-                painter = painterResource(R.drawable.ic_thumb_down),
+                imageVector = Icons.Default.ThumbDown,
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(if (card.hasDisliked) MaterialTheme.colors.primary else MaterialTheme.colors.onSurface),
                 modifier = Modifier.clickable {
@@ -90,7 +94,7 @@ fun CardScreen(viewModel: CardViewModel) {
               )
               Spacer(modifier = Modifier.weight(1f))
               Image(
-                painter = painterResource(R.drawable.ic_delete),
+                imageVector = Icons.Default.Delete,
                 contentDescription = null,
                 colorFilter = ColorFilter.tint(MaterialTheme.colors.onSurface),
                 modifier = Modifier.clickable {
