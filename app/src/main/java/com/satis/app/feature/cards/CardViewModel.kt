@@ -72,6 +72,18 @@ class CardViewModel @Inject constructor(
     cardRepository.removeCard(card.id)
   }
 
+  fun openCreateDialog() {
+    setState {
+      copy(creatingCardDialogOpen = true)
+    }
+  }
+
+  fun closeCreateDialog() {
+    setState {
+      copy(creatingCardDialogOpen = false)
+    }
+  }
+
   private fun getCards() {
     launch {
       cardRepository.getCards().collect { cards ->

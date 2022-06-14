@@ -24,8 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
@@ -120,12 +118,11 @@ private fun CardText(text: String, fontSize: TextUnit, modifier: Modifier) = Tex
 @Composable
 private fun CardAppBar(viewModel: CardViewModel, state: State<CardState>) {
   val context = LocalContext.current
-  val openDialog = remember { mutableStateOf(false) }
 
   val creatingCardEvent = state.value.creatingCardEvent
 
   val closeDialog = {
-    openDialog.value = false
+    viewModel.closeCreateDialog()
   }
 
   LaunchedEffect(creatingCardEvent) {
@@ -153,10 +150,10 @@ private fun CardAppBar(viewModel: CardViewModel, state: State<CardState>) {
         modifier = Modifier
           .padding(8.dp)
           .clickable {
-            openDialog.value = true
+            viewModel.openCreateDialog()
           },
       )
-      if (openDialog.value) {
+      if (state.value.creatingCardDialogOpen) {
         OpenDialog(viewModel = viewModel, onDismiss = closeDialog, state = state)
       }
     }
