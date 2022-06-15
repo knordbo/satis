@@ -30,8 +30,6 @@ val keystoreProperties = Properties().apply {
 android {
   compileSdk = BuildVersions.compileSdk
 
-  ndkVersion = BuildVersions.ndk
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
     targetCompatibility = JavaVersion.VERSION_11
