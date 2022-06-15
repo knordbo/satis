@@ -21,15 +21,8 @@ jobs:
         run: openssl enc -d -aes-256-cbc -md sha256 -in secrets.zip.enc -out secrets.zip -k ${{secrets.ENCRYPT_ZIP_KEY}} && unzip secrets.zip
       - name: Build debug
         run: ./gradlew assembleDebug --stacktrace
-#      - name: Run lint
-#        run: ./gradlew lintDebug
-      - name: Run tests
-        run: ./gradlew testDebug
-#      - name: Run emulator tests
-#        uses: reactivecircus/android-emulator-runner@v2
-#        with:
-#          api-level: 29
-#          script: ./gradlew connectedCheck
+      - name: Run lint
+        run: ./gradlew lintDebug
       - name: Publish to play store
         run: ./gradlew publishReleaseBundle
         if: success() && github.ref == 'refs/heads/master'

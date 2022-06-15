@@ -15,10 +15,6 @@ plugins {
   id("dagger.hilt.android.plugin")
 }
 
-apply {
-  plugin("androidx.navigation.safeargs")
-}
-
 val keystoreProperties = Properties().apply {
   try {
     load(FileInputStream(file("../keystore.properties")))
@@ -44,7 +40,7 @@ android {
     kotlinCompilerExtensionVersion = Versions.compose
   }
 
-  tasks.withType(KotlinCompile::class.java).configureEach {
+  tasks.withType(KotlinCompile::class).configureEach {
     kotlinOptions {
       jvmTarget = "11"
       freeCompilerArgs =
@@ -92,7 +88,6 @@ android {
   }
 
   buildFeatures {
-    viewBinding = true
     compose = true
   }
 }
@@ -107,23 +102,10 @@ dependencies {
   implementation(fileTree("dir" to "libs", "include" to listOf("*.jar")))
 
   // AndroidX
-  implementation(Deps.androidx.activity)
   implementation(Deps.androidx.activityCompose)
-  implementation(Deps.androidx.appCompat)
-  implementation(Deps.androidx.cardView)
-  implementation(Deps.androidx.constraintLayout)
-  implementation(Deps.androidx.coreKtx)
-  implementation(Deps.androidx.fragment.fragment)
-  implementation(Deps.androidx.concurrent) {
-    exclude(group = "com.google.guava", module = "listenablefuture")
-  }
   implementation(Deps.androidx.lifecycle.process)
-  implementation(Deps.androidx.lifecycle.runtime)
   implementation(Deps.androidx.lifecycle.viewmodelCompose)
   implementation(Deps.androidx.navigation.compose)
-  implementation(Deps.androidx.navigation.fragmentKtx)
-  implementation(Deps.androidx.navigation.uiKtx)
-  implementation(Deps.androidx.recyclerView)
   kapt(Deps.androidx.lifecycle.compiler)
 
   // Compose
@@ -135,7 +117,6 @@ dependencies {
   implementation(Deps.androidx.compose.uiUtil)
   implementation(Deps.androidx.compose.runtime)
   implementation(Deps.androidx.compose.runtimeLivedata)
-  implementation(Deps.androidx.compose.viewBinding)
   androidTestImplementation(Deps.androidx.compose.uiTest)
 
   // Work Manager
@@ -144,7 +125,6 @@ dependencies {
   }
 
   // Coil
-  implementation(Deps.coil.coil)
   implementation(Deps.coil.coilCompose)
 
   // Dagger
@@ -197,20 +177,8 @@ dependencies {
   implementation(Deps.sqldelight.coroutinesExtensions)
   implementation(Deps.sqldelight.primitiveAdapters)
 
-  // Unit Testing
-  testImplementation(Deps.junit)
-
   // Android Testing
   androidTestImplementation(Deps.androidx.test.runner)
-  androidTestImplementation(Deps.androidx.test.rules)
-  androidTestImplementation(Deps.androidx.test.junit)
-  androidTestImplementation(Deps.androidx.coreTesting)
-  androidTestImplementation(Deps.androidx.espresso.core)
-  androidTestImplementation(Deps.androidx.espresso.contrib)
-  androidTestImplementation(Deps.androidx.espresso.intents)
-  debugImplementation(Deps.androidx.fragment.testing) {
-    exclude(group = "androidx.test", module = "core")
-  }
 }
 
 kapt {

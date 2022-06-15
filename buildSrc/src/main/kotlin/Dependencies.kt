@@ -2,19 +2,9 @@ object Versions {
   const val androidGradlePlugin = "7.1.0"
 
   object androidx {
-    const val activity = "1.6.0-alpha04"
     const val activityCompose = "1.6.0-alpha03"
-    const val appCompat = "1.6.0-alpha01"
-    const val cardView = "1.0.0"
-    const val constraintLayout = "2.1.3"
-    const val coreKtx = "1.9.0-alpha04"
-    const val coreTesting = "2.1.0"
-    const val espresso = "3.5.0-alpha05"
-    const val fragment = "1.5.0-alpha04"
-    const val concurrent = "1.1.0"
     const val lifecycle = "2.5.0-alpha05"
     const val navigation = "2.5.0-alpha03"
-    const val recyclerView = "1.3.0-alpha01"
     const val test = "1.4.1-alpha05"
     const val testExt = "1.1.4-alpha05"
     const val workManager = "2.8.0-alpha01"
@@ -35,7 +25,6 @@ object Versions {
   const val googlePlayPublisher = "3.7.0"
   const val googleServices = "4.3.10"
   const val gradleVersionsPlugin = "0.28.0"
-  const val junit = "4.13.2"
 
   object kotlin {
     const val kotlin = "1.6.10"
@@ -61,13 +50,7 @@ object Deps {
   const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
 
   object androidx {
-    const val activity = "androidx.activity:activity-ktx:${Versions.androidx.activity}"
     const val activityCompose = "androidx.activity:activity-compose:${Versions.androidx.activityCompose}"
-    const val appCompat = "androidx.appcompat:appcompat:${Versions.androidx.appCompat}"
-    const val cardView = "androidx.cardview:cardview:${Versions.androidx.cardView}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.androidx.constraintLayout}"
-    const val coreKtx = "androidx.core:core-ktx:${Versions.androidx.coreKtx}"
-    const val coreTesting = "androidx.arch.core:core-testing:${Versions.androidx.coreTesting}"
 
     object compose {
       const val foundation = "androidx.compose.foundation:foundation:${Versions.compose}"
@@ -80,21 +63,7 @@ object Deps {
       const val test = "androidx.compose.ui:ui-test:${Versions.compose}"
       const val uiTest = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
       const val uiUtil = "androidx.compose.ui:ui-util:${Versions.compose}"
-      const val viewBinding = "androidx.compose.ui:ui-viewbinding:${Versions.compose}"
     }
-
-    object espresso {
-      const val core = "androidx.test.espresso:espresso-core:${Versions.androidx.espresso}"
-      const val contrib = "androidx.test.espresso:espresso-contrib:${Versions.androidx.espresso}"
-      const val intents = "androidx.test.espresso:espresso-intents:${Versions.androidx.espresso}"
-    }
-
-    object fragment {
-      const val fragment = "androidx.fragment:fragment:${Versions.androidx.fragment}"
-      const val testing = "androidx.fragment:fragment-testing:${Versions.androidx.fragment}"
-    }
-
-    const val concurrent = "androidx.concurrent:concurrent-futures:${Versions.androidx.concurrent}"
 
     object lifecycle {
       const val compiler = "androidx.lifecycle:lifecycle-compiler:${Versions.androidx.lifecycle}"
@@ -105,24 +74,16 @@ object Deps {
 
     object navigation {
       const val compose = "androidx.navigation:navigation-compose:${Versions.androidx.navigation}"
-      const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.androidx.navigation}"
-      const val safeArgs = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.androidx.navigation}"
-      const val uiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.androidx.navigation}"
     }
-
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.androidx.recyclerView}"
 
     object test {
       const val runner = "androidx.test:runner:${Versions.androidx.test}"
-      const val rules = "androidx.test:rules:${Versions.androidx.test}"
-      const val junit = "androidx.test.ext:junit:${Versions.androidx.testExt}"
     }
 
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.androidx.workManager}"
   }
 
   object coil {
-    const val coil = "io.coil-kt:coil:${Versions.coil}"
     const val coilCompose = "io.coil-kt:coil-compose:${Versions.coil}"
   }
 
@@ -154,7 +115,6 @@ object Deps {
   const val googlePlayPublisher = "com.github.triplet.gradle:play-publisher:${Versions.googlePlayPublisher}"
   const val googleServices = "com.google.gms:google-services:${Versions.googleServices}"
   const val gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:${Versions.gradleVersionsPlugin}"
-  const val junit = "junit:junit:${Versions.junit}"
 
   object kotlin {
     const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin.kotlin}"
