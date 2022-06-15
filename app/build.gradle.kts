@@ -120,9 +120,7 @@ dependencies {
   androidTestImplementation(Deps.androidx.compose.uiTest)
 
   // Work Manager
-  implementation(Deps.androidx.workManager) {
-    exclude(group = "com.google.guava", module = "listenablefuture")
-  }
+  implementation(Deps.androidx.workManager)
 
   // Coil
   implementation(Deps.coil.coilCompose)
