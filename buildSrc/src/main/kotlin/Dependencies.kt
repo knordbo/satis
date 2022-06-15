@@ -5,8 +5,6 @@ object Versions {
     const val activityCompose = "1.6.0-alpha03"
     const val lifecycle = "2.5.0-alpha05"
     const val navigation = "2.5.0-alpha03"
-    const val test = "1.4.1-alpha05"
-    const val testExt = "1.1.4-alpha05"
     const val workManager = "2.8.0-alpha01"
   }
 
@@ -74,10 +72,6 @@ object Deps {
 
     object navigation {
       const val compose = "androidx.navigation:navigation-compose:${Versions.androidx.navigation}"
-    }
-
-    object test {
-      const val runner = "androidx.test:runner:${Versions.androidx.test}"
     }
 
     const val workManager = "androidx.work:work-runtime-ktx:${Versions.androidx.workManager}"

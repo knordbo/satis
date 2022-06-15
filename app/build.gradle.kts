@@ -176,9 +176,6 @@ dependencies {
   implementation(Deps.sqldelight.androidDriver)
   implementation(Deps.sqldelight.coroutinesExtensions)
   implementation(Deps.sqldelight.primitiveAdapters)
-
-  // Android Testing
-  androidTestImplementation(Deps.androidx.test.runner)
 }
 
 kapt {
