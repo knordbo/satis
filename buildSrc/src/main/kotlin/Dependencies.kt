@@ -19,7 +19,7 @@ object Versions {
     const val work = "1.0.0"
   }
 
-  const val firebase = "29.2.1"
+  const val firebase = "30.3.2"
   const val flipper = "0.162.0"
   const val googlePlayPublisher = "3.7.0"
   const val googleServices = "4.3.10"
@@ -28,12 +28,12 @@ object Versions {
   object kotlin {
     const val kotlin = "1.7.10"
     const val coroutines = "1.3.8"
-    const val serialization = "1.3.2"
+    const val serialization = "1.4.0"
   }
 
-  const val leakCanary = "2.8.1"
+  const val leakCanary = "2.9.1"
   const val material = "1.7.0-beta01"
-  const val okhttp = "4.10.0-RC1"
+  const val okhttp = "5.0.0-alpha.10"
   const val playCore = "1.10.3"
 
   object retrofit {
