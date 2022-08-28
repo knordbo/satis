@@ -52,11 +52,13 @@ fun AccountScreen() {
 private fun AccountScreen(viewModel: AccountViewModel) {
   Scaffold(topBar = {
     AccountAppBar(viewModel)
-  }) {
+  }) { paddingValues ->
     val state = viewModel.state.collectAsState(AccountState())
     val clipboardManager = LocalClipboardManager.current
     Column(
-      modifier = Modifier.padding(16.dp)
+      modifier = Modifier
+        .padding(paddingValues)
+        .padding(16.dp)
     ) {
       val buildData = state.value.buildData
       if (buildData != null) {

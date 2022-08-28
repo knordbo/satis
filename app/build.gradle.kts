@@ -37,7 +37,7 @@ android {
 
   composeOptions {
     kotlinCompilerVersion = Versions.kotlin.kotlin
-    kotlinCompilerExtensionVersion = Versions.compose
+    kotlinCompilerExtensionVersion = Versions.composeCompiler
   }
 
   tasks.withType(KotlinCompile::class).configureEach {

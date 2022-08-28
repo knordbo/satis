@@ -2,36 +2,37 @@ object Versions {
   const val androidGradlePlugin = "7.2.2"
 
   object androidx {
-    const val activityCompose = "1.6.0-alpha03"
-    const val lifecycle = "2.5.0-alpha05"
-    const val navigation = "2.5.0-alpha03"
-    const val workManager = "2.8.0-alpha01"
+    const val activityCompose = "1.6.0-rc01"
+    const val lifecycle = "2.6.0-alpha01"
+    const val navigation = "2.5.1"
+    const val workManager = "2.8.0-alpha03"
   }
 
-  const val coil = "2.0.0-rc02"
-  const val compose = "1.2.0-alpha06"
+  const val coil = "2.2.0"
+  const val composeCompiler = "1.3.0"
+  const val compose = "1.3.0-beta01"
   const val crashlyticsGradle = "2.4.1"
 
   object dagger {
-    const val hilt = "2.41"
+    const val hilt = "2.43.2"
     const val hiltNavigation = "1.0.0"
     const val work = "1.0.0"
   }
 
   const val firebase = "29.2.1"
-  const val flipper = "0.140.0"
+  const val flipper = "0.162.0"
   const val googlePlayPublisher = "3.7.0"
   const val googleServices = "4.3.10"
   const val gradleVersionsPlugin = "0.28.0"
 
   object kotlin {
-    const val kotlin = "1.6.10"
+    const val kotlin = "1.7.10"
     const val coroutines = "1.3.8"
     const val serialization = "1.3.2"
   }
 
   const val leakCanary = "2.8.1"
-  const val material = "1.6.0-beta01"
+  const val material = "1.7.0-beta01"
   const val okhttp = "4.10.0-RC1"
   const val playCore = "1.10.3"
 
@@ -40,7 +41,7 @@ object Versions {
     const val retrofit = "2.9.0"
   }
 
-  const val soloader = "0.10.3"
+  const val soloader = "0.10.4"
   const val sqldelight = "2.0.0-alpha01"
 }
 

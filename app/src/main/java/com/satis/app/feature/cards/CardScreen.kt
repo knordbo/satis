@@ -41,8 +41,8 @@ fun CardScreen(viewModel: CardViewModel = hiltViewModel()) {
   val state = viewModel.state.collectAsState(CardState())
   Scaffold(topBar = {
     CardAppBar(viewModel, state)
-  }) {
-    LazyColumn {
+  }) { paddingValues ->
+    LazyColumn(modifier = Modifier.padding(paddingValues)) {
       items(state.value.cards) { card ->
         Card(
           elevation = 2.dp,

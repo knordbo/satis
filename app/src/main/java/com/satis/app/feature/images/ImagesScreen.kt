@@ -39,11 +39,11 @@ private fun ImagesScreen(
     TopAppBar(title = {
       Text(stringResource(id = R.string.images))
     })
-  }) {
+  }) { paddingValues ->
     val state = imagesViewModel.state.collectAsState(ImagesState())
     val lazyListState = rememberLazyListState()
 
-    LazyColumn(state = lazyListState) {
+    LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
       val items = state.value.photoState.toPhotoStateItems()
       items(items) { rows ->
         Row(

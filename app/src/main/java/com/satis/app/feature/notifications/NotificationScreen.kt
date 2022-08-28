@@ -48,10 +48,10 @@ fun NotificationScreen() {
 private fun NotificationScreen(viewModel: NotificationViewModel) {
   Scaffold(topBar = {
     NotificationAppBar(viewModel)
-  }) {
+  }) { paddingValues ->
     val state = viewModel.state.collectAsState(NotificationState())
     val context = LocalContext.current
-    LazyColumn {
+    LazyColumn(modifier = Modifier.padding(paddingValues)) {
       items(state.value.notifications) { notification ->
         Row(modifier = Modifier
           .padding(16.dp)
