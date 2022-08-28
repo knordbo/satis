@@ -24,6 +24,7 @@ val keystoreProperties = Properties().apply {
 }
 
 android {
+  namespace = "com.satis.app"
   compileSdk = BuildVersions.compileSdk
 
   compileOptions {

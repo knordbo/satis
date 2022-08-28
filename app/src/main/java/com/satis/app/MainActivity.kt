@@ -36,6 +36,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.android.play.core.common.IntentSenderForResultStarter
+import com.google.common.io.BaseEncoding.base64
 import com.satis.app.common.theme.AppTheme
 import com.satis.app.common.updater.ImmediateAppUpdater
 import com.satis.app.feature.account.ui.AccountScreen
@@ -103,7 +104,7 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
               },
             )) { backStackEntry ->
               ImageScreen(
-                photoUrl = backStackEntry.arguments!!.getString("photoUrl")!!,
+                photoUrl = String(base64().decode(backStackEntry.arguments!!.getString("photoUrl")!!)!!),
                 description = backStackEntry.arguments!!.getString("description"),
               )
             }

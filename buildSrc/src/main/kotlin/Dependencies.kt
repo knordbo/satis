@@ -42,7 +42,7 @@ object Versions {
   }
 
   const val soloader = "0.10.4"
-  const val sqldelight = "2.0.0-alpha01"
+  const val sqldelight = "2.0.0-alpha03"
 }
 
 object Deps {

@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.google.common.io.BaseEncoding.base64
 import com.satis.app.R
 
 @Composable
@@ -61,7 +62,12 @@ private fun ImagesScreen(
                 .aspectRatio(1f)
                 .weight(1f)
                 .clickable {
-                  var route = "image?photoUrl=${item.photoState.photoUrl}"
+                  var route =
+                    "image?photoUrl=${
+                      base64().encode(item.photoState.photoUrl
+                        .toString()
+                        .toByteArray())
+                    }"
                   if (item.photoState.description != null) {
                     route = "$route&description=${item.photoState.description}"
                   }

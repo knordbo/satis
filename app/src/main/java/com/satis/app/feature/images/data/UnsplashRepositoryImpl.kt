@@ -1,12 +1,12 @@
 package com.satis.app.feature.images.data
 
 import android.net.Uri
+import app.cash.sqldelight.coroutines.asFlow
 import com.satis.app.common.annotations.Io
 import com.satis.app.feature.images.PhotoState
 import com.satis.app.feature.images.User
 import com.satis.app.feature.images.data.db.UnsplashPhotoEntity
 import com.satis.app.feature.images.data.db.UnsplashQueries
-import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
@@ -19,7 +19,7 @@ import kotlin.coroutines.CoroutineContext
 class UnsplashRepositoryImpl @Inject constructor(
   @Io private val io: CoroutineContext,
   private val unsplashApi: UnsplashApi,
-  private val unsplashQueries: UnsplashQueries
+  private val unsplashQueries: UnsplashQueries,
 ) : UnsplashRepository {
 
   override suspend fun fetchPhotos(query: String): List<PhotoState> {

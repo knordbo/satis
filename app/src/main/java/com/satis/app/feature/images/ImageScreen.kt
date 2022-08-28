@@ -1,10 +1,13 @@
 package com.satis.app.feature.images
 
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
@@ -20,7 +23,11 @@ fun ImageScreen(photoUrl: String, description: String?) {
       model = photoUrl,
       contentDescription = null,
       contentScale = ContentScale.Crop,
-      modifier = Modifier.padding(paddingValues)
+      modifier = Modifier
+        .padding(paddingValues)
+        .fillMaxHeight()
+        .fillMaxWidth(),
+      alignment = Alignment.Center,
     )
   }
 }

@@ -1,9 +1,9 @@
 package com.satis.app.common.logging
 
+import app.cash.sqldelight.coroutines.asFlow
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.logging.db.LogEntity
 import com.satis.app.common.logging.db.LogQueries
-import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
@@ -17,7 +17,7 @@ import kotlin.coroutines.CoroutineContext
 @Singleton
 class PersistedLoggerImpl @Inject constructor(
   private val logQueries: LogQueries,
-  @Io private val io: CoroutineContext
+  @Io private val io: CoroutineContext,
 ) : PersistedLogger, CoroutineScope {
 
   override val coroutineContext: CoroutineContext = io

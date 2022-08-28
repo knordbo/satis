@@ -1,15 +1,19 @@
 package com.satis.app.feature.notifications.data
 
 import androidx.core.app.NotificationManagerCompat
+import app.cash.sqldelight.Query
+import app.cash.sqldelight.coroutines.asFlow
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.feature.notifications.Icon
 import com.satis.app.feature.notifications.Notification
 import com.satis.app.feature.notifications.data.db.NotificationEntity
 import com.satis.app.feature.notifications.data.db.NotificationQueries
-import app.cash.sqldelight.Query
-import com.squareup.sqldelight.runtime.coroutines.asFlow
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -47,12 +51,13 @@ class NotificationRepositoryImpl @Inject constructor(
     ).toNotifications()
   }
 
-  override fun streamNotifications(): Flow<List<Notification>> = notificationQueries.streamNotifications()
-    .asFlow()
-    .map { notifications ->
-      notifications.toNotifications()
-    }
-    .flowOn(io)
+  override fun streamNotifications(): Flow<List<Notification>> =
+    notificationQueries.streamNotifications()
+      .asFlow()
+      .map { notifications ->
+        notifications.toNotifications()
+      }
+      .flowOn(io)
 
   override suspend fun insertNotification(pushNotification: PushNotification) = withContext(io) {
     notificationQueries.insertNotification(
