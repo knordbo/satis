@@ -11,6 +11,7 @@ import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
 import com.satis.app.common.annotations.SharedPrefsName
+import com.satis.app.common.annotations.WorkerIo
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.PrefsImpl
 import com.satis.app.common.updater.ImmediateAppUpdater
@@ -21,6 +22,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
+import java.util.concurrent.Executors
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -67,6 +70,12 @@ object AppModule {
   @Singleton
   @Io
   fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
+
+  @Provides
+  @Singleton
+  @WorkerIo
+  fun provideWorkerIoCoroutineContext(): CoroutineContext =
+    Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
   @Provides
   @Singleton

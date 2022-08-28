@@ -1,5 +1,5 @@
 object Versions {
-  const val androidGradlePlugin = "7.1.0"
+  const val androidGradlePlugin = "7.2.2"
 
   object androidx {
     const val activityCompose = "1.6.0-alpha03"

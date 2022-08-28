@@ -6,7 +6,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import coil.imageLoader
 import coil.request.ImageRequest
-import com.satis.app.common.annotations.Io
+import com.satis.app.common.annotations.WorkerIo
 import com.satis.app.common.logging.Logger
 import com.satis.app.feature.images.data.NATURE
 import com.satis.app.feature.images.data.UnsplashRepository
@@ -22,15 +22,17 @@ import kotlin.time.toDuration
 @HiltWorker
 class ImageWorker @AssistedInject constructor(
   @Assisted private val context: Context,
-  @Assisted workerParameters: WorkerParameters,
-  @Io private val io: CoroutineContext,
+  @Assisted private val workerParameters: WorkerParameters,
+  @WorkerIo private val io: CoroutineContext,
   private val logger: Logger,
   private val unsplashRepository: UnsplashRepository,
 ) : CoroutineWorker(context, workerParameters) {
 
   override suspend fun doWork(): Result = withContext(io) {
     try {
-      logger.log(LOG_TAG, "Starting in $isAppForegroundString")
+      val type = if (PERIODIC in workerParameters.tags) "periodic" else "one time"
+      logger.log(LOG_TAG,
+        "Starting $type worker in $isAppForegroundString on thread: ${Thread.currentThread()}")
 
       val popularImages = unsplashRepository.fetchPhotos(NATURE)
       popularImages
@@ -52,6 +54,8 @@ class ImageWorker @AssistedInject constructor(
     }
   }
 }
+
+const val PERIODIC = "periodic"
 
 private const val FETCH_IMAGE_COUNT = 20
 private const val LOG_TAG = "ImageWorker"

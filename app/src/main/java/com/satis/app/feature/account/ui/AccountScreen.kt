@@ -80,6 +80,12 @@ private fun AccountScreen(viewModel: AccountViewModel) {
         }
       )
       AccountText(
+        text = stringResource(R.string.trigger_workers),
+        onClick = {
+          viewModel.triggerWorkers()
+        }
+      )
+      AccountText(
         text = stringResource(R.string.log),
       )
       LazyColumn {

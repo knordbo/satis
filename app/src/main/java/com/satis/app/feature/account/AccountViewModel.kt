@@ -8,6 +8,7 @@ import com.satis.app.common.prefs.Theme
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.feature.notifications.data.NotificationRepository
+import com.satis.app.work.WorkScheduler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +24,7 @@ class AccountViewModel @Inject constructor(
   private val appInfoRetriever: AppInfoRetriever,
   private val prefs: Prefs,
   private val notificationRepository: NotificationRepository,
+  private val workerScheduler: WorkScheduler,
 ) : ViewModel(), CoroutineScope {
 
   override val coroutineContext: CoroutineContext
@@ -40,6 +42,12 @@ class AccountViewModel @Inject constructor(
   fun setTheme(theme: Theme) {
     prefs.theme = theme
     theme.apply()
+  }
+
+  fun triggerWorkers() {
+    repeat(3) {
+      workerScheduler.scheduleImageFetch()
+    }
   }
 
   private fun streamLogs() {

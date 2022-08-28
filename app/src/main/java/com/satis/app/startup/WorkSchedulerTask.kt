@@ -7,6 +7,6 @@ class WorkSchedulerTask @Inject constructor(
   private val workScheduler: WorkScheduler
 ) : StartupTask {
   override suspend fun execute() {
-    workScheduler.schedule()
+    workScheduler.schedulePeriodic()
   }
 }
