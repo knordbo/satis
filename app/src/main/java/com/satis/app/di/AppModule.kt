@@ -3,6 +3,8 @@ package com.satis.app.di
 import android.content.Context
 import androidx.core.app.NotificationManagerCompat
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import coil.ImageLoader
+import coil.imageLoader
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.satis.app.Database
@@ -91,6 +93,9 @@ object AppModule {
   fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat =
     NotificationManagerCompat.from(context)
 
+  @Provides
+  @Singleton
+  fun provideImageLoader(@ApplicationContext context: Context): ImageLoader = context.imageLoader
 }
 
 @InstallIn(SingletonComponent::class)

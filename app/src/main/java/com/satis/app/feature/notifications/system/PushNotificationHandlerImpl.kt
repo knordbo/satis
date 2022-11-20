@@ -8,7 +8,7 @@ import android.net.Uri
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.toBitmap
-import coil.imageLoader
+import coil.ImageLoader
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
 import com.satis.app.MainActivity
@@ -26,6 +26,7 @@ class PushNotificationHandlerImpl @Inject constructor(
   private val notificationManager: NotificationManagerCompat,
   private val notificationChannelHelper: NotificationChannelHelper,
   private val notificationRepository: NotificationRepository,
+  private val imageLoader: ImageLoader,
 ) : PushNotificationHandler {
 
   override suspend fun handle(pushNotification: PushNotification) {
@@ -66,7 +67,7 @@ class PushNotificationHandlerImpl @Inject constructor(
         .size(LARGE_ICON_SIZE)
         .data(icon.url)
         .build()
-      context.imageLoader.execute(request).drawable?.toBitmap()
+      imageLoader.execute(request).drawable?.toBitmap()
     }
   } else {
     null
