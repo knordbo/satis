@@ -23,9 +23,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.asCoroutineDispatcher
-import java.util.concurrent.Executors
 import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
@@ -61,23 +60,23 @@ object AppModule {
   @Provides
   @Singleton
   @Main
-  fun provideMainCoroutineContext(): CoroutineContext = Dispatchers.Main.immediate
+  fun provideMainCoroutineContext(): CoroutineDispatcher = Dispatchers.Main.immediate
 
   @Provides
   @Singleton
   @Background
-  fun provideBackgroundCoroutineContext(): CoroutineContext = Dispatchers.Default
+  fun provideBackgroundCoroutineContext(): CoroutineDispatcher = Dispatchers.Default
 
   @Provides
   @Singleton
   @Io
-  fun provideIoCoroutineContext(): CoroutineContext = Dispatchers.IO
+  fun provideIoCoroutineContext(): CoroutineDispatcher = Dispatchers.IO
 
   @Provides
   @Singleton
   @WorkerIo
-  fun provideWorkerIoCoroutineContext(): CoroutineContext =
-    Executors.newSingleThreadExecutor().asCoroutineDispatcher()
+  fun provideWorkerIoCoroutineContext(@Io dispatcher: CoroutineDispatcher): CoroutineDispatcher =
+    dispatcher.limitedParallelism(parallelism = 1)
 
   @Provides
   @Singleton
@@ -106,6 +105,29 @@ abstract class AppBindingModule {
   abstract fun providePrefs(bind: PrefsImpl): Prefs
 
   @Binds
-  abstract fun provideImmediateAppUpdaterFactory(bind: ImmediateAppUpdater.FactoryImpl): ImmediateAppUpdater.Factory
+  abstract fun provideImmediateAppUpdaterFactory(bind: ImmediateAppUpdater.FactoryImpl):
+    ImmediateAppUpdater.Factory
+
+  @Binds
+  @Singleton
+  @Main
+  abstract fun provideMainCoroutineContext(@Main bind: CoroutineDispatcher): CoroutineContext
+
+  @Binds
+  @Singleton
+  @Background
+  abstract fun provideBackgroundCoroutineContext(@Background bind: CoroutineDispatcher):
+    CoroutineContext
+
+  @Binds
+  @Singleton
+  @Io
+  abstract fun provideIoCoroutineContext(@Io bind: CoroutineDispatcher): CoroutineContext
+
+  @Binds
+  @Singleton
+  @WorkerIo
+  abstract fun provideWorkerIoCoroutineContext(@WorkerIo bind: CoroutineDispatcher):
+    CoroutineContext
 
 }
