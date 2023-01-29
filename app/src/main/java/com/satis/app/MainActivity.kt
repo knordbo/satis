@@ -67,9 +67,7 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    if (savedInstanceState == null) {
-      handleAccount()
-    }
+    handleAccount()
     setContent {
       val navController = rememberNavController()
       AppTheme {

@@ -12,8 +12,9 @@ class AccountHolder @Inject constructor() {
 
   fun setAccountId(value: String) {
     assertMainThread()
-    check(accountId == null) { "Account should only be set once" }
-    accountId = AccountId(value)
+    if (accountId == null) {
+      accountId = AccountId(value)
+    }
   }
 
   fun requireAccountId(): AccountId = requireNotNull(accountId) { "Account must be set" }
