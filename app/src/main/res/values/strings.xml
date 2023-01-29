@@ -11,6 +11,9 @@
   <string name="theme_light">Light theme</string>
   <string name="theme_dark">Dark theme</string>
 
+  <string name="launch_adjacent_account">Launch adjacent account</string>
+
+  <string name="account_id">Account: %1$s</string>
   <string name="version_info">Version: %1$d</string>
   <string name="build_time_info">Build time: %1$s</string>
   <string name="notification_token">Notification token: %1$s</string>

@@ -37,8 +37,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.common.io.BaseEncoding.base64
+import com.satis.app.common.launcher.ACCOUNT_ID
+import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.theme.AppTheme
 import com.satis.app.common.updater.ImmediateAppUpdater
+import com.satis.app.feature.account.AccountHolder
 import com.satis.app.feature.account.ui.AccountScreen
 import com.satis.app.feature.cards.CardScreen
 import com.satis.app.feature.images.ImageScreen
@@ -51,6 +54,8 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
 
   @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
+  @Inject lateinit var prefs: Prefs
+  @Inject lateinit var accountHolder: AccountHolder
 
   private var appUpdateCalled = false
 
@@ -60,6 +65,9 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+    if (savedInstanceState == null) {
+      handleAccount()
+    }
     setContent {
       val navController = rememberNavController()
       AppTheme {
@@ -140,6 +148,16 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
         ActivityResultContracts.RequestPermission()
       ) {}.launch(Manifest.permission.POST_NOTIFICATIONS)
     }
+  }
+
+  private fun handleAccount() {
+    var accountId = intent.getStringExtra(ACCOUNT_ID)
+    // If there is no account specified in the account, fall back to the "current" at startup.
+    if (accountId == null) {
+      accountId = prefs.currentAccountId
+      intent.putExtra(ACCOUNT_ID, accountId)
+    }
+    accountHolder.setAccountId(accountId)
   }
 
   sealed class Screen(val route: String, @StringRes val resourceId: Int, val icon: ImageVector) {

@@ -3,25 +3,23 @@ package com.satis.app.feature.cards.data
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.satis.app.common.annotations.Io
-import com.satis.app.common.prefs.UserId
+import com.satis.app.common.prefs.AccountId
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.inject.Provider
-import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
-@Singleton
+@ViewModelScoped
 class CardRepositoryImpl @Inject constructor(
-  userIdProvider: Provider<UserId>,
+  private val accountId: AccountId,
   firebaseFirestore: FirebaseFirestore,
   @Io private val io: CoroutineContext
 ) : CardRepository {
 
-  private val userId by lazy(LazyThreadSafetyMode.NONE) { userIdProvider.get() }
   private val cardsCollection by lazy { firebaseFirestore.collection(CARDS_COLLECTION) }
 
   override fun getCards(): Flow<List<Card>> = channelFlow {
@@ -30,7 +28,7 @@ class CardRepositoryImpl @Inject constructor(
         launch(io) {
           val cards = querySnapshot.documents
             .mapNotNull {
-              it.toObject(DbCard::class.java)?.toModel(it.id, userId)
+              it.toObject(DbCard::class.java)?.toModel(it.id, accountId)
             }
           trySend(cards).isSuccess
         }
@@ -50,11 +48,11 @@ class CardRepositoryImpl @Inject constructor(
   }
 
   override fun like(id: String, like: Boolean) {
-    setDiff(id, mapOf(LIKES to mapOf(userId.value to like)))
+    setDiff(id, mapOf(LIKES to mapOf(accountId.value to like)))
   }
 
   override fun dislike(id: String, dislike: Boolean) {
-    setDiff(id, mapOf(DISLIKES to mapOf(userId.value to dislike)))
+    setDiff(id, mapOf(DISLIKES to mapOf(accountId.value to dislike)))
   }
 
   private fun setDiff(id: String, diff: Any) {

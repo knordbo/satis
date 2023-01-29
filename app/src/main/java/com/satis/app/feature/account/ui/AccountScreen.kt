@@ -60,6 +60,9 @@ private fun AccountScreen(viewModel: AccountViewModel) {
         .padding(paddingValues)
         .padding(16.dp)
     ) {
+      AccountText(
+        text = stringResource(R.string.account_id, state.value.accountId),
+      )
       val buildData = state.value.buildData
       if (buildData != null) {
         AccountText(
@@ -139,6 +142,11 @@ private fun AccountAppBar(viewModel: AccountViewModel) {
           viewModel.setTheme(Theme.DARK)
         }) {
           Text(stringResource(id = R.string.theme_dark))
+        }
+        DropdownMenuItem(onClick = {
+          viewModel.launchAdjacentAccount()
+        }) {
+          Text(stringResource(id = R.string.launch_adjacent_account))
         }
       }
     }

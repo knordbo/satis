@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class AccountState(
+  val accountId: String = "",
   val buildData: BuildData? = null,
   val logs: List<LogEntry> = emptyList(),
   val notificationToken: String? = null,

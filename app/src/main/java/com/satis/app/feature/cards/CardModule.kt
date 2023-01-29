@@ -7,6 +7,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -20,11 +21,11 @@ object CardModule {
 
 }
 
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 @Module
 abstract class CardBindingModule {
 
   @Binds
-  abstract fun provideCardRespository(bind: CardRepositoryImpl): CardRepository
+  abstract fun provideCardRepository(bind: CardRepositoryImpl): CardRepository
 
 }

@@ -12,23 +12,24 @@ import javax.inject.Singleton
 @Singleton
 class PrefsImpl @Inject constructor(
   @ApplicationContext context: Context,
-  @SharedPrefsName prefsName: String
+  @SharedPrefsName prefsName: String,
 ) : Prefs {
 
-  private val sharedPreferences: SharedPreferences = context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
+  private val sharedPreferences: SharedPreferences =
+    context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
 
-  override val userId: UserId
+  override val currentAccountId: String
     get() {
-      val existingValue = sharedPreferences.getString(UNIQUE_USER_ID, null)
-      return UserId(if (existingValue != null) {
+      val existingValue = sharedPreferences.getString(UNIQUE_ACCOUNT_ID, null)
+      return if (existingValue != null) {
         existingValue
       } else {
         val id = UUID.randomUUID().toString()
         sharedPreferences.edit {
-          putString(UNIQUE_USER_ID, id)
+          putString(UNIQUE_ACCOUNT_ID, id)
         }
         id
-      })
+      }
     }
 
   override var theme: Theme
@@ -54,6 +55,6 @@ class PrefsImpl @Inject constructor(
     }
 }
 
-private const val UNIQUE_USER_ID = "UNIQUE_USER_ID"
+private const val UNIQUE_ACCOUNT_ID = "UNIQUE_ACCOUNT_ID"
 private const val THEME = "THEME"
 private const val NOTIFICATION_TOKEN = "NOTIFICATION_TOKEN"

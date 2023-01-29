@@ -85,10 +85,6 @@ object AppModule {
 
   @Provides
   @Singleton
-  fun provideUserId(prefs: Prefs) = prefs.userId
-
-  @Provides
-  @Singleton
   fun provideNotificationManager(@ApplicationContext context: Context): NotificationManagerCompat =
     NotificationManagerCompat.from(context)
 
