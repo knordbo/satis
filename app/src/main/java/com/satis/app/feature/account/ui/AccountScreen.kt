@@ -16,6 +16,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.satis.app.R
+import com.satis.app.common.launcher.MainActivityLauncher
 import com.satis.app.common.prefs.Theme
 import com.satis.app.feature.account.AccountState
 import com.satis.app.feature.account.AccountViewModel
@@ -44,16 +46,28 @@ private val simpleDateFormat: SimpleDateFormat by lazy {
 }
 
 @Composable
-fun AccountScreen() {
-  AccountScreen(hiltViewModel())
+fun AccountScreen(mainActivityLauncher: MainActivityLauncher) {
+  AccountScreen(hiltViewModel(), mainActivityLauncher)
 }
 
 @Composable
-private fun AccountScreen(viewModel: AccountViewModel) {
+private fun AccountScreen(
+  viewModel: AccountViewModel,
+  mainActivityLauncher: MainActivityLauncher,
+) {
   Scaffold(topBar = {
     AccountAppBar(viewModel)
   }) { paddingValues ->
     val state = viewModel.state.collectAsState(AccountState())
+
+    val launchAccountId = state.value.launchAccountId
+    LaunchedEffect(launchAccountId) {
+      if (launchAccountId != null) {
+        mainActivityLauncher.launchAdjacent(launchAccountId)
+        viewModel.launchAdjacentAccountHandled()
+      }
+    }
+
     val clipboardManager = LocalClipboardManager.current
     Column(
       modifier = Modifier

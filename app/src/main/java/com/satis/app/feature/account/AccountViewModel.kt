@@ -29,7 +29,6 @@ class AccountViewModel @Inject constructor(
   private val prefs: Prefs,
   private val notificationRepository: NotificationRepository,
   private val workerScheduler: WorkScheduler,
-  private val mainActivityLauncher: MainActivityLauncher,
 ) : ViewModel(), CoroutineScope {
 
   override val coroutineContext: CoroutineContext
@@ -57,7 +56,15 @@ class AccountViewModel @Inject constructor(
   }
 
   fun launchAdjacentAccount() {
-    mainActivityLauncher.launchAdjacent(UUID.randomUUID().toString())
+    setState {
+      copy(launchAccountId = UUID.randomUUID().toString())
+    }
+  }
+
+  fun launchAdjacentAccountHandled() {
+    setState {
+      copy(launchAccountId = null)
+    }
   }
 
   private fun streamLogs() {

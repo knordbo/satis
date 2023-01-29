@@ -38,6 +38,7 @@ import androidx.navigation.navArgument
 import com.google.android.play.core.common.IntentSenderForResultStarter
 import com.google.common.io.BaseEncoding.base64
 import com.satis.app.common.launcher.ACCOUNT_ID
+import com.satis.app.common.launcher.MainActivityLauncher
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.theme.AppTheme
 import com.satis.app.common.updater.ImmediateAppUpdater
@@ -56,6 +57,7 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
   @Inject lateinit var immediateAppUpdaterFactory: ImmediateAppUpdater.Factory
   @Inject lateinit var prefs: Prefs
   @Inject lateinit var accountHolder: AccountHolder
+  @Inject lateinit var mainActivityLauncher: MainActivityLauncher
 
   private var appUpdateCalled = false
 
@@ -103,7 +105,7 @@ class MainActivity : AppCompatActivity(), IntentSenderForResultStarter {
               ImagesScreen(navController = navController)
             }
             composable(Screen.Notifications.route) { NotificationScreen() }
-            composable(Screen.Account.route) { AccountScreen() }
+            composable(Screen.Account.route) { AccountScreen(mainActivityLauncher) }
             composable("image?photoUrl={photoUrl}&description={description}", arguments = listOf(
               navArgument("photoUrl") { type = NavType.StringType },
               navArgument("description") {
