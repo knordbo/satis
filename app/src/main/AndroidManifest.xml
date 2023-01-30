@@ -18,6 +18,7 @@
       android:exported="true"
       android:launchMode="standard"
       android:resizeableActivity="true"
+      android:configChanges="orientation|screenLayout|screenSize"
       tools:ignore="Instantiatable"
       >
       <intent-filter>

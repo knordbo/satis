@@ -1,9 +1,10 @@
 package com.satis.app.feature.account.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
@@ -69,60 +70,72 @@ private fun AccountScreen(
     }
 
     val clipboardManager = LocalClipboardManager.current
-    Column(
-      modifier = Modifier
-        .padding(paddingValues)
-        .padding(16.dp)
+    LazyColumn(
+      contentPadding = PaddingValues(8.dp),
+      modifier = Modifier.padding(paddingValues),
     ) {
-      AccountText(
-        text = stringResource(R.string.account_id, state.value.accountId),
-      )
-      val buildData = state.value.buildData
-      if (buildData != null) {
+      item {
         AccountText(
-          text = stringResource(R.string.version_info, buildData.versionNum),
-        )
-        AccountText(
-          text = stringResource(
-            R.string.build_time_info,
-            simpleDateFormat.format(Date(buildData.buildTime))
-          ),
+          text = stringResource(R.string.account_id, state.value.accountId),
         )
       }
-      AccountText(
-        text = stringResource(R.string.notification_token,
-          state.value.notificationToken.orEmpty()),
-        onClick = {
-          clipboardManager.setText(
-            AnnotatedString(state.value.notificationToken.orEmpty())
+      val buildData = state.value.buildData
+      if (buildData != null) {
+        item {
+          AccountText(
+            text = stringResource(R.string.version_info, buildData.versionNum),
           )
         }
-      )
-      AccountText(
-        text = stringResource(R.string.trigger_workers),
-        onClick = {
-          viewModel.triggerWorkers()
+        item {
+          AccountText(
+            text = stringResource(
+              R.string.build_time_info,
+              simpleDateFormat.format(Date(buildData.buildTime))
+            ),
+          )
         }
-      )
-      AccountText(
-        text = stringResource(R.string.log),
-      )
-      LazyColumn {
-        items(state.value.logs.toListItems()) { item ->
-          when (item) {
-            is DateHeaderItem -> Text(
-              text = item.date.formatted,
-              fontSize = 20.sp,
-              fontWeight = FontWeight.Bold,
-              modifier = Modifier.padding(vertical = 4.dp),
-              color = MaterialTheme.colors.onSurface,
-            )
-            is LogEntryItem -> Text(
-              text = item.logEntry.formatted,
-              fontSize = 12.sp,
-              color = MaterialTheme.colors.onSurface,
+      }
+      item {
+        AccountText(
+          text = stringResource(R.string.notification_token,
+            state.value.notificationToken.orEmpty()),
+          onClick = {
+            clipboardManager.setText(
+              AnnotatedString(state.value.notificationToken.orEmpty())
             )
           }
+        )
+      }
+      item {
+        AccountText(
+          text = stringResource(R.string.trigger_workers),
+          onClick = {
+            viewModel.triggerWorkers()
+          }
+        )
+      }
+      item {
+        AccountText(
+          text = stringResource(R.string.log),
+        )
+      }
+      items(state.value.logs.toListItems()) { item ->
+        when (item) {
+          is DateHeaderItem -> Text(
+            text = item.date.formatted,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier
+              .padding(vertical = 4.dp)
+              .fillParentMaxWidth(),
+            color = MaterialTheme.colors.onSurface,
+          )
+          is LogEntryItem -> Text(
+            text = item.logEntry.formatted,
+            fontSize = 12.sp,
+            color = MaterialTheme.colors.onSurface,
+            modifier = Modifier.fillParentMaxWidth()
+          )
         }
       }
     }
@@ -167,12 +180,12 @@ private fun AccountAppBar(viewModel: AccountViewModel) {
   )
 }
 
-
 @Composable
-private fun AccountText(text: String, onClick: (() -> Unit)? = null) = Text(
+private fun LazyItemScope.AccountText(text: String, onClick: (() -> Unit)? = null) = Text(
   text = text,
   modifier = Modifier
     .padding(bottom = 8.dp)
+    .fillParentMaxWidth()
     .then(
       if (onClick != null) {
         Modifier.clickable(onClick = onClick)

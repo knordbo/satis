@@ -4,11 +4,12 @@ import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -42,12 +43,16 @@ fun CardScreen(viewModel: CardViewModel = hiltViewModel()) {
   Scaffold(topBar = {
     CardAppBar(viewModel, state)
   }) { paddingValues ->
-    LazyColumn(modifier = Modifier.padding(paddingValues)) {
-      items(state.value.cards) { card ->
+    LazyColumn(
+      contentPadding = PaddingValues(8.dp),
+      modifier = Modifier.padding(paddingValues),
+    ) {
+      itemsIndexed(state.value.cards) { index, card ->
+        val isLastItem = index == state.value.cards.lastIndex
         Card(
           elevation = 2.dp,
           modifier = Modifier
-            .padding(top = 8.dp, start = 8.dp, end = 8.dp)
+            .padding(bottom = (if (isLastItem) 0 else 8).dp)
             .fillParentMaxWidth()
         ) {
           Column(
