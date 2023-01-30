@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import java.util.concurrent.ConcurrentHashMap
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -30,9 +31,8 @@ class AccountComponentHolder @Inject constructor(
   private val singletonPerAccountComponentBuilder: SingletonPerAccountComponent.Builder,
 ) : CardRepositoryProvider {
 
-  private val map = mutableMapOf<AccountId, SingletonPerAccountComponent>()
+  private val map = ConcurrentHashMap<AccountId, SingletonPerAccountComponent>()
 
-  @Synchronized
   private fun get(accountId: AccountId): SingletonPerAccountComponent {
     return map.computeIfAbsent(accountId) {
       singletonPerAccountComponentBuilder.accountId(it).build()
