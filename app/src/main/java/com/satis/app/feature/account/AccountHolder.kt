@@ -1,6 +1,6 @@
 package com.satis.app.feature.account
 
-import com.satis.app.common.prefs.AccountId
+import com.satis.app.common.account.AccountId
 import com.satis.app.common.thread.assertMainThread
 import dagger.hilt.android.scopes.ActivityRetainedScoped
 import javax.inject.Inject

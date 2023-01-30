@@ -1,6 +1,6 @@
 package com.satis.app.feature.cards.data
 
-import com.satis.app.common.prefs.AccountId
+import com.satis.app.common.account.AccountId
 
 fun DbCard.toModel(id: String, accountId: AccountId) = Card(
   id = id,

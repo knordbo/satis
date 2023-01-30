@@ -2,11 +2,10 @@ package com.satis.app.feature.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.satis.app.common.launcher.MainActivityLauncher
 import com.satis.app.common.logging.PersistedLogger
 import com.satis.app.common.prefs.Prefs
 import com.satis.app.common.prefs.Theme
-import com.satis.app.common.prefs.AccountId
+import com.satis.app.common.account.AccountId
 import com.satis.app.common.prefs.apply
 import com.satis.app.feature.account.appinfo.AppInfoRetriever
 import com.satis.app.feature.notifications.data.NotificationRepository

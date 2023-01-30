@@ -3,22 +3,27 @@ package com.satis.app.feature.cards.data
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.satis.app.common.annotations.Io
-import com.satis.app.common.prefs.AccountId
-import dagger.hilt.android.scopes.ViewModelScoped
+import com.satis.app.common.account.AccountId
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.channelFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-@ViewModelScoped
-class CardRepositoryImpl @Inject constructor(
-  private val accountId: AccountId,
+class CardRepositoryImpl @AssistedInject constructor(
+  @Assisted val accountId: AccountId,
   firebaseFirestore: FirebaseFirestore,
   @Io private val io: CoroutineContext
 ) : CardRepository {
+
+  @AssistedFactory
+  interface Factory {
+    fun create(accountId: AccountId): CardRepositoryImpl
+  }
 
   private val cardsCollection by lazy { firebaseFirestore.collection(CARDS_COLLECTION) }
 
