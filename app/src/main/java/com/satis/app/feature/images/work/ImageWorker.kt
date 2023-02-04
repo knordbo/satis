@@ -6,10 +6,12 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import coil.ImageLoader
 import coil.request.ImageRequest
+import com.satis.app.common.account.AccountId
+import com.satis.app.common.annotations.MostRecentCurrentAccount
 import com.satis.app.common.annotations.WorkerIo
 import com.satis.app.common.logging.Logger
+import com.satis.app.di.account.UnsplashRepositoryProvider
 import com.satis.app.feature.images.data.NATURE
-import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -24,8 +26,9 @@ class ImageWorker @AssistedInject constructor(
   @Assisted private val context: Context,
   @Assisted private val workerParameters: WorkerParameters,
   @WorkerIo private val io: CoroutineContext,
+  @MostRecentCurrentAccount val mostRecentCurrentAccountId: AccountId,
   private val logger: Logger,
-  private val unsplashRepository: UnsplashRepository,
+  private val unsplashRepositoryProvider: UnsplashRepositoryProvider,
   private val imageLoader: ImageLoader,
 ) : CoroutineWorker(context, workerParameters) {
 
@@ -35,7 +38,8 @@ class ImageWorker @AssistedInject constructor(
       logger.log(LOG_TAG,
         "Starting $type worker in $isAppForegroundString on thread: ${Thread.currentThread()}")
 
-      val popularImages = unsplashRepository.fetchPhotos(NATURE)
+      val popularImages =
+        unsplashRepositoryProvider.get(mostRecentCurrentAccountId).fetchPhotos(NATURE)
       popularImages
         .take(FETCH_IMAGE_COUNT)
         .forEach { photo ->

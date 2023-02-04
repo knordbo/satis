@@ -18,9 +18,7 @@ import com.satis.app.feature.notifications.data.PushNotification
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.withTimeoutOrNull
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class PushNotificationHandlerImpl @Inject constructor(
   @ApplicationContext private val context: Context,
   private val notificationManager: NotificationManagerCompat,

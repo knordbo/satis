@@ -12,10 +12,8 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
-import javax.inject.Singleton
 import kotlin.coroutines.CoroutineContext
 
-@Singleton
 class UnsplashRepositoryImpl @Inject constructor(
   @Io private val io: CoroutineContext,
   private val unsplashApi: UnsplashApi,

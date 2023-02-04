@@ -1,7 +1,10 @@
 package com.satis.app.feature.images
 
-import com.satis.app.Database
+import com.satis.app.AccountDatabase
+import com.satis.app.common.account.AccountId
 import com.satis.app.common.annotations.Background
+import com.satis.app.di.account.AccountScope
+import com.satis.app.di.account.UnsplashRepositoryProvider
 import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
@@ -12,36 +15,59 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
+import dagger.hilt.migration.DisableInstallInCheck
 import dagger.multibindings.IntoSet
 import retrofit2.Retrofit
 import retrofit2.create
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
+@Module(includes = [ImagesAccountBindingModule::class])
+@DisableInstallInCheck
+object ImagesAccountModule {
+
+  @Provides
+  fun provideUnsplashQueries(database: AccountDatabase): UnsplashQueries = database.unsplashQueries
+}
+
 @Module
-object ImagesModule {
+@DisableInstallInCheck
+abstract class ImagesAccountBindingModule {
+
+  @Binds
+  @AccountScope
+  abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
+}
+
+@Module
+@InstallIn(ViewModelComponent::class)
+object ImagesViewModelModule {
+
+  @Provides
+  @ViewModelScoped
+  fun provideUnsplashRepository(
+    accountId: AccountId,
+    unsplashRepositoryProvider: UnsplashRepositoryProvider,
+  ): UnsplashRepository = unsplashRepositoryProvider.get(accountId)
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+object ImagesSingletonModule {
 
   @Provides
   @Singleton
   fun provideUnsplashApi(retrofit: Retrofit): UnsplashApi = retrofit.create()
-
-  @Provides
-  @Singleton
-  fun provideUnsplashQueries(database: Database): UnsplashQueries = database.unsplashQueries
-
 }
 
-@InstallIn(SingletonComponent::class)
 @Module
-abstract class ImagesBindingModule {
-
-  @Binds
-  abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
+@InstallIn(SingletonComponent::class)
+abstract class ImagesSingletonBindingModule {
 
   @Binds
   @IntoSet
   @Background
   abstract fun provideUnsplashTask(bind: UnsplashPreloadTask): StartupTask
-
 }

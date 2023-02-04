@@ -12,7 +12,7 @@ import com.facebook.flipper.plugins.inspector.InspectorFlipperPlugin
 import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
-import com.satis.app.common.annotations.DatabaseName
+import com.satis.app.common.annotations.AppDatabaseName
 import com.satis.app.common.annotations.Main
 import com.satis.app.common.annotations.SharedPrefsName
 import com.satis.app.startup.StartupTask
@@ -53,7 +53,7 @@ object FlipperModule {
   @Singleton
   fun provideDatabasePlugin(
     @ApplicationContext context: Context,
-    @DatabaseName databaseName: String,
+    @AppDatabaseName databaseName: String,
   ): FlipperPlugin {
     return DatabasesFlipperPlugin(SqliteDatabaseDriver(context, SqliteDatabaseProvider {
       // Some random databases like the one from firestore closes which throws flipper off,

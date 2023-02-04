@@ -18,7 +18,7 @@ class PrefsImpl @Inject constructor(
   private val sharedPreferences: SharedPreferences =
     context.getSharedPreferences(prefsName, Context.MODE_PRIVATE)
 
-  override val currentAccountId: String
+  override var currentAccountId: String
     get() {
       val existingValue = sharedPreferences.getString(UNIQUE_ACCOUNT_ID, null)
       return if (existingValue != null) {
@@ -30,6 +30,9 @@ class PrefsImpl @Inject constructor(
         }
         id
       }
+    }
+    set(value) {
+      sharedPreferences.edit().putString(UNIQUE_ACCOUNT_ID, value).apply()
     }
 
   override var theme: Theme

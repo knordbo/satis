@@ -177,6 +177,15 @@ dependencies {
   implementation(Deps.sqldelight.primitiveAdapters)
 }
 
+sqldelight {
+  database("AppDatabase") {
+    sourceFolders = listOf("sqldelight_app")
+  }
+  database("AccountDatabase") {
+    sourceFolders = listOf("sqldelight_account")
+  }
+}
+
 kapt {
   correctErrorTypes = true
 }

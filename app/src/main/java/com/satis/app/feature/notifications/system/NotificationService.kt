@@ -2,7 +2,11 @@ package com.satis.app.feature.notifications.system
 
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.satis.app.common.account.AccountId
+import com.satis.app.common.annotations.MostRecentCurrentAccount
 import com.satis.app.common.logging.PersistedLogger
+import com.satis.app.di.account.NotificationRepositoryProvider
+import com.satis.app.di.account.PushNotificationHandlerProvider
 import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.feature.notifications.data.PushNotification
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,14 +15,22 @@ import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
 class NotificationService : FirebaseMessagingService() {
 
-  @Inject lateinit var notificationRepository: NotificationRepository
-  @Inject lateinit var notificationHandler: PushNotificationHandler
+  @Inject lateinit var notificationRepositoryProvider: NotificationRepositoryProvider
+  @Inject lateinit var pushNotificationHandlerProvider: PushNotificationHandlerProvider
   @Inject lateinit var logger: PersistedLogger
   @Inject lateinit var json: Json
+  @Inject @MostRecentCurrentAccount lateinit var mostRecentCurrentAccountId: Provider<AccountId>
+
+  private val notificationRepository: NotificationRepository
+    get() = notificationRepositoryProvider.get(mostRecentCurrentAccountId.get())
+
+  private val pushNotificationHandler: PushNotificationHandler
+    get() = pushNotificationHandlerProvider.get(mostRecentCurrentAccountId.get())
 
   override fun onMessageReceived(remoteMessage: RemoteMessage) {
     GlobalScope.launch {
@@ -26,7 +38,7 @@ class NotificationService : FirebaseMessagingService() {
         val jsonStr = remoteMessage.data["json"]!!
         val pushNotification: PushNotification = json.decodeFromString(jsonStr)
         logger.log(LOG_TAG, "Received notification: ${pushNotification.id}")
-        notificationHandler.handle(pushNotification)
+        pushNotificationHandler.handle(pushNotification)
       } catch (t: Throwable) {
         logger.log(LOG_TAG, "Received broken notification: $t")
       }

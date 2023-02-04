@@ -7,11 +7,13 @@ import coil.ImageLoader
 import coil.imageLoader
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.satis.app.Database
+import com.satis.app.AppDatabase
+import com.satis.app.common.account.AccountId
+import com.satis.app.common.annotations.AppDatabaseName
 import com.satis.app.common.annotations.Background
-import com.satis.app.common.annotations.DatabaseName
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.Main
+import com.satis.app.common.annotations.MostRecentCurrentAccount
 import com.satis.app.common.annotations.SharedPrefsName
 import com.satis.app.common.annotations.WorkerIo
 import com.satis.app.common.prefs.Prefs
@@ -33,24 +35,28 @@ import kotlin.coroutines.CoroutineContext
 object AppModule {
 
   @Provides
+  @MostRecentCurrentAccount
+  fun provideMostRecentCurrentAccountId(prefs: Prefs): AccountId = AccountId(prefs.currentAccountId)
+
+  @Provides
   @Singleton
   @SharedPrefsName
   fun provideSharedPrefsName(): String = "satis.shared.prefs"
 
   @Provides
   @Singleton
-  @DatabaseName
-  fun provideDatabaseName(): String = "satis.sqldelight.db"
+  @AppDatabaseName
+  fun provideDatabaseName(): String = "satis.sqldelight.appdb"
 
   @Provides
   @Singleton
-  fun provideDatabase(
+  fun provideAppDatabase(
     @ApplicationContext context: Context,
-    @DatabaseName databaseName: String,
-  ): Database =
-    Database(
+    @AppDatabaseName databaseName: String,
+  ): AppDatabase =
+    AppDatabase(
       driver = AndroidSqliteDriver(
-        schema = Database.Schema,
+        schema = AppDatabase.Schema,
         context = context,
         name = databaseName,
         useNoBackupDirectory = true

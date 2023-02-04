@@ -1,44 +1,54 @@
 package com.satis.app.di.account
 
+import android.content.Context
+import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import com.satis.app.AccountDatabase
 import com.satis.app.common.account.AccountId
-import com.satis.app.feature.cards.data.CardRepository
+import com.satis.app.common.annotations.AccountDatabaseName
+import com.satis.app.common.annotations.AccountPath
+import com.satis.app.feature.cards.CardAccountModule
+import com.satis.app.feature.images.ImagesAccountModule
+import com.satis.app.feature.notifications.NotificationAccountModule
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import java.util.concurrent.ConcurrentHashMap
-import javax.inject.Inject
-import javax.inject.Singleton
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.migration.DisableInstallInCheck
 
-@InstallIn(SingletonComponent::class)
-@Module(subcomponents = [
-  SingletonPerAccountComponent::class
+@Module(includes = [
+  CardAccountModule::class,
+  ImagesAccountModule::class,
+  NotificationAccountModule::class,
 ])
+@DisableInstallInCheck
 object SingletonAccountModule {
-  @Singleton
+
   @Provides
-  fun provideCardRepositoryProvider(accountComponentHolder: AccountComponentHolder): CardRepositoryProvider {
-    return accountComponentHolder
-  }
-}
-
-interface CardRepositoryProvider {
-  fun cardRepository(accountId: AccountId): CardRepository
-}
-
-@Singleton
-class AccountComponentHolder @Inject constructor(
-  private val singletonPerAccountComponentBuilder: SingletonPerAccountComponent.Builder,
-) : CardRepositoryProvider {
-
-  private val map = ConcurrentHashMap<AccountId, SingletonPerAccountComponent>()
-
-  private fun get(accountId: AccountId): SingletonPerAccountComponent {
-    return map.computeIfAbsent(accountId) {
-      singletonPerAccountComponentBuilder.accountId(it).build()
-    }
+  @AccountScope
+  @AccountPath
+  fun provideAccountFolderPath(accountId: AccountId): String {
+    return "accounts/${accountId.value}"
   }
 
-  override fun cardRepository(accountId: AccountId): CardRepository =
-    get(accountId).cardRepository()
+  @Provides
+  @AccountScope
+  @AccountDatabaseName
+  fun provideAccountDatabaseName(@AccountPath accountPath: String): String {
+    return "${accountPath}/satis.sqldelight.accountdb"
+  }
+
+  @Provides
+  @AccountScope
+  fun provideAccountDatabase(
+    @ApplicationContext context: Context,
+    @AccountDatabaseName accountDatabaseName: String,
+  ): AccountDatabase =
+    AccountDatabase(
+      driver = AndroidSqliteDriver(
+        schema = AccountDatabase.Schema,
+        context = context,
+        name = accountDatabaseName,
+        useNoBackupDirectory = true
+      ),
+    )
+
 }
