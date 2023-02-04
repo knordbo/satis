@@ -55,7 +55,7 @@ class PushNotificationHandlerImpl @Inject constructor(
     } else {
       MainActivity.getIntent(context)
     }
-    return PendingIntent.getActivity(context, 0, intent, 0)
+    return PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
   }
 
   private suspend fun PushNotification.getIcon(): Bitmap? = if (icon != null) {
