@@ -34,7 +34,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.satis.app.R
 import com.satis.app.common.launcher.MainActivityLauncher
 import com.satis.app.common.prefs.Theme
-import com.satis.app.feature.account.AccountState
 import com.satis.app.feature.account.AccountViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -59,7 +58,7 @@ private fun AccountScreen(
   Scaffold(topBar = {
     AccountAppBar(viewModel)
   }) { paddingValues ->
-    val state = viewModel.state.collectAsState(AccountState())
+    val state = viewModel.state.collectAsState()
 
     val launchAccountId = state.value.launchAccountId
     LaunchedEffect(launchAccountId) {

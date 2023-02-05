@@ -23,6 +23,10 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,6 +41,8 @@ import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.satis.app.R
+import kotlinx.coroutines.delay
+import kotlin.time.Duration.Companion.minutes
 
 
 @Composable
@@ -49,7 +55,7 @@ private fun NotificationScreen(viewModel: NotificationViewModel) {
   Scaffold(topBar = {
     NotificationAppBar(viewModel)
   }) { paddingValues ->
-    val state = viewModel.state.collectAsState(NotificationState())
+    val state = viewModel.state.collectAsState()
     val context = LocalContext.current
     LazyColumn(modifier = Modifier.padding(paddingValues)) {
       items(state.value.notifications) { notification ->
@@ -57,12 +63,21 @@ private fun NotificationScreen(viewModel: NotificationViewModel) {
           .padding(16.dp)
           .clickable {
             if (notification.url != null) {
-              ContextCompat.startActivity(context,
-                Intent(Intent.ACTION_VIEW, Uri.parse(notification.url)),
+              ContextCompat.startActivity(
+                context,
+                Intent(
+                  Intent.ACTION_VIEW,
+                  Uri.parse(notification.url),
+                ),
                 null)
             }
           }) {
-          LaunchedEffect(Unit) {
+          var currentTimeMillis by remember { mutableStateOf(System.currentTimeMillis()) }
+          LaunchedEffect(currentTimeMillis) {
+            delay(1.minutes)
+            currentTimeMillis = System.currentTimeMillis()
+          }
+          LaunchedEffect(notification.id) {
             viewModel.notificationSeen(notification.id)
           }
           if (notification.icon != null) {
@@ -87,7 +102,7 @@ private fun NotificationScreen(viewModel: NotificationViewModel) {
               Text(
                 text = DateUtils.getRelativeTimeSpanString(
                   notification.createdAt,
-                  System.currentTimeMillis(),
+                  currentTimeMillis,
                   0
                 ).toString(),
                 style = TextStyle(fontSize = 14.sp),

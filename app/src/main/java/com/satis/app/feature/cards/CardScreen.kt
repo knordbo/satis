@@ -39,7 +39,7 @@ import com.satis.app.R
 
 @Composable
 fun CardScreen(viewModel: CardViewModel = hiltViewModel()) {
-  val state = viewModel.state.collectAsState(CardState())
+  val state = viewModel.state.collectAsState()
   Scaffold(topBar = {
     CardAppBar(viewModel, state)
   }) { paddingValues ->

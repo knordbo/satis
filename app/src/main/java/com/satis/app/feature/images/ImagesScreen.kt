@@ -41,7 +41,7 @@ private fun ImagesScreen(
       Text(stringResource(id = R.string.images))
     })
   }) { paddingValues ->
-    val state = imagesViewModel.state.collectAsState(ImagesState())
+    val state = imagesViewModel.state.collectAsState()
     val lazyListState = rememberLazyListState()
 
     LazyColumn(state = lazyListState, modifier = Modifier.padding(paddingValues)) {
