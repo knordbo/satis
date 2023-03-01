@@ -7,8 +7,9 @@ import coil.request.ImageRequest
 import com.satis.app.common.account.AccountId
 import com.satis.app.common.annotations.Io
 import com.satis.app.common.annotations.MostRecentCurrentAccount
-import com.satis.app.di.account.UnsplashRepositoryProvider
+import com.satis.app.di.account.AccountProvider
 import com.satis.app.feature.images.data.NATURE
+import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.startup.StartupTask
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.firstOrNull
@@ -20,7 +21,7 @@ class UnsplashPreloadTask @Inject constructor(
   @ApplicationContext private val context: Context,
   @MostRecentCurrentAccount private val mostRecentCurrentAccountId: AccountId,
   @Io private val io: CoroutineContext,
-  private val unsplashRepositoryProvider: UnsplashRepositoryProvider,
+  private val unsplashRepositoryProvider: AccountProvider<UnsplashRepository>,
   private val imageLoader: ImageLoader,
 ) : StartupTask {
   override suspend fun execute() {

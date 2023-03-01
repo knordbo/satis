@@ -10,8 +10,9 @@ import com.satis.app.common.account.AccountId
 import com.satis.app.common.annotations.MostRecentCurrentAccount
 import com.satis.app.common.annotations.WorkerIo
 import com.satis.app.common.logging.Logger
-import com.satis.app.di.account.UnsplashRepositoryProvider
+import com.satis.app.di.account.AccountProvider
 import com.satis.app.feature.images.data.NATURE
+import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.utils.lifecycle.isAppForegroundString
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
@@ -28,7 +29,7 @@ class ImageWorker @AssistedInject constructor(
   @WorkerIo private val io: CoroutineContext,
   @MostRecentCurrentAccount val mostRecentCurrentAccountId: AccountId,
   private val logger: Logger,
-  private val unsplashRepositoryProvider: UnsplashRepositoryProvider,
+  private val unsplashRepositoryProvider: AccountProvider<UnsplashRepository>,
   private val imageLoader: ImageLoader,
 ) : CoroutineWorker(context, workerParameters) {
 

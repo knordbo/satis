@@ -1,9 +1,7 @@
 package com.satis.app.feature.notifications
 
 import com.satis.app.AccountDatabase
-import com.satis.app.common.account.AccountId
 import com.satis.app.di.account.AccountScope
-import com.satis.app.di.account.NotificationRepositoryProvider
 import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.feature.notifications.data.NotificationRepositoryImpl
 import com.satis.app.feature.notifications.data.db.NotificationQueries
@@ -15,8 +13,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.migration.DisableInstallInCheck
 
@@ -47,15 +43,4 @@ abstract class NotificationSingletonModule {
 
   @Binds
   abstract fun provideNotificationChannelHelper(bind: NotificationChannelHelperImpl): NotificationChannelHelper
-}
-
-@Module
-@InstallIn(ViewModelComponent::class)
-object NotificationViewModelModule {
-  @Provides
-  @ViewModelScoped
-  fun provideNotificationRepository(
-    accountId: AccountId,
-    notificationRepositoryProvider: NotificationRepositoryProvider,
-  ): NotificationRepository = notificationRepositoryProvider.get(accountId)
 }

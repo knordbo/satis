@@ -1,10 +1,8 @@
 package com.satis.app.feature.images
 
 import com.satis.app.AccountDatabase
-import com.satis.app.common.account.AccountId
 import com.satis.app.common.annotations.Background
 import com.satis.app.di.account.AccountScope
-import com.satis.app.di.account.UnsplashRepositoryProvider
 import com.satis.app.feature.images.data.UnsplashApi
 import com.satis.app.feature.images.data.UnsplashRepository
 import com.satis.app.feature.images.data.UnsplashRepositoryImpl
@@ -15,8 +13,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.migration.DisableInstallInCheck
 import dagger.multibindings.IntoSet
@@ -39,18 +35,6 @@ abstract class ImagesAccountBindingModule {
   @Binds
   @AccountScope
   abstract fun provideUnsplashRepository(bind: UnsplashRepositoryImpl): UnsplashRepository
-}
-
-@Module
-@InstallIn(ViewModelComponent::class)
-object ImagesViewModelModule {
-
-  @Provides
-  @ViewModelScoped
-  fun provideUnsplashRepository(
-    accountId: AccountId,
-    unsplashRepositoryProvider: UnsplashRepositoryProvider,
-  ): UnsplashRepository = unsplashRepositoryProvider.get(accountId)
 }
 
 @Module

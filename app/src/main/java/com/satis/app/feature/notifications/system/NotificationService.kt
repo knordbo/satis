@@ -5,8 +5,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.satis.app.common.account.AccountId
 import com.satis.app.common.annotations.MostRecentCurrentAccount
 import com.satis.app.common.logging.PersistedLogger
-import com.satis.app.di.account.NotificationRepositoryProvider
-import com.satis.app.di.account.PushNotificationHandlerProvider
+import com.satis.app.di.account.AccountProvider
 import com.satis.app.feature.notifications.data.NotificationRepository
 import com.satis.app.feature.notifications.data.PushNotification
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,8 +19,8 @@ import javax.inject.Provider
 @AndroidEntryPoint
 class NotificationService : FirebaseMessagingService() {
 
-  @Inject lateinit var notificationRepositoryProvider: NotificationRepositoryProvider
-  @Inject lateinit var pushNotificationHandlerProvider: PushNotificationHandlerProvider
+  @Inject lateinit var notificationRepositoryProvider: AccountProvider<NotificationRepository>
+  @Inject lateinit var pushNotificationHandlerProvider: AccountProvider<PushNotificationHandler>
   @Inject lateinit var logger: PersistedLogger
   @Inject lateinit var json: Json
   @Inject @MostRecentCurrentAccount lateinit var mostRecentCurrentAccountId: Provider<AccountId>
